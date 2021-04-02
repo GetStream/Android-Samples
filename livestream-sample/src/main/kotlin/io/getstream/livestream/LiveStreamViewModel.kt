@@ -32,32 +32,26 @@ class LiveStreamViewModel : ViewModel() {
         }
     }
 
-    fun sendButtonClicked(message: String) {
-        Message().run {
-            text = message
-            channelClient.sendMessage(this).enqueue {
-                if (it.isSuccess) {
-                    Timber.d("Message send success")
-                } else {
-                    _viewState.postValue(State.Error("Messsage sending error"))
-                    Timber.e(it.error().cause)
-                }
+    fun sendButtonClicked(text: String) {
+        channelClient.sendMessage(Message(text = text)).enqueue {
+            if (it.isSuccess) {
+                Timber.d("Message send success")
+            } else {
+                _viewState.postValue(State.Error("Messsage sending error"))
+                Timber.e(it.error().cause)
             }
         }
     }
 
     private fun subscribeToNewMessageEvent() {
-        chatClient.subscribe {
-            if (it is NewMessageEvent) {
-                _viewState.postValue(State.NewMessage(it.message))
-            }
+        chatClient.subscribeForSingle(NewMessageEvent::class.java) {
+            _viewState.postValue(State.NewMessage(it.message))
         }
     }
 
     private fun requestChannel() {
-        val channelData = mapOf("name" to "Live stream chat")
         val request = QueryChannelRequest()
-            .withData(channelData)
+            .withData(mapOf("name" to "Live stream chat"))
             .withMessages(20)
             .withWatch()
 

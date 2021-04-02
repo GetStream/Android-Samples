@@ -10,10 +10,10 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".VideoActivity"
+            android:name=".video.VideoActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
 
-        <activity android:name=".VideosListActivity">
+        <activity android:name=".video_list.VideosListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

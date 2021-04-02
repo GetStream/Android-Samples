@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
         android:id="@+id/videoPlayer"
@@ -14,19 +13,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:showFullScreenButton="false"
-        />
+        app:showFullScreenButton="false" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvMessages"
+        android:id="@+id/messageList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:paddingVertical="2dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/input"
         app:layout_constraintTop_toBottomOf="@+id/videoPlayer"
-        tools:listitem="@layout/item_message"
-        />
+        tools:listitem="@layout/item_message" />
 
     <View
         android:layout_width="match_parent"
@@ -34,8 +31,7 @@
         android:background="@android:color/darker_gray"
         app:layout_constraintBottom_toTopOf="@+id/input"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/input"
@@ -43,17 +39,16 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ivSend"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintEnd_toStartOf="@+id/sendButton"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/ivSend"
+        android:id="@+id/sendButton"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:padding="4dp"
         android:src="@android:drawable/ic_menu_send"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

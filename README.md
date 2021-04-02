@@ -21,11 +21,11 @@ With Stream's chat components, developers quickly add chat to their app for a va
 
 ## Repo Overview 😎
 
-A collection of sample apps that use Android Stream SDK.
+A collection of sample apps that use [Android Stream SDK](https://github.com/GetStream/stream-chat-android).
 
 ## **Projects 🚀**
 
-- [Live stream](https://github.com/GetStream/android-samples/tree/master/io.getstream.livestream-sample)
+- [Live stream](https://github.com/GetStream/android-samples/tree/master/livestream-sample)
 
 - [Video chat](https://github.com/GetStream/android-samples/tree/master/video-chat-sample)
 

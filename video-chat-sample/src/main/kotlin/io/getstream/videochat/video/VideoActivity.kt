@@ -1,24 +1,16 @@
-package io.getstream.videochat
+package io.getstream.videochat.video
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
-import androidx.recyclerview.widget.AsyncListDiffer
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.api.load
-import coil.transform.CircleCropTransformation
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerCallback
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
@@ -28,14 +20,16 @@ import io.getstream.chat.android.client.channel.ChannelClient
 import io.getstream.chat.android.client.events.NewMessageEvent
 import io.getstream.chat.android.client.models.Message
 import io.getstream.chat.android.client.utils.observable.Disposable
-import kotlin.properties.Delegates
+import io.getstream.videochat.R
+import io.getstream.videochat.Video
+import io.getstream.videochat.nicknameColor
 
 private const val VIDEO_INTENT_EXTRA = "VIDEO_INTENT_EXTRA"
 private const val CHANNEL_TYPE = "livestream"
 
 class VideoActivity : AppCompatActivity(R.layout.activity_video) {
 
-    private val messageAdapter: MessageAdapter = MessageAdapter()
+    private val messageListAdapter: MessageListAdapter = MessageListAdapter()
     private lateinit var input: EditText
     private lateinit var sendMessageButton: ImageView
     private lateinit var rvMessages: RecyclerView
@@ -54,8 +48,9 @@ class VideoActivity : AppCompatActivity(R.layout.activity_video) {
                 }
             })
         }
-        rvMessages = findViewById<RecyclerView>(R.id.rvMessages).apply { adapter = messageAdapter }
-        sendMessageButton = findViewById<ImageView>(R.id.ivSend).apply {
+        rvMessages =
+            findViewById<RecyclerView>(R.id.messageList).apply { adapter = messageListAdapter }
+        sendMessageButton = findViewById<ImageView>(R.id.sendButton).apply {
             visibility = View.GONE
             setOnClickListener { sendMessage() }
         }
@@ -101,8 +96,8 @@ class VideoActivity : AppCompatActivity(R.layout.activity_video) {
     private fun addMessage(message: Message) = addMessages(listOf(message))
 
     private fun addMessages(messages: List<Message>) {
-        messageAdapter.addMessages(messages.map(Message::toViewHolderMessage))
-        rvMessages.post { rvMessages.smoothScrollToPosition(messageAdapter.itemCount) }
+        messageListAdapter.addMessages(messages.map(Message::toViewHolderMessage))
+        rvMessages.post { rvMessages.smoothScrollToPosition(messageListAdapter.itemCount) }
     }
 
     override fun onPause() {
@@ -122,65 +117,8 @@ class VideoActivity : AppCompatActivity(R.layout.activity_video) {
     }
 }
 
-class MessageAdapter : RecyclerView.Adapter<MessageViewHolder>() {
-    private var messages: List<MessageViewHolder.Message> by Delegates.observable(listOf()) { _, _, newMessages ->
-        asyncListDiffer.submitList(
-            newMessages.takeIf { it.isNotEmpty() })
-    }
-    private val asyncListDiffer: AsyncListDiffer<MessageViewHolder.Message> by lazy {
-        AsyncListDiffer(this, object : DiffUtil.ItemCallback<MessageViewHolder.Message>() {
-            override fun areContentsTheSame(
-                oldItem: MessageViewHolder.Message,
-                newItem: MessageViewHolder.Message
-            ): Boolean = oldItem == newItem
-
-            override fun areItemsTheSame(
-                oldItem: MessageViewHolder.Message,
-                newItem: MessageViewHolder.Message
-            ): Boolean = oldItem.id == newItem.id
-        })
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder =
-        MessageViewHolder(parent)
-
-    override fun getItemCount(): Int = asyncListDiffer.currentList.size
-    override fun onBindViewHolder(holder: MessageViewHolder, position: Int) =
-        holder.bind(asyncListDiffer.currentList[position])
-
-    fun addMessages(newMessages: List<MessageViewHolder.Message>) {
-        messages = (messages + newMessages).sortedBy { it.timestamp }
-    }
-}
-
-class MessageViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-    LayoutInflater.from(parent.context).inflate(R.layout.item_message, parent, false)
-) {
-    private val ivAvatar: ImageView by lazy { itemView.findViewById<ImageView>(R.id.ivAvatar) }
-    private val tvUserName: TextView by lazy { itemView.findViewById<TextView>(R.id.tvUserName) }
-    private val tvMessage: TextView by lazy { itemView.findViewById<TextView>(R.id.tvMessage) }
-
-    fun bind(message: Message) {
-        tvUserName.apply {
-            text = message.userName
-            setTextColor(message.colorName)
-        }
-        tvMessage.text = message.text
-        ivAvatar.load(message.avatarUrl) { transformations(CircleCropTransformation()) }
-    }
-
-    data class Message(
-        val id: String,
-        val timestamp: Long,
-        val avatarUrl: String,
-        val userName: String,
-        @ColorInt val colorName: Int,
-        val text: String
-    )
-}
-
 fun Message.toViewHolderMessage() =
-    MessageViewHolder.Message(
+    MessageListAdapter.MessageViewHolder.Message(
         id,
         createdAt?.time ?: 0,
         user.getExtraValue("image", ""),

@@ -7,7 +7,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/ivVideo"
+        android:id="@+id/videoImageView"
         android:layout_width="104dp"
         android:layout_height="64dp"
         android:layout_margin="8dp"
@@ -18,15 +18,15 @@
         />
 
     <TextView
-        android:id="@+id/tvVideoName"
+        android:id="@+id/videoNameTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         tools:text="@tools:sample/lorem"
         android:layout_margin="8dp"
         android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="@+id/ivVideo"
+        app:layout_constraintBottom_toBottomOf="@+id/videoImageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivVideo"
-        app:layout_constraintTop_toTopOf="@+id/ivVideo"
+        app:layout_constraintStart_toEndOf="@+id/videoImageView"
+        app:layout_constraintTop_toTopOf="@+id/videoImageView"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import io.getstream.chat.android.client.models.Message
 import io.getstream.livestream.databinding.ItemMessageBinding
 
-class MessagesListAdapter() : ListAdapter<Message, MessageViewHolder>(DiffCallback) {
+class MessagesListAdapter :
+    ListAdapter<Message, MessagesListAdapter.MessageViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
         return ItemMessageBinding
@@ -20,8 +21,21 @@ class MessagesListAdapter() : ListAdapter<Message, MessageViewHolder>(DiffCallba
         holder.bindMessage(getItem(position))
     }
 
+    class MessageViewHolder(
+        private val binding: ItemMessageBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+
+        fun bindMessage(message: Message) {
+            binding.apply {
+                avatarImageView.loadUrl(message.user.image, R.drawable.ic_person_white_24dp)
+                userNameTextView.text = message.user.name
+                messageTextView.text = message.text
+            }
+        }
+    }
+
     companion object {
-        val DiffCallback = object : DiffUtil.ItemCallback<Message>() {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Message>() {
             override fun areItemsTheSame(oldItem: Message, newItem: Message): Boolean {
                 return oldItem.id == newItem.id
             }
@@ -33,15 +47,4 @@ class MessagesListAdapter() : ListAdapter<Message, MessageViewHolder>(DiffCallba
     }
 }
 
-class MessageViewHolder(
-    private val binding: ItemMessageBinding
-) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bindMessage(message: Message) {
-        message.apply {
-            binding.avatar.loadUrl(user.image, R.drawable.ic_person_white_24dp)
-            binding.userName.text = user.name
-            binding.message.text = text
-        }
-    }
-}

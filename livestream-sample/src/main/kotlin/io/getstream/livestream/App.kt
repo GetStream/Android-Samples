@@ -15,7 +15,7 @@ class App : Application() {
             Timber.plant(DebugTree())
         }
 
-        ChatClient.Builder(API_KEY, this).logLevel(ChatLogLevel.ALL).build()
+        ChatClient.Builder(API_KEY, this).build()
     }
 
     companion object {
