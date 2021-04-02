@@ -1,6 +1,7 @@
 include(
-        ':livestream-clone-sample',
-        ':whatsapp-clone-sample'
+        ':livestream-sample',
+        ':whatsapp-clone-sample',
+        ':video-chat-sample'
 )
 
 
