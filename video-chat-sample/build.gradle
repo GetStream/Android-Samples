@@ -1,4 +1,5 @@
 import io.getstream.samples.Configuration
+import io.getstream.samples.Dependencies
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
@@ -39,16 +40,16 @@ android {
 }
 
 dependencies {
+    // Stream SDK dependency
     implementation 'io.getstream:stream-chat-android-client:4.8.0'
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.2.0'
-    implementation 'io.coil-kt:coil:0.9.5'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
-    testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation Dependencies.kotlinStdLib
+    implementation Dependencies.androidxAppCompat
+    implementation Dependencies.androidxCoreKtx
+    implementation Dependencies.androidxActivityKtx
+    implementation Dependencies.androidxLifecycleExtensions
+    implementation Dependencies.coil
+    implementation Dependencies.androidxRecyclerview
+    implementation Dependencies.androidxConstraintLayout
+    implementation Dependencies.youtubePlayer
 }
