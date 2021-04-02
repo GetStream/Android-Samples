@@ -4,4 +4,4 @@ Livestream video and chat sample application for Android
 
 # Screenshots
 
-![screenshot](image/screenshot.png?raw=true "Livestream Video & Chat App")
+<img src="image/screenshot.png" width="40%" />

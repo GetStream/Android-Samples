@@ -2,6 +2,7 @@ package io.getstream.livestream
 
 import android.app.Application
 import io.getstream.chat.android.client.ChatClient
+import io.getstream.chat.android.client.logger.ChatLogLevel
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
@@ -14,7 +15,7 @@ class App : Application() {
             Timber.plant(DebugTree())
         }
 
-        ChatClient.Builder(API_KEY, this).build()
+        ChatClient.Builder(API_KEY, this).logLevel(ChatLogLevel.ALL).build()
     }
 
     companion object {

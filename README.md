@@ -25,7 +25,7 @@ A collection of sample apps that use Android Stream SDK.
 
 ## **Projects 🚀**
 
-- [Live stream](https://github.com/GetStream/android-samples/tree/master/livestream-sample)
+- [Live stream](https://github.com/GetStream/android-samples/tree/master/io.getstream.livestream-sample)
 
 - [Video chat](https://github.com/GetStream/android-samples/tree/master/video-chat-sample)
 

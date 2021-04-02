@@ -1,6 +1,6 @@
 # Livestream Video Chat
 
-This is an example of a Twitch style livestream experience
+This is an example of a Twitch style io.getstream.livestream experience
 
 # Screenshots
 
