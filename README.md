@@ -4,7 +4,8 @@
 
 - [Register](https://getstream.io/chat/trial/) to get an API key for Stream Chat
 - [Android Chat Tutorial](https://getstream.io/tutorials/android-chat/)
-- [Android SDK Repo](https://github.com/GetStream/stream-chat-android/)
+- [Stream Chat Android Repo](https://github.com/GetStream/stream-chat-android)
+- [Stream Chat Android Docs](http://getstream.io/chat/docs?language=kotlin)
 
 ## What is Stream?
 
