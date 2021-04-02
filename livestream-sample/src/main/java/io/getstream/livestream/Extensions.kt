@@ -11,7 +11,6 @@ import androidx.appcompat.content.res.AppCompatResources
 import com.squareup.picasso.Picasso
 import io.getstream.chat.android.client.models.User
 
-
 var User.image: String
     get() = extraData["image"] as String
     set(value) {
