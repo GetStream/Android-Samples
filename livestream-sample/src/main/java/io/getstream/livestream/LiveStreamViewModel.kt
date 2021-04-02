@@ -5,53 +5,49 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.api.models.QueryChannelRequest
-import io.getstream.chat.android.client.controllers.ChannelController
-import io.getstream.chat.android.client.errors.ChatError
+import io.getstream.chat.android.client.channel.ChannelClient
 import io.getstream.chat.android.client.events.NewMessageEvent
 import io.getstream.chat.android.client.models.Message
 import io.getstream.chat.android.client.models.User
-import io.getstream.chat.android.client.socket.InitConnectionListener
 import timber.log.Timber
 
-class LiveStreamViewModel() : ViewModel() {
+class LiveStreamViewModel : ViewModel() {
     private val chatClient = ChatClient.instance()
     private val _viewState = MutableLiveData<State>()
 
-    private lateinit var channelController: ChannelController
+    private lateinit var channelClient: ChannelClient
 
     val viewState: LiveData<State> = _viewState
 
     init {
-        chatClient.setUser(chatUser, USER_TOKEN, object : InitConnectionListener() {
-            override fun onSuccess(data: ConnectionData) {
-                channelController = chatClient.channel(CHANNEL_TYPE, CHANNEL_ID)
+        chatClient.connectUser(chatUser, USER_TOKEN).enqueue {
+            if (it.isSuccess) {
+                channelClient = chatClient.channel(CHANNEL_TYPE, CHANNEL_ID)
                 requestChannel()
                 subscribeToNewMessageEvent()
-            }
-
-            override fun onError(error: ChatError) {
+            } else {
                 _viewState.postValue(State.Error("User setting error"))
-                Timber.e(error)
+                Timber.e(it.error().cause)
             }
-        })
+        }
     }
 
     fun sendButtonClicked(message: String) {
         Message().run {
             text = message
-            channelController.sendMessage(this).enqueue {
+            channelClient.sendMessage(this).enqueue {
                 if (it.isSuccess) {
                     Timber.d("Message send success")
                 } else {
                     _viewState.postValue(State.Error("Messsage sending error"))
-                    Timber.e(it.error())
+                    Timber.e(it.error().cause)
                 }
             }
         }
     }
 
     private fun subscribeToNewMessageEvent() {
-        chatClient.events().subscribe {
+        chatClient.subscribe {
             if (it is NewMessageEvent) {
                 _viewState.postValue(State.NewMessage(it.message))
             }
@@ -65,12 +61,12 @@ class LiveStreamViewModel() : ViewModel() {
             .withMessages(20)
             .withWatch()
 
-        channelController.query(request).enqueue {
+        channelClient.query(request).enqueue {
             if (it.isSuccess) {
                 _viewState.postValue(State.Messages(it.data().messages))
             } else {
                 _viewState.postValue(State.Error("QueryChannelRequest error"))
-                Timber.e(it.error())
+                Timber.e(it.error().cause)
             }
         }
     }
@@ -78,8 +74,10 @@ class LiveStreamViewModel() : ViewModel() {
     companion object {
         private const val USER_ID = "bob"
         private const val CHANNEL_TYPE = "livestream"
-        private const val CHANNEL_ID = "livestream-clone-android" // You'll want to make it unique per video
-        private const val USER_TOKEN = BuildConfig.USER_TOKEN
+        private const val CHANNEL_ID =
+            "livestream-clone-android" // You'll want to make it unique per video
+        private const val USER_TOKEN =
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMWYzN2U1OGQtZDhiMC00NzZhLWE0ZjItZjg2MTFlMGQ4NWQ5In0.l3u9P1NKhJ91rI1tzOcABGh045Kj69-iVkC2yUtohVw"
 
         private val chatUser = User(id = USER_ID).apply {
             name = USER_ID

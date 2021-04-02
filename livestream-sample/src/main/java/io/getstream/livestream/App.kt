@@ -14,6 +14,10 @@ class App : Application() {
             Timber.plant(DebugTree())
         }
 
-        ChatClient.Builder(BuildConfig.STREAM_API_KEY, this).build()
+        ChatClient.Builder(API_KEY, this).build()
+    }
+
+    companion object {
+        private const val API_KEY = "qx5us2v6xvmh"
     }
 }

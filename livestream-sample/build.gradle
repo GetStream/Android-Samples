@@ -1,13 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
-ext {
-    secrets = [
-            streamApiKey : keyProperty("STREAM_API_KEY"),
-            userToken : keyProperty("USER_TOKEN")
-    ]
-}
-
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -24,15 +17,11 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField 'String', 'STREAM_API_KEY', "\"${secrets.streamApiKey}\""
-            buildConfigField 'String', 'USER_TOKEN', "\"${secrets.userToken}\""
         }
 
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField 'String', 'STREAM_API_KEY', "\"${secrets.streamApiKey}\""
-            buildConfigField 'String', 'USER_TOKEN', "\"${secrets.userToken}\""
         }
     }
 
@@ -55,6 +44,8 @@ android {
 }
 
 dependencies {
+    implementation 'io.getstream:stream-chat-android-client:4.8.0'
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -65,12 +56,10 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.2.0'
     implementation "com.google.android.material:material:1.1.0"
 
-    implementation 'com.github.getstream:stream-chat-android-client:1.4.1'
+
 
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.3'
 
     implementation 'com.jakewharton.timber:timber:4.7.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
-
-    testImplementation 'junit:junit:4.12'
 }
