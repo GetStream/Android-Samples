@@ -1,16 +1,18 @@
+import io.getstream.samples.Configuration
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion Configuration.compileSdkVersion
+
     defaultConfig {
         applicationId "io.getstream.whatsappclone"
-        minSdkVersion 21
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        minSdkVersion Configuration.minSdkVersion
+        targetSdkVersion Configuration.targetSdkVersion
+        versionCode Configuration.versionCode
+        versionName Configuration.versionName
     }
     buildTypes {
         release {
@@ -29,7 +31,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = "1.8"
     }
 
     sourceSets {
