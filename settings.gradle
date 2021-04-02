@@ -1,2 +1,6 @@
-include(':livestream-sample')
+include(
+        ':livestream-clone-sample',
+        ':whatsapp-clone-sample'
+)
+
 
