@@ -1,18 +1,13 @@
 package io.getstream.whatsappclone.ui.message_list
 
 import android.content.Context
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.getstream.sdk.chat.viewmodel.MessageInputViewModel
 import io.getstream.whatsappclone.databinding.ViewMessageInputBinding
-
-//import com.getstream.sdk.chat.interfaces.MessageSendListener
-//import com.getstream.sdk.chat.rest.Message
-//import com.getstream.sdk.chat.rest.interfaces.MessageCallback
-//import com.getstream.sdk.chat.rest.response.MessageResponse
-//import com.getstream.sdk.chat.view.MessageInputView
-//import com.getstream.sdk.chat.viewmodel.ChannelViewModel
-
 
 /**
  * Basic message input view. Handles:
@@ -44,48 +39,38 @@ class MessageInputView : ConstraintLayout {
     }
 
     private fun init(context: Context) {
-        val inflater = LayoutInflater.from(context)
-        binding = ViewMessageInputBinding.inflate(inflater, this, true)
+        binding = ViewMessageInputBinding
+            .inflate(LayoutInflater.from(context), this, true)
     }
 
-//    fun setViewModel(
-//        viewModel: ChannelViewModel,
-//        lifecycleOwner: LifecycleOwner?
-//    ) {
-//        binding.lifecycleOwner = lifecycleOwner
-//        binding.viewModel = viewModel
-//
-//        // implement message sending
-//        binding.voiceRecordingOrSend.setOnClickListener {
-//            val message : Message = Message()
-//            message.text =  binding.messageInput.text.toString()
-//            viewModel.sendMessage(message, object: MessageCallback {
-//                override fun onSuccess(response: MessageResponse?) {
-//                    // hi
-//                    viewModel.messageInputText.value = ""
-//                }
-//
-//                override fun onError(errMsg: String?, errCode: Int) {
-//                }
-//
-//            })
-//        }
-//
-//        // listen to typing events and connect to the view model
-//        binding.messageInput.addTextChangedListener(object : TextWatcher {
-//
-//            override fun afterTextChanged(s: Editable) {
-//                if (s.toString().isNotEmpty()) viewModel.keystroke()
-//            }
-//
-//            override fun beforeTextChanged(s: CharSequence, start: Int,
-//                                           count: Int, after: Int) {
-//            }
-//
-//            override fun onTextChanged(s: CharSequence, start: Int,
-//                                       before: Int, count: Int) {
-//            }
-//        })
-//    }
+    fun setViewModel(viewModel: MessageInputViewModel) {
+        binding.voiceRecordingOrSend.setOnClickListener {
+
+            viewModel.sendMessage(binding.messageInput.text.toString())
+            binding.messageInput.setText("")
+        }
+
+        // listen to typing events and connect to the view model
+        binding.messageInput.addTextChangedListener(
+            object : TextWatcher {
+
+                override fun afterTextChanged(s: Editable) {
+                    if (s.toString().isNotEmpty()) viewModel.keystroke()
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) = Unit
+
+                override fun onTextChanged(
+                    s: CharSequence, start: Int,
+                    before: Int, count: Int
+                ) = Unit
+            }
+        )
+    }
 
 }
