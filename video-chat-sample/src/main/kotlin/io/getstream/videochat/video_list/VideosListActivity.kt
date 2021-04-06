@@ -11,11 +11,13 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import io.getstream.chat.android.client.ChatClient
-import io.getstream.chat.android.client.errors.ChatError
 import io.getstream.chat.android.client.logger.ChatLogLevel
-import io.getstream.chat.android.client.socket.InitConnectionListener
-import io.getstream.videochat.*
+import io.getstream.videochat.R
+import io.getstream.videochat.Video
+import io.getstream.videochat.demoUsers
+import io.getstream.videochat.token
 import io.getstream.videochat.video.createVideoIntent
+import io.getstream.videochat.videos
 
 class VideosListActivity : AppCompatActivity(R.layout.activity_videos_list) {
 
@@ -65,4 +67,3 @@ class VideosListActivity : AppCompatActivity(R.layout.activity_videos_list) {
         private const val APIKEY = "sfgpnf7xhf2r"
     }
 }
-

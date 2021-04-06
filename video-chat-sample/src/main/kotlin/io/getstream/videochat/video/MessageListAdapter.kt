@@ -19,17 +19,20 @@ class MessageListAdapter : RecyclerView.Adapter<MessageListAdapter.MessageViewHo
         asyncListDiffer.submitList(newMessages.takeIf { it.isNotEmpty() })
     }
     private val asyncListDiffer: AsyncListDiffer<MessageViewHolder.Message> by lazy {
-        AsyncListDiffer(this, object : DiffUtil.ItemCallback<MessageViewHolder.Message>() {
-            override fun areContentsTheSame(
-                oldItem: MessageViewHolder.Message,
-                newItem: MessageViewHolder.Message
-            ): Boolean = oldItem == newItem
+        AsyncListDiffer(
+            this,
+            object : DiffUtil.ItemCallback<MessageViewHolder.Message>() {
+                override fun areContentsTheSame(
+                    oldItem: MessageViewHolder.Message,
+                    newItem: MessageViewHolder.Message
+                ): Boolean = oldItem == newItem
 
-            override fun areItemsTheSame(
-                oldItem: MessageViewHolder.Message,
-                newItem: MessageViewHolder.Message
-            ): Boolean = oldItem.id == newItem.id
-        })
+                override fun areItemsTheSame(
+                    oldItem: MessageViewHolder.Message,
+                    newItem: MessageViewHolder.Message
+                ): Boolean = oldItem.id == newItem.id
+            }
+        )
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {

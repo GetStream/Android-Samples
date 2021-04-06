@@ -1,19 +1,19 @@
 package io.getstream.whatsappclone.ui.channel_list
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import io.getstream.whatsappclone.databinding.FragmentChannelListBinding
-import io.getstream.whatsappclone.ui.home.HomeFragmentDirections
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.models.User
 import io.getstream.chat.android.ui.channel.list.viewmodel.ChannelListViewModel
 import io.getstream.chat.android.ui.channel.list.viewmodel.bindView
 import io.getstream.chat.android.ui.channel.list.viewmodel.factory.ChannelListViewModelFactory
+import io.getstream.whatsappclone.databinding.FragmentChannelListBinding
+import io.getstream.whatsappclone.ui.home.HomeFragmentDirections
 
 class ChannelListFragment : Fragment() {
 
@@ -64,5 +64,3 @@ class ChannelListFragment : Fragment() {
         }
     }
 }
-
-

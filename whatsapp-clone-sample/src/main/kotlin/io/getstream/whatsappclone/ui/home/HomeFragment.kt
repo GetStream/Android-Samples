@@ -9,12 +9,12 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import io.getstream.whatsappclone.R
 import io.getstream.whatsappclone.ui.home.HomePagerAdapter.Companion.TAB_CAMERA
 import io.getstream.whatsappclone.ui.home.HomePagerAdapter.Companion.TAB_CHATS
 import io.getstream.whatsappclone.ui.home.HomePagerAdapter.Companion.TAB_TITLES
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var viewPager: ViewPager2
@@ -26,19 +26,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main, menu)
-        super.onCreateOptionsMenu(menu,inflater)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val activity : AppCompatActivity = activity as AppCompatActivity
-        val fragmentView = requireNotNull(view) {"View should not be null when calling onActivityCreated"}
+        val activity: AppCompatActivity = activity as AppCompatActivity
+        val fragmentView = requireNotNull(view) { "View should not be null when calling onActivityCreated" }
 
         val toolbar: Toolbar = fragmentView.findViewById(R.id.toolbar)
         activity.setSupportActionBar(toolbar)
 
-        val tabLayout : TabLayout = fragmentView.findViewById(R.id.tabs)
+        val tabLayout: TabLayout = fragmentView.findViewById(R.id.tabs)
         viewPager = fragmentView.findViewById(R.id.view_pager)
         viewPager.adapter = HomePagerAdapter(childFragmentManager, lifecycle)
 
