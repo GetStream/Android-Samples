@@ -1,0 +1,27 @@
+import io.getstream.samples.Dependencies
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath Dependencies.androidGradlePlugin
+        classpath Dependencies.kotlinGradlePlugin
+        classpath Dependencies.navigationSafeArgsGradlePlugin
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven {
+            url "https://jitpack.io"
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

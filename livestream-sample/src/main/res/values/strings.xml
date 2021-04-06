@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Livestream Sample</string>
+    <string name="hint_enter_your_message">Write a message…</string>
+</resources>

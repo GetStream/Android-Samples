@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/avatarContainer"
+        android:layout_width="@dimen/avatar_size"
+        android:layout_height="@dimen/avatar_size"
+        android:layout_margin="@dimen/margin_x_small"
+        app:cardCornerRadius="@dimen/avatar_circle_radius"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/avatarImageView"
+            android:layout_width="@dimen/avatar_size"
+            android:layout_height="@dimen/avatar_size" />
+
+    </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/userNameTextView"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_x_small"
+        android:ellipsize="end"
+        android:lines="1"
+        app:layout_constraintLeft_toRightOf="@+id/avatarContainer"
+        app:layout_constraintTop_toTopOf="@+id/avatarContainer"
+        tools:text="Don Ross Don Ross Don Ross Don Ross Don Ross Don Ross Don Ross Don Ross" />
+
+    <TextView
+        android:id="@+id/messageTextView"
+        style="@style/TextAppearance.AppCompat.Caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_x_small"
+        android:ellipsize="end"
+        android:maxLines="3"
+        app:layout_constraintStart_toEndOf="@+id/avatarContainer"
+        app:layout_constraintTop_toBottomOf="@+id/userName"
+        tools:text="Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text " />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,55 @@
+import io.getstream.samples.Configuration
+import io.getstream.samples.Dependencies
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion Configuration.compileSdkVersion
+
+    defaultConfig {
+        applicationId "io.getstream.videochat"
+        minSdkVersion Configuration.minSdkVersion
+        targetSdkVersion Configuration.targetSdkVersion
+        versionCode Configuration.versionCode
+        versionName Configuration.versionName
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    sourceSets {
+        all {
+            it.java.srcDir "src/$it.name/kotlin"
+        }
+    }
+}
+
+dependencies {
+    // Stream SDK dependency
+    implementation 'io.getstream:stream-chat-android-client:4.8.0'
+
+    implementation Dependencies.kotlinStdLib
+    implementation Dependencies.androidxAppCompat
+    implementation Dependencies.androidxCoreKtx
+    implementation Dependencies.androidxActivityKtx
+    implementation Dependencies.androidxLifecycleExtensions
+    implementation Dependencies.coil
+    implementation Dependencies.androidxRecyclerview
+    implementation Dependencies.androidxConstraintLayout
+    implementation Dependencies.youtubePlayer
+}
