@@ -19,6 +19,7 @@ private const val NAVIGATION_VERSION = "2.3.3"
 private const val PICASSO_VERSION = "2.71828"
 private const val TIMBER_VERSION = "4.7.1"
 private const val YOUTUBE_PLAYER_VERSION = "10.0.5"
+private const val KTLINT_PLUGIN_VERSION = "10.0.0"
 
 object Dependencies {
     const val androidGradlePlugin = "com.android.tools.build:gradle:$ANDROID_GRADLE_PLUGIN_VERSION"
@@ -43,5 +44,5 @@ object Dependencies {
     const val picasso = "com.squareup.picasso:picasso:$PICASSO_VERSION"
     const val timber = "com.jakewharton.timber:timber:$TIMBER_VERSION"
     const val youtubePlayer = "com.pierfrancescosoffritti.androidyoutubeplayer:core:$YOUTUBE_PLAYER_VERSION"
-
+    const val ktlintPlugin = "org.jlleitschuh.gradle:ktlint-gradle:$KTLINT_PLUGIN_VERSION"
 }

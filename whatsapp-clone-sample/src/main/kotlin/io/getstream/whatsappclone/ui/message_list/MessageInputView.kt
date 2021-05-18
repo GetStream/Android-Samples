@@ -81,11 +81,12 @@ class MessageInputView : ConstraintLayout {
                 ) = Unit
 
                 override fun onTextChanged(
-                    s: CharSequence, start: Int,
-                    before: Int, count: Int
+                    s: CharSequence,
+                    start: Int,
+                    before: Int,
+                    count: Int
                 ) = Unit
             }
         )
     }
-
 }

@@ -101,11 +101,8 @@ val randomColors = listOf(
 )
 
 val userColorMap = mutableMapOf<String, Int>()
-val User.nicknameColor:  Int
-        get() = userColorMap.getOrPut(id) { randomColors.random() }
+val User.nicknameColor: Int
+    get() = userColorMap.getOrPut(id) { randomColors.random() }
 
 val User.token: String
     get() = tokensMap[id] ?: ""
-
-
-

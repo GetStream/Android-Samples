@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearSmoothScroller
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
@@ -39,13 +38,16 @@ class LiveStreamActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun observeViewState() {
-        viewModel.viewState.observe(this, {
-            when (it) {
-                is State.Messages -> updateMessagesList(it.messages)
-                is State.NewMessage -> updateMessagesList(adapter.currentList + it.message)
-                is State.Error -> showToast(it.message)
+        viewModel.viewState.observe(
+            this,
+            {
+                when (it) {
+                    is State.Messages -> updateMessagesList(it.messages)
+                    is State.NewMessage -> updateMessagesList(adapter.currentList + it.message)
+                    is State.Error -> showToast(it.message)
+                }
             }
-        })
+        )
     }
 
     private fun setupView() {

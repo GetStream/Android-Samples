@@ -48,7 +48,3 @@ class VideoListAdapter(
         }
     }
 }
-
-
-
-
