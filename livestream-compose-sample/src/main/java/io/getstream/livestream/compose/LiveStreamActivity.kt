@@ -37,7 +37,7 @@ class LiveStreamActivity : ComponentActivity() {
         setContent {
             AndroidSamplesTheme(darkTheme = true) {
                 Surface(color = MaterialTheme.colors.background) {
-                    LiveStreamScreen(composerViewModel, listViewModel)
+                    LiveStreamScreen(composerViewModel, listViewModel, onBackPressed = { finish() })
                 }
             }
         }

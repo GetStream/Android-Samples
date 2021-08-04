@@ -24,7 +24,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LiveStreamActivity" />
+        <activity
+            android:name=".LiveStreamActivity"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>
