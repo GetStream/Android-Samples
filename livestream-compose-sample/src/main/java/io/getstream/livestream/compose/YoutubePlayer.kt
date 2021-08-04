@@ -27,6 +27,5 @@ fun YTPlayer() {
             enableAutomaticInitialization = false
             initialize(playerListener, false, playerOptions)
         }
-
     })
 }
