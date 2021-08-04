@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">livestream-compose-sample</string>
+    <string name="permission_message">Permissions not granted by the user.</string>
 </resources>

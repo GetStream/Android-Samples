@@ -26,11 +26,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.api.models.QuerySort
-import io.getstream.chat.android.client.call.await
 import io.getstream.chat.android.client.models.Channel
 import io.getstream.chat.android.client.models.Filters
 import io.getstream.chat.android.client.models.User
-import io.getstream.chat.android.client.utils.Result
 import io.getstream.chat.android.compose.ui.channel.ChannelsScreen
 import io.getstream.chat.android.compose.ui.channel.header.ChannelListHeader
 import io.getstream.chat.android.compose.ui.channel.info.ChannelInfo
@@ -41,11 +39,8 @@ import io.getstream.chat.android.compose.viewmodel.channel.ChannelListViewModel
 import io.getstream.chat.android.compose.viewmodel.channel.ChannelViewModelFactory
 import io.getstream.chat.android.offline.ChatDomain
 import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.withContext
-import timber.log.Timber
+
+private const val KEY_LIVE_STREAM_TYPE = "liveStreamType"
 
 class HomeActivity : ComponentActivity() {
 
@@ -73,42 +68,14 @@ class HomeActivity : ComponentActivity() {
          * definition, in which you gain access to all the UI component functions.
          *
          * You can use the default [ChannelsScreen] component that sets everything up for you,
-         * or build a custom component yourself, like [MyCustomUi].
+         * or build a custom component yourself, like [CustomChannelScreen].
          * */
         setContent {
             ChatTheme {
-                /*ChannelsScreen(
-                    title = stringResource(id = R.string.app_name),
-                    isShowingHeader = true,
-                    isShowingSearch = true,
-                    onItemClick = {
-                        startActivity(LiveStreamActivity.getIntent(this, it.cid))
-                    },
-                    onBackPressed = { finish() }
-                )*/
-
-//                MyCustomUiSimplified()
-                MyCustomUi()
+                CustomChannelScreen()
             }
         }
-    }
 
-
-    @ExperimentalFoundationApi
-    @ExperimentalMaterialApi
-    @Composable
-    fun MyCustomUiSimplified() {
-        val user by ChatDomain.instance().user.collectAsState()
-
-        Column(modifier = Modifier.fillMaxSize()) {
-            ChannelListHeader(
-                title = stringResource(id = R.string.app_name),
-                currentUser = user,
-                isNetworkAvailable = true
-            )
-
-            ChannelList()
-        }
     }
 
     /**
@@ -122,7 +89,7 @@ class HomeActivity : ComponentActivity() {
     @ExperimentalFoundationApi
     @ExperimentalMaterialApi
     @Composable
-    fun MyCustomUi() {
+    fun CustomChannelScreen() {
         var query by remember { mutableStateOf("") }
 
         val user by listViewModel.user.collectAsState()
@@ -172,6 +139,13 @@ class HomeActivity : ComponentActivity() {
     }
 
     private fun openMessages(channel: Channel) {
-        startActivity(LiveStreamActivity.getIntent(this, channel.cid))
+        val liveStreamType = if (channel.extraData.isEmpty().not()) {
+            if (channel.extraData["name"] != null) {
+                if((channel.extraData["name"] as String).contains("Youtube")){
+                    LiveStreamType.Youtube
+                } else LiveStreamType.Camera
+            } else LiveStreamType.Youtube
+        } else LiveStreamType.Youtube
+        startActivity(LiveStreamActivity.getIntent(this, channel.cid, liveStreamType))
     }
 }

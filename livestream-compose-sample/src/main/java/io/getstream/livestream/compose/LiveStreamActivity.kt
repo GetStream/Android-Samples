@@ -1,19 +1,26 @@
 package io.getstream.livestream.compose
 
+import android.Manifest
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessagesViewModelFactory
 import io.getstream.chat.android.offline.ChatDomain
+import io.getstream.livestream.compose.streams.YoutubeLiveStream
 import io.getstream.livestream.compose.ui.theme.AndroidSamplesTheme
 
 class LiveStreamActivity : ComponentActivity() {
@@ -31,24 +38,95 @@ class LiveStreamActivity : ComponentActivity() {
 
     private val composerViewModel by viewModels<MessageComposerViewModel>(factoryProducer = { factory })
     private val listViewModel by viewModels<MessageListViewModel>(factoryProducer = { factory })
+    private var liveStreamType: LiveStreamType = LiveStreamType.Youtube
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        handleExtras()
+        setViewContent()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<String>, grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_CODE_PERMISSIONS) {
+            if (allPermissionsGranted()) {
+                setViewContent()
+            } else {
+                Toast.makeText(
+                    this,
+                    getString(R.string.permission_message),
+                    Toast.LENGTH_SHORT
+                ).show()
+                finish()
+            }
+        }
+    }
+
+    private fun setViewContent() {
         setContent {
             AndroidSamplesTheme(darkTheme = true) {
                 Surface(color = MaterialTheme.colors.background) {
-                    LiveStreamScreen(composerViewModel, listViewModel, onBackPressed = { finish() })
+                    when (liveStreamType) {
+                        LiveStreamType.Youtube -> {
+                            YoutubeLiveStream(
+                                composerViewModel,
+                                listViewModel,
+                                onBackPressed = { finish() })
+                        }
+                        LiveStreamType.Camera -> {
+                            if (allPermissionsGranted()) {
+                                CameraLiveStream(
+                                    composerViewModel,
+                                    listViewModel,
+                                    onBackPressed = { finish() }
+                                )
+                            } else {
+                                ActivityCompat.requestPermissions(
+                                    this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
+                                )
+                            }
+                        }
+                        LiveStreamType.Video -> {
+                            YoutubeLiveStream(
+                                composerViewModel,
+                                listViewModel,
+                                onBackPressed = { finish() }
+                            )
+                        }
+                    }
                 }
             }
         }
     }
 
+    private fun handleExtras() {
+        if (intent.hasExtra(KEY_LIVE_STREAM_TYPE)) {
+            liveStreamType =
+                intent.getSerializableExtra(KEY_LIVE_STREAM_TYPE) as LiveStreamType
+        }
+    }
+
+    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
+        ContextCompat.checkSelfPermission(
+            baseContext, it
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+
     companion object {
         private const val KEY_CHANNEL_ID = "channelId"
+        private const val KEY_LIVE_STREAM_TYPE = "liveStreamType"
 
-        fun getIntent(context: Context, channelId: String): Intent {
+        private const val REQUEST_CODE_PERMISSIONS = 10
+        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+        private const val IMMERSIVE_FLAG_TIMEOUT = 500L
+
+        fun getIntent(context: Context, channelId: String, liveStreamType: LiveStreamType): Intent {
             return Intent(context, LiveStreamActivity::class.java).apply {
                 putExtra(KEY_CHANNEL_ID, channelId)
+                putExtra(KEY_LIVE_STREAM_TYPE, liveStreamType)
             }
         }
     }
