@@ -1,12 +1,14 @@
 package io.getstream.livestream.compose
 
 import android.app.Application
+import androidx.camera.camera2.Camera2Config
+import androidx.camera.core.CameraXConfig
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.models.User
 import io.getstream.chat.android.offline.ChatDomain
 import timber.log.Timber
 
-class App : Application() {
+class App : Application(), CameraXConfig.Provider {
     override fun onCreate() {
         super.onCreate()
 
@@ -30,6 +32,10 @@ class App : Application() {
             user = user,
             token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYWRpdGxhbCJ9.Q8oM9czJlsGV5RiV2pEF-y9XnwUh--5XbF1j7Dc861U"
         ).enqueue()
+    }
+
+    override fun getCameraXConfig(): CameraXConfig {
+        return Camera2Config.defaultConfig()
     }
 
     companion object {
