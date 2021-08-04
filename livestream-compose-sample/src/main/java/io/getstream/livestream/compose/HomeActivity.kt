@@ -30,6 +30,7 @@ import io.getstream.chat.android.client.call.await
 import io.getstream.chat.android.client.models.Channel
 import io.getstream.chat.android.client.models.Filters
 import io.getstream.chat.android.client.models.User
+import io.getstream.chat.android.client.utils.Result
 import io.getstream.chat.android.compose.ui.channel.ChannelsScreen
 import io.getstream.chat.android.compose.ui.channel.header.ChannelListHeader
 import io.getstream.chat.android.compose.ui.channel.info.ChannelInfo
@@ -39,8 +40,12 @@ import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.channel.ChannelListViewModel
 import io.getstream.chat.android.compose.viewmodel.channel.ChannelViewModelFactory
 import io.getstream.chat.android.offline.ChatDomain
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 class HomeActivity : ComponentActivity() {
 
@@ -57,6 +62,7 @@ class HomeActivity : ComponentActivity() {
 
     private val listViewModel: ChannelListViewModel by viewModels { factory }
 
+    @DelicateCoroutinesApi
     @ExperimentalFoundationApi
     @ExperimentalMaterialApi
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,17 +91,8 @@ class HomeActivity : ComponentActivity() {
                 MyCustomUi()
             }
         }
-
     }
-
-    suspend fun createNewChannel() {
-        withContext(Dispatchers.IO) {
-            ChatClient.instance().createChannel(
-                "livestream",
-                members = listOf()
-            ).await()
-        }
-    }
+    
 
     @ExperimentalFoundationApi
     @ExperimentalMaterialApi
