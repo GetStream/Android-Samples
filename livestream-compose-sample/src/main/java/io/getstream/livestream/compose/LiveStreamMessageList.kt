@@ -14,6 +14,7 @@ fun LiveStreamMessageList(messageListViewModel: MessageListViewModel) {
         viewModel = messageListViewModel,
         itemContent = {
             LiveStreamMessage(it)
-        }
+        },
+        emptyState = {}
     )
 }

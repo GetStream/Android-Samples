@@ -20,6 +20,7 @@ import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessagesViewModelFactory
 import io.getstream.chat.android.offline.ChatDomain
 import io.getstream.livestream.compose.streams.CameraLiveStream
+import io.getstream.livestream.compose.streams.VideoLiveStream
 import io.getstream.livestream.compose.streams.YoutubeLiveStream
 import io.getstream.livestream.compose.ui.theme.AndroidSamplesTheme
 
@@ -88,7 +89,8 @@ class LiveStreamActivity : ComponentActivity() {
                             }
                         }
                         LiveStreamType.Video -> {
-                            YoutubeLiveStream(
+                            VideoLiveStream(
+                                urlToLoad = "asset:///video.mp4",
                                 composerViewModel,
                                 listViewModel
                             )

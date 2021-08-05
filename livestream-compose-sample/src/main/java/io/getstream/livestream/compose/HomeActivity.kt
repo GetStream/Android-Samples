@@ -40,8 +40,6 @@ import io.getstream.chat.android.compose.viewmodel.channel.ChannelViewModelFacto
 import io.getstream.chat.android.offline.ChatDomain
 import kotlinx.coroutines.DelicateCoroutinesApi
 
-private const val KEY_LIVE_STREAM_TYPE = "liveStreamType"
-
 class HomeActivity : ComponentActivity() {
 
     private val factory by lazy {
@@ -141,11 +139,17 @@ class HomeActivity : ComponentActivity() {
     private fun openMessages(channel: Channel) {
         val liveStreamType = if (channel.extraData.isEmpty().not()) {
             if (channel.extraData["name"] != null) {
-                if((channel.extraData["name"] as String).contains("Youtube")){
-                    LiveStreamType.Youtube
-                } else LiveStreamType.Camera
-            } else LiveStreamType.Youtube
-        } else LiveStreamType.Youtube
+                when {
+                    (channel.extraData["name"] as String).contains("Youtube") -> {
+                        LiveStreamType.Youtube
+                    }
+                    (channel.extraData["name"] as String).contains("Video") -> {
+                        LiveStreamType.Video
+                    }
+                    else -> LiveStreamType.Camera
+                }
+            } else LiveStreamType.Video
+        } else LiveStreamType.Video
         startActivity(LiveStreamActivity.getIntent(this, channel.cid, liveStreamType))
     }
 }

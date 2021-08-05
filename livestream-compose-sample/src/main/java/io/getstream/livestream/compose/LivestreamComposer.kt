@@ -20,9 +20,12 @@ import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
 
 @Composable
-fun LivestreamComposer(composerViewModel: MessageComposerViewModel) {
+fun LivestreamComposer(
+    composerViewModel: MessageComposerViewModel,
+    modifier: Modifier = Modifier
+) {
     Row(
-        Modifier
+        modifier
             .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {

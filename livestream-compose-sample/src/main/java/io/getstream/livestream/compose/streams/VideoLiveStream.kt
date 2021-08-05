@@ -15,11 +15,12 @@ import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewM
 import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 import io.getstream.livestream.compose.LiveStreamMessageList
 import io.getstream.livestream.compose.LivestreamComposer
+import io.getstream.livestream.compose.players.ExoVideoPlayer
 import io.getstream.livestream.compose.players.YTPlayer
 
-
 @Composable
-fun YoutubeLiveStream(
+fun VideoLiveStream(
+    urlToLoad: String,
     composerViewModel: MessageComposerViewModel,
     listViewModel: MessageListViewModel
 ) {
@@ -29,7 +30,7 @@ fun YoutubeLiveStream(
 
     ChatTheme {
         Box(modifier = Modifier.fillMaxSize()) {
-            YTPlayer()
+            ExoVideoPlayer(urlToLoad)
             Box(
                 modifier = Modifier
                     .background(
