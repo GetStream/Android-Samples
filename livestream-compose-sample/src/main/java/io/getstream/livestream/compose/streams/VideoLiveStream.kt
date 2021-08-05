@@ -16,7 +16,6 @@ import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 import io.getstream.livestream.compose.LiveStreamMessageList
 import io.getstream.livestream.compose.LivestreamComposer
 import io.getstream.livestream.compose.players.ExoVideoPlayer
-import io.getstream.livestream.compose.players.YTPlayer
 
 @Composable
 fun VideoLiveStream(

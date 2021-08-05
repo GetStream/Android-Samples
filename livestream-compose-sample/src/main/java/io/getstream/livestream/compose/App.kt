@@ -37,8 +37,4 @@ class App : Application(), CameraXConfig.Provider {
     override fun getCameraXConfig(): CameraXConfig {
         return Camera2Config.defaultConfig()
     }
-
-    companion object {
-        private const val API_KEY = "qx5us2v6xvmh"
-    }
 }

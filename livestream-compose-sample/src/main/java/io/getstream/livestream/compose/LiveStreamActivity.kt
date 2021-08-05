@@ -15,6 +15,7 @@ import androidx.compose.material.Surface
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import io.getstream.chat.android.client.ChatClient
+import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessagesViewModelFactory
@@ -22,7 +23,6 @@ import io.getstream.chat.android.offline.ChatDomain
 import io.getstream.livestream.compose.streams.CameraLiveStream
 import io.getstream.livestream.compose.streams.VideoLiveStream
 import io.getstream.livestream.compose.streams.YoutubeLiveStream
-import io.getstream.livestream.compose.ui.theme.AndroidSamplesTheme
 
 class LiveStreamActivity : ComponentActivity() {
 
@@ -67,34 +67,32 @@ class LiveStreamActivity : ComponentActivity() {
 
     private fun setViewContent() {
         setContent {
-            AndroidSamplesTheme(darkTheme = true) {
-                Surface(color = MaterialTheme.colors.background) {
-                    when (liveStreamType) {
-                        LiveStreamType.Youtube -> {
-                            YoutubeLiveStream(
+            ChatTheme {
+                when (liveStreamType) {
+                    LiveStreamType.Youtube -> {
+                        YoutubeLiveStream(
+                            composerViewModel,
+                            listViewModel
+                        )
+                    }
+                    LiveStreamType.Camera -> {
+                        if (allPermissionsGranted()) {
+                            CameraLiveStream(
                                 composerViewModel,
                                 listViewModel
                             )
-                        }
-                        LiveStreamType.Camera -> {
-                            if (allPermissionsGranted()) {
-                                CameraLiveStream(
-                                    composerViewModel,
-                                    listViewModel
-                                )
-                            } else {
-                                ActivityCompat.requestPermissions(
-                                    this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
-                                )
-                            }
-                        }
-                        LiveStreamType.Video -> {
-                            VideoLiveStream(
-                                urlToLoad = "asset:///video.mp4",
-                                composerViewModel,
-                                listViewModel
+                        } else {
+                            ActivityCompat.requestPermissions(
+                                this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
                             )
                         }
+                    }
+                    LiveStreamType.Video -> {
+                        VideoLiveStream(
+                            urlToLoad = "asset:///video.mp4",
+                            composerViewModel,
+                            listViewModel
+                        )
                     }
                 }
             }
@@ -121,7 +119,6 @@ class LiveStreamActivity : ComponentActivity() {
 
         private const val REQUEST_CODE_PERMISSIONS = 10
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
-        private const val IMMERSIVE_FLAG_TIMEOUT = 500L
 
         fun getIntent(context: Context, channelId: String, liveStreamType: LiveStreamType): Intent {
             return Intent(context, LiveStreamActivity::class.java).apply {

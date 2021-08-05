@@ -15,7 +15,7 @@ import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewM
 import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 import io.getstream.livestream.compose.LiveStreamMessageList
 import io.getstream.livestream.compose.LivestreamComposer
-import io.getstream.livestream.compose.players.YTPlayer
+import io.getstream.livestream.compose.players.YoutubePlayer
 
 
 @Composable
@@ -29,7 +29,7 @@ fun YoutubeLiveStream(
 
     ChatTheme {
         Box(modifier = Modifier.fillMaxSize()) {
-            YTPlayer()
+            YoutubePlayer()
             Box(
                 modifier = Modifier
                     .background(

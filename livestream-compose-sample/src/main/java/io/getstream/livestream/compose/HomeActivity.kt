@@ -61,13 +61,6 @@ class HomeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         listViewModel.start()
-        /**
-         * To use the Compose SDK/Components, simply call [setContent] to provide a Compose UI
-         * definition, in which you gain access to all the UI component functions.
-         *
-         * You can use the default [ChannelsScreen] component that sets everything up for you,
-         * or build a custom component yourself, like [CustomChannelScreen].
-         * */
         setContent {
             ChatTheme {
                 CustomChannelScreen()

@@ -10,7 +10,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFram
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
 @Composable
-fun YTPlayer(modifier: Modifier = Modifier) {
+fun YoutubePlayer(modifier: Modifier = Modifier) {
     AndroidView(modifier = modifier.fillMaxSize(), factory = { context ->
         val playerListener = object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
