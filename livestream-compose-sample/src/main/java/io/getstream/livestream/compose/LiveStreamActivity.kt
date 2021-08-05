@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -20,6 +19,7 @@ import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewM
 import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessagesViewModelFactory
 import io.getstream.chat.android.offline.ChatDomain
+import io.getstream.livestream.compose.streams.CameraLiveStream
 import io.getstream.livestream.compose.streams.YoutubeLiveStream
 import io.getstream.livestream.compose.ui.theme.AndroidSamplesTheme
 
@@ -72,15 +72,14 @@ class LiveStreamActivity : ComponentActivity() {
                         LiveStreamType.Youtube -> {
                             YoutubeLiveStream(
                                 composerViewModel,
-                                listViewModel,
-                                onBackPressed = { finish() })
+                                listViewModel
+                            )
                         }
                         LiveStreamType.Camera -> {
                             if (allPermissionsGranted()) {
                                 CameraLiveStream(
                                     composerViewModel,
-                                    listViewModel,
-                                    onBackPressed = { finish() }
+                                    listViewModel
                                 )
                             } else {
                                 ActivityCompat.requestPermissions(
@@ -91,8 +90,7 @@ class LiveStreamActivity : ComponentActivity() {
                         LiveStreamType.Video -> {
                             YoutubeLiveStream(
                                 composerViewModel,
-                                listViewModel,
-                                onBackPressed = { finish() }
+                                listViewModel
                             )
                         }
                     }
