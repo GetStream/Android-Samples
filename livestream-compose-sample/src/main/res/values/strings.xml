@@ -1,4 +1,8 @@
 <resources>
-    <string name="app_name">livestream-compose-sample</string>
+    <string name="app_name">LiveStream compose sample</string>
     <string name="permission_message">Permissions not granted by the user.</string>
+    <string name="desc1">ESG Regulations, Standards and Disclosure: Who to publish it for and how to make it meaningful.</string>
+    <string name="desc2">How to set a business plans to use information to a competitive advantage and support enterprise goals.</string>
+    <string name="desc3">Learn how to combine approaches with declarative API for native management and deployment across clusters.</string>
+    <string name="desc4">Data management &amp; Analytics best practices - Driving data literacy</string>
 </resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="description">
+        <item>@string/desc1</item>
+        <item>@string/desc2</item>
+        <item>@string/desc3</item>
+        <item>@string/desc4</item>
+    </array>
+</resources>
