@@ -9,6 +9,11 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
+/**
+ * View component which adds YoutubePlayer to play youtube videos
+ *
+ * @param modifier - Modifier for styling.
+ */
 @Composable
 fun YoutubePlayer(modifier: Modifier = Modifier) {
     AndroidView(modifier = modifier.fillMaxSize(), factory = { context ->

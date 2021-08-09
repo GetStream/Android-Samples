@@ -8,8 +8,11 @@ import androidx.camera.view.PreviewView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -24,6 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
@@ -32,14 +36,26 @@ import io.getstream.chat.android.compose.ui.messages.list.MessageList
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
+import io.getstream.livestream.compose.LiveStreamHeader
 import io.getstream.livestream.compose.LiveStreamMessage
 import io.getstream.livestream.compose.LiveStreamMessageList
 import io.getstream.livestream.compose.LivestreamComposer
 
+/**
+ * Shows a camera preview surface in a view component that relies on [MessageListViewModel]
+ * and [MessageComposerViewModel] to connect all the chat data handling operations.
+ *
+ * @param composerViewModel - [MessageComposerViewModel] for manging message input field
+ * @param listViewModel - [MessageListViewModel] The ViewModel that stores all the data and
+ * business logic required to show a list of messages. The user has to provide one in this case,
+ * as we require the channelId to start the operations.
+ * @param onBackPressed - Handler for when the user clicks back press
+ */
 @Composable
 fun CameraLiveStream(
     composerViewModel: MessageComposerViewModel,
-    listViewModel: MessageListViewModel
+    listViewModel: MessageListViewModel,
+    onBackPressed: () -> Unit
 ) {
     val lifecycleOwner = LocalLifecycleOwner.current
     val context = LocalContext.current
@@ -82,6 +98,10 @@ fun CameraLiveStream(
                     LiveStreamMessageList(listViewModel)
                     LivestreamComposer(composerViewModel)
                 }
+            }
+
+            LiveStreamHeader {
+                onBackPressed()
             }
         }
     }

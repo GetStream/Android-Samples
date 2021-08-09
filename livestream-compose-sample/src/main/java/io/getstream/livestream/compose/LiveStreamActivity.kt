@@ -71,16 +71,20 @@ class LiveStreamActivity : ComponentActivity() {
                 when (liveStreamType) {
                     LiveStreamType.Youtube -> {
                         YoutubeLiveStream(
-                            composerViewModel,
-                            listViewModel
-                        )
+                            composerViewModel = composerViewModel,
+                            listViewModel = listViewModel
+                        ) {
+                            finish()
+                        }
                     }
                     LiveStreamType.Camera -> {
                         if (allPermissionsGranted()) {
                             CameraLiveStream(
                                 composerViewModel,
                                 listViewModel
-                            )
+                            ) {
+                                finish()
+                            }
                         } else {
                             ActivityCompat.requestPermissions(
                                 this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
@@ -90,9 +94,11 @@ class LiveStreamActivity : ComponentActivity() {
                     LiveStreamType.Video -> {
                         VideoLiveStream(
                             urlToLoad = "asset:///video.mp4",
-                            composerViewModel,
-                            listViewModel
-                        )
+                            composerViewModel = composerViewModel,
+                            listViewModel = listViewModel
+                        ) {
+                            finish()
+                        }
                     }
                 }
             }

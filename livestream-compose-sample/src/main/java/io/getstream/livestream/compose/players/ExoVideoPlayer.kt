@@ -17,7 +17,15 @@ import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
+import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
+import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 
+/**
+ * View component which adds Exoplayer to play external URL video links
+ *
+ * @param modifier - Modifier for styling.
+ * @param urlToLoad - A string URL for loading a video
+ */
 @Composable
 fun ExoVideoPlayer(
     urlToLoad: String,
