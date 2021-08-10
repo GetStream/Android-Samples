@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidSamples">
         <activity
-            android:name=".LivestreamHHomeActivity"
+            android:name=".LiveStreamHomeActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.AndroidSamples.NoActionBar"
