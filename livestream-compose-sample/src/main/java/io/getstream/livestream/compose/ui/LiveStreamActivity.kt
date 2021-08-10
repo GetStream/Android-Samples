@@ -1,4 +1,4 @@
-package io.getstream.livestream.compose
+package io.getstream.livestream.compose.ui
 
 import android.Manifest
 import android.content.ClipboardManager
@@ -10,8 +10,6 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import io.getstream.chat.android.client.ChatClient
@@ -20,6 +18,8 @@ import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewM
 import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessagesViewModelFactory
 import io.getstream.chat.android.offline.ChatDomain
+import io.getstream.livestream.compose.R
+import io.getstream.livestream.compose.models.LiveStreamType
 import io.getstream.livestream.compose.streams.CameraLiveStream
 import io.getstream.livestream.compose.streams.VideoLiveStream
 import io.getstream.livestream.compose.streams.YoutubeLiveStream
@@ -71,6 +71,7 @@ class LiveStreamActivity : ComponentActivity() {
                 when (liveStreamType) {
                     LiveStreamType.Youtube -> {
                         YoutubeLiveStream(
+                            videoId = "XYqrrpvTtU8",
                             composerViewModel = composerViewModel,
                             listViewModel = listViewModel
                         ) {

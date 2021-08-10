@@ -1,4 +1,4 @@
-package io.getstream.livestream.compose
+package io.getstream.livestream.compose.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -7,8 +7,6 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.DropdownMenu
@@ -17,14 +15,13 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
-import androidx.compose.material.lightColors
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.api.models.QuerySort
@@ -33,6 +30,9 @@ import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.channel.ChannelListViewModel
 import io.getstream.chat.android.compose.viewmodel.channel.ChannelViewModelFactory
 import io.getstream.chat.android.offline.ChatDomain
+import io.getstream.livestream.compose.R
+import io.getstream.livestream.compose.darkColorPalette
+import io.getstream.livestream.compose.lightColorPalette
 
 class LiveStreamHomeActivity : ComponentActivity() {
     private val factory by lazy {
@@ -62,18 +62,20 @@ class LiveStreamHomeActivity : ComponentActivity() {
                 CustomHeader(
                     title = resources.getString(R.string.app_name),
                     actions = {
+                        //Adds a icon button for switching theme
                         IconButton(
                             onClick = {
                                 expanded = !expanded
                             }) {
                             Image(
                                 painter = painterResource(id = R.drawable.ic_theme_switch),
-                                contentDescription = "Switch theme",
+                                contentDescription = stringResource(id = R.string.accessibilitySwitchTheme),
                                 modifier = Modifier
                                     .width(24.dp)
                                     .height(24.dp)
                             )
                         }
+                        //Theme chooser drop down selector
                         DropdownMenu(
                             expanded = expanded,
                             onDismissRequest = { expanded = false }
@@ -92,12 +94,14 @@ class LiveStreamHomeActivity : ComponentActivity() {
                                 Text(text = "LiveStream dark theme")
                             }
                         }
+
+                        //Adds a icon button for switching grid toggle
                         IconButton(onClick = {
                             isGrid = !isGrid
                         }) {
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_toggle_grid),
-                                contentDescription = "Switch theme",
+                                contentDescription = stringResource(id = R.string.accessibilityGridToggle),
                                 tint = ChatTheme.colors.textHighEmphasis
                             )
                         }
@@ -108,7 +112,6 @@ class LiveStreamHomeActivity : ComponentActivity() {
                         columnCount = if (isGrid) 2 else 1,
                         modifier = Modifier.background(ChatTheme.colors.appBackground),
                         channelListViewModel = listViewModel,
-                        context = this@LiveStreamHomeActivity
                     )
                 }
             }

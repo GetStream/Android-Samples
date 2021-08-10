@@ -2,7 +2,6 @@ package io.getstream.livestream.compose.streams
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -13,10 +12,9 @@ import androidx.compose.ui.graphics.Color
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
-import io.getstream.livestream.compose.LiveStreamHeader
-import io.getstream.livestream.compose.LiveStreamMessageList
-import io.getstream.livestream.compose.LivestreamComposer
 import io.getstream.livestream.compose.players.ExoVideoPlayer
+import io.getstream.livestream.compose.ui.CommentsBox
+import io.getstream.livestream.compose.ui.LiveStreamHeader
 
 /**
  * Shows a video view component that relies on [MessageListViewModel]
@@ -48,7 +46,7 @@ fun VideoLiveStream(
                 onBackPressed()
             }
             ExoVideoPlayer(urlToLoad)
-            Box(
+            CommentsBox(
                 modifier = Modifier
                     .background(
                         brush = Brush.verticalGradient(
@@ -57,13 +55,10 @@ fun VideoLiveStream(
                             1050f,
                         )
                     )
-                    .align(Alignment.BottomCenter)
-            ) {
-                Column {
-                    LiveStreamMessageList(listViewModel)
-                    LivestreamComposer(composerViewModel)
-                }
-            }
+                    .align(Alignment.BottomCenter),
+                composerViewModel,
+                listViewModel
+            )
             LiveStreamHeader {
                 onBackPressed()
             }

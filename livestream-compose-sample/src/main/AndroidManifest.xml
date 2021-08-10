@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidSamples">
         <activity
-            android:name=".LiveStreamHomeActivity"
+            android:name=".ui.LiveStreamHomeActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.AndroidSamples.NoActionBar"
@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LiveStreamActivity"
+            android:name=".ui.LiveStreamActivity"
             android:windowSoftInputMode="adjustResize" />
     </application>
 

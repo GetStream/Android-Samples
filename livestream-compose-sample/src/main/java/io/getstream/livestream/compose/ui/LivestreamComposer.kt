@@ -1,7 +1,6 @@
-package io.getstream.livestream.compose
+package io.getstream.livestream.compose.ui
 
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
@@ -18,11 +17,18 @@ import androidx.compose.ui.unit.dp
 import io.getstream.chat.android.compose.ui.messages.composer.components.MessageInput
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
+import io.getstream.livestream.compose.R
 
+/**
+ * A View component to provide message composer bar at bottom of a screen
+ *
+ * @param modifier - Modifier for styling.
+ * @param composerViewModel - Stream Message composer ViewModel to bind state for composer/ message input component
+ */
 @Composable
 fun LivestreamComposer(
-    composerViewModel: MessageComposerViewModel,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    composerViewModel: MessageComposerViewModel
 ) {
     Row(
         modifier

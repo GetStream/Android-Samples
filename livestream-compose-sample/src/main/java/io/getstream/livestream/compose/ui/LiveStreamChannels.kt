@@ -1,9 +1,6 @@
-package io.getstream.livestream.compose
+package io.getstream.livestream.compose.ui
 
 import android.content.Context
-import android.content.res.TypedArray
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -30,26 +27,40 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import io.getstream.chat.android.client.models.name
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.channel.ChannelListViewModel
-import java.util.*
+import io.getstream.livestream.compose.R
+import io.getstream.livestream.compose.models.LiveStreamChannelItem
+import io.getstream.livestream.compose.models.LiveStreamType
+import io.getstream.livestream.compose.models.LiveStreamType.*
+import io.getstream.livestream.compose.randomArtWork
+import io.getstream.livestream.compose.randomDescription
 
+/**
+ * View component to add custom live stream channels screen
+ *
+// * @param context - Local context for fetching resources to draw Icons or vectors
+ * @param channelListViewModel - Stream channel list ViewModel to bind all channel data to custom UI provided here.
+ * @param modifier - Modifier for styling.
+ * @param isDarkTheme - a Boolean state to get Theme is dark or light , used for deciding card background
+ * @param columnCount - a toggle State to switch between 2 column grid to single column list
+ */
 @ExperimentalMaterialApi
 @ExperimentalFoundationApi
 @Composable
 fun LiveStreamChannels(
+    channelListViewModel: ChannelListViewModel,
     modifier: Modifier = Modifier,
     isDarkTheme: Boolean = false,
-    columnCount: Int = 2,
-    context: Context,
-    channelListViewModel: ChannelListViewModel,
+    columnCount: Int = 2
 ) {
     LaunchedEffect(Unit) {
         channelListViewModel.start()
@@ -58,6 +69,8 @@ fun LiveStreamChannels(
         colorResource(id = R.color.cardview_dark_background)
     else
         colorResource(id = R.color.cardview_light_background)
+    val context: Context = LocalContext.current
+
     val channels = channelListViewModel.channelsState.channels.map { channel ->
         LiveStreamChannelItem(
             channelId = channel.cid,
@@ -99,7 +112,7 @@ fun LiveStreamChannels(
                         ) {
                             Image(
                                 painterResource(channels[index].channelArt),
-                                contentDescription = "",
+                                contentDescription = stringResource(id = R.string.accessibilityArtworkImage),
                                 contentScale = ContentScale.Crop,
                             )
                         }
@@ -111,9 +124,8 @@ fun LiveStreamChannels(
                             verticalAlignment = Alignment.Top
                         ) {
                             Icon(
-                                modifier = Modifier.align(Alignment.CenterVertically),
                                 imageVector = Icons.Rounded.ViewStream,
-                                contentDescription = null
+                                contentDescription = stringResource(id = R.string.accessibilityIcon)
                             )
                             Text(
                                 modifier = Modifier
@@ -138,42 +150,15 @@ fun LiveStreamChannels(
     )
 }
 
-fun Context.randomArtWork(): Int {
-    val rand = Random()
-    val artworksArray: TypedArray = resources.obtainTypedArray(R.array.artwork)
-    val rndInt: Int = rand.nextInt(artworksArray.length())
-    return artworksArray.getResourceId(rndInt, 0).also {
-        artworksArray.recycle()
-    }
-}
-
-fun Context.randomDescription(): Int {
-    val rand = Random()
-    val descArray: TypedArray = resources.obtainTypedArray(R.array.description)
-    val rndInt: Int = rand.nextInt(descArray.length())
-    return descArray.getResourceId(rndInt, 0).also {
-        descArray.recycle()
-    }
-}
-
 private fun openMessages(context: Context, channel: LiveStreamChannelItem) {
     val liveStreamType = when {
         channel.channelName.contains("Youtube") -> {
-            LiveStreamType.Youtube
+            Youtube
         }
         channel.channelName.contains("Video") -> {
-            LiveStreamType.Video
+            Video
         }
-        else -> LiveStreamType.Video
+        else -> Video
     }
     context.startActivity(LiveStreamActivity.getIntent(context, channel.channelId, liveStreamType))
 }
-
-data class LiveStreamChannelItem(
-    val channelId: String,
-    val channelName: String,
-    @StringRes
-    val channelDescription: Int,
-    @DrawableRes
-    val channelArt: Int
-)

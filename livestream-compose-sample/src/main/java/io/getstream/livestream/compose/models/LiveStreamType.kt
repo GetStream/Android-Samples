@@ -1,4 +1,4 @@
-package io.getstream.livestream.compose
+package io.getstream.livestream.compose.models
 
 enum class LiveStreamType {
     Youtube,

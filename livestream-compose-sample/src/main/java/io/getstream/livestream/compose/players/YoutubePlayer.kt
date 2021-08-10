@@ -13,20 +13,23 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
  * View component which adds YoutubePlayer to play youtube videos
  *
  * @param modifier - Modifier for styling.
+ * @param videoId - String id of Youtube video url
  */
 @Composable
-fun YoutubePlayer(modifier: Modifier = Modifier) {
+fun YoutubePlayer(
+    modifier: Modifier = Modifier,
+    videoId: String,
+    playerOptions: IFramePlayerOptions = IFramePlayerOptions.Builder()
+        .controls(0)
+        .rel(0)
+        .build()
+) {
     AndroidView(modifier = modifier.fillMaxSize(), factory = { context ->
         val playerListener = object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
-                youTubePlayer.loadVideo(videoId = "XYqrrpvTtU8", startSeconds = 0f)
+                youTubePlayer.loadVideo(videoId = videoId, startSeconds = 0f)
             }
         }
-
-        val playerOptions = IFramePlayerOptions.Builder()
-            .controls(0)
-            .rel(0)
-            .build()
 
         YouTubePlayerView(context).apply {
             enableAutomaticInitialization = false

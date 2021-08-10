@@ -23,8 +23,8 @@ import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 /**
  * View component which adds Exoplayer to play external URL video links
  *
- * @param modifier - Modifier for styling.
  * @param urlToLoad - A string URL for loading a video
+ * @param modifier - Modifier for styling.
  */
 @Composable
 fun ExoVideoPlayer(
@@ -55,7 +55,7 @@ fun ExoVideoPlayer(
 
     exoPlayer.videoScalingMode = C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING
     exoPlayer.repeatMode = Player.REPEAT_MODE_ONE
-    AndroidView(modifier = modifier.fillMaxWidth(), factory = { context ->
+    AndroidView(modifier = modifier, factory = { context ->
         PlayerView(context).apply {
             useController = false
             player = exoPlayer
