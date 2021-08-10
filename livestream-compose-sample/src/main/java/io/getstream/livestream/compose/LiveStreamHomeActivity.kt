@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -16,6 +17,7 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
+import androidx.compose.material.lightColors
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -53,8 +55,10 @@ class LiveStreamHomeActivity : ComponentActivity() {
 
         setContent {
             var expanded by remember { mutableStateOf(false) }
+            var isDarkMode by remember { mutableStateOf(false) }
+            var isGrid by remember { mutableStateOf(true) }
 
-            ChatTheme(isInDarkMode = false) {
+            ChatTheme(colors = if (isDarkMode) darkColorPalette() else lightColorPalette()) {
                 CustomHeader(
                     title = resources.getString(R.string.app_name),
                     actions = {
@@ -68,7 +72,6 @@ class LiveStreamHomeActivity : ComponentActivity() {
                                 modifier = Modifier
                                     .width(24.dp)
                                     .height(24.dp)
-
                             )
                         }
                         DropdownMenu(
@@ -78,27 +81,32 @@ class LiveStreamHomeActivity : ComponentActivity() {
 
                             DropdownMenuItem(onClick = {
                                 expanded = !expanded
+                                isDarkMode = false
                             }) {
                                 Text(text = "LiveStream light theme")
                             }
                             DropdownMenuItem(onClick = {
                                 expanded = !expanded
+                                isDarkMode = true
                             }) {
                                 Text(text = "LiveStream dark theme")
                             }
                         }
                         IconButton(onClick = {
-                            //TODO change grid toggle
+                            isGrid = !isGrid
                         }) {
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_toggle_grid),
                                 contentDescription = "Switch theme",
-                                tint = Color.Black
+                                tint = ChatTheme.colors.textHighEmphasis
                             )
                         }
                     }
                 ) {
                     LiveStreamChannels(
+                        isDarkTheme = isDarkMode,
+                        columnCount = if (isGrid) 2 else 1,
+                        modifier = Modifier.background(ChatTheme.colors.appBackground),
                         channelListViewModel = listViewModel,
                         context = this@LiveStreamHomeActivity
                     )

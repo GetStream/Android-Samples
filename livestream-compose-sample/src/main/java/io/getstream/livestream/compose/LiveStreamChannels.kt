@@ -30,7 +30,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -44,13 +46,18 @@ import java.util.*
 @Composable
 fun LiveStreamChannels(
     modifier: Modifier = Modifier,
+    isDarkTheme: Boolean = false,
+    columnCount: Int = 2,
     context: Context,
     channelListViewModel: ChannelListViewModel,
 ) {
     LaunchedEffect(Unit) {
         channelListViewModel.start()
     }
-
+    val cardBackground = if (isDarkTheme)
+        colorResource(id = R.color.cardview_dark_background)
+    else
+        colorResource(id = R.color.cardview_light_background)
     val channels = channelListViewModel.channelsState.channels.map { channel ->
         LiveStreamChannelItem(
             channelId = channel.cid,
@@ -62,12 +69,13 @@ fun LiveStreamChannels(
 
     LazyVerticalGrid(
         modifier = modifier,
-        cells = GridCells.Fixed(2),
+        cells = GridCells.Fixed(columnCount),
         contentPadding = PaddingValues(bottom = 12.dp, top = 12.dp),
         content = {
             items(channelListViewModel.channelsState.channels.size) { index ->
                 Card(
                     shape = RoundedCornerShape(8.dp),
+                    backgroundColor = cardBackground,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(10.dp)
@@ -111,6 +119,7 @@ fun LiveStreamChannels(
                                 modifier = Modifier
                                     .align(Alignment.CenterVertically)
                                     .padding(start = 4.dp),
+                                color = ChatTheme.colors.textHighEmphasis,
                                 text = channels[index].channelName
                             )
                         }

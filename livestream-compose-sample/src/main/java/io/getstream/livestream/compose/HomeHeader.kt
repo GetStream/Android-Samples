@@ -58,25 +58,3 @@ fun CustomHeader(
         content = content
     )
 }
-
-@Composable
-fun PopupMenu(
-    menuItems: List<String>,
-    onClickCallbacks: List<() -> Unit>,
-    showMenu: Boolean,
-    onDismiss: () -> Unit,
-) {
-    DropdownMenu(
-        expanded = showMenu,
-        onDismissRequest = { onDismiss() },
-    ) {
-        menuItems.forEachIndexed { index, item ->
-            DropdownMenuItem(onClick = {
-                onDismiss()
-                onClickCallbacks[index]
-            }) {
-                Text(text = item)
-            }
-        }
-    }
-}
