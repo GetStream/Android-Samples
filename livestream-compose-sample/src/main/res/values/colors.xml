@@ -7,4 +7,35 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Light colors -->
+    <color name="light_text_high_emphasis">#2C2C30</color>
+    <color name="light_text_low_emphasis">#85CDFF</color>
+    <color name="light_disabled">#B4B7BB</color>
+    <color name="light_borders">#BED5E4</color>
+    <color name="light_input_background">#E9EAED</color>
+    <color name="light_app_background">#F7F7F8</color>
+    <color name="light_bars_background">#FFFFFF</color>
+    <color name="light_link_background">#E9F1FF</color>
+    <color name="light_overlay">#33000000</color>
+    <color name="light_primary_accent">#19A0FF</color>
+    <color name="light_error_accent">#FF3742</color>
+    <color name="light_info_accent">#20E070</color>
+    <color name="light_card_background">#FFFFFF</color>
+
+    <!-- Dark colors -->
+    <color name="dark_text_high_emphasis">#FFFFFF</color>
+    <color name="dark_text_low_emphasis">#8FFFFFFF</color>
+    <color name="dark_disabled">#B4B7BB</color>
+    <color name="dark_borders">#BED5E4</color>
+    <color name="dark_input_background">#E9EAED</color>
+    <color name="dark_app_background">#000615</color>
+    <color name="dark_bars_background">#00091F</color>
+    <color name="dark_link_background">#000615</color>
+    <color name="dark_overlay">#33000000</color>
+    <color name="dark_primary_accent">#0D47D9</color>
+    <color name="dark_error_accent">#FF3742</color>
+    <color name="dark_info_accent">#20E070</color>
+    <color name="dark_card_background">#010C29</color>
+
 </resources>
