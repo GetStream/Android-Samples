@@ -48,7 +48,7 @@ fun LivestreamComposer(
                 MessageInput(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .weight(7f)
+                        .weight(1f)
                         .padding(start = 8.dp),
                     value = composerViewModel.input,
                     attachments = composerViewModel.selectedAttachments,

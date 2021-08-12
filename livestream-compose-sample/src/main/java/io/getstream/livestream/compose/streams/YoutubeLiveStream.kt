@@ -2,6 +2,8 @@ package io.getstream.livestream.compose.streams
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -17,6 +19,7 @@ import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 import io.getstream.livestream.compose.players.YoutubePlayer
 import io.getstream.livestream.compose.ui.CommentsComponent
 import io.getstream.livestream.compose.ui.LiveStreamHeader
+import io.getstream.livestream.compose.ui.LivestreamComposer
 
 /**
  * Shows a Youtube view component that relies on [MessageListViewModel]
@@ -39,22 +42,19 @@ fun YoutubeLiveStream(
     onBackPressed: () -> Unit
 ) {
     Box(modifier = modifier.fillMaxSize()) {
-        YoutubePlayer(
-            videoId = videoId
-        )
-        CommentsComponent(
-            modifier = Modifier
-                .background(
-                    brush = Brush.verticalGradient(
-                        listOf(Color.Transparent, ChatTheme.colors.appBackground),
-                        0f,
-                        1050f,
-                    )
-                )
-                .align(Alignment.BottomCenter),
-            composerViewModel = composerViewModel,
-            listViewModel = listViewModel
-        )
+        Column(modifier) {
+            YoutubePlayer(
+                videoId = videoId
+            )
+            CommentsComponent(
+                modifier = Modifier
+                    .background(ChatTheme.colors.appBackground)
+                    .weight(0.6f),
+                composerViewModel = composerViewModel,
+                listViewModel = listViewModel
+            )
+            LivestreamComposer(composerViewModel = composerViewModel)
+        }
         LiveStreamHeader(
             modifier = Modifier
                 .fillMaxWidth()

@@ -24,18 +24,17 @@ fun CommentsComponent(
 ) {
     Column(modifier = modifier) {
         MessageList(
-            modifier = Modifier
-                .fillMaxHeight(0.5f),
+            modifier = Modifier,
             viewModel = listViewModel,
             itemContent = {
                 LiveStreamComment(messageItem = it)
             },
             emptyContent = {
-                // we hide EmptyView provided in SDK ,
+                // we hide default EmptyView from SDK ,
                 // as we have a transparent scrim background for the video playing
                 // in the background of our message list
             }
         )
-        LivestreamComposer(composerViewModel = composerViewModel)
+      //  LivestreamComposer(composerViewModel = composerViewModel)
     }
 }
