@@ -72,6 +72,8 @@ dependencies {
     implementation Dependencies.youtubePlayer
     implementation Dependencies.timber
 
-    implementation Dependencies.streamCompose
-
+    implementation Dependencies.streamClient
+    implementation Dependencies.streamOffline
+    implementation fileTree(include: ['*.aar'], dir: 'libs')
+    // implementation Dependencies.streamCompose
 }
