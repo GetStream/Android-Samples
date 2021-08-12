@@ -9,7 +9,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,7 +21,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
-import io.getstream.livestream.compose.ui.CommentsBox
+import io.getstream.livestream.compose.ui.CommentsComponent
 import io.getstream.livestream.compose.ui.LiveStreamHeader
 
 /**
@@ -62,7 +61,7 @@ fun CameraLiveStream(
             },
             modifier = Modifier.fillMaxSize(),
         )
-        CommentsBox(
+        CommentsComponent(
             modifier = Modifier
                 .background(
                     brush = Brush.verticalGradient(
