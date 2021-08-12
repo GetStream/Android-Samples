@@ -68,7 +68,7 @@ class LiveStreamActivity : ComponentActivity() {
                 when (liveStreamType) {
                     Youtube -> {
                         YoutubeLiveStream(
-                            videoId = "XYqrrpvTtU8",
+                            videoId = "9rIy0xY99a0",
                             composerViewModel = composerViewModel,
                             listViewModel = listViewModel
                         ) {
@@ -85,7 +85,7 @@ class LiveStreamActivity : ComponentActivity() {
                     }
                     Video -> {
                         VideoLiveStream(
-                            urlToLoad = "asset:///video.mp4",
+                            urlToLoad = "asset:///participant01.webm",
                             composerViewModel = composerViewModel,
                             listViewModel = listViewModel
                         ) {

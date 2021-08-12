@@ -2,21 +2,22 @@ package io.getstream.livestream.compose.streams
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import io.getstream.chat.android.compose.ui.messages.list.MessageList
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 import io.getstream.livestream.compose.players.ExoVideoPlayer
-import io.getstream.livestream.compose.ui.CommentsComponent
+import io.getstream.livestream.compose.ui.LiveStreamComment
 import io.getstream.livestream.compose.ui.LiveStreamHeader
+import io.getstream.livestream.compose.ui.LivestreamComposer
 
 /**
  * Shows a video view component that relies on [MessageListViewModel]
@@ -38,22 +39,28 @@ fun VideoLiveStream(
     listViewModel: MessageListViewModel,
     onBackPressed: () -> Unit
 ) {
-
     Box(modifier = modifier.fillMaxSize()) {
-        ExoVideoPlayer(urlToLoad)
-        CommentsComponent(
-            modifier = Modifier
-                .background(
-                    brush = Brush.verticalGradient(
-                        listOf(Color.Transparent, ChatTheme.colors.appBackground),
-                        0f,
-                        1050f,
-                    )
-                )
-                .align(Alignment.BottomCenter),
-            composerViewModel = composerViewModel,
-            listViewModel = listViewModel
-        )
+        Column {
+            ExoVideoPlayer(
+                modifier = Modifier.fillMaxWidth().wrapContentHeight(),
+                urlToLoad = urlToLoad
+            )
+            MessageList(
+                modifier = Modifier
+                    .background(ChatTheme.colors.appBackground)
+                    .weight(0.6f),
+                viewModel = listViewModel,
+                itemContent = {
+                    LiveStreamComment(messageItem = it)
+                },
+                emptyContent = {
+                    // we hide default EmptyView from SDK ,
+                    // as we have a transparent scrim background for the video playing
+                    // in the background of our message list
+                }
+            )
+            LivestreamComposer(composerViewModel = composerViewModel)
+        }
         LiveStreamHeader(
             modifier = Modifier
                 .fillMaxWidth()

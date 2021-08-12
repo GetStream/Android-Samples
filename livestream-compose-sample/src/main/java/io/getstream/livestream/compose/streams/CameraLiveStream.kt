@@ -7,26 +7,26 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
+import io.getstream.chat.android.compose.ui.messages.list.MessageList
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
-import io.getstream.livestream.compose.ui.CommentsComponent
+import io.getstream.livestream.compose.ui.LiveStreamComment
 import io.getstream.livestream.compose.ui.LiveStreamHeader
+import io.getstream.livestream.compose.ui.LivestreamComposer
 
 /**
  * Shows a camera preview surface in a view component that relies on [MessageListViewModel]
@@ -49,33 +49,43 @@ fun CameraLiveStream(
     val cameraProviderFuture = remember { ProcessCameraProvider.getInstance(context) }
 
     Box(modifier = Modifier.fillMaxSize()) {
-        AndroidView(
-            factory = { ctx ->
-                val preview = PreviewView(ctx)
-                val executor = ContextCompat.getMainExecutor(ctx)
-                cameraProviderFuture.addListener({
-                    val cameraProvider = cameraProviderFuture.get()
-                    bindPreview(
-                        lifecycleOwner,
-                        preview,
-                        cameraProvider
-                    )
-                }, executor)
-                preview
-            },
-            modifier = Modifier.fillMaxSize(),
-        )
-        CommentsComponent(
-            modifier = Modifier
-                .background(
-                    brush = Brush.verticalGradient(
-                        listOf(Color.Transparent, ChatTheme.colors.appBackground)
-                    )
-                )
-                .align(Alignment.BottomCenter),
-            composerViewModel = composerViewModel,
-            listViewModel = listViewModel
-        )
+        Column {
+            AndroidView(
+                factory = { ctx ->
+                    val preview = PreviewView(ctx)
+                    val executor = ContextCompat.getMainExecutor(ctx)
+                    cameraProviderFuture.addListener({
+                        val cameraProvider = cameraProviderFuture.get()
+                        bindPreview(
+                            lifecycleOwner,
+                            preview,
+                            cameraProvider
+                        )
+                    }, executor)
+                    preview
+                },
+                modifier = Modifier.fillMaxWidth(),
+            )
+            MessageList(
+                modifier = Modifier
+                    .background(ChatTheme.colors.appBackground)
+                    .weight(0.6f),
+                viewModel = listViewModel,
+                itemContent = {
+                    LiveStreamComment(messageItem = it)
+                },
+                emptyContent = {
+                    // we hide default EmptyView from SDK ,
+                    // as we have a transparent scrim background for the video playing
+                    // in the background of our message list
+                }
+            )
+
+            //TODO Fix bug if message list is empty , how to ensure this aligns to bottom
+            LivestreamComposer(
+                composerViewModel = composerViewModel
+            )
+        }
         LiveStreamHeader(
             modifier = Modifier
                 .fillMaxWidth()
