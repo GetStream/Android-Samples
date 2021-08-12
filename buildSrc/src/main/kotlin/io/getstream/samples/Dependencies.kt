@@ -26,6 +26,7 @@ private const val STREAM = "4.15.1"
 private const val CAMERA_V2 = "1.1.0-alpha07"
 private const val CAMERA_VIEW = "1.0.0-alpha27"
 private const val EXOPLAYER = "2.14.2"
+private const val COMPOSE_ACCOMPANIST = "0.16.1"
 
 object Dependencies {
     const val androidGradlePlugin = "com.android.tools.build:gradle:$ANDROID_GRADLE_PLUGIN_VERSION"
@@ -59,7 +60,9 @@ object Dependencies {
     const val youtubePlayer =
         "com.pierfrancescosoffritti.androidyoutubeplayer:core:$YOUTUBE_PLAYER_VERSION"
     const val ktlintPlugin = "org.jlleitschuh.gradle:ktlint-gradle:$KTLINT_PLUGIN_VERSION"
+
     const val exoPlayer = "com.google.android.exoplayer:exoplayer:$EXOPLAYER"
+
     const val composeCompiler = "androidx.compose.compiler:compiler:$COMPOSE"
     const val composeUi = "androidx.compose.ui:ui:$COMPOSE"
     const val composeUiTooling = "androidx.compose.ui:ui-tooling:$COMPOSE"
@@ -68,6 +71,8 @@ object Dependencies {
     const val composeMaterialIconsCore = "androidx.compose.material:material-icons-core:$COMPOSE"
     const val composeMaterialIconsExtended =
         "androidx.compose.material:material-icons-extended:$COMPOSE"
+    const val composeAccompanistPermissions =
+        "com.google.accompanist:accompanist-permissions:${COMPOSE_ACCOMPANIST}"
     const val composeActivity = "androidx.activity:activity-compose:$COMPOSE_ACTIVITY"
     const val composeCameraLifecycle = "androidx.camera:camera-lifecycle:$CAMERA_V2"
     const val composeCameraView = "androidx.camera:camera-view:$CAMERA_VIEW"

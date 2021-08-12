@@ -69,9 +69,7 @@ fun CameraLiveStream(
             modifier = Modifier
                 .background(
                     brush = Brush.verticalGradient(
-                        listOf(Color.Transparent, ChatTheme.colors.appBackground),
-                        0f,
-                        1050f,
+                        listOf(Color.Transparent, ChatTheme.colors.appBackground)
                     )
                 )
                 .align(Alignment.BottomCenter),
