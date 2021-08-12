@@ -1,6 +1,5 @@
 package io.getstream.livestream.compose.players
 
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -27,16 +26,19 @@ fun YoutubePlayer(
         .rel(0)
         .build()
 ) {
-    AndroidView(modifier = modifier.fillMaxWidth(), factory = { context ->
-        val playerListener = object : AbstractYouTubePlayerListener() {
-            override fun onReady(youTubePlayer: YouTubePlayer) {
-                youTubePlayer.loadVideo(videoId = videoId, startSeconds = 0f)
+    AndroidView(
+        modifier = modifier.fillMaxWidth(),
+        factory = { context ->
+            val playerListener = object : AbstractYouTubePlayerListener() {
+                override fun onReady(youTubePlayer: YouTubePlayer) {
+                    youTubePlayer.loadVideo(videoId = videoId, startSeconds = 0f)
+                }
+            }
+
+            YouTubePlayerView(context).apply {
+                enableAutomaticInitialization = false
+                initialize(playerListener, false, playerOptions)
             }
         }
-
-        YouTubePlayerView(context).apply {
-            enableAutomaticInitialization = false
-            initialize(playerListener, false, playerOptions)
-        }
-    })
+    )
 }

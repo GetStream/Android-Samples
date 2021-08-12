@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -25,13 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import io.getstream.chat.android.client.ChatClient
-import io.getstream.chat.android.client.api.models.QuerySort
-import io.getstream.chat.android.client.models.Filters
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
-import io.getstream.chat.android.compose.viewmodel.channel.ChannelListViewModel
-import io.getstream.chat.android.compose.viewmodel.channel.ChannelViewModelFactory
-import io.getstream.chat.android.offline.ChatDomain
 import io.getstream.livestream.compose.R
 import io.getstream.livestream.compose.darkColorPalette
 import io.getstream.livestream.compose.lightColorPalette
@@ -62,11 +55,12 @@ class LiveStreamHomeActivity : ComponentActivity() {
                 LiveStreamCustomChannelScreen(
                     title = resources.getString(R.string.app_name),
                     actions = {
-                        //Adds a icon button for switching theme
+                        // Adds a icon button for switching theme
                         IconButton(
                             onClick = {
                                 expanded = !expanded
-                            }) {
+                            }
+                        ) {
                             Image(
                                 painter = painterResource(id = R.drawable.ic_theme_switch),
                                 contentDescription = stringResource(id = R.string.accessibilitySwitchTheme),
@@ -75,32 +69,38 @@ class LiveStreamHomeActivity : ComponentActivity() {
                                     .height(24.dp)
                             )
                         }
-                        //Theme chooser drop down selector
+                        // Theme chooser drop down selector
                         DropdownMenu(
                             expanded = expanded,
                             onDismissRequest = { expanded = false }
                         ) {
-                            DropdownMenuItem(onClick = {
-                                expanded = !expanded
-                                isDarkMode = false
-                                updateTheme(isDarkMode)
-                            }) {
+                            DropdownMenuItem(
+                                onClick = {
+                                    expanded = !expanded
+                                    isDarkMode = false
+                                    updateTheme(isDarkMode)
+                                }
+                            ) {
                                 Text(text = stringResource(R.string.light_theme_toggle_title))
                             }
-                            DropdownMenuItem(onClick = {
-                                expanded = !expanded
-                                isDarkMode = true
-                                updateTheme(isDarkMode)
-                            }) {
+                            DropdownMenuItem(
+                                onClick = {
+                                    expanded = !expanded
+                                    isDarkMode = true
+                                    updateTheme(isDarkMode)
+                                }
+                            ) {
                                 Text(text = stringResource(R.string.dark_theme_toggle_title))
                             }
                         }
 
-                        //Adds a icon button for switching grid toggle
-                        IconButton(onClick = {
-                            isGrid = !isGrid
-                        }) {
-                            //We also update the icon when the state changes from a grid view to single list
+                        // Adds a icon button for switching grid toggle
+                        IconButton(
+                            onClick = {
+                                isGrid = !isGrid
+                            }
+                        ) {
+                            // We also update the icon when the state changes from a grid view to single list
                             val iconToShow =
                                 if (!isGrid) {
                                     painterResource(id = R.drawable.ic_toggle_grid)

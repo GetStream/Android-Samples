@@ -2,7 +2,7 @@ package io.getstream.livestream.compose
 
 import android.content.Context
 import android.content.res.TypedArray
-import java.util.*
+import java.util.Random
 
 fun Context.randomArtWork(): Int {
     val rand = Random()

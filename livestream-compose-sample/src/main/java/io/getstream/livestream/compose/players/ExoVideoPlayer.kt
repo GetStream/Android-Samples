@@ -1,8 +1,6 @@
 package io.getstream.livestream.compose.players
 
 import android.net.Uri
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
@@ -18,8 +16,6 @@ import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
-import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
-import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 
 /**
  * View component which adds Exoplayer to play external URL video links.
@@ -56,13 +52,16 @@ fun ExoVideoPlayer(
 
     exoPlayer.videoScalingMode = C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING
     exoPlayer.repeatMode = Player.REPEAT_MODE_ONE
-    AndroidView(modifier = modifier, factory = { context ->
-        PlayerView(context).apply {
-            useController = false
-            player = exoPlayer
-            exoPlayer.playWhenReady = true
+    AndroidView(
+        modifier = modifier,
+        factory = { context ->
+            PlayerView(context).apply {
+                useController = false
+                player = exoPlayer
+                exoPlayer.playWhenReady = true
+            }
         }
-    })
+    )
 
     DisposableEffect(urlToLoad) {
         onDispose {

@@ -104,7 +104,6 @@ class LiveStreamActivity : ComponentActivity() {
         }
     }
 
-
     companion object {
         private const val KEY_CHANNEL_ID = "channelId"
         private const val KEY_LIVE_STREAM_TYPE = "liveStreamType"

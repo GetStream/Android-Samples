@@ -54,14 +54,17 @@ fun CameraLiveStream(
                 factory = { ctx ->
                     val preview = PreviewView(ctx)
                     val executor = ContextCompat.getMainExecutor(ctx)
-                    cameraProviderFuture.addListener({
-                        val cameraProvider = cameraProviderFuture.get()
-                        bindPreview(
-                            lifecycleOwner,
-                            preview,
-                            cameraProvider
-                        )
-                    }, executor)
+                    cameraProviderFuture.addListener(
+                        {
+                            val cameraProvider = cameraProviderFuture.get()
+                            bindPreview(
+                                lifecycleOwner,
+                                preview,
+                                cameraProvider
+                            )
+                        },
+                        executor
+                    )
                     preview
                 },
                 modifier = Modifier.fillMaxWidth(),
@@ -81,7 +84,7 @@ fun CameraLiveStream(
                 }
             )
 
-            //TODO Fix bug if message list is empty , how to ensure this aligns to bottom
+            // TODO Fix bug if message list is empty , how to ensure this aligns to bottom
             LivestreamComposer(
                 composerViewModel = composerViewModel
             )
@@ -95,7 +98,6 @@ fun CameraLiveStream(
         }
     }
 }
-
 
 @SuppressLint("UnsafeExperimentalUsageError")
 private fun bindPreview(

@@ -23,7 +23,7 @@ import io.getstream.chat.android.compose.viewmodel.channel.ChannelListViewModel
 import io.getstream.chat.android.compose.viewmodel.channel.ChannelViewModelFactory
 import io.getstream.chat.android.offline.ChatDomain
 import io.getstream.livestream.compose.models.LiveStreamChannelItem
-import io.getstream.livestream.compose.models.LiveStreamType.*
+import io.getstream.livestream.compose.models.LiveStreamType
 import io.getstream.livestream.compose.randomArtWork
 import io.getstream.livestream.compose.randomDescription
 
@@ -56,7 +56,6 @@ fun LiveStreamChannels(
     isGrid: Boolean = false
 ) {
     val context: Context = LocalContext.current
-
     val channels = channelListViewModel.channelsState.channels.map { channel ->
         LiveStreamChannelItem(
             channelId = channel.cid,
@@ -66,7 +65,7 @@ fun LiveStreamChannels(
         )
     }
 
-    //We load a [LazyVerticalGrid] when we have a grid view to show
+    // We load a [LazyVerticalGrid] when we have a grid view to show
     if (isGrid) {
         LazyVerticalGrid(
             modifier = modifier,
@@ -88,7 +87,7 @@ fun LiveStreamChannels(
             }
         )
     } else {
-        //We load a [LazyColumn] for when list is required
+        // We load a [LazyColumn] for when list is required
         LazyColumn {
             items(channels) { item ->
                 LiveStreamChannelCard(
@@ -113,15 +112,15 @@ fun LiveStreamChannels(
  * @param channel - the clicked [LiveStreamChannelItem] item to pass as a parcelable
  */
 private fun openLiveStream(context: Context, channel: LiveStreamChannelItem) {
-    //Dummy logic to decide the type of live stream screen to show
+    // Dummy logic to decide the type of live stream screen to show
     val liveStreamType = when {
         channel.channelName.contains("Youtube") -> {
-            Youtube
+            LiveStreamType.Youtube
         }
         channel.channelName.contains("Video") -> {
-            Video
+            LiveStreamType.Video
         }
-        else -> Camera
+        else -> LiveStreamType.Camera
     }
     context.startActivity(LiveStreamActivity.getIntent(context, channel.channelId, liveStreamType))
 }

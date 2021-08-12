@@ -28,7 +28,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import io.getstream.chat.android.client.models.Channel
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.livestream.compose.R
 import io.getstream.livestream.compose.models.LiveStreamChannelItem

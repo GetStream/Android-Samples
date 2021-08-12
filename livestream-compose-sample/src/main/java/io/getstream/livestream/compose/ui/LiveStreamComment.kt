@@ -10,16 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import coil.compose.rememberImagePainter
-import io.getstream.chat.android.client.models.image
 import io.getstream.chat.android.client.models.name
 import io.getstream.chat.android.compose.state.messages.items.MessageItem
-import io.getstream.chat.android.compose.ui.common.avatar.Avatar
 import io.getstream.chat.android.compose.ui.common.avatar.UserAvatar
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
 
 /**
  * View component to add custom live stream channels screen.
@@ -60,7 +56,6 @@ fun LiveStreamComment(
                     color = ChatTheme.colors.textLowEmphasis
                 )
             }
-
 
             Text(
                 modifier = Modifier.padding(8.dp),
