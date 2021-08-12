@@ -22,7 +22,7 @@ import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewM
 import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 
 /**
- * View component which adds Exoplayer to play external URL video links
+ * View component which adds Exoplayer to play external URL video links.
  *
  * @param urlToLoad - A string URL for loading a video
  * @param modifier - Modifier for styling.

@@ -63,6 +63,7 @@ dependencies {
     implementation Dependencies.composeMaterial
     implementation Dependencies.composeAccompanistPermissions
     implementation Dependencies.composeCoil
+    implementation Dependencies.composeViewModel
     implementation Dependencies.composeMaterialIconsCore
     implementation Dependencies.composeMaterialIconsExtended
 

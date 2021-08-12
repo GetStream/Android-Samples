@@ -11,10 +11,12 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFram
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
 /**
- * View component which adds YoutubePlayer to play youtube videos
+ * View component which adds YoutubePlayer to play youtube videos.
  *
  * @param modifier - Modifier for styling.
  * @param videoId - String id of Youtube video url
+ * @param playerOptions - Optional parameters for our Youtube player IFrameOptions,
+ * default options already hides controls
  */
 @Composable
 fun YoutubePlayer(

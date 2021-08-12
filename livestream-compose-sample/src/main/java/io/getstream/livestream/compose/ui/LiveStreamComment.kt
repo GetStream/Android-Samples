@@ -22,7 +22,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 /**
- * View component to add custom live stream channels screen
+ * View component to add custom live stream channels screen.
  *
  * @param modifier - Modifier for styling.
  * @param messageItem - Data model for messageItem for each chat message row

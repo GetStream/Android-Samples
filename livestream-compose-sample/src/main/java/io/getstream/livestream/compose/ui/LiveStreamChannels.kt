@@ -14,8 +14,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import io.getstream.chat.android.client.ChatClient
+import io.getstream.chat.android.client.api.models.QuerySort
+import io.getstream.chat.android.client.models.Filters
 import io.getstream.chat.android.client.models.name
 import io.getstream.chat.android.compose.viewmodel.channel.ChannelListViewModel
+import io.getstream.chat.android.compose.viewmodel.channel.ChannelViewModelFactory
+import io.getstream.chat.android.offline.ChatDomain
 import io.getstream.livestream.compose.models.LiveStreamChannelItem
 import io.getstream.livestream.compose.models.LiveStreamType.*
 import io.getstream.livestream.compose.randomArtWork
@@ -33,7 +39,18 @@ import io.getstream.livestream.compose.randomDescription
 @ExperimentalFoundationApi
 @Composable
 fun LiveStreamChannels(
-    channelListViewModel: ChannelListViewModel,
+    channelListViewModel: ChannelListViewModel = viewModel(
+        factory =
+        ChannelViewModelFactory(
+            ChatClient.instance(),
+            ChatDomain.instance(),
+            QuerySort.desc("last_updated"),
+            Filters.and(
+                Filters.eq("type", "livestream"),
+                Filters.`in`("members", listOf(ChatClient.instance().getCurrentUser()?.id ?: ""))
+            )
+        )
+    ),
     modifier: Modifier = Modifier,
     isDarkTheme: Boolean = false,
     isGrid: Boolean = false

@@ -23,7 +23,7 @@ import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewM
 import io.getstream.livestream.compose.R
 
 /**
- * A View component to provide message composer bar at bottom of a screen
+ * A View component to provide message composer bar at bottom of a screen.
  *
  * @param modifier - Modifier for styling.
  * @param composerViewModel - Stream Message composer ViewModel to bind state for composer/ message input component

@@ -19,5 +19,7 @@
     <!--Shared preference keys-->
     <string name="name_shared_pref">Compose Live Events pref</string>
     <string name="key_theme">theme</string>
+    <string name="light_theme_toggle_title">LiveStream light theme</string>
+    <string name="dark_theme_toggle_title">LiveStream dark theme</string>
 
 </resources>

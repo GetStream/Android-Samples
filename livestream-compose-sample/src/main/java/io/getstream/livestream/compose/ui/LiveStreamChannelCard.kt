@@ -69,17 +69,15 @@ fun LiveStreamChannelCard(
             modifier = Modifier
                 .height(240.dp)
         ) {
-            Row(
+            Image(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(105.dp)
-            ) {
-                Image(
-                    painterResource(liveStreamChannelItem.channelArt),
-                    contentDescription = stringResource(id = R.string.accessibilityArtworkImage),
-                    contentScale = ContentScale.Crop,
-                )
-            }
+                    .height(105.dp),
+                painter = painterResource(liveStreamChannelItem.channelArt),
+                contentDescription = stringResource(id = R.string.accessibilityArtworkImage),
+                contentScale = ContentScale.Crop,
+            )
+
             Row(
                 modifier = Modifier
                     .fillMaxWidth()

@@ -19,7 +19,7 @@ import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.livestream.compose.R
 
 /**
- * View component to add support for header and a back button icon
+ * View component to add support for header and a back button icon.
  *
  * @param modifier - Modifier for styling.
  * @param onBackPressed - Handler for when the user clicks back press

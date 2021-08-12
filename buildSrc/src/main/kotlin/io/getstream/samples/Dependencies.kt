@@ -27,6 +27,7 @@ private const val CAMERA_V2 = "1.1.0-alpha07"
 private const val CAMERA_VIEW = "1.0.0-alpha27"
 private const val EXOPLAYER = "2.14.2"
 private const val COMPOSE_ACCOMPANIST = "0.16.1"
+private const val COMPOSE_VIEW_MODEL = "1.0.0-alpha07"
 
 object Dependencies {
     const val androidGradlePlugin = "com.android.tools.build:gradle:$ANDROID_GRADLE_PLUGIN_VERSION"
@@ -74,6 +75,7 @@ object Dependencies {
     const val composeAccompanistPermissions =
         "com.google.accompanist:accompanist-permissions:${COMPOSE_ACCOMPANIST}"
     const val composeActivity = "androidx.activity:activity-compose:$COMPOSE_ACTIVITY"
+    const val composeViewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:$COMPOSE_VIEW_MODEL"
     const val composeCameraLifecycle = "androidx.camera:camera-lifecycle:$CAMERA_V2"
     const val composeCameraView = "androidx.camera:camera-view:$CAMERA_VIEW"
     const val composeCamera2 = "androidx.camera:camera-camera2:$CAMERA_V2"

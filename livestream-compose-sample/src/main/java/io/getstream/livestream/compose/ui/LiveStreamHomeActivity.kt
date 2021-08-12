@@ -37,18 +37,6 @@ import io.getstream.livestream.compose.darkColorPalette
 import io.getstream.livestream.compose.lightColorPalette
 
 class LiveStreamHomeActivity : ComponentActivity() {
-    private val factory by lazy {
-        ChannelViewModelFactory(
-            ChatClient.instance(), ChatDomain.instance(),
-            QuerySort.desc("last_updated"),
-            Filters.and(
-                Filters.eq("type", "livestream"),
-                Filters.`in`("members", listOf(ChatClient.instance().getCurrentUser()?.id ?: ""))
-            )
-        )
-    }
-
-    private val listViewModel: ChannelListViewModel by viewModels { factory }
     private lateinit var sharedPref: SharedPreferences
 
     @ExperimentalMaterialApi
@@ -97,14 +85,14 @@ class LiveStreamHomeActivity : ComponentActivity() {
                                 isDarkMode = false
                                 updateTheme(isDarkMode)
                             }) {
-                                Text(text = "LiveStream light theme")
+                                Text(text = stringResource(R.string.light_theme_toggle_title))
                             }
                             DropdownMenuItem(onClick = {
                                 expanded = !expanded
                                 isDarkMode = true
                                 updateTheme(isDarkMode)
                             }) {
-                                Text(text = "LiveStream dark theme")
+                                Text(text = stringResource(R.string.dark_theme_toggle_title))
                             }
                         }
 
@@ -130,8 +118,7 @@ class LiveStreamHomeActivity : ComponentActivity() {
                     LiveStreamChannels(
                         isDarkTheme = isDarkMode,
                         isGrid = isGrid,
-                        modifier = Modifier.background(ChatTheme.colors.appBackground),
-                        channelListViewModel = listViewModel,
+                        modifier = Modifier.background(ChatTheme.colors.appBackground)
                     )
                 }
             }
