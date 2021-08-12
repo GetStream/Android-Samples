@@ -1,6 +1,6 @@
 package io.getstream.samples
 
-private const val KOTLIN_VERSION = "1.5.10"
+private const val KOTLIN_VERSION = "1.5.21"
 private const val ANDROID_GRADLE_PLUGIN_VERSION = "7.0.0"
 private const val GLIDE_VERSION = "4.11.0"
 private const val ANDROIDX_ACTIVITY_KTX_VERSION = "1.2.0"
@@ -20,7 +20,7 @@ private const val PICASSO_VERSION = "2.71828"
 private const val TIMBER_VERSION = "4.7.1"
 private const val YOUTUBE_PLAYER_VERSION = "10.0.5"
 private const val KTLINT_PLUGIN_VERSION = "10.0.0"
-private const val COMPOSE = "1.0.0"
+private const val COMPOSE = "1.0.1"
 private const val COMPOSE_ACTIVITY = "1.3.0"
 
 object Dependencies {
