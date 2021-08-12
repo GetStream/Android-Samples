@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 
 /**
- * View component to add support for Scaffold with actionable CTA
+ * View component to add support for Scaffold with actionable CTA and main content.
  *
  * @param title - Title for the header
  * @param modifier - Modifier for styling Scaffold root component.
@@ -19,7 +19,7 @@ import io.getstream.chat.android.compose.ui.theme.ChatTheme
  * @param content - Composable function to render content below the Scaffold
  */
 @Composable
-fun CustomHeader(
+fun LiveStreamCustomChannelScreen(
     title: String,
     modifier: Modifier = Modifier,
     actions: @Composable (RowScope) -> Unit,

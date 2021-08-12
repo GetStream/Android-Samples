@@ -59,7 +59,7 @@ class LiveStreamHomeActivity : ComponentActivity() {
             var isGrid by remember { mutableStateOf(true) }
 
             ChatTheme(colors = if (isDarkMode) darkColorPalette() else lightColorPalette()) {
-                CustomHeader(
+                LiveStreamCustomChannelScreen(
                     title = resources.getString(R.string.app_name),
                     actions = {
                         //Adds a icon button for switching theme
@@ -80,7 +80,6 @@ class LiveStreamHomeActivity : ComponentActivity() {
                             expanded = expanded,
                             onDismissRequest = { expanded = false }
                         ) {
-
                             DropdownMenuItem(onClick = {
                                 expanded = !expanded
                                 isDarkMode = false
@@ -99,8 +98,15 @@ class LiveStreamHomeActivity : ComponentActivity() {
                         IconButton(onClick = {
                             isGrid = !isGrid
                         }) {
+                            //We also update the icon when the state changes from a grid view to single list
+                            val iconToShow =
+                                if (!isGrid) {
+                                    painterResource(id = R.drawable.ic_toggle_grid)
+                                } else {
+                                    painterResource(id = R.drawable.ic_toggle_list)
+                                }
                             Icon(
-                                painter = painterResource(id = R.drawable.ic_toggle_grid),
+                                painter = iconToShow,
                                 contentDescription = stringResource(id = R.string.accessibilityGridToggle),
                                 tint = ChatTheme.colors.textHighEmphasis
                             )
@@ -109,7 +115,7 @@ class LiveStreamHomeActivity : ComponentActivity() {
                 ) {
                     LiveStreamChannels(
                         isDarkTheme = isDarkMode,
-                        columnCount = if (isGrid) 2 else 1,
+                        isGrid = isGrid,
                         modifier = Modifier.background(ChatTheme.colors.appBackground),
                         channelListViewModel = listViewModel,
                     )
