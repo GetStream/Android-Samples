@@ -1,17 +1,17 @@
 package io.getstream.livestream.compose.ui
 
-import android.Manifest
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
@@ -19,7 +19,12 @@ import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessagesViewModelFactory
 import io.getstream.chat.android.offline.ChatDomain
 import io.getstream.livestream.compose.R
+import io.getstream.livestream.compose.darkColorPalette
+import io.getstream.livestream.compose.lightColorPalette
 import io.getstream.livestream.compose.models.LiveStreamType
+import io.getstream.livestream.compose.models.LiveStreamType.Camera
+import io.getstream.livestream.compose.models.LiveStreamType.Video
+import io.getstream.livestream.compose.models.LiveStreamType.Youtube
 import io.getstream.livestream.compose.streams.CameraLiveStream
 import io.getstream.livestream.compose.streams.VideoLiveStream
 import io.getstream.livestream.compose.streams.YoutubeLiveStream
@@ -39,37 +44,29 @@ class LiveStreamActivity : ComponentActivity() {
 
     private val composerViewModel by viewModels<MessageComposerViewModel>(factoryProducer = { factory })
     private val listViewModel by viewModels<MessageListViewModel>(factoryProducer = { factory })
-    private var liveStreamType: LiveStreamType = LiveStreamType.Youtube
+    private var liveStreamType: LiveStreamType = Youtube
+    private lateinit var sharedPref: SharedPreferences
 
+    @ExperimentalPermissionsApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        sharedPref =
+            getSharedPreferences(getString(R.string.name_shared_pref), Context.MODE_PRIVATE)
         handleExtras()
-        setViewContent()
-    }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int, permissions: Array<String>, grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_CODE_PERMISSIONS) {
-            if (allPermissionsGranted()) {
-                setViewContent()
-            } else {
-                Toast.makeText(
-                    this,
-                    getString(R.string.permission_message),
-                    Toast.LENGTH_SHORT
-                ).show()
-                finish()
-            }
-        }
-    }
-
-    private fun setViewContent() {
         setContent {
-            ChatTheme {
+            val isDarkMode by remember {
+                mutableStateOf(
+                    sharedPref.getBoolean(
+                        getString(R.string.key_theme),
+                        false
+                    )
+                )
+            }
+
+            ChatTheme(colors = if (isDarkMode) darkColorPalette() else lightColorPalette()) {
                 when (liveStreamType) {
-                    LiveStreamType.Youtube -> {
+                    Youtube -> {
                         YoutubeLiveStream(
                             videoId = "XYqrrpvTtU8",
                             composerViewModel = composerViewModel,
@@ -78,21 +75,15 @@ class LiveStreamActivity : ComponentActivity() {
                             finish()
                         }
                     }
-                    LiveStreamType.Camera -> {
-                        if (allPermissionsGranted()) {
-                            CameraLiveStream(
-                                composerViewModel,
-                                listViewModel
-                            ) {
-                                finish()
-                            }
-                        } else {
-                            ActivityCompat.requestPermissions(
-                                this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
-                            )
+                    Camera -> {
+                        CameraLiveStream(
+                            composerViewModel = composerViewModel,
+                            listViewModel = listViewModel
+                        ) {
+                            finish()
                         }
                     }
-                    LiveStreamType.Video -> {
+                    Video -> {
                         VideoLiveStream(
                             urlToLoad = "asset:///video.mp4",
                             composerViewModel = composerViewModel,
@@ -113,19 +104,10 @@ class LiveStreamActivity : ComponentActivity() {
         }
     }
 
-    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
-        ContextCompat.checkSelfPermission(
-            baseContext, it
-        ) == PackageManager.PERMISSION_GRANTED
-    }
-
 
     companion object {
         private const val KEY_CHANNEL_ID = "channelId"
         private const val KEY_LIVE_STREAM_TYPE = "liveStreamType"
-
-        private const val REQUEST_CODE_PERMISSIONS = 10
-        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
 
         fun getIntent(context: Context, channelId: String, liveStreamType: LiveStreamType): Intent {
             return Intent(context, LiveStreamActivity::class.java).apply {

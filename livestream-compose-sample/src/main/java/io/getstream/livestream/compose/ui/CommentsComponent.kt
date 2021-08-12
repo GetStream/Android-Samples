@@ -25,7 +25,7 @@ fun CommentsComponent(
     Column(modifier = modifier) {
         MessageList(
             modifier = Modifier
-                .fillMaxHeight(0.5f), // dont do this
+                .fillMaxHeight(0.5f),
             viewModel = listViewModel,
             itemContent = {
                 LiveStreamComment(messageItem = it)

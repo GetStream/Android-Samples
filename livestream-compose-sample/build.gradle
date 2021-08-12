@@ -61,6 +61,7 @@ dependencies {
     implementation Dependencies.androidXLifecycleRuntime
     implementation Dependencies.composeActivity
     implementation Dependencies.composeMaterial
+    implementation Dependencies.composeAccompanistPermissions
     implementation Dependencies.composeCoil
     implementation Dependencies.composeMaterialIconsCore
     implementation Dependencies.composeMaterialIconsExtended

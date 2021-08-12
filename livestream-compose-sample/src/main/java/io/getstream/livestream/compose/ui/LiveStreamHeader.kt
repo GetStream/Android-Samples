@@ -29,15 +29,11 @@ fun LiveStreamHeader(
     modifier: Modifier = Modifier,
     onBackPressed: () -> Unit
 ) {
-    Box(
-        modifier
-            .fillMaxWidth()
-            .padding(top = 16.dp, start = 16.dp)
-    ) {
+    Box(modifier) {
         IconButton(
             modifier = Modifier
                 .clip(CircleShape)
-                .background(Color.Black.copy(alpha = 0.4f)),
+                .background(ChatTheme.colors.appBackground.copy(alpha = 0.4f)),
             onClick = onBackPressed
         ) {
             Icon(

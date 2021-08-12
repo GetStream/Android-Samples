@@ -1,5 +1,7 @@
 package io.getstream.livestream.compose.ui
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -47,15 +49,25 @@ class LiveStreamHomeActivity : ComponentActivity() {
     }
 
     private val listViewModel: ChannelListViewModel by viewModels { factory }
+    private lateinit var sharedPref: SharedPreferences
 
     @ExperimentalMaterialApi
     @ExperimentalFoundationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        sharedPref =
+            getSharedPreferences(getString(R.string.name_shared_pref), Context.MODE_PRIVATE)
 
         setContent {
             var expanded by remember { mutableStateOf(false) }
-            var isDarkMode by remember { mutableStateOf(false) }
+            var isDarkMode by remember {
+                mutableStateOf(
+                    sharedPref.getBoolean(
+                        getString(R.string.key_theme),
+                        false
+                    )
+                )
+            }
             var isGrid by remember { mutableStateOf(true) }
 
             ChatTheme(colors = if (isDarkMode) darkColorPalette() else lightColorPalette()) {
@@ -83,12 +95,14 @@ class LiveStreamHomeActivity : ComponentActivity() {
                             DropdownMenuItem(onClick = {
                                 expanded = !expanded
                                 isDarkMode = false
+                                updateTheme(isDarkMode)
                             }) {
                                 Text(text = "LiveStream light theme")
                             }
                             DropdownMenuItem(onClick = {
                                 expanded = !expanded
                                 isDarkMode = true
+                                updateTheme(isDarkMode)
                             }) {
                                 Text(text = "LiveStream dark theme")
                             }
@@ -121,6 +135,18 @@ class LiveStreamHomeActivity : ComponentActivity() {
                     )
                 }
             }
+        }
+    }
+
+    /**
+     * Simple function to store the last state of theme toggle into default preferences file.
+     *
+     * @param isDarkTheme - theme state after toggling from the dropdown
+     */
+    private fun updateTheme(isDarkTheme: Boolean) {
+        with(sharedPref.edit()) {
+            putBoolean(getString(R.string.key_theme), isDarkTheme)
+            apply()
         }
     }
 }

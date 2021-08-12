@@ -28,11 +28,11 @@
     <color name="dark_text_low_emphasis">#8FFFFFFF</color>
     <color name="dark_disabled">#B4B7BB</color>
     <color name="dark_borders">#BED5E4</color>
-    <color name="dark_input_background">#E9EAED</color>
+    <color name="dark_input_background">#0E1723</color>
     <color name="dark_app_background">#000615</color>
     <color name="dark_bars_background">#00091F</color>
     <color name="dark_link_background">#000615</color>
-    <color name="dark_overlay">#33000000</color>
+    <color name="dark_overlay">#33FFFFFF</color>
     <color name="dark_primary_accent">#0D47D9</color>
     <color name="dark_error_accent">#FF3742</color>
     <color name="dark_info_accent">#20E070</color>
