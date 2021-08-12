@@ -17,8 +17,8 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
  */
 @Composable
 fun YoutubePlayer(
-    modifier: Modifier = Modifier,
     videoId: String,
+    modifier: Modifier = Modifier,
     playerOptions: IFramePlayerOptions = IFramePlayerOptions.Builder()
         .controls(0)
         .rel(0)

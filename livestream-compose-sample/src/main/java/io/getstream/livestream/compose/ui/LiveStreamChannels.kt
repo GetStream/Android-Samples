@@ -62,9 +62,7 @@ fun LiveStreamChannels(
     isDarkTheme: Boolean = false,
     columnCount: Int = 2
 ) {
-    LaunchedEffect(Unit) {
-        channelListViewModel.start()
-    }
+
     val cardBackground = if (isDarkTheme)
         colorResource(id = R.color.cardview_dark_background)
     else
@@ -85,7 +83,7 @@ fun LiveStreamChannels(
         cells = GridCells.Fixed(columnCount),
         contentPadding = PaddingValues(bottom = 12.dp, top = 12.dp),
         content = {
-            items(channelListViewModel.channelsState.channels.size) { index ->
+            items(channels.size) { index ->
                 Card(
                     shape = RoundedCornerShape(8.dp),
                     backgroundColor = cardBackground,

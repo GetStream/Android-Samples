@@ -36,31 +36,25 @@ fun YoutubeLiveStream(
     listViewModel: MessageListViewModel,
     onBackPressed: () -> Unit
 ) {
-    LaunchedEffect(Unit) {
-        listViewModel.start()
-    }
-
-    ChatTheme {
-        Box(modifier = modifier.fillMaxSize()) {
-            YoutubePlayer(
-                videoId = videoId
-            )
-            CommentsBox(
-                modifier = Modifier
-                    .background(
-                        brush = Brush.verticalGradient(
-                            listOf(Color.Transparent, Color.Black),
-                            0f,
-                            1050f,
-                        )
+    Box(modifier = modifier.fillMaxSize()) {
+        YoutubePlayer(
+            videoId = videoId
+        )
+        CommentsBox(
+            modifier = Modifier
+                .background(
+                    brush = Brush.verticalGradient(
+                        listOf(Color.Transparent, Color.Black),
+                        0f,
+                        1050f,
                     )
-                    .align(Alignment.BottomCenter),
-                composerViewModel,
-                listViewModel
-            )
-            LiveStreamHeader {
-                onBackPressed()
-            }
+                )
+                .align(Alignment.BottomCenter),
+            composerViewModel = composerViewModel,
+            listViewModel = listViewModel
+        )
+        LiveStreamHeader {
+            onBackPressed()
         }
     }
 }

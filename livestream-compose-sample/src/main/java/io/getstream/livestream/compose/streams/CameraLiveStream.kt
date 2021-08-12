@@ -20,7 +20,6 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
-import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 import io.getstream.livestream.compose.ui.CommentsBox
@@ -46,44 +45,38 @@ fun CameraLiveStream(
     val context = LocalContext.current
     val cameraProviderFuture = remember { ProcessCameraProvider.getInstance(context) }
 
-    LaunchedEffect(Unit) {
-        listViewModel.start()
-    }
-
-    ChatTheme {
-        Box(modifier = Modifier.fillMaxSize()) {
-            AndroidView(
-                factory = { ctx ->
-                    val preview = PreviewView(ctx)
-                    val executor = ContextCompat.getMainExecutor(ctx)
-                    cameraProviderFuture.addListener({
-                        val cameraProvider = cameraProviderFuture.get()
-                        bindPreview(
-                            lifecycleOwner,
-                            preview,
-                            cameraProvider
-                        )
-                    }, executor)
-                    preview
-                },
-                modifier = Modifier.fillMaxSize(),
-            )
-            CommentsBox(
-                modifier = Modifier
-                    .background(
-                        brush = Brush.verticalGradient(
-                            listOf(Color.Transparent, Color.Black),
-                            0f,
-                            1050f,
-                        )
+    Box(modifier = Modifier.fillMaxSize()) {
+        AndroidView(
+            factory = { ctx ->
+                val preview = PreviewView(ctx)
+                val executor = ContextCompat.getMainExecutor(ctx)
+                cameraProviderFuture.addListener({
+                    val cameraProvider = cameraProviderFuture.get()
+                    bindPreview(
+                        lifecycleOwner,
+                        preview,
+                        cameraProvider
                     )
-                    .align(Alignment.BottomCenter),
-                composerViewModel,
-                listViewModel
-            )
-            LiveStreamHeader {
-                onBackPressed()
-            }
+                }, executor)
+                preview
+            },
+            modifier = Modifier.fillMaxSize(),
+        )
+        CommentsBox(
+            modifier = Modifier
+                .background(
+                    brush = Brush.verticalGradient(
+                        listOf(Color.Transparent, Color.Black),
+                        0f,
+                        1050f,
+                    )
+                )
+                .align(Alignment.BottomCenter),
+            composerViewModel = composerViewModel,
+            listViewModel = listViewModel
+        )
+        LiveStreamHeader { //add modifier
+            onBackPressed()
         }
     }
 }

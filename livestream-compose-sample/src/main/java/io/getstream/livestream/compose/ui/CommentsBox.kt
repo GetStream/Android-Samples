@@ -12,27 +12,25 @@ import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 /**
  * A view component to build a custom message box with consists of [MessageList]
  * and a background scrim
+ *
+ * @param
  */
 @Composable
 fun CommentsBox(
-    modifier: Modifier = Modifier,
     composerViewModel: MessageComposerViewModel,
-    listViewModel: MessageListViewModel
+    listViewModel: MessageListViewModel,
+    modifier: Modifier = Modifier,
 ) {
-    Box(
-        modifier = modifier
-    ) {
-        Column {
+        Column(modifier = modifier) {
             MessageList(
                 modifier = Modifier
-                    .fillMaxHeight(0.5f),
+                    .fillMaxHeight(0.5f), // dont do this
                 viewModel = listViewModel,
                 itemContent = {
                     LiveStreamMessage(messageItem = it)
                 },
-                emptyState = {}
+               // emp = {}
             )
             LivestreamComposer(composerViewModel = composerViewModel)
         }
-    }
 }

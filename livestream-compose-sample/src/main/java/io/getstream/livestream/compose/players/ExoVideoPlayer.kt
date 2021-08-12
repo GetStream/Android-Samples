@@ -63,7 +63,7 @@ fun ExoVideoPlayer(
         }
     })
 
-    DisposableEffect(key1 = urlToLoad) {
+    DisposableEffect(urlToLoad) {
         onDispose {
             exoPlayer.release()
         }
