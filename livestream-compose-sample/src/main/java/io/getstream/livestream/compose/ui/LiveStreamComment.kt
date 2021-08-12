@@ -56,7 +56,8 @@ fun LiveStreamComment(
                     modifier = Modifier.padding(start = 4.dp),
                     text = SimpleDateFormat.getTimeInstance()
                         .format(messageItem.message.createdAt ?: Date()),
-                    style = ChatTheme.typography.footnote
+                    style = ChatTheme.typography.footnote,
+                    color = ChatTheme.colors.textLowEmphasis
                 )
             }
 
