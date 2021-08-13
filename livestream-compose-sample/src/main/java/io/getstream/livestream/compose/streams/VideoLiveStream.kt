@@ -3,13 +3,20 @@ package io.getstream.livestream.compose.streams
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import io.getstream.chat.android.compose.ui.messages.list.DefaultMessageContainer
 import io.getstream.chat.android.compose.ui.messages.list.MessageList
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
@@ -40,15 +47,32 @@ fun VideoLiveStream(
     onBackPressed: () -> Unit
 ) {
     Box(modifier = modifier.fillMaxSize()) {
-        Column {
-            ExoVideoPlayer(
-                modifier = Modifier.fillMaxWidth().wrapContentHeight(),
-                urlToLoad = urlToLoad
-            )
+        ExoVideoPlayer(
+            urlToLoad = urlToLoad
+        )
+        //Gradient overlay
+        Spacer(
+            Modifier
+                .fillMaxWidth()
+                .align(Alignment.BottomCenter)
+                .height(1000.dp)
+                .background(
+                    brush = Brush.verticalGradient(
+                        colors = listOf(
+                            Color.Transparent,
+                            ChatTheme.colors.appBackground
+                        )
+                    )
+                )
+        )
+        Column(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxHeight(0.5f)
+        ) {
             MessageList(
                 modifier = Modifier
-                    .background(ChatTheme.colors.appBackground)
-                    .weight(0.6f),
+                    .weight(1f),
                 viewModel = listViewModel,
                 itemContent = {
                     LiveStreamComment(messageItem = it)
@@ -59,7 +83,9 @@ fun VideoLiveStream(
                     // in the background of our message list
                 }
             )
-            LivestreamComposer(composerViewModel = composerViewModel)
+            LivestreamComposer(
+                composerViewModel = composerViewModel
+            )
         }
         LiveStreamHeader(
             modifier = Modifier

@@ -8,12 +8,18 @@ import androidx.camera.view.PreviewView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
@@ -49,30 +55,48 @@ fun CameraLiveStream(
     val cameraProviderFuture = remember { ProcessCameraProvider.getInstance(context) }
 
     Box(modifier = Modifier.fillMaxSize()) {
-        Column {
-            AndroidView(
-                factory = { ctx ->
-                    val preview = PreviewView(ctx)
-                    val executor = ContextCompat.getMainExecutor(ctx)
-                    cameraProviderFuture.addListener(
-                        {
-                            val cameraProvider = cameraProviderFuture.get()
-                            bindPreview(
-                                lifecycleOwner,
-                                preview,
-                                cameraProvider
-                            )
-                        },
-                        executor
+        AndroidView(
+            factory = { ctx ->
+                val preview = PreviewView(ctx)
+                val executor = ContextCompat.getMainExecutor(ctx)
+                cameraProviderFuture.addListener(
+                    {
+                        val cameraProvider = cameraProviderFuture.get()
+                        bindPreview(
+                            lifecycleOwner,
+                            preview,
+                            cameraProvider
+                        )
+                    },
+                    executor
+                )
+                preview
+            },
+            modifier = Modifier.fillMaxSize()
+        )
+        //Gradient overlay
+        Spacer(
+            Modifier
+                .fillMaxWidth()
+                .align(Alignment.BottomCenter)
+                .height(1000.dp)
+                .background(
+                    brush = Brush.verticalGradient(
+                        colors = listOf(
+                            Color.Transparent,
+                            ChatTheme.colors.appBackground
+                        )
                     )
-                    preview
-                },
-                modifier = Modifier.fillMaxWidth(),
-            )
+                )
+        )
+        Column(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxHeight(0.5f)
+        ) {
             MessageList(
                 modifier = Modifier
-                    .background(ChatTheme.colors.appBackground)
-                    .weight(0.6f),
+                    .weight(1f),
                 viewModel = listViewModel,
                 itemContent = {
                     LiveStreamComment(messageItem = it)
@@ -81,10 +105,15 @@ fun CameraLiveStream(
                     // we hide default EmptyView from SDK ,
                     // as we have a transparent scrim background for the video playing
                     // in the background of our message list
+
+                    Spacer(
+                        modifier = Modifier
+                            .fillMaxHeight(0.8f)
+                        // this allows the `empty` message to push down the column
+                        // height for composer to be at bottom
+                    )
                 }
             )
-
-            // TODO Fix bug if message list is empty , how to ensure this aligns to bottom
             LivestreamComposer(
                 composerViewModel = composerViewModel
             )

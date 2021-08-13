@@ -85,7 +85,7 @@ class LiveStreamActivity : ComponentActivity() {
                     }
                     Video -> {
                         VideoLiveStream(
-                            urlToLoad = "asset:///participant01.webm",
+                            urlToLoad = "asset:///video.mp4",
                             composerViewModel = composerViewModel,
                             listViewModel = listViewModel
                         ) {
