@@ -10,7 +10,7 @@
 
     <!-- Light colors -->
     <color name="light_text_high_emphasis">#2C2C30</color>
-    <color name="light_text_low_emphasis">#85CDFF</color>
+    <color name="light_text_low_emphasis">#2C2C30</color>
     <color name="light_disabled">#B4B7BB</color>
     <color name="light_borders">#BED5E4</color>
     <color name="light_input_background">#E9EAED</color>

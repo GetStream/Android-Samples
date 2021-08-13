@@ -22,4 +22,14 @@
     <string name="light_theme_toggle_title">LiveStream light theme</string>
     <string name="dark_theme_toggle_title">LiveStream dark theme</string>
 
+    <!-- Time-->
+    <string name="just_now">now</string>
+    <string name="seconds_ago">%1d secs</string>
+    <string name="minutes_ago">%1d min</string>
+    <string name="hour_ago">%1d hour</string>
+    <string name="yesterday">yesterday</string>
+    <string name="days_ago">%1d day</string>
+    <string name="week_ago">week ago</string>
+    <string name="long_time">long time</string>
+
 </resources>
