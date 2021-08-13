@@ -54,8 +54,8 @@ fun VideoLiveStream(
         Spacer(
             Modifier
                 .fillMaxWidth()
+                .fillMaxHeight(0.6f)
                 .align(Alignment.BottomCenter)
-                .height(1000.dp)
                 .background(
                     brush = Brush.verticalGradient(
                         colors = listOf(

@@ -62,7 +62,7 @@ fun LiveStreamComment(
                 )
             }
             MessageBubble(
-                color = ChatTheme.colors.overlay,
+                color = ChatTheme.colors.appBackground,
                 shape = ChatTheme.shapes.otherMessageBubble
             ) {
                 Text(
