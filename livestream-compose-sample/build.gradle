@@ -1,0 +1,80 @@
+import io.getstream.samples.Dependencies
+
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdkVersion 30
+
+    defaultConfig {
+        applicationId "io.getstream.livestream.compose"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+        useIR = true
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion "1.0.0"
+        kotlinCompilerVersion '1.5.10'
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+    implementation Dependencies.exoPlayer
+    implementation Dependencies.androidxActivityKtx
+    implementation Dependencies.androidxCoreKtx
+    implementation Dependencies.androidxAppCompat
+    implementation Dependencies.materialComponents
+
+    implementation Dependencies.composeUi
+    implementation Dependencies.composeUiTooling
+    implementation Dependencies.androidXLifecycleRuntime
+    implementation Dependencies.composeActivity
+    implementation Dependencies.composeMaterial
+    implementation Dependencies.composeCoil
+    implementation Dependencies.composeMaterialIconsCore
+    implementation Dependencies.composeMaterialIconsExtended
+
+    implementation Dependencies.composeCameraLifecycle
+    implementation Dependencies.composeCameraView
+    implementation Dependencies.composeCamera2
+
+    implementation Dependencies.youtubePlayer
+    implementation Dependencies.timber
+
+    implementation Dependencies.streamClient
+    implementation Dependencies.streamOffline
+    implementation fileTree(include: ['*.aar'], dir: 'libs')
+    // implementation Dependencies.streamCompose
+
+}
