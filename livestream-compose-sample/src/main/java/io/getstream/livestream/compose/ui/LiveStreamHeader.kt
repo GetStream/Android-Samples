@@ -2,6 +2,8 @@ package io.getstream.livestream.compose.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -11,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.livestream.compose.R
 
@@ -28,6 +31,8 @@ fun LiveStreamHeader(
     Box(modifier) {
         IconButton(
             modifier = Modifier
+                .width(36.dp)
+                .height(36.dp)
                 .clip(CircleShape)
                 .background(ChatTheme.colors.appBackground.copy(alpha = 0.4f)),
             onClick = onBackPressed
