@@ -46,7 +46,11 @@ fun VideoLiveStream(
     listViewModel: MessageListViewModel,
     onBackPressed: () -> Unit
 ) {
-    Box(modifier = modifier.fillMaxSize()) {
+    Box(
+        modifier = modifier
+            .background(ChatTheme.colors.appBackground)
+            .fillMaxSize()
+    ) {
         ExoVideoPlayer(
             urlToLoad = urlToLoad
         )
@@ -81,6 +85,14 @@ fun VideoLiveStream(
                     // we hide default EmptyView from SDK ,
                     // as we have a transparent scrim background for the video playing
                     // in the background of our message list
+
+
+                    Spacer(
+                        modifier = Modifier
+                            .fillMaxHeight(0.8f)
+                        // this allows the `empty` message to push down the column
+                        // height for composer to be at bottom
+                    )
                 }
             )
             LivestreamComposer(

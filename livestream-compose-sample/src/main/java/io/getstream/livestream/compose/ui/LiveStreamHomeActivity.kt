@@ -52,8 +52,10 @@ class LiveStreamHomeActivity : ComponentActivity() {
             }
             var isGrid by remember { mutableStateOf(true) }
 
-            ChatTheme(colors = if (isDarkMode) darkColorPalette() else lightColorPalette(),
-                shapes = shapes()) {
+            ChatTheme(
+                colors = if (isDarkMode) darkColorPalette() else lightColorPalette(),
+                shapes = shapes()
+            ) {
                 LiveStreamCustomChannelScreen(
                     title = resources.getString(R.string.app_name),
                     actions = {

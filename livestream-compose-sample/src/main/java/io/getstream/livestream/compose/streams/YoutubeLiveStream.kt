@@ -3,6 +3,8 @@ package io.getstream.livestream.compose.streams
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -38,7 +40,11 @@ fun YoutubeLiveStream(
     listViewModel: MessageListViewModel,
     onBackPressed: () -> Unit
 ) {
-    Box(modifier = modifier.fillMaxSize()) {
+    Box(
+        modifier = modifier
+            .background(ChatTheme.colors.appBackground)
+            .fillMaxSize()
+    ) {
         Column {
             YoutubePlayer(
                 videoId = videoId
@@ -55,6 +61,14 @@ fun YoutubeLiveStream(
                     // we hide default EmptyView from SDK ,
                     // as we have a transparent scrim background for the video playing
                     // in the background of our message list
+
+
+                    Spacer(
+                        modifier = Modifier
+                            .fillMaxHeight(0.8f)
+                        // this allows the `empty` message to push down the column
+                        // height for composer to be at bottom
+                    )
                 }
             )
             LivestreamComposer(composerViewModel = composerViewModel)

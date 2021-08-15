@@ -2,6 +2,7 @@ package io.getstream.livestream.compose.ui
 
 import android.content.Context
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -19,6 +20,7 @@ import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.api.models.QuerySort
 import io.getstream.chat.android.client.models.Filters
 import io.getstream.chat.android.client.models.name
+import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.channel.ChannelListViewModel
 import io.getstream.chat.android.compose.viewmodel.channel.ChannelViewModelFactory
 import io.getstream.chat.android.offline.ChatDomain
@@ -30,8 +32,8 @@ import io.getstream.livestream.compose.randomDescription
 /**
  * View component to add custom live stream channels screen.
  *
- * @param channelListViewModel - Stream channel list ViewModel to bind all channel data to custom UI provided here.
  * @param modifier - Modifier for styling.
+ * @param channelListViewModel - Stream channel list ViewModel to bind all channel data to custom UI provided here.
  * @param isDarkTheme - a Boolean state to get Theme is dark or light , used for deciding card background
  * @param isGrid - a toggle State to switch between 2 column grid to single column list
  */
@@ -39,6 +41,7 @@ import io.getstream.livestream.compose.randomDescription
 @ExperimentalFoundationApi
 @Composable
 fun LiveStreamChannels(
+    modifier: Modifier = Modifier,
     channelListViewModel: ChannelListViewModel = viewModel(
         factory =
         ChannelViewModelFactory(
@@ -51,7 +54,6 @@ fun LiveStreamChannels(
             )
         )
     ),
-    modifier: Modifier = Modifier,
     isDarkTheme: Boolean = false,
     isGrid: Boolean = false
 ) {
@@ -68,7 +70,7 @@ fun LiveStreamChannels(
     // We load a [LazyVerticalGrid] when we have a grid view to show
     if (isGrid) {
         LazyVerticalGrid(
-            modifier = modifier,
+            modifier = modifier.background(ChatTheme.colors.appBackground),
             cells = GridCells.Fixed(2),
             contentPadding = PaddingValues(bottom = 12.dp, top = 12.dp),
             content = {
@@ -88,7 +90,7 @@ fun LiveStreamChannels(
         )
     } else {
         // We load a [LazyColumn] for when list is required
-        LazyColumn {
+        LazyColumn(modifier.background(ChatTheme.colors.appBackground)) {
             items(channels) { item ->
                 LiveStreamChannelCard(
                     modifier = Modifier
