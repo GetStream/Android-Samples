@@ -56,7 +56,7 @@ fun YoutubeLiveStream(
                     .weight(0.6f),
                 viewModel = listViewModel,
                 itemContent = {
-                    LiveStreamComment(messageItem = it)
+                    LiveStreamComment(messageItem = it, shouldShowBubble = false)
                 },
                 emptyContent = {
                     // we hide default EmptyView from SDK ,

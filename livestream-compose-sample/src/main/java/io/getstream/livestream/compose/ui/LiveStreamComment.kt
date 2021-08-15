@@ -2,11 +2,9 @@ package io.getstream.livestream.compose.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,18 +17,20 @@ import io.getstream.chat.android.compose.ui.common.MessageBubble
 import io.getstream.chat.android.compose.ui.common.avatar.UserAvatar
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.livestream.compose.getTimeAgo
-import java.text.SimpleDateFormat
 import java.util.Date
 
 /**
  * View component to add custom live stream channels screen.
  *
  * @param modifier - Modifier for styling.
+ * @param shouldShowBubble - a boolean check if a message bubble is necessary , this is dependent on
+ * type of streaming screen design elements.
  * @param messageItem - Data model for messageItem for each chat message row
  */
 @Composable
 fun LiveStreamComment(
     modifier: Modifier = Modifier,
+    shouldShowBubble: Boolean = true,
     messageItem: MessageItem
 ) {
     val context = LocalContext.current
@@ -61,10 +61,19 @@ fun LiveStreamComment(
                     color = ChatTheme.colors.textLowEmphasis
                 )
             }
-            MessageBubble(
-                color = ChatTheme.colors.appBackground,
-                shape = ChatTheme.shapes.otherMessageBubble
-            ) {
+            if (shouldShowBubble) {
+                MessageBubble(
+                    color = ChatTheme.colors.appBackground,
+                    shape = ChatTheme.shapes.otherMessageBubble
+                ) {
+                    Text(
+                        modifier = Modifier.padding(8.dp),
+                        text = messageItem.message.text,
+                        style = ChatTheme.typography.body,
+                        color = ChatTheme.colors.textHighEmphasis
+                    )
+                }
+            } else {
                 Text(
                     modifier = Modifier.padding(8.dp),
                     text = messageItem.message.text,
@@ -72,7 +81,6 @@ fun LiveStreamComment(
                     color = ChatTheme.colors.textHighEmphasis
                 )
             }
-
         }
     }
 }
