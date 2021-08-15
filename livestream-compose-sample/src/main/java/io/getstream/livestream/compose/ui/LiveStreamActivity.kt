@@ -10,6 +10,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,6 +33,7 @@ import io.getstream.livestream.compose.models.LiveStreamType.Video
 import io.getstream.livestream.compose.models.LiveStreamType.Youtube
 import io.getstream.livestream.compose.shapes
 import io.getstream.livestream.compose.streams.CameraLiveStream
+import io.getstream.livestream.compose.streams.RenderLiveStream
 import io.getstream.livestream.compose.streams.VideoLiveStream
 import io.getstream.livestream.compose.streams.YoutubeLiveStream
 
@@ -75,39 +77,14 @@ class LiveStreamActivity : ComponentActivity() {
                 colors = if (isDarkMode) darkColorPalette() else lightColorPalette(),
                 shapes = shapes()
             ) {
-                when (liveStreamType) {
-                    Youtube -> {
-                        YoutubeLiveStream(
-                            modifier = Modifier
-                                .fillMaxWidth(),
-                            videoId = "9rIy0xY99a0",
-                            title = stringResource(R.string.youtube_screen_title),
-                            composerViewModel = composerViewModel,
-                            listViewModel = listViewModel,
-                            channelId = channelId
-                        ) {
-                            finish()
-                        }
-                    }
-                    Camera -> {
-                        CameraLiveStream(
-                            composerViewModel = composerViewModel,
-                            listViewModel = listViewModel,
-                            channelId = channelId
-                        ) {
-                            finish()
-                        }
-                    }
-                    Video -> {
-                        VideoLiveStream(
-                            urlToLoad = "asset:///video.mp4",
-                            composerViewModel = composerViewModel,
-                            listViewModel = listViewModel,
-                            channelId = channelId
-                        ) {
-                            finish()
-                        }
-                    }
+                RenderLiveStream(
+                    liveStreamType = liveStreamType,
+                    composerViewModel = composerViewModel,
+                    listViewModel = listViewModel,
+                    channelId = channelId
+                ) {
+                    // On back press
+                    finish()
                 }
             }
         }
