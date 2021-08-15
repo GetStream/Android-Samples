@@ -48,6 +48,7 @@ import io.getstream.livestream.compose.ui.LivestreamComposer
 @Composable
 fun CameraLiveStream(
     modifier: Modifier = Modifier,
+    channelId: String,
     composerViewModel: MessageComposerViewModel,
     listViewModel: MessageListViewModel,
     onBackPressed: () -> Unit
@@ -121,6 +122,7 @@ fun CameraLiveStream(
                 }
             )
             LivestreamComposer(
+                channelId = channelId,
                 composerViewModel = composerViewModel
             )
         }

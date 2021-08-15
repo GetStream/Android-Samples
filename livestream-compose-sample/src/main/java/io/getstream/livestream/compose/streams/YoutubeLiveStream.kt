@@ -36,6 +36,7 @@ import io.getstream.livestream.compose.ui.LivestreamComposer
 fun YoutubeLiveStream(
     modifier: Modifier = Modifier,
     videoId: String,
+    channelId: String,
     composerViewModel: MessageComposerViewModel,
     listViewModel: MessageListViewModel,
     onBackPressed: () -> Unit
@@ -62,7 +63,6 @@ fun YoutubeLiveStream(
                     // as we have a transparent scrim background for the video playing
                     // in the background of our message list
 
-
                     Spacer(
                         modifier = Modifier
                             .fillMaxHeight(0.8f)
@@ -71,7 +71,10 @@ fun YoutubeLiveStream(
                     )
                 }
             )
-            LivestreamComposer(composerViewModel = composerViewModel)
+            LivestreamComposer(
+                channelId = channelId,
+                composerViewModel = composerViewModel
+            )
         }
         LiveStreamHeader(
             modifier = Modifier

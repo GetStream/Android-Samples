@@ -42,6 +42,7 @@ class LiveStreamActivity : ComponentActivity() {
             30
         )
     }
+    private var channelId: String = ""
 
     private val composerViewModel by viewModels<MessageComposerViewModel>(factoryProducer = { factory })
     private val listViewModel by viewModels<MessageListViewModel>(factoryProducer = { factory })
@@ -74,7 +75,8 @@ class LiveStreamActivity : ComponentActivity() {
                         YoutubeLiveStream(
                             videoId = "9rIy0xY99a0",
                             composerViewModel = composerViewModel,
-                            listViewModel = listViewModel
+                            listViewModel = listViewModel,
+                            channelId = channelId
                         ) {
                             finish()
                         }
@@ -82,7 +84,8 @@ class LiveStreamActivity : ComponentActivity() {
                     Camera -> {
                         CameraLiveStream(
                             composerViewModel = composerViewModel,
-                            listViewModel = listViewModel
+                            listViewModel = listViewModel,
+                            channelId = channelId
                         ) {
                             finish()
                         }
@@ -91,7 +94,8 @@ class LiveStreamActivity : ComponentActivity() {
                         VideoLiveStream(
                             urlToLoad = "asset:///video.mp4",
                             composerViewModel = composerViewModel,
-                            listViewModel = listViewModel
+                            listViewModel = listViewModel,
+                            channelId = channelId
                         ) {
                             finish()
                         }
@@ -105,6 +109,9 @@ class LiveStreamActivity : ComponentActivity() {
         if (intent.hasExtra(KEY_LIVE_STREAM_TYPE)) {
             liveStreamType =
                 intent.getSerializableExtra(KEY_LIVE_STREAM_TYPE) as LiveStreamType
+        }
+        intent.getStringExtra(KEY_CHANNEL_ID)?.let {
+            channelId = it
         }
     }
 

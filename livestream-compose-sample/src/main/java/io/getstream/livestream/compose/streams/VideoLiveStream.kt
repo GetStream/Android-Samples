@@ -42,6 +42,7 @@ import io.getstream.livestream.compose.ui.LivestreamComposer
 fun VideoLiveStream(
     modifier: Modifier = Modifier,
     urlToLoad: String,
+    channelId: String,
     composerViewModel: MessageComposerViewModel,
     listViewModel: MessageListViewModel,
     onBackPressed: () -> Unit
@@ -96,6 +97,7 @@ fun VideoLiveStream(
                 }
             )
             LivestreamComposer(
+                channelId = channelId,
                 composerViewModel = composerViewModel
             )
         }

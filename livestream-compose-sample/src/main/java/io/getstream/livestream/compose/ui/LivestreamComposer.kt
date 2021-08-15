@@ -24,6 +24,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import io.getstream.chat.android.client.models.Message
 import io.getstream.chat.android.compose.ui.messages.composer.components.MessageInput
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
@@ -34,11 +35,13 @@ import io.getstream.livestream.compose.cardBackground
  * A View component to provide message composer bar at bottom of a screen.
  *
  * @param modifier - Modifier for styling.
+ * @param channelId - Channel id should be passed in to send messages on given channel
  * @param composerViewModel - Stream Message composer ViewModel to bind state for composer/ message input component
  */
 @Composable
 fun LivestreamComposer(
     modifier: Modifier = Modifier,
+    channelId: String,
     composerViewModel: MessageComposerViewModel
 ) {
     val context = LocalContext.current
@@ -80,8 +83,15 @@ fun LivestreamComposer(
                 .height(40.dp)
                 .clickable(
                     interactionSource = remember { MutableInteractionSource() },
-                    indication = rememberRipple(bounded = false), // You can also change the color and radius of the ripple
-                    onClick = {}
+                    indication = rememberRipple(bounded = false),
+                    onClick = {
+                        composerViewModel.sendMessage(
+                            Message(
+                                cid = channelId,
+                                text = composerViewModel.input
+                            )
+                        )
+                    }
                 ),
         ) {
             Icon(
