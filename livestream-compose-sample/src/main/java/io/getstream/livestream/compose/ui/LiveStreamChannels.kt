@@ -18,8 +18,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.api.models.QuerySort
+import io.getstream.chat.android.client.models.Channel
 import io.getstream.chat.android.client.models.Filters
 import io.getstream.chat.android.client.models.name
+import io.getstream.chat.android.compose.ui.channel.list.ChannelList
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.channel.ChannelListViewModel
 import io.getstream.chat.android.compose.viewmodel.channel.ChannelViewModelFactory
@@ -36,6 +38,7 @@ import io.getstream.livestream.compose.randomDescription
  * @param channelListViewModel - Stream channel list ViewModel to bind all channel data to custom UI provided here.
  * @param isDarkTheme - a Boolean state to get Theme is dark or light , used for deciding card background
  * @param isGrid - a toggle State to switch between 2 column grid to single column list
+ * @param gridColumn - customization for Grid view column count.
  */
 @ExperimentalMaterialApi
 @ExperimentalFoundationApi
@@ -55,23 +58,21 @@ fun LiveStreamChannels(
         )
     ),
     isDarkTheme: Boolean = false,
-    isGrid: Boolean = false
+    isGrid: Boolean = false,
+    gridColumn: Int = 2
 ) {
     val context: Context = LocalContext.current
-    val channels = channelListViewModel.channelsState.channels.map { channel ->
-        LiveStreamChannelItem(
-            channelId = channel.cid,
-            channelArt = context.randomArtWork(),
-            channelName = channel.name,
-            channelDescription = context.randomDescription()
-        )
-    }
 
     // We load a [LazyVerticalGrid] when we have a grid view to show
     if (isGrid) {
+        // We fetch channels first
+        val channels = channelListViewModel.channelsState.channels.map { channel ->
+            channel.toLiveStreamChannelItem(context = context)
+        }
+
         LazyVerticalGrid(
             modifier = modifier.background(ChatTheme.colors.appBackground),
-            cells = GridCells.Fixed(2),
+            cells = GridCells.Fixed(gridColumn),
             contentPadding = PaddingValues(bottom = 12.dp, top = 12.dp),
             content = {
                 items(channels) { item ->
@@ -90,21 +91,35 @@ fun LiveStreamChannels(
         )
     } else {
         // We load a [LazyColumn] for when list is required
-        LazyColumn(modifier.background(ChatTheme.colors.appBackground)) {
-            items(channels) { item ->
-                LiveStreamChannelCard(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(10.dp),
-                    isDarkTheme = isDarkTheme,
-                    liveStreamChannelItem = item,
-                    onCardClick = { clickedItem ->
-                        openLiveStream(context, clickedItem)
-                    }
-                )
-            }
+        ChannelList(
+            modifier = modifier.background(ChatTheme.colors.appBackground),
+            viewModel = channelListViewModel
+        ) { channel ->
+            LiveStreamChannelCard(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(10.dp),
+                isDarkTheme = isDarkTheme,
+                liveStreamChannelItem = channel.toLiveStreamChannelItem(
+                    context = context,
+                ),
+                onCardClick = { clickedItem ->
+                    openLiveStream(context, clickedItem)
+                }
+            )
         }
     }
+}
+
+private fun Channel.toLiveStreamChannelItem(
+    context: Context
+): LiveStreamChannelItem {
+    return LiveStreamChannelItem(
+        channelId = cid,
+        channelArt = context.randomArtWork(),
+        channelName = name,
+        channelDescription = context.randomDescription()
+    )
 }
 
 /**

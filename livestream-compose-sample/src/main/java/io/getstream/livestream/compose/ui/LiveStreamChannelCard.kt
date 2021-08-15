@@ -24,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
@@ -41,6 +42,7 @@ import io.getstream.livestream.compose.models.LiveStreamChannelItem
  *
  * @param liveStreamChannelItem - The single item [LiveStreamChannelItem] that represents a channel
  * @param modifier - Modifier for styling the card.
+ * @param cardShape - Shape object for the card customization.
  * @param isDarkTheme - this is a Boolean to decide if the card needs to show dark variant or a light, by default its false
  * @param onCardClick - click handler to allow the call site to provide functionality when the Card itself is clicked.
  */
@@ -48,6 +50,7 @@ import io.getstream.livestream.compose.models.LiveStreamChannelItem
 fun LiveStreamChannelCard(
     liveStreamChannelItem: LiveStreamChannelItem,
     modifier: Modifier = Modifier,
+    cardShape: Shape = RoundedCornerShape(8.dp),
     isDarkTheme: Boolean = false,
     onCardClick: (LiveStreamChannelItem) -> Unit
 ) {
@@ -58,7 +61,7 @@ fun LiveStreamChannelCard(
         colorResource(id = R.color.cardview_light_background)
 
     Card(
-        shape = RoundedCornerShape(8.dp),
+        shape = cardShape,
         backgroundColor = cardBackground,
         modifier = modifier
             .clickable(
