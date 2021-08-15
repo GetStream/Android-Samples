@@ -20,7 +20,7 @@ import io.getstream.livestream.compose.getTimeAgo
 import java.util.Date
 
 /**
- * View component to add custom live stream channels screen.
+ * This is a component to render custom message or comments.
  *
  * @param modifier - Modifier for styling.
  * @param shouldShowBubble - a boolean check if a message bubble is necessary , this is dependent on
@@ -42,11 +42,11 @@ fun LiveStreamComment(
     ) {
         UserAvatar(
             modifier = Modifier
-                .padding(start = 8.dp, end = 8.dp)
+                .padding(horizontal = 8.dp)
                 .size(32.dp),
             user = messageItem.message.user
         )
-        Column {
+        Column(modifier = Modifier.align(Alignment.CenterVertically)) {
             Row {
                 Text(
                     modifier = Modifier.padding(start = 8.dp),

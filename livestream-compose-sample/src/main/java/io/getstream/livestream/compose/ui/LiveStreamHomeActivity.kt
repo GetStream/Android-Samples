@@ -15,7 +15,9 @@ import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -56,75 +58,89 @@ class LiveStreamHomeActivity : ComponentActivity() {
                 colors = if (isDarkMode) darkColorPalette() else lightColorPalette(),
                 shapes = shapes()
             ) {
-                LiveStreamCustomChannelScreen(
-                    title = resources.getString(R.string.app_name),
-                    actions = {
-                        // Adds a icon button for switching theme
-                        IconButton(
-                            onClick = {
-                                expanded = !expanded
-                            }
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.ic_theme_switch),
-                                contentDescription = stringResource(id = R.string.accessibilitySwitchTheme),
-                                modifier = Modifier
-                                    .width(24.dp)
-                                    .height(24.dp)
-                            )
-                        }
-                        // Theme chooser drop down selector
-                        DropdownMenu(
-                            expanded = expanded,
-                            onDismissRequest = { expanded = false }
-                        ) {
-                            DropdownMenuItem(
-                                onClick = {
-                                    expanded = !expanded
-                                    isDarkMode = false
-                                    updateTheme(isDarkMode)
+                Scaffold(
+                    topBar = {
+                        TopAppBar(
+                            title = {
+                                Text(
+                                    text = stringResource(id = R.string.app_name),
+                                    color = ChatTheme.colors.textHighEmphasis
+                                )
+                            },
+                            backgroundColor = ChatTheme.colors.barsBackground,
+                            contentColor = ChatTheme.colors.appBackground,
+                            elevation = 12.dp,
+                            actions = {
+                                // Adds a icon button for switching theme
+                                IconButton(
+                                    onClick = {
+                                        expanded = !expanded
+                                    }
+                                ) {
+                                    Image(
+                                        painter = painterResource(id = R.drawable.ic_theme_switch),
+                                        contentDescription = stringResource(id = R.string.accessibilitySwitchTheme),
+                                        modifier = Modifier
+                                            .width(24.dp)
+                                            .height(24.dp)
+                                    )
                                 }
-                            ) {
-                                Text(text = stringResource(R.string.light_theme_toggle_title))
-                            }
-                            DropdownMenuItem(
-                                onClick = {
-                                    expanded = !expanded
-                                    isDarkMode = true
-                                    updateTheme(isDarkMode)
+                                // Theme chooser drop down selector
+                                DropdownMenu(
+                                    expanded = expanded,
+                                    onDismissRequest = { expanded = false }
+                                ) {
+                                    DropdownMenuItem(
+                                        onClick = {
+                                            expanded = !expanded
+                                            isDarkMode = false
+                                            updateTheme(isDarkMode)
+                                        }
+                                    ) {
+                                        Text(text = stringResource(R.string.light_theme_toggle_title))
+                                    }
+                                    DropdownMenuItem(
+                                        onClick = {
+                                            expanded = !expanded
+                                            isDarkMode = true
+                                            updateTheme(isDarkMode)
+                                        }
+                                    ) {
+                                        Text(text = stringResource(R.string.dark_theme_toggle_title))
+                                    }
                                 }
-                            ) {
-                                Text(text = stringResource(R.string.dark_theme_toggle_title))
-                            }
-                        }
 
-                        // Adds a icon button for switching grid toggle
-                        IconButton(
-                            onClick = {
-                                isGrid = !isGrid
-                            }
-                        ) {
-                            // We also update the icon when the state changes from a grid view to single list
-                            val iconToShow =
-                                if (!isGrid) {
-                                    painterResource(id = R.drawable.ic_toggle_grid)
-                                } else {
-                                    painterResource(id = R.drawable.ic_toggle_list)
+                                // Adds a icon button for switching grid toggle
+                                IconButton(
+                                    onClick = {
+                                        isGrid = !isGrid
+                                    }
+                                ) {
+                                    // We also update the icon when the state changes from a grid view to single list
+                                    val iconToShow =
+                                        painterResource(
+                                            if (isGrid)
+                                                R.drawable.ic_toggle_grid
+                                            else
+                                                R.drawable.ic_toggle_list
+                                        )
+                                    Icon(
+                                        painter = iconToShow,
+                                        contentDescription = stringResource(id = R.string.accessibilityGridToggle),
+                                        tint = ChatTheme.colors.textHighEmphasis
+                                    )
                                 }
-                            Icon(
-                                painter = iconToShow,
-                                contentDescription = stringResource(id = R.string.accessibilityGridToggle),
-                                tint = ChatTheme.colors.textHighEmphasis
-                            )
-                        }
+                            }
+                        )
+                    },
+                    content = {
+                        LiveStreamChannels(
+                            isDarkTheme = isDarkMode,
+                            isGrid = isGrid,
+                            modifier = Modifier.background(ChatTheme.colors.appBackground)
+                        )
                     }
-                ) {
-                    LiveStreamChannels(
-                        isDarkTheme = isDarkMode,
-                        isGrid = isGrid,
-                        modifier = Modifier.background(ChatTheme.colors.appBackground)
-                    )
-                }
+                )
             }
         }
     }

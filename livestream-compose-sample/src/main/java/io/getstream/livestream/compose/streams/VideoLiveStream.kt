@@ -7,16 +7,13 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import io.getstream.chat.android.compose.ui.messages.list.DefaultMessageContainer
 import io.getstream.chat.android.compose.ui.messages.list.MessageList
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
@@ -31,7 +28,7 @@ import io.getstream.livestream.compose.ui.LivestreamComposer
  * and [MessageComposerViewModel] to connect all the chat data handling operations.
  *
  * @param modifier - Modifier for styling.
- * @param urlToLoad - A string URL for loading a video in Video view component
+ * @param urlToLoad - A string URL for loading a video in Exoplayer view component
  * @param composerViewModel - [MessageComposerViewModel] for manging message input field
  * @param listViewModel - [MessageListViewModel] The ViewModel that stores all the data and
  * business logic required to show a list of messages. The user has to provide one in this case,
@@ -52,11 +49,12 @@ fun VideoLiveStream(
             .background(ChatTheme.colors.appBackground)
             .fillMaxSize()
     ) {
+        // Loads a exoplayer to play a video from provided URL path
         ExoVideoPlayer(
             urlToLoad = urlToLoad
         )
-        //Gradient overlay
-        Spacer(
+        // Gradient overlay
+        Box(
             Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.6f)
@@ -70,6 +68,8 @@ fun VideoLiveStream(
                     )
                 )
         )
+        // This column hosts the bottom half of our components namely MessageList
+        // and a custom message compose
         Column(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
@@ -87,7 +87,6 @@ fun VideoLiveStream(
                     // as we have a transparent scrim background for the video playing
                     // in the background of our message list
 
-
                     Spacer(
                         modifier = Modifier
                             .fillMaxHeight(0.8f)
@@ -101,6 +100,7 @@ fun VideoLiveStream(
                 composerViewModel = composerViewModel
             )
         }
+        // Custom livestream screen top-bar
         LiveStreamHeader(
             modifier = Modifier
                 .fillMaxWidth()

@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -62,6 +61,7 @@ fun CameraLiveStream(
             .background(ChatTheme.colors.appBackground)
             .fillMaxSize()
     ) {
+        // Loads a camera surface preview into a AndroidView
         AndroidView(
             modifier = Modifier.fillMaxSize(),
             factory = { ctx ->
@@ -81,8 +81,8 @@ fun CameraLiveStream(
                 preview
             }
         )
-        //Gradient overlay
-        Spacer(
+        // Gradient overlay
+        Box(
             Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.6f)
@@ -96,6 +96,8 @@ fun CameraLiveStream(
                     )
                 )
         )
+        // This column hosts the bottom half of our components namely MessageList
+        // and a custom message composer
         Column(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
@@ -126,6 +128,7 @@ fun CameraLiveStream(
                 composerViewModel = composerViewModel
             )
         }
+        // Custom livestream screen top-bar
         LiveStreamHeader(
             modifier = Modifier
                 .fillMaxWidth()

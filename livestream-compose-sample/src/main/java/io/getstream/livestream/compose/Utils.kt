@@ -5,9 +5,9 @@ import android.content.res.TypedArray
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
-import java.util.Random
 import java.util.Calendar
 import java.util.Date
+import java.util.Random
 
 fun Context.randomArtWork(): Int {
     val rand = Random()
@@ -57,7 +57,7 @@ fun Context.getTimeAgo(date: Date): String {
         diff < 6 * DAY_MILLIS -> {
             String.format(getString(R.string.hour_ago), diff / DAY_MILLIS)
         }
-        diff <8* DAY_MILLIS ->{
+        diff <8 * DAY_MILLIS -> {
             getString(R.string.week_ago)
         }
         else -> {
@@ -86,4 +86,3 @@ fun Context.isDarkTheme(): Boolean {
         false
     )
 }
-

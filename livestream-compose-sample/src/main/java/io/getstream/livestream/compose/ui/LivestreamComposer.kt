@@ -62,16 +62,14 @@ fun LivestreamComposer(
             onValueChange = { composerViewModel.setMessageInput(it) },
             onAttachmentRemoved = { composerViewModel.removeSelectedAttachment(it) },
             label = {
-                Row(
-                    Modifier.wrapContentWidth(),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        modifier = Modifier.padding(start = 4.dp),
-                        text = stringResource(id = R.string.composer_hint),
-                        color = ChatTheme.colors.textLowEmphasis
-                    )
-                }
+                Text(
+                    modifier = Modifier
+                        .padding(start = 4.dp)
+                        .wrapContentWidth()
+                        .align(Alignment.CenterVertically),
+                    text = stringResource(id = R.string.composer_hint),
+                    color = ChatTheme.colors.textLowEmphasis
+                )
             }
         )
         Column(

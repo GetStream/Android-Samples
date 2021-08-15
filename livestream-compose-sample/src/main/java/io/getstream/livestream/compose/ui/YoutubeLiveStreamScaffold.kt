@@ -38,9 +38,11 @@ fun YoutubeLiveStreamScaffold(
     onInfoClickHandler: () -> Unit = {},
     actions: @Composable (RowScope) -> Unit = {
         Icon(
-            modifier = Modifier.clickable(onClick = {
-                onInfoClickHandler()
-            }),
+            modifier = Modifier.clickable(
+                onClick = {
+                    onInfoClickHandler()
+                }
+            ),
             imageVector = Icons.Default.Info,
             contentDescription = stringResource(id = R.string.accessibilityBackButton),
             tint = colorResource(id = R.color.white),
@@ -61,9 +63,11 @@ fun YoutubeLiveStreamScaffold(
                 },
                 navigationIcon = {
                     Icon(
-                        modifier = Modifier.clickable(onClick = {
-                            onBackPressed()
-                        }),
+                        modifier = Modifier.clickable(
+                            onClick = {
+                                onBackPressed()
+                            }
+                        ),
                         painter = painterResource(id = R.drawable.ic_left_navigation),
                         contentDescription = stringResource(id = R.string.accessibilityBackButton),
                         tint = colorResource(id = R.color.white),
