@@ -1,17 +1,11 @@
 package io.getstream.livestream.compose
 
-import android.content.Context
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.ui.theme.StreamColors
 import io.getstream.chat.android.compose.ui.theme.StreamShapes
 
@@ -64,4 +58,9 @@ fun shapes(): StreamShapes {
         inputField = RoundedCornerShape(8.dp),
         attachment = RoundedCornerShape(16.dp)
     )
+}
+
+@Composable
+fun topBarBackground(): Color {
+    return colorResource(id = R.color.top_bar_grey)
 }

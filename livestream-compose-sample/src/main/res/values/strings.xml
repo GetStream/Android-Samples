@@ -11,6 +11,7 @@
     <string name="composer_hint">Say something</string>
 
     <string name="accessibilityBackButton">Go back</string>
+    <string name="accessibilityInfoButton">Info</string>
     <string name="accessibilityArtworkImage">Artwork image view</string>
     <string name="accessibilityParticipantImage">Participant logo image view</string>
     <string name="accessibilityViewersImage">Viewers logo image view</string>
@@ -35,5 +36,6 @@
     <string name="days_ago">%1d day</string>
     <string name="week_ago">week ago</string>
     <string name="long_time">long time</string>
+    <string name="youtube_screen_title">Youtube example</string>
 
 </resources>

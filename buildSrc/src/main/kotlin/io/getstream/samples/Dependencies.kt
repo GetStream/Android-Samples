@@ -10,6 +10,7 @@ private const val ANDROIDX_KTX_VERSION = "1.3.2"
 private const val ANDROIDX_CONSTRAINT_LAYOUT_VERSION = "2.0.4"
 private const val ANDROIDX_LEGACY_SUPPORT = "1.0.0"
 private const val ANDROIDX_LIFECYCLE_EXTENSIONS_VERSION = "2.2.0"
+private const val ANDROIDX_LIFECYCLE_RUNTIME = "2.3.1"
 private const val ANDROIDX_RECYCLERVIEW_VERSION = "1.2.0-beta01"
 private const val ANDROIDX_VIEW_PAGER_2_VERSION = "1.0.0"
 private const val COIL_VERSION = "1.3.0"
@@ -35,7 +36,7 @@ object Dependencies {
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:$KOTLIN_VERSION"
     const val androidxActivityKtx = "androidx.activity:activity-ktx:$ANDROIDX_ACTIVITY_KTX_VERSION"
     const val androidxAppCompat = "androidx.appcompat:appcompat:$ANDROIDX_APPCOMPAT_VERSION"
-    const val androidXLifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
+    const val androidXLifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:$ANDROIDX_LIFECYCLE_RUNTIME"
     const val androidxCardView = "androidx.cardview:cardview:$ANDROIDX_CARD_VIEW_VERSION"
     const val androidxCoreKtx = "androidx.core:core-ktx:$ANDROIDX_KTX_VERSION"
     const val androidxConstraintLayout =
@@ -75,7 +76,8 @@ object Dependencies {
     const val composeAccompanistPermissions =
         "com.google.accompanist:accompanist-permissions:${COMPOSE_ACCOMPANIST}"
     const val composeActivity = "androidx.activity:activity-compose:$COMPOSE_ACTIVITY"
-    const val composeViewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:$COMPOSE_VIEW_MODEL"
+    const val composeViewModel =
+        "androidx.lifecycle:lifecycle-viewmodel-compose:$COMPOSE_VIEW_MODEL"
     const val composeCameraLifecycle = "androidx.camera:camera-lifecycle:$CAMERA_V2"
     const val composeCameraView = "androidx.camera:camera-view:$CAMERA_VIEW"
     const val composeCamera2 = "androidx.camera:camera-camera2:$CAMERA_V2"

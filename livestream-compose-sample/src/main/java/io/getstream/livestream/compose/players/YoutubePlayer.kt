@@ -27,7 +27,7 @@ fun YoutubePlayer(
         .build()
 ) {
     AndroidView(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier,
         factory = { context ->
             val playerListener = object : AbstractYouTubePlayerListener() {
                 override fun onReady(youTubePlayer: YouTubePlayer) {
