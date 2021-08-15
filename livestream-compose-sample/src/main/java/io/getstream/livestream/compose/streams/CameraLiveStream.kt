@@ -38,6 +38,7 @@ import io.getstream.livestream.compose.ui.LivestreamComposer
  * Shows a camera preview surface in a view component that relies on [MessageListViewModel]
  * and [MessageComposerViewModel] to connect all the chat data handling operations.
  *
+ * @param modifier - Modifier for styling.
  * @param composerViewModel - [MessageComposerViewModel] for manging message input field
  * @param listViewModel - [MessageListViewModel] The ViewModel that stores all the data and
  * business logic required to show a list of messages. The user has to provide one in this case,
@@ -46,6 +47,7 @@ import io.getstream.livestream.compose.ui.LivestreamComposer
  */
 @Composable
 fun CameraLiveStream(
+    modifier: Modifier = Modifier,
     composerViewModel: MessageComposerViewModel,
     listViewModel: MessageListViewModel,
     onBackPressed: () -> Unit
@@ -54,8 +56,9 @@ fun CameraLiveStream(
     val context = LocalContext.current
     val cameraProviderFuture = remember { ProcessCameraProvider.getInstance(context) }
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = modifier.fillMaxSize()) {
         AndroidView(
+            modifier = Modifier.fillMaxSize(),
             factory = { ctx ->
                 val preview = PreviewView(ctx)
                 val executor = ContextCompat.getMainExecutor(ctx)
@@ -71,8 +74,7 @@ fun CameraLiveStream(
                     executor
                 )
                 preview
-            },
-            modifier = Modifier.fillMaxSize()
+            }
         )
         //Gradient overlay
         Spacer(
@@ -115,7 +117,6 @@ fun CameraLiveStream(
                 }
             )
             LivestreamComposer(
-                modifier = Modifier,
                 composerViewModel = composerViewModel
             )
         }

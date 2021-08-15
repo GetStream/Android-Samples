@@ -1,6 +1,8 @@
 package io.getstream.livestream.compose.players
 
 import android.net.Uri
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
@@ -50,10 +52,10 @@ fun ExoVideoPlayer(
             }
     }
 
-    exoPlayer.videoScalingMode = C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING
+    exoPlayer.videoScalingMode = C.VIDEO_SCALING_MODE_DEFAULT
     exoPlayer.repeatMode = Player.REPEAT_MODE_ONE
     AndroidView(
-        modifier = modifier,
+        modifier = modifier.fillMaxWidth(),
         factory = { context ->
             PlayerView(context).apply {
                 useController = false

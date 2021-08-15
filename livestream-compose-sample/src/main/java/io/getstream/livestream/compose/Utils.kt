@@ -2,6 +2,9 @@ package io.getstream.livestream.compose
 
 import android.content.Context
 import android.content.res.TypedArray
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import java.util.Random
 import java.util.Calendar
 import java.util.Date
@@ -62,3 +65,25 @@ fun Context.getTimeAgo(date: Date): String {
         }
     }
 }
+
+@Composable
+fun Context.cardBackground(): Color {
+    return if (isDarkTheme())
+        colorResource(R.color.dark_cardBackground)
+    else
+        colorResource(R.color.light_cardBackground)
+}
+
+fun Context.isDarkTheme(): Boolean {
+    val sharedPref =
+        getSharedPreferences(
+            getString(R.string.name_shared_pref),
+            Context.MODE_PRIVATE
+        )
+
+    return sharedPref.getBoolean(
+        getString(R.string.key_theme),
+        false
+    )
+}
+

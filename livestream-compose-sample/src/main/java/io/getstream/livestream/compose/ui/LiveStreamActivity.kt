@@ -25,6 +25,7 @@ import io.getstream.livestream.compose.models.LiveStreamType
 import io.getstream.livestream.compose.models.LiveStreamType.Camera
 import io.getstream.livestream.compose.models.LiveStreamType.Video
 import io.getstream.livestream.compose.models.LiveStreamType.Youtube
+import io.getstream.livestream.compose.shapes
 import io.getstream.livestream.compose.streams.CameraLiveStream
 import io.getstream.livestream.compose.streams.VideoLiveStream
 import io.getstream.livestream.compose.streams.YoutubeLiveStream
@@ -64,7 +65,10 @@ class LiveStreamActivity : ComponentActivity() {
                 )
             }
 
-            ChatTheme(colors = if (isDarkMode) darkColorPalette() else lightColorPalette()) {
+            ChatTheme(
+                colors = if (isDarkMode) darkColorPalette() else lightColorPalette(),
+                shapes = shapes()
+            ) {
                 when (liveStreamType) {
                     Youtube -> {
                         YoutubeLiveStream(

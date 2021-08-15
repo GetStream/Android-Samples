@@ -28,6 +28,7 @@ import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.livestream.compose.R
 import io.getstream.livestream.compose.darkColorPalette
 import io.getstream.livestream.compose.lightColorPalette
+import io.getstream.livestream.compose.shapes
 
 class LiveStreamHomeActivity : ComponentActivity() {
     private lateinit var sharedPref: SharedPreferences
@@ -51,7 +52,8 @@ class LiveStreamHomeActivity : ComponentActivity() {
             }
             var isGrid by remember { mutableStateOf(true) }
 
-            ChatTheme(colors = if (isDarkMode) darkColorPalette() else lightColorPalette()) {
+            ChatTheme(colors = if (isDarkMode) darkColorPalette() else lightColorPalette(),
+                shapes = shapes()) {
                 LiveStreamCustomChannelScreen(
                     title = resources.getString(R.string.app_name),
                     actions = {

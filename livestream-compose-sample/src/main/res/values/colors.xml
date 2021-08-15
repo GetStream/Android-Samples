@@ -23,6 +23,9 @@
     <color name="light_info_accent">#20E070</color>
     <color name="light_card_background">#FFFFFF</color>
 
+    <color name="light_cardBackground">#F2F2F2</color>
+
+
     <!-- Dark colors -->
     <color name="dark_text_high_emphasis">#FFFFFF</color>
     <color name="dark_text_low_emphasis">#8FFFFFFF</color>
@@ -37,5 +40,7 @@
     <color name="dark_error_accent">#FF3742</color>
     <color name="dark_info_accent">#20E070</color>
     <color name="dark_card_background">#010C29</color>
+
+    <color name="dark_cardBackground">#152438</color>
 
 </resources>
