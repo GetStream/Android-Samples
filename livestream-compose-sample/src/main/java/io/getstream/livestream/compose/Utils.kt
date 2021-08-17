@@ -1,7 +1,10 @@
 package io.getstream.livestream.compose
 
 import android.content.Context
+import android.content.Intent
 import android.content.res.TypedArray
+import android.net.Uri
+import android.provider.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -85,4 +88,13 @@ fun Context.isDarkTheme(): Boolean {
         getString(R.string.key_theme),
         false
     )
+}
+
+fun Context.openCameraSettings() {
+    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+        val uri: Uri = Uri.fromParts("package", packageName, null)
+        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        data = uri
+    }
+    startActivity(intent)
 }

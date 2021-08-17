@@ -18,8 +18,11 @@
     <string name="accessibilityIcon">Icon</string>
     <string name="accessibilitySwitchTheme">Switch theme</string>
     <string name="accessibilityGridToggle">Grid toggle</string>
+
+    <!--permission's-->
     <string name="permission_camera_title">Camera access permission</string>
     <string name="permission_camera_message">Camera access permissions is required in order to be able to stream from your camera</string>
+    <string name="give_permission">Give permission</string>
 
     <!--Shared preference keys-->
     <string name="name_shared_pref">Compose Live Events pref</string>

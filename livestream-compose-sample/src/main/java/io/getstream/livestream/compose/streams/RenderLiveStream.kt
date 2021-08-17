@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 import io.getstream.livestream.compose.R
@@ -21,6 +22,7 @@ import io.getstream.livestream.compose.models.LiveStreamType
  * @param channelId - Channel id for loading comments and sending comments
  * @param onBackPressed - Handler for when the user clicks back press
  */
+@ExperimentalPermissionsApi
 @Composable
 fun RenderLiveStream(
     liveStreamType: LiveStreamType,
