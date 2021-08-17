@@ -138,5 +138,12 @@ private fun openLiveStream(context: Context, channel: LiveStreamChannelItem) {
         }
         else -> LiveStreamType.Camera
     }
-    context.startActivity(LiveStreamActivity.getIntent(context, channel.channelId, liveStreamType))
+    context.startActivity(
+        LiveStreamActivity.getIntent(
+            context = context,
+            channelId = channel.channelId,
+            channelTitle = channel.channelName,
+            liveStreamType = liveStreamType
+        )
+    )
 }

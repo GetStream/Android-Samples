@@ -15,12 +15,13 @@ import io.getstream.livestream.compose.models.LiveStreamType
  *
  * @param liveStreamType - [LiveStreamType] an enum representation of live stream type
  * for this channel.
- * @param composerViewModel - [MessageComposerViewModel] for manging message input field
+ * @param composerViewModel - [MessageComposerViewModel] for manging message input field.
  * @param listViewModel - [MessageListViewModel] The ViewModel that stores all the data and
  * business logic required to show a list of messages. The user has to provide one in this case,
  * as we require the channelId to start the operations.
- * @param channelId - Channel id for loading comments and sending comments
- * @param onBackPressed - Handler for when the user clicks back press
+ * @param channelId - Channel id for loading comments and sending comments.
+ * @param channelTitle - Channel name or a title to show in the header.
+ * @param onBackPressed - Handler for when the user clicks back press.
  */
 @ExperimentalPermissionsApi
 @Composable
@@ -29,6 +30,7 @@ fun RenderLiveStream(
     composerViewModel: MessageComposerViewModel,
     listViewModel: MessageListViewModel,
     channelId: String,
+    channelTitle: String,
     onBackPressed: () -> Unit
 ) {
     when (liveStreamType) {
@@ -37,7 +39,7 @@ fun RenderLiveStream(
                 modifier = Modifier
                     .fillMaxWidth(),
                 videoId = "9rIy0xY99a0",
-                title = stringResource(R.string.youtube_screen_title),
+                title = channelTitle,
                 composerViewModel = composerViewModel,
                 listViewModel = listViewModel,
                 channelId = channelId

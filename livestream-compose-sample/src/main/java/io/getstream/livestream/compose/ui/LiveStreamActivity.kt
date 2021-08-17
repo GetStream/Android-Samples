@@ -39,6 +39,7 @@ class LiveStreamActivity : ComponentActivity() {
         )
     }
     private var channelId: String = ""
+    private var channelTitle: String = ""
 
     private val composerViewModel by viewModels<MessageComposerViewModel>(factoryProducer = { factory })
     private val listViewModel by viewModels<MessageListViewModel>(factoryProducer = { factory })
@@ -70,7 +71,8 @@ class LiveStreamActivity : ComponentActivity() {
                     liveStreamType = liveStreamType,
                     composerViewModel = composerViewModel,
                     listViewModel = listViewModel,
-                    channelId = channelId
+                    channelId = channelId,
+                    channelTitle = channelTitle
                 ) {
                     // On back press
                     finish()
@@ -87,15 +89,35 @@ class LiveStreamActivity : ComponentActivity() {
         intent.getStringExtra(KEY_CHANNEL_ID)?.let {
             channelId = it
         }
+        intent.getStringExtra(KEY_CHANNEL_TITLE)?.let {
+            channelTitle = it
+        }
     }
 
     companion object {
         private const val KEY_CHANNEL_ID = "channelId"
+        private const val KEY_CHANNEL_TITLE = "channelTitle"
         private const val KEY_LIVE_STREAM_TYPE = "liveStreamType"
 
-        fun getIntent(context: Context, channelId: String, liveStreamType: LiveStreamType): Intent {
+        /**
+         * Function to return an [Intent] to start this activity.
+         *
+         * @param context - provide a context to include with our Intent.
+         * @param channelId - provide the current channelId , necessary to fetch
+         * corresponding messages and for sending new messages.
+         * @param channelTitle - provide the channel title or name to show as heading.
+         * @param liveStreamType - provide the channel's [LiveStreamType] instance
+         * to decide the type of screen to render.
+         */
+        fun getIntent(
+            context: Context,
+            channelId: String,
+            channelTitle: String,
+            liveStreamType: LiveStreamType,
+        ): Intent {
             return Intent(context, LiveStreamActivity::class.java).apply {
                 putExtra(KEY_CHANNEL_ID, channelId)
+                putExtra(KEY_CHANNEL_TITLE, channelTitle)
                 putExtra(KEY_LIVE_STREAM_TYPE, liveStreamType)
             }
         }
