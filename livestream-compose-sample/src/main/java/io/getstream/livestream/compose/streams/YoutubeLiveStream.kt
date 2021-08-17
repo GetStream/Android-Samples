@@ -57,7 +57,7 @@ fun YoutubeLiveStream(
                 modifier = Modifier
                     .background(ChatTheme.colors.appBackground)
                     .weight(0.6f),
-                viewModel = listViewModel,
+                currentState = listViewModel.currentMessagesState,
                 itemContent = {
                     LiveStreamComment(messageItem = it, shouldShowBubble = false)
                 },

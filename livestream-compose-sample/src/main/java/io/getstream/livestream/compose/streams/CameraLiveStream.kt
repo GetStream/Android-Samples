@@ -124,7 +124,7 @@ fun CameraLiveStream(
                     MessageList(
                         modifier = Modifier
                             .weight(1f),
-                        viewModel = listViewModel,
+                        currentState = listViewModel.currentMessagesState,
                         itemContent = {
                             LiveStreamComment(messageItem = it)
                         },
