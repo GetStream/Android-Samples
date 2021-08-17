@@ -92,6 +92,8 @@ fun LiveStreamChannelCard(
                 verticalAlignment = Alignment.Top
             ) {
                 Icon(
+                    modifier = Modifier
+                        .align(Alignment.CenterVertically),
                     imageVector = Icons.Rounded.ViewStream,
                     contentDescription = stringResource(id = R.string.accessibilityIcon)
                 )
