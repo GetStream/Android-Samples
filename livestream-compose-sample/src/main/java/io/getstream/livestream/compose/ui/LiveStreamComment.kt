@@ -49,13 +49,17 @@ fun LiveStreamComment(
         Column(modifier = Modifier.align(Alignment.CenterVertically)) {
             Row {
                 Text(
-                    modifier = Modifier.padding(start = 8.dp),
+                    modifier = Modifier
+                        .padding(start = 8.dp)
+                        .align(Alignment.CenterVertically),
                     text = messageItem.message.user.name,
                     style = ChatTheme.typography.bodyBold,
                     color = ChatTheme.colors.textHighEmphasis
                 )
                 Text(
-                    modifier = Modifier.padding(start = 4.dp),
+                    modifier = Modifier
+                        .padding(start = 4.dp)
+                        .align(Alignment.CenterVertically),
                     text = context.getTimeAgo(messageItem.message.createdAt ?: Date()),
                     style = ChatTheme.typography.footnote,
                     color = ChatTheme.colors.textLowEmphasis
