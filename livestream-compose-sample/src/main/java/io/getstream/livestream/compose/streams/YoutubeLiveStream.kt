@@ -11,8 +11,6 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -28,7 +26,6 @@ import io.getstream.livestream.compose.players.YoutubePlayer
 import io.getstream.livestream.compose.topBarBackground
 import io.getstream.livestream.compose.ui.LiveStreamComment
 import io.getstream.livestream.compose.ui.LivestreamComposer
-import io.getstream.livestream.compose.ui.YoutubeLiveStreamScaffold
 
 /**
  * Shows a Youtube view component that relies on [MessageListViewModel]
