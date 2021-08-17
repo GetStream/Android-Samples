@@ -7,6 +7,7 @@ import android.net.Uri
 import android.provider.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import java.util.Calendar
 import java.util.Date
@@ -60,7 +61,7 @@ fun Context.getTimeAgo(date: Date): String {
         diff < 6 * DAY_MILLIS -> {
             String.format(getString(R.string.hour_ago), diff / DAY_MILLIS)
         }
-        diff <8 * DAY_MILLIS -> {
+        diff < 8 * DAY_MILLIS -> {
             getString(R.string.week_ago)
         }
         else -> {
@@ -70,11 +71,9 @@ fun Context.getTimeAgo(date: Date): String {
 }
 
 @Composable
-fun Context.cardBackground(): Color {
-    return if (isDarkTheme())
-        colorResource(R.color.dark_cardBackground)
-    else
-        colorResource(R.color.light_cardBackground)
+fun cardBackground(): Color {
+    val context = LocalContext.current
+    return colorResource(if (context.isDarkTheme()) R.color.dark_cardBackground else R.color.light_cardBackground)
 }
 
 fun Context.isDarkTheme(): Boolean {

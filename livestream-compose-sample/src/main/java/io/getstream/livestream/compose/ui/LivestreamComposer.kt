@@ -76,7 +76,7 @@ fun LivestreamComposer(
                 .padding(8.dp)
                 .align(Alignment.CenterVertically)
                 .clip(RoundedCornerShape(8.dp))
-                .background(context.cardBackground())
+                .background(cardBackground())
                 .width(40.dp)
                 .height(40.dp)
                 .padding(8.dp),
