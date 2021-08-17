@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/stream_ui_spacing_small"
+    android:paddingEnd="@dimen/stream_ui_spacing_small"
+    >
+
+    <io.getstream.chat.android.ui.avatar.AvatarView
+        android:layout_width="@dimen/stream_ui_avatar_size_medium"
+        android:layout_height="@dimen/stream_ui_avatar_size_medium"
+        android:id="@+id/avatarView"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/userNameTextView"
+        tools:text="Amit Kumar"
+        android:paddingLeft="@dimen/stream_ui_spacing_medium"
+        android:paddingRight="@dimen/stream_ui_spacing_medium"
+        android:textAppearance="@style/SlackTextAppearance.Title"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:layout_toEndOf="@+id/avatarView"
+        android:layout_alignTop="@id/avatarView"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/messageTimeLabel"
+        android:paddingLeft="8dp"
+        android:paddingRight="@dimen/stream_ui_spacing_medium"
+        android:textAppearance="@style/SlackTextAppearance.Timestamp"
+        android:layout_toEndOf="@+id/userNameTextView"
+        tools:text="5:07 PM"/>
+
+    <TextView
+        android:id="@+id/messageText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/avatarView"
+        android:layout_below="@+id/userNameTextView"
+        android:autoLink="web"
+        android:hyphenationFrequency="normal"
+        android:lineHeight="16sp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingLeft="@dimen/stream_ui_spacing_medium"
+        android:paddingRight="@dimen/stream_ui_spacing_medium"
+        android:textAppearance="@style/SlackTextAppearance"
+        android:textColorLink="@color/stream_ui_accent_blue"
+        tools:text="@tools:sample/lorem" />
+
+</RelativeLayout>

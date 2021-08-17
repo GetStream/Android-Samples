@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <io.getstream.chat.android.ui.message.list.adapter.view.internal.GapView
+        android:id="@+id/gapView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toEndOf="@+id/marginStart"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/stream_ui_spacing_small"
+        android:clipToPadding="false"
+        app:cardBackgroundColor="@color/stream_ui_white"
+        app:cardElevation="@dimen/stream_ui_elevation_small"
+        app:layout_constraintEnd_toStartOf="@id/marginEnd"
+        app:layout_constraintStart_toEndOf="@id/marginStart"
+        app:layout_constraintTop_toBottomOf="@id/gapView"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:id="@+id/giphyIconImageView"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="@dimen/stream_ui_spacing_small"
+                android:src="@drawable/stream_ui_ic_giphy"
+                app:layout_constraintBottom_toTopOf="@+id/mediaAttachmentView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription"
+                />
+
+            <TextView
+                android:id="@+id/giphyLabelTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="start|center_vertical"
+                android:singleLine="true"
+                android:text="@string/stream_ui_message_list_giphy_title"
+                android:textAppearance="@style/StreamUiTextAppearance.BodyBold"
+                app:layout_constraintStart_toEndOf="@id/giphyIconImageView"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/giphyQueryTextView"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="@dimen/stream_ui_spacing_small"
+                android:gravity="start|center_vertical"
+                android:singleLine="true"
+                android:textAppearance="@style/StreamUiTextAppearance.Body"
+                android:textColor="@color/stream_ui_text_color_secondary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/giphyLabelTextView"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="cats"
+                />
+
+            <io.getstream.chat.android.ui.message.list.adapter.view.internal.MediaAttachmentView
+                android:id="@+id/mediaAttachmentView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/giphyIconImageView"
+                />
+
+            <View
+                android:id="@+id/horizontalDivider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="2dp"
+                android:background="@color/stream_ui_border"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mediaAttachmentView"
+                />
+
+            <TextView
+                android:id="@+id/cancelButton"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:background="?selectableItemBackground"
+                android:gravity="center"
+                android:text="@string/stream_ui_message_list_giphy_cancel"
+                android:textAppearance="@style/StreamUiTextAppearance.BodyBold"
+                android:textColor="@color/stream_ui_text_color_secondary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/verticalDivider1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontalDivider"
+                />
+
+            <View
+                android:id="@+id/verticalDivider1"
+                android:layout_width="1dp"
+                android:layout_height="48dp"
+                android:background="@color/stream_ui_border"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/shuffleButton"
+                app:layout_constraintStart_toEndOf="@id/cancelButton"
+                app:layout_constraintTop_toBottomOf="@id/horizontalDivider"
+                />
+
+            <TextView
+                android:id="@+id/shuffleButton"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:background="?selectableItemBackground"
+                android:gravity="center"
+                android:text="@string/stream_ui_message_list_giphy_shuffle"
+                android:textAppearance="@style/StreamUiTextAppearance.BodyBold"
+                android:textColor="@color/stream_ui_text_color_secondary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/verticalDivider2"
+                app:layout_constraintStart_toEndOf="@id/verticalDivider1"
+                app:layout_constraintTop_toBottomOf="@id/horizontalDivider"
+                />
+
+            <View
+                android:id="@+id/verticalDivider2"
+                android:layout_width="1dp"
+                android:layout_height="48dp"
+                android:background="@color/stream_ui_border"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/sendButton"
+                app:layout_constraintStart_toEndOf="@id/shuffleButton"
+                app:layout_constraintTop_toBottomOf="@id/horizontalDivider"
+                />
+
+            <TextView
+                android:id="@+id/sendButton"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:background="?selectableItemBackground"
+                android:gravity="center"
+                android:text="@string/stream_ui_message_list_giphy_send"
+                android:textAppearance="@style/StreamUiTextAppearance.BodyBold"
+                android:textColor="@color/stream_ui_accent_blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/verticalDivider2"
+                app:layout_constraintTop_toBottomOf="@id/horizontalDivider"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <io.getstream.chat.android.ui.message.list.adapter.view.internal.FootnoteView
+        android:id="@+id/footnote"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/stream_ui_spacing_small"
+        android:layout_marginEnd="@dimen/stream_ui_spacing_small"
+        app:layout_constraintEnd_toEndOf="@+id/marginEnd"
+        app:layout_constraintStart_toEndOf="@id/marginStart"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/marginStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:layout_constraintGuide_begin="20dp"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/marginEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:layout_constraintGuide_end="20dp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

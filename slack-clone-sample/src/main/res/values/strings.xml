@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Slack Sample App</string>
+    <string name="backend_error_info">Something went wrong!</string>
+    <string name="cancel">Cancel</string>
+    <string name="chat_fragment_big_attachment_subtitle">File too big - max %d mb</string>
+    <string name="search">Search</string>
+    <string name="content_description_favorite">Search</string>
+    <string name="more">More</string>
+    <string name="content_description_more">More</string>
+    <string name="jump_to">Jump to</string>
+</resources>

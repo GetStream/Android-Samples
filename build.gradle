@@ -14,6 +14,7 @@ buildscript {
         classpath Dependencies.kotlinGradlePlugin
         classpath Dependencies.navigationSafeArgsGradlePlugin
 	classpath Dependencies.ktlintPlugin
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20'
     }
 }
 
