@@ -75,6 +75,7 @@ fun YoutubeLiveStream(
                 }
             )
             LivestreamComposer(
+                modifier = Modifier.background(ChatTheme.colors.appBackground),
                 channelId = channelId,
                 composerViewModel = composerViewModel
             )

@@ -12,7 +12,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Send
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -54,6 +57,7 @@ fun LivestreamComposer(
         MessageInput(
             modifier = Modifier
                 .fillMaxWidth()
+                .height(40.dp)
                 .weight(1f)
                 .padding(start = 8.dp),
             value = composerViewModel.input,
@@ -72,43 +76,36 @@ fun LivestreamComposer(
                 )
             }
         )
-        Column(
+        val inputValue = composerViewModel.input
+        val isInputValid = inputValue.isNotEmpty()
+
+        IconButton(
             modifier = Modifier
-                .padding(start = 4.dp)
+                .padding(8.dp)
+                .align(Alignment.CenterVertically)
                 .clip(RoundedCornerShape(8.dp))
                 .background(context.cardBackground())
                 .width(40.dp)
                 .height(40.dp)
-                .clickable(
-                    interactionSource = remember { MutableInteractionSource() },
-                    indication = rememberRipple(bounded = false),
-                    onClick = {
-                        composerViewModel.sendMessage(
-                            Message(
-                                cid = channelId,
-                                text = composerViewModel.input
-                            )
+                .padding(8.dp),
+            enabled = isInputValid,
+            content = {
+                Icon(
+                    painter = painterResource(R.drawable.ic_arrow),
+                    contentDescription = stringResource(id = R.string.stream_compose_send_message),
+                    tint = if (isInputValid) ChatTheme.colors.textHighEmphasis else ChatTheme.colors.disabled
+                )
+            },
+            onClick = {
+                if (isInputValid) {
+                    composerViewModel.sendMessage(
+                        Message(
+                            cid = channelId,
+                            text = composerViewModel.input
                         )
-                    }
-                ),
-        ) {
-            Icon(
-                modifier = Modifier
-                    .weight(1f)
-                    .align(Alignment.CenterHorizontally),
-                painter = painterResource(R.drawable.ic_arrow),
-                contentDescription = stringResource(id = R.string.stream_compose_send_message),
-                tint = ChatTheme.colors.textLowEmphasis
-            )
-            Text(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(3.dp)
-                    .align(Alignment.CenterHorizontally),
-                fontSize = 11.sp,
-                color = ChatTheme.colors.textLowEmphasis,
-                text = "280"
-            )
-        }
+                    )
+                }
+            }
+        )
     }
 }
