@@ -1,5 +1,6 @@
 package io.getstream.livestream.compose.streams
 
+import android.Manifest
 import android.annotation.SuppressLint
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.Preview
@@ -7,9 +8,16 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.Button
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,27 +25,41 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.PermissionRequired
+import com.google.accompanist.permissions.rememberPermissionState
+import io.getstream.chat.android.compose.ui.messages.list.MessageList
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
-import io.getstream.livestream.compose.ui.CommentsBox
+import io.getstream.livestream.compose.R
+import io.getstream.livestream.compose.openCameraSettings
+import io.getstream.livestream.compose.ui.LiveStreamComment
 import io.getstream.livestream.compose.ui.LiveStreamHeader
+import io.getstream.livestream.compose.ui.LivestreamComposer
 
 /**
  * Shows a camera preview surface in a view component that relies on [MessageListViewModel]
  * and [MessageComposerViewModel] to connect all the chat data handling operations.
  *
+ * @param modifier - Modifier for styling.
  * @param composerViewModel - [MessageComposerViewModel] for manging message input field
  * @param listViewModel - [MessageListViewModel] The ViewModel that stores all the data and
  * business logic required to show a list of messages. The user has to provide one in this case,
  * as we require the channelId to start the operations.
  * @param onBackPressed - Handler for when the user clicks back press
  */
+@ExperimentalPermissionsApi
 @Composable
 fun CameraLiveStream(
+    modifier: Modifier = Modifier,
+    channelId: String,
     composerViewModel: MessageComposerViewModel,
     listViewModel: MessageListViewModel,
     onBackPressed: () -> Unit
@@ -45,49 +67,97 @@ fun CameraLiveStream(
     val lifecycleOwner = LocalLifecycleOwner.current
     val context = LocalContext.current
     val cameraProviderFuture = remember { ProcessCameraProvider.getInstance(context) }
-
-    LaunchedEffect(Unit) {
-        listViewModel.start()
-    }
-
-    ChatTheme {
-        Box(modifier = Modifier.fillMaxSize()) {
-            AndroidView(
-                factory = { ctx ->
-                    val preview = PreviewView(ctx)
-                    val executor = ContextCompat.getMainExecutor(ctx)
-                    cameraProviderFuture.addListener({
-                        val cameraProvider = cameraProviderFuture.get()
-                        bindPreview(
-                            lifecycleOwner,
-                            preview,
-                            cameraProvider
+    val cameraPermissionState = rememberPermissionState(permission = Manifest.permission.CAMERA)
+    PermissionRequired(
+        permissionState = cameraPermissionState,
+        permissionNotGrantedContent = { MissingPermissionContent() },
+        permissionNotAvailableContent = { MissingPermissionContent() },
+        content = {
+            // On permission granted load the content
+            Box(
+                modifier = modifier
+                    .background(ChatTheme.colors.appBackground)
+                    .fillMaxSize()
+            ) {
+                // Loads a camera surface preview into a AndroidView
+                AndroidView(
+                    modifier = Modifier.fillMaxSize(),
+                    factory = { ctx ->
+                        val preview = PreviewView(ctx)
+                        val executor = ContextCompat.getMainExecutor(ctx)
+                        cameraProviderFuture.addListener(
+                            {
+                                val cameraProvider = cameraProviderFuture.get()
+                                bindPreview(
+                                    lifecycleOwner,
+                                    preview,
+                                    cameraProvider
+                                )
+                            },
+                            executor
                         )
-                    }, executor)
-                    preview
-                },
-                modifier = Modifier.fillMaxSize(),
-            )
-            CommentsBox(
-                modifier = Modifier
-                    .background(
-                        brush = Brush.verticalGradient(
-                            listOf(Color.Transparent, Color.Black),
-                            0f,
-                            1050f,
+                        preview
+                    }
+                )
+                // Gradient overlay
+                Box(
+                    Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(0.6f)
+                        .align(Alignment.BottomCenter)
+                        .background(
+                            brush = Brush.verticalGradient(
+                                colors = listOf(
+                                    Color.Transparent,
+                                    ChatTheme.colors.appBackground
+                                )
+                            )
                         )
+                )
+                // This column hosts the bottom half of our components namely MessageList
+                // and a custom message composer
+                Column(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .fillMaxHeight(0.5f)
+                ) {
+                    MessageList(
+                        modifier = Modifier
+                            .weight(1f),
+                        currentState = listViewModel.currentMessagesState,
+                        itemContent = {
+                            LiveStreamComment(messageItem = it)
+                        },
+                        emptyContent = {
+                            // we hide default EmptyView from SDK ,
+                            // as we have a transparent scrim background for the video playing
+                            // in the background of our message list
+
+                            Spacer(
+                                modifier = Modifier
+                                    .fillMaxHeight(0.8f)
+                                // this allows the `empty` message to push down the column
+                                // height for composer to be at bottom
+                            )
+                        }
                     )
-                    .align(Alignment.BottomCenter),
-                composerViewModel,
-                listViewModel
-            )
-            LiveStreamHeader {
-                onBackPressed()
+                    LivestreamComposer(
+                        channelId = channelId,
+                        composerViewModel = composerViewModel
+                    )
+                }
+                // Custom livestream screen top-bar
+                LiveStreamHeader(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp, start = 16.dp)
+                ) {
+                    onBackPressed()
+                }
             }
         }
-    }
+    )
 }
-
 
 @SuppressLint("UnsafeExperimentalUsageError")
 private fun bindPreview(
@@ -109,4 +179,48 @@ private fun bindPreview(
         cameraSelector,
         preview
     )
+}
+
+/**
+ * Shows a UI if we're missing permissions to activate camera.
+ * The UI explains to the user why the permission is needed.
+ * */
+@ExperimentalPermissionsApi
+@Composable
+private fun MissingPermissionContent() {
+    val title = R.string.permission_camera_title
+    val message = R.string.permission_camera_message
+
+    val context = LocalContext.current
+
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            modifier = Modifier.padding(16.dp),
+            style = ChatTheme.typography.title3Bold,
+            text = stringResource(id = title),
+            color = ChatTheme.colors.textHighEmphasis,
+        )
+
+        Spacer(modifier = Modifier.size(16.dp))
+
+        Text(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            style = ChatTheme.typography.body,
+            text = stringResource(id = message),
+            textAlign = TextAlign.Center,
+            color = ChatTheme.colors.textLowEmphasis,
+        )
+
+        Spacer(modifier = Modifier.size(16.dp))
+
+        Button(
+            onClick = {
+                context.openCameraSettings()
+            },
+            content = { Text(stringResource(id = R.string.give_permission)) }
+        )
+    }
 }

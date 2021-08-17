@@ -17,11 +17,9 @@ import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
-import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
-import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 
 /**
- * View component which adds Exoplayer to play external URL video links
+ * View component which adds Exoplayer to play external URL video links.
  *
  * @param urlToLoad - A string URL for loading a video
  * @param modifier - Modifier for styling.
@@ -53,17 +51,20 @@ fun ExoVideoPlayer(
             }
     }
 
-    exoPlayer.videoScalingMode = C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING
+    exoPlayer.videoScalingMode = C.VIDEO_SCALING_MODE_DEFAULT
     exoPlayer.repeatMode = Player.REPEAT_MODE_ONE
-    AndroidView(modifier = modifier, factory = { context ->
-        PlayerView(context).apply {
-            useController = false
-            player = exoPlayer
-            exoPlayer.playWhenReady = true
+    AndroidView(
+        modifier = modifier.fillMaxWidth(),
+        factory = { context ->
+            PlayerView(context).apply {
+                useController = false
+                player = exoPlayer
+                exoPlayer.playWhenReady = true
+            }
         }
-    })
+    )
 
-    DisposableEffect(key1 = urlToLoad) {
+    DisposableEffect(urlToLoad) {
         onDispose {
             exoPlayer.release()
         }

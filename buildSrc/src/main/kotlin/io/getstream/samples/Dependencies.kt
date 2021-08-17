@@ -1,6 +1,6 @@
 package io.getstream.samples
 
-private const val KOTLIN_VERSION = "1.5.10"
+private const val KOTLIN_VERSION = "1.5.21"
 private const val ANDROID_GRADLE_PLUGIN_VERSION = "7.0.0"
 private const val GLIDE_VERSION = "4.11.0"
 private const val ANDROIDX_ACTIVITY_KTX_VERSION = "1.2.0"
@@ -10,6 +10,7 @@ private const val ANDROIDX_KTX_VERSION = "1.3.2"
 private const val ANDROIDX_CONSTRAINT_LAYOUT_VERSION = "2.0.4"
 private const val ANDROIDX_LEGACY_SUPPORT = "1.0.0"
 private const val ANDROIDX_LIFECYCLE_EXTENSIONS_VERSION = "2.2.0"
+private const val ANDROIDX_LIFECYCLE_RUNTIME = "2.3.1"
 private const val ANDROIDX_RECYCLERVIEW_VERSION = "1.2.0-beta01"
 private const val ANDROIDX_VIEW_PAGER_2_VERSION = "1.0.0"
 private const val COIL_VERSION = "1.3.0"
@@ -20,8 +21,14 @@ private const val PICASSO_VERSION = "2.71828"
 private const val TIMBER_VERSION = "4.7.1"
 private const val YOUTUBE_PLAYER_VERSION = "10.0.5"
 private const val KTLINT_PLUGIN_VERSION = "10.0.0"
-private const val COMPOSE = "1.0.0"
+private const val COMPOSE = "1.0.1"
 private const val COMPOSE_ACTIVITY = "1.3.0"
+private const val STREAM = "4.16.0"
+private const val CAMERA_V2 = "1.1.0-alpha07"
+private const val CAMERA_VIEW = "1.0.0-alpha27"
+private const val EXOPLAYER = "2.14.2"
+private const val COMPOSE_ACCOMPANIST = "0.16.1"
+private const val COMPOSE_VIEW_MODEL = "1.0.0-alpha07"
 
 object Dependencies {
     const val androidGradlePlugin = "com.android.tools.build:gradle:$ANDROID_GRADLE_PLUGIN_VERSION"
@@ -29,7 +36,7 @@ object Dependencies {
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:$KOTLIN_VERSION"
     const val androidxActivityKtx = "androidx.activity:activity-ktx:$ANDROIDX_ACTIVITY_KTX_VERSION"
     const val androidxAppCompat = "androidx.appcompat:appcompat:$ANDROIDX_APPCOMPAT_VERSION"
-    const val androidXLifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
+    const val androidXLifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:$ANDROIDX_LIFECYCLE_RUNTIME"
     const val androidxCardView = "androidx.cardview:cardview:$ANDROIDX_CARD_VIEW_VERSION"
     const val androidxCoreKtx = "androidx.core:core-ktx:$ANDROIDX_KTX_VERSION"
     const val androidxConstraintLayout =
@@ -55,7 +62,9 @@ object Dependencies {
     const val youtubePlayer =
         "com.pierfrancescosoffritti.androidyoutubeplayer:core:$YOUTUBE_PLAYER_VERSION"
     const val ktlintPlugin = "org.jlleitschuh.gradle:ktlint-gradle:$KTLINT_PLUGIN_VERSION"
-    const val exoPlayer = "com.google.android.exoplayer:exoplayer:2.14.2"
+
+    const val exoPlayer = "com.google.android.exoplayer:exoplayer:$EXOPLAYER"
+
     const val composeCompiler = "androidx.compose.compiler:compiler:$COMPOSE"
     const val composeUi = "androidx.compose.ui:ui:$COMPOSE"
     const val composeUiTooling = "androidx.compose.ui:ui-tooling:$COMPOSE"
@@ -64,17 +73,20 @@ object Dependencies {
     const val composeMaterialIconsCore = "androidx.compose.material:material-icons-core:$COMPOSE"
     const val composeMaterialIconsExtended =
         "androidx.compose.material:material-icons-extended:$COMPOSE"
+    const val composeAccompanistPermissions =
+        "com.google.accompanist:accompanist-permissions:${COMPOSE_ACCOMPANIST}"
     const val composeActivity = "androidx.activity:activity-compose:$COMPOSE_ACTIVITY"
-    const val composeCameraLifecycle = "androidx.camera:camera-lifecycle:1.1.0-alpha07"
-    const val composeCameraView = "androidx.camera:camera-view:1.0.0-alpha27"
-    const val composeCamera2 = "androidx.camera:camera-camera2:1.1.0-alpha07"
+    const val composeViewModel =
+        "androidx.lifecycle:lifecycle-viewmodel-compose:$COMPOSE_VIEW_MODEL"
+    const val composeCameraLifecycle = "androidx.camera:camera-lifecycle:$CAMERA_V2"
+    const val composeCameraView = "androidx.camera:camera-view:$CAMERA_VIEW"
+    const val composeCamera2 = "androidx.camera:camera-camera2:$CAMERA_V2"
 
     /**
      * Stream chat sdk components
      */
-    const val streamClient = "io.getstream:stream-chat-android-client:4.15.0"
-    const val streamOffline = "io.getstream:stream-chat-android-offline:4.15.0"
-    const val streamCompose = "io.getstream:stream-chat-android-compos:4.15.0-beta"
+    const val streamClient = "io.getstream:stream-chat-android-client:$STREAM"
+    const val streamOffline = "io.getstream:stream-chat-android-offline:$STREAM"
+    const val streamCompose = "io.getstream:stream-chat-android-compose:$STREAM-beta"
     const val composeCoil = "io.coil-kt:coil-compose:$COIL_VERSION"
-
 }
