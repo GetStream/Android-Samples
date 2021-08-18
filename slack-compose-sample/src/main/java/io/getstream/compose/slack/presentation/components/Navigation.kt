@@ -5,7 +5,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import io.getstream.compose.slack.models.NavigationItem
+import io.getstream.compose.slack.presentation.screens.DMScreen
 import io.getstream.compose.slack.presentation.screens.HomeScreen
+import io.getstream.compose.slack.presentation.screens.MentionsScreen
+import io.getstream.compose.slack.presentation.screens.ProfileScreen
+import io.getstream.compose.slack.presentation.screens.SearchScreen
 
 /**
  * A view component to draw a bottom navigation bar,
@@ -21,16 +25,16 @@ fun Navigation(navController: NavHostController) {
             HomeScreen()
         }
         composable(NavigationItem.DM.route) {
-            HomeScreen()
+            DMScreen()
         }
         composable(NavigationItem.Mentions.route) {
-            HomeScreen()
+            MentionsScreen()
         }
         composable(NavigationItem.Search.route) {
-            HomeScreen()
+            SearchScreen()
         }
         composable(NavigationItem.Profile.route) {
-            HomeScreen()
+            ProfileScreen()
         }
     }
 }
