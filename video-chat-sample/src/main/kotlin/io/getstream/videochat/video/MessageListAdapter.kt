@@ -9,7 +9,7 @@ import androidx.annotation.ColorInt
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.api.load
+import coil.load
 import coil.transform.CircleCropTransformation
 import io.getstream.videochat.R
 import kotlin.properties.Delegates
