@@ -47,7 +47,7 @@ fun SlackDrawer(
     }
 }
 
-/**
+/** [WIP]
  * A view state less view component , representation of each drawer row based on [DrawerScreens].
  *
  * @param modifier - Modifier to customize the specs on the root element.
@@ -58,6 +58,8 @@ fun SlackDrawerRow(
     modifier: Modifier = Modifier,
     screen: DrawerScreens
 ) {
+    // Todo clean this item UI elements to represent a replica of side drawer of
+    //  native android slack app.
     Spacer(modifier)
     Row {
         Image(
