@@ -31,6 +31,7 @@ import io.getstream.compose.slack.models.DrawerWorkspaces
 import io.getstream.compose.slack.models.NavigationItem
 import io.getstream.compose.slack.presentation.components.Navigation
 import io.getstream.compose.slack.presentation.components.SlackDrawerContent
+import io.getstream.compose.slack.shapes
 import kotlinx.coroutines.launch
 
 class RootActivity : ComponentActivity() {
@@ -45,7 +46,9 @@ class RootActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ChatTheme {
+            ChatTheme(
+                shapes = shapes()
+            ) {
                 val navController = rememberNavController()
                 // create a scaffold state, set it to close by default
                 val scaffoldState = rememberScaffoldState(rememberDrawerState(DrawerValue.Closed))
