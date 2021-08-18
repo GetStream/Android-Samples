@@ -10,7 +10,7 @@
         android:supportsRtl="false">
 
         <activity
-            android:name=".presentation.HomeActivity"
+            android:name=".presentation.RootActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.AndroidSamples.NoActionBar"
