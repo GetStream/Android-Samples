@@ -3,8 +3,6 @@ package io.getstream.compose.slack.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.DrawerValue
@@ -17,24 +15,22 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.rememberDrawerState
 import androidx.compose.material.rememberScaffoldState
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.compose.slack.R
+import io.getstream.compose.slack.models.DrawerWorkspaces
 import io.getstream.compose.slack.models.NavigationItem
 import io.getstream.compose.slack.presentation.components.Navigation
-import io.getstream.compose.slack.presentation.components.SlackDrawer
+import io.getstream.compose.slack.presentation.components.SlackDrawerContent
 import kotlinx.coroutines.launch
 
 class RootActivity : ComponentActivity() {
@@ -108,10 +104,12 @@ class RootActivity : ComponentActivity() {
                     },
                     drawerBackgroundColor = colorResource(id = R.color.white),
                     drawerContent = {
-                        SlackDrawer(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(start = 24.dp, top = 48.dp)
+                        SlackDrawerContent(
+                            workspaces = listOf(
+                                DrawerWorkspaces.Workspace1,
+                                DrawerWorkspaces.Workspace2,
+                                DrawerWorkspaces.Workspace3
+                            )
                         )
                     }
                 ) {

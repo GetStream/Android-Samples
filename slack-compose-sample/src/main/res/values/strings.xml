@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Slack compose sample app</string>
+
+    <string name="workspace_heading">Workspaces</string>
 </resources>
