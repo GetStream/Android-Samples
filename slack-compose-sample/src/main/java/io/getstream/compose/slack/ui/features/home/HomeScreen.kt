@@ -151,7 +151,6 @@ internal fun DefaultChannelRow(
     }
 }
 
-
 /**
  * A 1-1 channel row component, that shows the channel in a list row and exposes single click action.
  *

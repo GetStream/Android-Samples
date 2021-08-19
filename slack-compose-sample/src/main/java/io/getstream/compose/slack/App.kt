@@ -1,8 +1,6 @@
 package io.getstream.compose.slack
 
 import android.app.Application
-import androidx.camera.camera2.Camera2Config
-import androidx.camera.core.CameraXConfig
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.models.User
 import io.getstream.chat.android.livedata.ChatDomain

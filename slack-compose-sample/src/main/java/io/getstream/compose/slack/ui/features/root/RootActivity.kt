@@ -68,9 +68,11 @@ class RootActivity : ComponentActivity() {
                             },
                             backgroundColor = Color.White,
                             navigationIcon = {
-                                IconButton(onClick = {
-                                    openDrawer()
-                                }) {
+                                IconButton(
+                                    onClick = {
+                                        openDrawer()
+                                    }
+                                ) {
                                     Icon(Icons.Filled.Menu, "")
                                 }
                             }
