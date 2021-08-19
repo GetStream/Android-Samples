@@ -1,4 +1,4 @@
-package io.getstream.compose.slack.presentation.screens
+package io.getstream.compose.slack.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -15,11 +15,11 @@ import androidx.compose.ui.unit.sp
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 
 /** [WIP]
- * A screen component to represent global search screen for messages , people , channels or more.
+ * A screen component to represent mentions or reaction screen
  *
  */
 @Composable
-fun SearchScreen() {
+fun MentionsScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -27,7 +27,7 @@ fun SearchScreen() {
             .wrapContentSize(Alignment.Center)
     ) {
         Text(
-            text = "Search View",
+            text = "Mention's View",
             fontWeight = FontWeight.Bold,
             color = ChatTheme.colors.textHighEmphasis,
             modifier = Modifier.align(Alignment.CenterHorizontally),
@@ -39,8 +39,8 @@ fun SearchScreen() {
 
 @Preview(showBackground = true)
 @Composable
-fun SearchScreenPreview() {
+fun MentionsScreenPreview() {
     ChatTheme {
-        SearchScreen()
+        MentionsScreen()
     }
 }

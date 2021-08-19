@@ -1,4 +1,4 @@
-package io.getstream.compose.slack.presentation
+package io.getstream.compose.slack.ui.features.root
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -29,8 +29,6 @@ import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.compose.slack.R
 import io.getstream.compose.slack.models.DrawerWorkspaces
 import io.getstream.compose.slack.models.NavigationItem
-import io.getstream.compose.slack.presentation.components.Navigation
-import io.getstream.compose.slack.presentation.components.SlackDrawerContent
 import io.getstream.compose.slack.shapes
 import kotlinx.coroutines.launch
 

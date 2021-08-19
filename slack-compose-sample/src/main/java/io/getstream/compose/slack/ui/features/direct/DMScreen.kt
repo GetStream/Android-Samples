@@ -1,4 +1,4 @@
-package io.getstream.compose.slack.presentation.screens
+package io.getstream.compose.slack.ui.features.direct
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -15,11 +15,11 @@ import androidx.compose.ui.unit.sp
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 
 /** [WIP]
- * A screen component to represent mentions or reaction screen
+ * A screen component to represent DM screen which enlists 1-1 channels
  *
  */
 @Composable
-fun MentionsScreen() {
+fun DMScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -27,7 +27,7 @@ fun MentionsScreen() {
             .wrapContentSize(Alignment.Center)
     ) {
         Text(
-            text = "Mention's View",
+            text = "DM's View",
             fontWeight = FontWeight.Bold,
             color = ChatTheme.colors.textHighEmphasis,
             modifier = Modifier.align(Alignment.CenterHorizontally),
@@ -39,8 +39,8 @@ fun MentionsScreen() {
 
 @Preview(showBackground = true)
 @Composable
-fun MentionsScreenPreview() {
+fun DMScreenPreview() {
     ChatTheme {
-        MentionsScreen()
+        DMScreen()
     }
 }
