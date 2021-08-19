@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
-import io.getstream.compose.slack.ui.features.profile.FullAvatar
 import io.getstream.compose.slack.ui.components.StatusInput
+import io.getstream.compose.slack.ui.features.profile.FullAvatar
 
 /** [WIP]
  * A screen component to represent profile or a settings page for the slack workspace example.
@@ -33,7 +33,8 @@ fun ProfileScreen() {
                 .height(48.dp),
             onValueChange = { _ ->
                 /* Handle action on value change on status input field */
-            })
+            }
+        )
     }
 }
 
