@@ -1,5 +1,6 @@
 package io.getstream.compose.slack.presentation.screens
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -8,23 +9,26 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.RadioButtonChecked
 import androidx.compose.material.icons.filled.Tag
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -33,7 +37,6 @@ import io.getstream.chat.android.client.api.models.FilterObject
 import io.getstream.chat.android.client.api.models.QuerySort
 import io.getstream.chat.android.client.models.Channel
 import io.getstream.chat.android.client.models.Filters
-import io.getstream.chat.android.client.models.User
 import io.getstream.chat.android.compose.ui.channel.list.ChannelList
 import io.getstream.chat.android.compose.ui.common.SearchInput
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
@@ -56,10 +59,14 @@ import io.getstream.compose.slack.R
 @Composable
 fun HomeScreen(
     filters: FilterObject = Filters.and(
-        Filters.eq("type", "messaging"),
+        Filters.or(
+            Filters.eq("type", "messaging"),
+            Filters.eq("muted", true),
+        ),
+        Filters.greaterThanEquals("member_count", 2),
         Filters.`in`("members", listOf(ChatClient.instance().getCurrentUser()?.id ?: ""))
     ),
-    querySort: QuerySort<Channel> = QuerySort.desc("last_updated"),
+    querySort: QuerySort<Channel> = QuerySort.desc("member_count"),
     isShowingSearch: Boolean = true,
     onItemClick: (Channel) -> Unit = {},
 ) {
@@ -102,21 +109,25 @@ fun HomeScreen(
             viewModel = listViewModel,
             onChannelClick = onItemClick,
             itemContent = {
-                DefaultChannelItem(channel = it, onChannelClick = {})
+                if (it.memberCount == 2) {
+                    DefaultOneOnOneChannelRow(channel = it, onChannelClick = {})
+                } else {
+                    DefaultChannelRow(channel = it, onChannelClick = {})
+                }
             }
         )
     }
 }
 
 /**
- * The basic channel item, that shows the channel in a list and exposes single click actions.
+ * A group channel row component, that shows the channel in a list row and exposes single click action.
  *
  * @param modifier - For special styling, like theming.
  * @param channel - The channel data to show.
  * @param onChannelClick - Handler for a single tap on an item.
  * */
 @Composable
-internal fun DefaultChannelItem(
+internal fun DefaultChannelRow(
     channel: Channel,
     onChannelClick: (Channel) -> Unit,
     modifier: Modifier = Modifier,
@@ -133,6 +144,46 @@ internal fun DefaultChannelItem(
             modifier = Modifier
                 .padding(horizontal = 16.dp),
             imageVector = Icons.Filled.Tag,
+            contentDescription = stringResource(id = R.string.accessibility_channel_icon)
+        )
+        Text(
+            text = channel.getDisplayName(),
+            style = ChatTheme.typography.body,
+            fontSize = 12.sp,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            color = ChatTheme.colors.textHighEmphasis,
+        )
+    }
+}
+
+
+/**
+ * A 1-1 channel row component, that shows the channel in a list row and exposes single click action.
+ *
+ * @param modifier - For special styling, like theming.
+ * @param channel - The channel data to show.
+ * @param onChannelClick - Handler for a single tap on an item.
+ * */
+@Composable
+internal fun DefaultOneOnOneChannelRow(
+    channel: Channel,
+    onChannelClick: (Channel) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Row(
+        modifier = modifier
+            .clickable { onChannelClick(channel) }
+            .padding(vertical = 8.dp)
+            .fillMaxWidth()
+            .height(24.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Icon(
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .size(24.dp),
+            imageVector = Icons.Filled.Tag, // TODO make it a user online status
             contentDescription = stringResource(id = R.string.accessibility_channel_icon)
         )
         Text(
