@@ -1,4 +1,4 @@
-package io.getstream.compose.slack.presentation.components
+package io.getstream.compose.slack.ui.features.profile
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row

@@ -1,4 +1,4 @@
-package io.getstream.compose.slack.presentation.screens
+package io.getstream.compose.slack.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -15,11 +15,11 @@ import androidx.compose.ui.unit.sp
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 
 /** [WIP]
- * A screen component to represent DM screen which enlists 1-1 channels
+ * A screen component to represent global search screen for messages , people , channels or more.
  *
  */
 @Composable
-fun DMScreen() {
+fun SearchScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -27,7 +27,7 @@ fun DMScreen() {
             .wrapContentSize(Alignment.Center)
     ) {
         Text(
-            text = "DM's View",
+            text = "Search View",
             fontWeight = FontWeight.Bold,
             color = ChatTheme.colors.textHighEmphasis,
             modifier = Modifier.align(Alignment.CenterHorizontally),
@@ -39,8 +39,8 @@ fun DMScreen() {
 
 @Preview(showBackground = true)
 @Composable
-fun DMScreenPreview() {
+fun SearchScreenPreview() {
     ChatTheme {
-        DMScreen()
+        SearchScreen()
     }
 }
