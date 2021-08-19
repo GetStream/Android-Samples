@@ -78,6 +78,7 @@ class RootActivity : ComponentActivity() {
                             }
                         )
                     },
+                    scaffoldState = scaffoldState,
                     bottomBar = {
                         BottomNavigation(
                             backgroundColor = ChatTheme.colors.barsBackground
