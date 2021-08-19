@@ -3,4 +3,5 @@
     <string name="accessibility_workspace_image">Workspace image</string>
     <string name="accessibility_overflow_icon">Overflow menu</string>
     <string name="accessibility_status_icon">Status icon to update emoticons</string>
+    <string name="accessibility_channel_icon">Channel icon</string>
 </resources>
