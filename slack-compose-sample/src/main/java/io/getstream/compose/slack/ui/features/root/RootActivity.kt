@@ -32,7 +32,6 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -108,7 +107,7 @@ class RootActivity : ComponentActivity() {
                                 Icon(
                                     imageVector = Icons.Filled.Edit,
                                     tint = ChatTheme.colors.barsBackground,
-                                    contentDescription = stringResource(R.string.accesiblity_fab_start_message)
+                                    contentDescription = stringResource(R.string.accessibility_fab_start_message)
                                 )
                             }
                         }

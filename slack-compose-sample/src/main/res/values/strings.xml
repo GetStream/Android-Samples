@@ -6,4 +6,10 @@
     <string name="user_status_active">Active</string>
     <string name="user_status_away">Away</string>
     <string name="status_input_label">Update your status</string>
+    <string name="pause_notifications">Pause notifications</string>
+    <string name="manage_user_online_status">Set yourself as %1$s</string>
+    <string name="saved_items">Saved items</string>
+    <string name="view_profile">View profile</string>
+    <string name="notifications">Notifications</string>
+    <string name="preferences">Preferences</string>
 </resources>

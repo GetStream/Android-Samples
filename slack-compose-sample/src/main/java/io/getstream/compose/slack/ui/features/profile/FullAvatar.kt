@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.getstream.sdk.chat.enums.OnlineStatus
 import io.getstream.chat.android.client.models.User
 import io.getstream.chat.android.client.models.name
 import io.getstream.chat.android.compose.ui.common.avatar.UserAvatar
@@ -24,18 +25,20 @@ import io.getstream.compose.slack.ui.common.OnlineStatus
  * A simple component to for showing user name, online status, etc.
  *
  * @param modifier - Modifier to customize the specs on the root element.
+ * @param isOnlineStatus - A boolean to represent current user online status indicator.
  * @param user - Optional parameter to pass in a [User] object to bind the data for this view component.
  */
 @Composable
 fun FullAvatar(
     modifier: Modifier = Modifier,
+    isOnlineStatus: Boolean,
     user: User = User(
         id = "aditlal",
         extraData = mutableMapOf(
             "name" to "Adit Lal",
             "image" to "https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U",
         ),
-        online = true
+        online = isOnlineStatus
     )
 ) {
     Row(
