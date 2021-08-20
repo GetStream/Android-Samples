@@ -1,4 +1,4 @@
-package io.getstream.compose.slack.ui.components
+package io.getstream.compose.slack.ui.features.profile
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box

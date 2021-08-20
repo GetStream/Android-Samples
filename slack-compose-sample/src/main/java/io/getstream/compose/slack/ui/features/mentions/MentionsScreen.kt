@@ -1,4 +1,4 @@
-package io.getstream.compose.slack.ui.screens
+package io.getstream.compose.slack.ui.features.mentions
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column

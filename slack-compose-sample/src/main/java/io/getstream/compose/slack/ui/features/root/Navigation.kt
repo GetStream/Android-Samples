@@ -7,9 +7,9 @@ import androidx.navigation.compose.composable
 import io.getstream.compose.slack.models.NavigationItem
 import io.getstream.compose.slack.ui.features.direct.DMScreen
 import io.getstream.compose.slack.ui.features.home.HomeScreen
-import io.getstream.compose.slack.ui.screens.MentionsScreen
-import io.getstream.compose.slack.ui.screens.ProfileScreen
-import io.getstream.compose.slack.ui.screens.SearchScreen
+import io.getstream.compose.slack.ui.features.mentions.MentionsScreen
+import io.getstream.compose.slack.ui.features.profile.ProfileScreen
+import io.getstream.compose.slack.ui.features.search.SearchScreen
 
 /**
  * A view component to draw a bottom navigation bar,

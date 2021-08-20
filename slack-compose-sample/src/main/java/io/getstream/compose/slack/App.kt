@@ -19,16 +19,16 @@ class App : Application() {
         ChatDomain.Builder(client, applicationContext).build()
 
         val user = User(
-            id = "filip-b",
+            id = "aditlal",
             extraData = mutableMapOf(
-                "name" to "Filip B",
-                "image" to "https://firebasestorage.googleapis.com/v0/b/stream-chat-internal.appspot.com/o/users%2FJc.png?alt=media",
+                "name" to "Adit Lal",
+                "image" to "https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U",
             ),
         )
 
         client.connectUser(
             user = user,
-            token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmlsaXAtYiJ9.MrBdSmiRFB1CRzWFXprjcXPo86W4H2N82KRgJVCXt60"
+            token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYWRpdGxhbCJ9.Q8oM9czJlsGV5RiV2pEF-y9XnwUh--5XbF1j7Dc861U"
         ).enqueue()
     }
 }

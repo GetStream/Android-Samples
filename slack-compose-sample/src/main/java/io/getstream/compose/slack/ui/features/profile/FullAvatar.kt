@@ -27,10 +27,10 @@ import io.getstream.compose.slack.R
 fun FullAvatar(
     modifier: Modifier = Modifier,
     user: User = User(
-        id = "1f37e58d-d8b0-476a-a4f2-f8611e0d85d9",
+        id = "aditlal",
         extraData = mutableMapOf(
-            "name" to "Jc",
-            "image" to "https://firebasestorage.googleapis.com/v0/b/stream-chat-internal.appspot.com/o/users%2FJc.png?alt=media",
+            "name" to "Adit Lal",
+            "image" to "https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U",
         ),
     )
 ) {
