@@ -1,4 +1,4 @@
-package io.getstream.compose.slack.ui.screens
+package io.getstream.compose.slack.ui.features.profile
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -10,8 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
-import io.getstream.compose.slack.ui.components.StatusInput
-import io.getstream.compose.slack.ui.features.profile.FullAvatar
 
 /** [WIP]
  * A screen component to represent profile or a settings page for the slack workspace example.

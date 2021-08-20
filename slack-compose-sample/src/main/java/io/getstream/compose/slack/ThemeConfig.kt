@@ -13,9 +13,13 @@ import io.getstream.chat.android.compose.ui.theme.StreamShapes
 @Composable
 fun shapes(): StreamShapes {
     return StreamShapes(
-        avatar = CircleShape,
+        avatar = RoundedCornerShape(8.dp),
         myMessageBubble = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp, bottomStart = 16.dp),
-        otherMessageBubble = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp, bottomEnd = 16.dp),
+        otherMessageBubble = RoundedCornerShape(
+            topStart = 16.dp,
+            topEnd = 16.dp,
+            bottomEnd = 16.dp
+        ),
         inputField = RoundedCornerShape(8.dp),
         attachment = RoundedCornerShape(16.dp)
     )
