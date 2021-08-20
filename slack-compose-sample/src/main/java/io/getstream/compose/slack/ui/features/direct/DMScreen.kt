@@ -1,46 +1,231 @@
 package io.getstream.compose.slack.ui.features.direct
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Tag
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.getstream.sdk.chat.utils.extensions.getUsers
+import io.getstream.chat.android.client.ChatClient
+import io.getstream.chat.android.client.api.models.FilterObject
+import io.getstream.chat.android.client.api.models.QuerySort
+import io.getstream.chat.android.client.models.Channel
+import io.getstream.chat.android.client.models.Filters
+import io.getstream.chat.android.client.models.User
+import io.getstream.chat.android.client.models.getUnreadMessagesCount
+import io.getstream.chat.android.compose.ui.channel.list.ChannelList
+import io.getstream.chat.android.compose.ui.common.SearchInput
+import io.getstream.chat.android.compose.ui.common.avatar.ChannelAvatar
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
+import io.getstream.chat.android.compose.ui.util.getDisplayName
+import io.getstream.chat.android.compose.ui.util.getLastMessagePreviewText
+import io.getstream.chat.android.compose.viewmodel.channel.ChannelListViewModel
+import io.getstream.chat.android.compose.viewmodel.channel.ChannelViewModelFactory
+import io.getstream.chat.android.offline.ChatDomain
+import io.getstream.compose.slack.R
+import java.text.SimpleDateFormat
+import java.util.*
 
-/** [WIP]
- * A screen component to represent DM screen which enlists 1-1 channels
+/**
+ * Default root Channel screen component for 1-1 chats, that provides the necessary ViewModel.
  *
- */
+ * It can be used without most parameters for default behavior, that can be tweaked if necessary.
+ *
+ * @param querySort - Default query sort for channels.
+ * @param isShowingSearch - If we show the search input or hide it.
+ * @param onItemClick - Handler for Channel item clicks.
+ * */
 @Composable
-fun DMScreen() {
+fun DMScreen(
+    querySort: QuerySort<Channel> = QuerySort.desc("last_updated"),
+    isShowingSearch: Boolean = true,
+    onItemClick: (Channel) -> Unit = {},
+) {
+    val filters: FilterObject = Filters.and(
+        Filters.eq("type", "messaging"),
+        Filters.eq("member_count", 2),
+        Filters.`in`("members", listOf(ChatClient.instance().getCurrentUser()?.id ?: ""))
+    )
+
+    val listViewModel: ChannelListViewModel = viewModel(
+        ChannelListViewModel::class.java,
+        factory = ChannelViewModelFactory(
+            ChatClient.instance(),
+            ChatDomain.instance(),
+            querySort,
+            filters
+        )
+    )
+    var searchQuery by rememberSaveable { mutableStateOf("") }
+    val currentUser by listViewModel.user.collectAsState()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(ChatTheme.colors.appBackground)
             .wrapContentSize(Alignment.Center)
     ) {
-        Text(
-            text = "DM's View",
-            fontWeight = FontWeight.Bold,
-            color = ChatTheme.colors.textHighEmphasis,
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            textAlign = TextAlign.Center,
-            fontSize = 25.sp
+        // Adds a search bar for the channel list search queries
+        if (isShowingSearch) {
+            SearchInput(
+                modifier = Modifier
+                    .padding(horizontal = 12.dp, vertical = 8.dp)
+                    .fillMaxWidth(),
+                label = {
+                    Text(
+                        text = stringResource(id = R.string.label_jump_to_dm),
+                        style = ChatTheme.typography.body,
+                        color = ChatTheme.colors.textLowEmphasis,
+                    )
+                },
+                query = searchQuery,
+                onSearchStarted = {},
+                onValueChange = {
+                    searchQuery = it
+                    listViewModel.setSearchQuery(it)
+                },
+            )
+        }
+        ChannelList(
+            modifier = Modifier
+                .fillMaxSize(),
+            viewModel = listViewModel,
+            onChannelClick = onItemClick,
+            itemContent = { channel ->
+                CustomDMChannelRow(
+                    channel = channel,
+                    currentUser = currentUser,
+                    onChannelClick = {}
+                )
+            }
         )
     }
 }
 
-@Preview(showBackground = true)
+
+/**
+ * A group channel row component, that shows the channel in a list row and exposes single click action.
+ *
+ * @param modifier - For special styling, like theming.
+ * @param channel - The channel data to show.
+ * @param currentUser - Channel user that the current User is chatting with.
+ * @param onChannelClick - Handler for a single tap on an item.
+ * */
 @Composable
-fun DMScreenPreview() {
-    ChatTheme {
-        DMScreen()
+internal fun CustomDMChannelRow(
+    channel: Channel,
+    currentUser: User?,
+    onChannelClick: (Channel) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Row(
+        modifier = modifier
+            .padding(top = 16.dp, bottom = 16.dp)
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .clickable {
+                onChannelClick(channel)
+            },
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Box(
+            Modifier
+                .padding(start = 8.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .background(ChatTheme.colors.borders)
+                    .size(36.dp)
+            )
+            ChannelAvatar(
+                modifier = Modifier.size(36.dp),
+                channel = channel,
+                currentUser = currentUser
+            )
+        }
+
+        Spacer(Modifier.width(8.dp))
+
+        val lastMessage = channel.messages.lastOrNull()
+
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .wrapContentHeight(),
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = channel.getDisplayName(),
+                style = ChatTheme.typography.bodyBold,
+                fontSize = 16.sp,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                color = ChatTheme.colors.textHighEmphasis,
+            )
+
+            val lastMessageText = channel.getLastMessagePreviewText(currentUser)
+
+            if (lastMessageText.isNotEmpty()) {
+                Text(
+                    text = lastMessageText,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    style = ChatTheme.typography.body,
+                    color = ChatTheme.colors.textLowEmphasis,
+                )
+            }
+        }
+
+        if (lastMessage != null) {
+            Row(
+                modifier = Modifier
+                    .padding(start = 8.dp, end = 8.dp, bottom = 4.dp)
+                    .wrapContentHeight()
+                    .align(Alignment.Bottom),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(
+                    text = SimpleDateFormat("MMM dd", Locale.ENGLISH).format(
+                        channel.lastUpdated ?: Date()
+                    ),
+                    fontSize = 14.sp,
+                    color = ChatTheme.colors.textLowEmphasis,
+                )
+            }
+        }
     }
 }
