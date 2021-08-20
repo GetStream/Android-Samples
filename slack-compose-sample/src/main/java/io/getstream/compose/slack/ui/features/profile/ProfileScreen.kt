@@ -11,7 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 
-/** [WIP]
+/**
  * A screen component to represent profile or a settings page for the slack workspace example.
  *
  */
