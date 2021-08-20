@@ -1,9 +1,11 @@
 package io.getstream.compose.slack.ui.features.profile
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -16,6 +18,7 @@ import io.getstream.chat.android.client.models.name
 import io.getstream.chat.android.compose.ui.common.avatar.UserAvatar
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.compose.slack.R
+import io.getstream.compose.slack.ui.common.OnlineStatus
 
 /**
  * A simple component to for showing user name, online status, etc.
@@ -32,18 +35,27 @@ fun FullAvatar(
             "name" to "Adit Lal",
             "image" to "https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U",
         ),
+        online = true
     )
 ) {
     Row(
         modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        UserAvatar(
-            modifier = Modifier
-                .width(56.dp)
-                .height(56.dp),
-            user = user
-        )
+        Box {
+            UserAvatar(
+                modifier = Modifier
+                    .width(56.dp)
+                    .height(56.dp),
+                user = user
+            )
+            OnlineStatus(
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .size(12.dp),
+                isOnlineStatus = user.online
+            )
+        }
         Column(modifier = Modifier.padding(horizontal = 16.dp)) {
             Text(
                 text = user.name,

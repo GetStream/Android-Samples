@@ -39,6 +39,7 @@ import io.getstream.chat.android.compose.viewmodel.channel.ChannelListViewModel
 import io.getstream.chat.android.compose.viewmodel.channel.ChannelViewModelFactory
 import io.getstream.chat.android.offline.ChatDomain
 import io.getstream.compose.slack.R
+import io.getstream.compose.slack.ui.common.OnlineStatus
 
 /**
  * Default root Channel screen component, that provides the necessary ViewModel.
@@ -172,17 +173,15 @@ internal fun CustomOneOnOneChannelRow(
             .height(24.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Icon(
+        OnlineStatus(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
-                .size(24.dp),
-            imageVector = Icons.Filled.Tag, // TODO make it a user online status
-            contentDescription = stringResource(id = R.string.accessibility_channel_icon)
+                .size(12.dp),
+            isOnlineStatus = channel.members.first().user.online
         )
         Text(
             text = channel.getDisplayName(),
             style = ChatTheme.typography.body,
-            fontSize = 12.sp,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             color = ChatTheme.colors.textHighEmphasis,
