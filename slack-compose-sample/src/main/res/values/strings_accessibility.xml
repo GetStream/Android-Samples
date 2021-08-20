@@ -4,6 +4,7 @@
     <string name="accessibility_overflow_icon">Overflow menu</string>
     <string name="accessibility_status_icon">Status icon to update emoticons</string>
     <string name="accessibility_channel_icon">Channel icon</string>
-    <string name="accesiblity_fab_start_message">Click to start messaging</string>
+    <string name="accessibility_fab_start_message">Click to start messaging</string>
     <string name="accessibility_drawer">Navigation drawer</string>
+    <string name="accessibility_icon">Icon</string>
 </resources>
