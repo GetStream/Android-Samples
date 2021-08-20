@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Slack compose sample app</string>
     <string name="workspace_heading">Workspaces</string>
-
+    <string name="label_jump_to_dm">Jump to…</string>
     <!-- Profile page strings -->
     <string name="user_status_active">Active</string>
     <string name="user_status_away">Away</string>
