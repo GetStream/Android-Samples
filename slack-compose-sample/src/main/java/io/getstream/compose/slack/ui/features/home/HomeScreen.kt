@@ -104,9 +104,9 @@ fun HomeScreen(
             onChannelClick = onItemClick,
             itemContent = {
                 if (it.memberCount == 2) {
-                    DefaultOneOnOneChannelRow(channel = it, onChannelClick = {})
+                    CustomOneOnOneChannelRow(channel = it, onChannelClick = {})
                 } else {
-                    DefaultChannelRow(channel = it, onChannelClick = {})
+                    CustomChannelRow(channel = it, onChannelClick = {})
                 }
             }
         )
@@ -121,7 +121,7 @@ fun HomeScreen(
  * @param onChannelClick - Handler for a single tap on an item.
  * */
 @Composable
-internal fun DefaultChannelRow(
+internal fun CustomChannelRow(
     channel: Channel,
     onChannelClick: (Channel) -> Unit,
     modifier: Modifier = Modifier,
@@ -159,7 +159,7 @@ internal fun DefaultChannelRow(
  * @param onChannelClick - Handler for a single tap on an item.
  * */
 @Composable
-internal fun DefaultOneOnOneChannelRow(
+internal fun CustomOneOnOneChannelRow(
     channel: Channel,
     onChannelClick: (Channel) -> Unit,
     modifier: Modifier = Modifier,
