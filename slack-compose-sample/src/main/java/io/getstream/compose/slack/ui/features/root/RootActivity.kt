@@ -3,24 +3,35 @@ package io.getstream.compose.slack.ui.features.root
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.DrawerValue
+import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.rememberDrawerState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -33,7 +44,7 @@ import io.getstream.compose.slack.shapes
 import kotlinx.coroutines.launch
 
 class RootActivity : ComponentActivity() {
-    val navigationItems = listOf(
+    private val navigationItems = listOf(
         NavigationItem.Home,
         NavigationItem.DM,
         NavigationItem.Mentions,
@@ -41,6 +52,7 @@ class RootActivity : ComponentActivity() {
         NavigationItem.Profile
     )
 
+    @ExperimentalAnimationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -51,6 +63,10 @@ class RootActivity : ComponentActivity() {
                 // create a scaffold state, set it to close by default
                 val scaffoldState = rememberScaffoldState(rememberDrawerState(DrawerValue.Closed))
                 val scope = rememberCoroutineScope()
+                var fabVisibilityState by remember { mutableStateOf(true) }
+                val size = animateDpAsState(if (fabVisibilityState) 56.dp else 0.dp)
+                var showDrawerState by remember { mutableStateOf(true) }
+                var drawerTitle by remember { mutableStateOf("Home") }
                 val openDrawer = {
                     scope.launch {
                         scaffoldState.drawerState.open()
@@ -62,21 +78,40 @@ class RootActivity : ComponentActivity() {
                         TopAppBar(
                             title = {
                                 Text(
-                                    text = stringResource(R.string.app_name),
-                                    fontSize = 18.sp
+                                    text = drawerTitle,
+                                    style = ChatTheme.typography.title3Bold,
                                 )
                             },
                             backgroundColor = Color.White,
                             navigationIcon = {
-                                IconButton(
-                                    onClick = {
-                                        openDrawer()
+                                if (showDrawerState) {
+                                    IconButton(
+                                        onClick = {
+                                            openDrawer()
+                                        }
+                                    ) {
+                                        Icon(
+                                            Icons.Filled.Menu,
+                                            getString(R.string.accessibility_drawer)
+                                        )
                                     }
-                                ) {
-                                    Icon(Icons.Filled.Menu, "")
                                 }
                             }
                         )
+                    },
+                    floatingActionButton = {
+                        AnimatedVisibility(visible = fabVisibilityState) {
+                            FloatingActionButton(
+                                modifier = Modifier.size(size.value),
+                                backgroundColor = ChatTheme.colors.primaryAccent,
+                                onClick = { /*do something*/ }) {
+                                Icon(
+                                    imageVector = Icons.Filled.Edit,
+                                    tint = ChatTheme.colors.barsBackground,
+                                    contentDescription = stringResource(R.string.accesiblity_fab_start_message)
+                                )
+                            }
+                        }
                     },
                     scaffoldState = scaffoldState,
                     bottomBar = {
@@ -100,6 +135,17 @@ class RootActivity : ComponentActivity() {
                                     alwaysShowLabel = true,
                                     selected = currentRoute == item.route,
                                     onClick = {
+                                        fabVisibilityState = when (item) {
+                                            NavigationItem.DM -> true
+                                            NavigationItem.Home -> true
+                                            NavigationItem.Mentions -> true
+                                            else -> false
+                                        }
+                                        showDrawerState = when (item) {
+                                            NavigationItem.Home -> true
+                                            else -> false
+                                        }
+                                        drawerTitle = item.title
                                         navigateToPage(navController, item)
                                     }
                                 )
@@ -115,7 +161,8 @@ class RootActivity : ComponentActivity() {
                                 DrawerWorkspaces.Workspace3
                             )
                         )
-                    }
+                    },
+                    drawerGesturesEnabled = showDrawerState,
                 ) {
                     Navigation(navController = navController)
                 }
@@ -123,7 +170,10 @@ class RootActivity : ComponentActivity() {
         }
     }
 
-    private fun navigateToPage(navController: NavHostController, item: NavigationItem) {
+    private fun navigateToPage(
+        navController: NavHostController,
+        item: NavigationItem
+    ) {
         navController.navigate(item.route) {
             // Pop up to the start destination of the graph to
             // avoid building up a large stack of destinations
