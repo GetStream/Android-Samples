@@ -102,12 +102,11 @@ fun HomeScreen(
             modifier = Modifier
                 .fillMaxSize(),
             viewModel = listViewModel,
-            onChannelClick = onItemClick,
             itemContent = {
                 if (it.memberCount == 2) {
-                    CustomOneOnOneChannelRow(channel = it, onChannelClick = {})
+                    CustomOneOnOneChannelRow(channel = it, onChannelClick = onItemClick)
                 } else {
-                    CustomChannelRow(channel = it, onChannelClick = {})
+                    CustomChannelRow(channel = it, onChannelClick = onItemClick)
                 }
             }
         )

@@ -7,4 +7,5 @@
     <string name="accessibility_fab_start_message">Click to start messaging</string>
     <string name="accessibility_drawer">Navigation drawer</string>
     <string name="accessibility_icon">Icon</string>
+    <string name="accessibility_back">Go back</string>
 </resources>

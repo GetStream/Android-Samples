@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import io.getstream.chat.android.client.models.Channel
 import io.getstream.compose.slack.models.NavigationItem
 import io.getstream.compose.slack.ui.features.direct.DMScreen
 import io.getstream.compose.slack.ui.features.home.HomeScreen
@@ -16,16 +17,21 @@ import io.getstream.compose.slack.ui.features.search.SearchScreen
  * items clicked will navigate to corresponding screen.
  *
  * @param navController - [NavHostController] instance for deciding when a particular screen/route
- * is loaded , corresponding composable screen content to be drawn
+ * is loaded , corresponding composable screen content to be drawn.
+ * @param onChannelClick - Handler for Channel item clicks.
  */
 @Composable
-fun Navigation(navController: NavHostController) {
+fun Navigation(navController: NavHostController, onChannelClick: (Channel) -> Unit) {
     NavHost(navController, startDestination = NavigationItem.Home.route) {
         composable(NavigationItem.Home.route) {
-            HomeScreen()
+            HomeScreen { channel ->
+                onChannelClick(channel)
+            }
         }
         composable(NavigationItem.DM.route) {
-            DMScreen()
+            DMScreen { channel ->
+                onChannelClick(channel)
+            }
         }
         composable(NavigationItem.Mentions.route) {
             MentionsScreen()
