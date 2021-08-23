@@ -12,4 +12,5 @@
     <string name="view_profile">View profile</string>
     <string name="notifications">Notifications</string>
     <string name="preferences">Preferences</string>
+    <string name="details">View details</string>
 </resources>

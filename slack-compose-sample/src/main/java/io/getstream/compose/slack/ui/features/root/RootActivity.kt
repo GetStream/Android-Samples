@@ -168,7 +168,13 @@ class RootActivity : ComponentActivity() {
                     drawerGesturesEnabled = showDrawerState,
                 ) {
                     Navigation(navController = navController) { channel ->
-                        startActivity(MessagingActivity.getIntent(channel.name, this@RootActivity))
+                        startActivity(
+                            MessagingActivity.getIntent(
+                                screenTitle = channel.name,
+                                channelId = channel.cid,
+                                context = this@RootActivity
+                            )
+                        )
                     }
                 }
             }

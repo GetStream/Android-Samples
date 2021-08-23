@@ -8,7 +8,8 @@ import androidx.activity.compose.setContent
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 
 class MessagingActivity : ComponentActivity() {
-    private lateinit var screenTitle: String
+    private var channelId: String = ""
+    private var screenTitle: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,24 +17,31 @@ class MessagingActivity : ComponentActivity() {
         setContent {
             ChatTheme {
                 ChannelMessagingScreen(
-                    title = screenTitle
-                ) {
-                    finish()
-                }
+                    title = screenTitle,
+                    channelId = channelId,
+                    onBackPressed = { finish() }
+                )
             }
         }
     }
 
     private fun handleExtras() {
-        screenTitle = intent.getStringExtra(KEY_SCREEN_TITLE) ?: "Message"
+        intent.getStringExtra(KEY_SCREEN_TITLE)?.let {
+            screenTitle = it
+        }
+        intent.getStringExtra(KEY_CHANNEL_ID)?.let {
+            channelId = it
+        }
     }
 
     companion object {
         private const val KEY_SCREEN_TITLE = "screen_title"
+        private const val KEY_CHANNEL_ID = "channel_id"
 
-        fun getIntent(screenTitle: String, context: Context): Intent {
+        fun getIntent(channelId: String, screenTitle: String, context: Context): Intent {
             return Intent(context, MessagingActivity::class.java).apply {
                 putExtra(KEY_SCREEN_TITLE, screenTitle)
+                putExtra(KEY_CHANNEL_ID, channelId)
             }
         }
     }

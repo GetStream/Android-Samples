@@ -1,24 +1,27 @@
 package io.getstream.compose.slack.ui.features.messaging
 
+import android.content.ClipboardManager
+import android.content.Context
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import io.getstream.chat.android.client.ChatClient
-import io.getstream.chat.android.client.api.models.FilterObject
-import io.getstream.chat.android.client.api.models.QuerySort
-import io.getstream.chat.android.client.models.Channel
-import io.getstream.chat.android.client.models.Filters
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
+import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
+import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
+import io.getstream.chat.android.compose.viewmodel.messages.MessagesViewModelFactory
+import io.getstream.chat.android.offline.ChatDomain
 import io.getstream.compose.slack.R
 
 /**
@@ -28,34 +31,35 @@ import io.getstream.compose.slack.R
  * It can be used without providing most parameters to achieve a default behavior
  * or it can be tweaked if necessary.
  *
- * @param filters - Default filters for channels.
- * @param querySort - Default query sort for channels.
- * @param title - String representation for channel screen title.
+ * @param messageLimit - The limit of messages per query.
  * @param onBackPressed - Handler for screen back press.
+ * @param onChannelInfoClicked - a click handler to handle clicks when this view is clicked
+ * @param topBarTitleView - Custom composable component which is a representation of channel info.
+ * @param title - current selected channel name to load the header text component.
+ * @param channelId -  current selected channel ID to load messages from.
  * */
 @Composable
 fun ChannelMessagingScreen(
-    filters: FilterObject = Filters.and(
-        Filters.or(
-            Filters.eq("type", "messaging"),
-            Filters.eq("muted", true),
-        ),
-        Filters.greaterThanEquals("member_count", 2),
-        Filters.`in`("members", listOf(ChatClient.instance().getCurrentUser()?.id ?: ""))
-    ),
-    querySort: QuerySort<Channel> = QuerySort.desc("member_count"),
+    messageLimit: Int = 30,
+    onBackPressed: () -> Unit = {},
+    onChannelInfoClicked: () -> Unit = {},
+    topBarTitleView: @Composable () -> Unit = {
+        MessageHeaderView(title = title) {
+            onChannelInfoClicked()
+        }
+    },
     title: String,
-    onBackPressed: () -> Unit
+    channelId: String
 ) {
+    val factory = buildViewModelFactory(LocalContext.current, channelId, messageLimit)
+    val listViewModel = viewModel(MessageListViewModel::class.java, factory = factory)
+    val composerViewModel = viewModel(MessageComposerViewModel::class.java, factory = factory)
+
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(
-                        text = title,
-                        style = ChatTheme.typography.title3Bold,
-                        color = ChatTheme.colors.textHighEmphasis
-                    )
+                    topBarTitleView()
                 },
                 backgroundColor = ChatTheme.colors.barsBackground,
                 navigationIcon = {
@@ -82,7 +86,7 @@ fun ChannelMessagingScreen(
                             indication = rememberRipple(color = ChatTheme.colors.textHighEmphasis)
                         ) {},
                         onClick = {
-                            // TODO add a new channel info screen
+                            onChannelInfoClicked()
                         }
                     ) {
                         Icon(
@@ -97,4 +101,28 @@ fun ChannelMessagingScreen(
     ) {
 
     }
+}
+
+/**
+ * Builds the [MessagesViewModelFactory] required to run the Conversation/Messages screen.
+ *
+ * @param context - Used to build the [ClipboardManager].
+ * @param channelId - The current channel ID, to load the messages from.
+ * @param messageLimit - The limit when loading messages.
+ * */
+private fun buildViewModelFactory(
+    context: Context,
+    channelId: String,
+    messageLimit: Int,
+): MessagesViewModelFactory {
+    val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+
+    return MessagesViewModelFactory(
+        context,
+        clipboardManager,
+        ChatClient.instance(),
+        ChatDomain.instance(),
+        channelId,
+        messageLimit
+    )
 }
