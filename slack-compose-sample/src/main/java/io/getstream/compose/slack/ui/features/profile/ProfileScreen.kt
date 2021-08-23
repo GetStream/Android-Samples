@@ -2,6 +2,7 @@ package io.getstream.compose.slack.ui.features.profile
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,6 +21,7 @@ import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.RoomPreferences
 import androidx.compose.material.icons.filled.SettingsApplications
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -46,7 +48,7 @@ fun ProfileScreen() {
             .fillMaxSize()
             .background(ChatTheme.colors.appBackground)
     ) {
-        var isOnline = remember {
+        val isOnline = remember {
             mutableStateOf(true)
         }
         FullAvatar(
@@ -66,13 +68,16 @@ fun ProfileScreen() {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp)
-                .clickable {}
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = rememberRipple(color = ChatTheme.colors.textHighEmphasis)
+                ) {}
                 .padding(horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
                 imageVector = Icons.Filled.Notifications,
-                tint = ChatTheme.colors.overlay,
+                tint = ChatTheme.colors.textHighEmphasis,
                 contentDescription = stringResource(id = R.string.accessibility_icon)
             )
 
@@ -88,7 +93,10 @@ fun ProfileScreen() {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp)
-                .clickable {
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = rememberRipple(color = ChatTheme.colors.textHighEmphasis)
+                ) {
                     isOnline.value = !isOnline.value
                 }
                 .padding(horizontal = 16.dp),
@@ -96,7 +104,7 @@ fun ProfileScreen() {
         ) {
             Icon(
                 imageVector = Icons.Filled.ManageAccounts,
-                tint = ChatTheme.colors.overlay,
+                tint = ChatTheme.colors.textHighEmphasis,
                 contentDescription = stringResource(id = R.string.accessibility_icon)
             )
 
@@ -114,19 +122,26 @@ fun ProfileScreen() {
                 fontSize = 16.sp
             )
         }
-        Divider(modifier = Modifier.padding(vertical = 8.dp))
+
+        Divider(
+            modifier = Modifier.padding(vertical = 8.dp),
+            color = ChatTheme.colors.textHighEmphasis
+        )
 
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp)
-                .clickable {}
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = rememberRipple(color = ChatTheme.colors.textHighEmphasis)
+                ) {}
                 .padding(horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
                 imageVector = Icons.Filled.Bookmark,
-                tint = ChatTheme.colors.overlay,
+                tint = ChatTheme.colors.textHighEmphasis,
                 contentDescription = stringResource(id = R.string.accessibility_icon)
             )
 
@@ -142,13 +157,16 @@ fun ProfileScreen() {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp)
-                .clickable {}
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = rememberRipple(color = ChatTheme.colors.textHighEmphasis)
+                ) {}
                 .padding(horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
                 imageVector = Icons.Filled.Person,
-                tint = ChatTheme.colors.overlay,
+                tint = ChatTheme.colors.textHighEmphasis,
                 contentDescription = stringResource(id = R.string.accessibility_icon)
             )
 
@@ -164,13 +182,16 @@ fun ProfileScreen() {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp)
-                .clickable {}
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = rememberRipple(color = ChatTheme.colors.textHighEmphasis)
+                ) {}
                 .padding(horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
                 imageVector = Icons.Filled.EditNotifications,
-                tint = ChatTheme.colors.overlay,
+                tint = ChatTheme.colors.textHighEmphasis,
                 contentDescription = stringResource(id = R.string.accessibility_icon)
             )
 
@@ -186,13 +207,16 @@ fun ProfileScreen() {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp)
-                .clickable {}
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = rememberRipple(color = ChatTheme.colors.textHighEmphasis)
+                ) {}
                 .padding(horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
                 imageVector = Icons.Filled.SettingsApplications,
-                tint = ChatTheme.colors.overlay,
+                tint = ChatTheme.colors.textHighEmphasis,
                 contentDescription = stringResource(id = R.string.accessibility_icon)
             )
 
