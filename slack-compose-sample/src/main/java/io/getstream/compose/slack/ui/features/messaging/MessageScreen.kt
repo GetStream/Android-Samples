@@ -21,9 +21,20 @@ import io.getstream.chat.android.client.models.Filters
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.compose.slack.R
 
+/**
+ * Default messaging screen component, that provides the necessary ViewModel to load channel messages
+ * and composer functionality.
+ *
+ * It can be used without providing most parameters to achieve a default behavior
+ * or it can be tweaked if necessary.
+ *
+ * @param filters - Default filters for channels.
+ * @param querySort - Default query sort for channels.
+ * @param title - String representation for channel screen title.
+ * @param onBackPressed - Handler for screen back press.
+ * */
 @Composable
 fun ChannelMessagingScreen(
-    modifier: Modifier = Modifier,
     filters: FilterObject = Filters.and(
         Filters.or(
             Filters.eq("type", "messaging"),
@@ -37,7 +48,6 @@ fun ChannelMessagingScreen(
     onBackPressed: () -> Unit
 ) {
     Scaffold(
-        modifier = modifier,
         topBar = {
             TopAppBar(
                 title = {
