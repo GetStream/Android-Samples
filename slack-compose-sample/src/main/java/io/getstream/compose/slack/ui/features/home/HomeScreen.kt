@@ -44,7 +44,8 @@ import io.getstream.compose.slack.ui.common.OnlineStatus
 /**
  * Default root Channel screen component, that provides the necessary ViewModel.
  *
- * It can be used without most parameters for default behavior, that can be tweaked if necessary.
+ * It can be used without providing most parameters to achieve a default behavior
+ * or it can be tweaked if necessary.
  *
  * @param filters - Default filters for channels.
  * @param querySort - Default query sort for channels.
