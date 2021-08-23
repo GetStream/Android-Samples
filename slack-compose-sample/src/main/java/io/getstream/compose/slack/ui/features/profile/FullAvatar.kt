@@ -1,5 +1,6 @@
 package io.getstream.compose.slack.ui.features.profile
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,6 +12,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.getstream.sdk.chat.enums.OnlineStatus
@@ -36,7 +38,7 @@ fun FullAvatar(
         id = "aditlal",
         extraData = mutableMapOf(
             "name" to "Adit Lal",
-            "image" to "https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U",
+            "image" to "https://picsum.photos/id/237/200/300",
         ),
         online = isOnlineStatus
     )
@@ -45,7 +47,10 @@ fun FullAvatar(
         modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Box {
+        Box(
+            modifier = Modifier
+                .clip(ChatTheme.shapes.avatar)
+        ) {
             UserAvatar(
                 modifier = Modifier
                     .width(56.dp)

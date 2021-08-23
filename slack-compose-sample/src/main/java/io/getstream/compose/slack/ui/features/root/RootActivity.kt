@@ -79,9 +79,10 @@ class RootActivity : ComponentActivity() {
                                 Text(
                                     text = drawerTitle,
                                     style = ChatTheme.typography.title3Bold,
+                                    color = ChatTheme.colors.textHighEmphasis
                                 )
                             },
-                            backgroundColor = Color.White,
+                            backgroundColor = ChatTheme.colors.barsBackground,
                             navigationIcon = {
                                 if (showDrawerState) {
                                     IconButton(
@@ -90,8 +91,9 @@ class RootActivity : ComponentActivity() {
                                         }
                                     ) {
                                         Icon(
-                                            Icons.Filled.Menu,
-                                            getString(R.string.accessibility_drawer)
+                                            imageVector = Icons.Filled.Menu,
+                                            tint = ChatTheme.colors.textHighEmphasis,
+                                            contentDescription = getString(R.string.accessibility_drawer)
                                         )
                                     }
                                 }
@@ -106,7 +108,7 @@ class RootActivity : ComponentActivity() {
                                 onClick = { /*do something*/ }) {
                                 Icon(
                                     imageVector = Icons.Filled.Edit,
-                                    tint = ChatTheme.colors.barsBackground,
+                                    tint = ChatTheme.colors.textHighEmphasis,
                                     contentDescription = stringResource(R.string.accessibility_fab_start_message)
                                 )
                             }
@@ -129,7 +131,7 @@ class RootActivity : ComponentActivity() {
                                         )
                                     },
                                     label = { Text(text = item.title) },
-                                    selectedContentColor = Color.Black,
+                                    selectedContentColor = ChatTheme.colors.textHighEmphasis,
                                     unselectedContentColor = ChatTheme.colors.disabled,
                                     alwaysShowLabel = true,
                                     selected = currentRoute == item.route,
