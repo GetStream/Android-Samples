@@ -114,12 +114,11 @@ fun DMScreen(
             modifier = Modifier
                 .fillMaxSize(),
             viewModel = listViewModel,
-            onChannelClick = onItemClick,
             itemContent = { channel ->
                 CustomDMChannelRow(
                     channel = channel,
                     currentUser = currentUser,
-                    onChannelClick = {}
+                    onChannelClick = onItemClick
                 )
             }
         )

@@ -35,11 +35,13 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import io.getstream.chat.android.client.models.name
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.compose.slack.R
 import io.getstream.compose.slack.models.DrawerWorkspaces
 import io.getstream.compose.slack.models.NavigationItem
 import io.getstream.compose.slack.shapes
+import io.getstream.compose.slack.ui.features.messaging.MessagingActivity
 import kotlinx.coroutines.launch
 
 class RootActivity : ComponentActivity() {
@@ -165,7 +167,9 @@ class RootActivity : ComponentActivity() {
                     },
                     drawerGesturesEnabled = showDrawerState,
                 ) {
-                    Navigation(navController = navController)
+                    Navigation(navController = navController) { channel ->
+                        startActivity(MessagingActivity.getIntent(channel.name, this@RootActivity))
+                    }
                 }
             }
         }
