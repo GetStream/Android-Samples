@@ -15,11 +15,9 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.EditNotifications
-import androidx.compose.material.icons.filled.Filter
 import androidx.compose.material.icons.filled.ManageAccounts
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.RoomPreferences
 import androidx.compose.material.icons.filled.SettingsApplications
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
@@ -28,14 +26,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.toLowerCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import io.getstream.chat.android.client.models.User
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.compose.slack.R
+import io.getstream.compose.slack.shapes
 import java.util.Locale
+
 
 /**
  * A screen component to represent profile or a settings page for the slack workspace example.
@@ -233,7 +231,7 @@ fun ProfileScreen() {
 @Preview(showBackground = true)
 @Composable
 fun ProfileScreenPreview() {
-    ChatTheme {
+   ChatTheme(shapes = shapes()) {
         ProfileScreen()
     }
 }
