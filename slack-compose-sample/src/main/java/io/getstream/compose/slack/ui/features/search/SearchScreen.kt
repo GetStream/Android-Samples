@@ -13,6 +13,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
+import io.getstream.compose.slack.shapes
 
 /** [WIP]
  * A screen component to represent global search screen for messages , people , channels or more.
@@ -40,7 +41,7 @@ fun SearchScreen() {
 @Preview(showBackground = true)
 @Composable
 fun SearchScreenPreview() {
-    ChatTheme {
+   ChatTheme(shapes = shapes()) {
         SearchScreen()
     }
 }

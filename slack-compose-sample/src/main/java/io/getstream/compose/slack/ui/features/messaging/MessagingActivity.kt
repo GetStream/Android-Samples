@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
+import io.getstream.compose.slack.shapes
 
 class MessagingActivity : ComponentActivity() {
     private var channelId: String = ""
@@ -15,7 +16,7 @@ class MessagingActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         handleExtras()
         setContent {
-            ChatTheme {
+           ChatTheme(shapes = shapes()) {
                 ChannelMessagingScreen(
                     title = screenTitle,
                     channelId = channelId,

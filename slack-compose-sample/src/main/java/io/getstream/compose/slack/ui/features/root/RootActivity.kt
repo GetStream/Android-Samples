@@ -57,9 +57,7 @@ class RootActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ChatTheme(
-                shapes = shapes()
-            ) {
+            ChatTheme(shapes = shapes()) {
                 val navController = rememberNavController()
                 // create a scaffold state, set it to close by default
                 val scaffoldState = rememberScaffoldState(rememberDrawerState(DrawerValue.Closed))

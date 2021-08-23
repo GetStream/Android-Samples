@@ -13,6 +13,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
+import io.getstream.compose.slack.shapes
 
 /** [WIP]
  * A screen component to represent mentions or reaction screen
@@ -40,7 +41,7 @@ fun MentionsScreen() {
 @Preview(showBackground = true)
 @Composable
 fun MentionsScreenPreview() {
-    ChatTheme {
+   ChatTheme(shapes = shapes()) {
         MentionsScreen()
     }
 }
