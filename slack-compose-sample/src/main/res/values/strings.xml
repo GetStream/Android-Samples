@@ -13,4 +13,8 @@
     <string name="notifications">Notifications</string>
     <string name="preferences">Preferences</string>
     <string name="details">View details</string>
+    <string name="composer_hint">"Message %1$s"</string>
+    <string name="accessibility_dm_btn">Direct Message</string>
+    <string name="accessibility_photo_btn">Attach Photo</string>
+    <string name="accessibility_send">Send message</string>
 </resources>

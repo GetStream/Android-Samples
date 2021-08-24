@@ -8,4 +8,6 @@
     <string name="accessibility_drawer">Navigation drawer</string>
     <string name="accessibility_icon">Icon</string>
     <string name="accessibility_back">Go back</string>
+    <string name="accessibility_text_input">Text input</string>
+    <string name="accessibility_emoji_btn">Show Emoji selector</string>
 </resources>

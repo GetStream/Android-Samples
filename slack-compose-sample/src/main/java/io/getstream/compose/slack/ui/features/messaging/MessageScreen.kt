@@ -2,9 +2,12 @@ package io.getstream.compose.slack.ui.features.messaging
 
 import android.content.ClipboardManager
 import android.content.Context
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
@@ -18,6 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import io.getstream.chat.android.client.ChatClient
+import io.getstream.chat.android.client.models.Message
 import io.getstream.chat.android.compose.ui.messages.list.MessageList
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
@@ -40,6 +44,7 @@ import io.getstream.compose.slack.R
  * @param title - current selected channel name to load the header text component.
  * @param channelId -  current selected channel ID to load messages from.
  * */
+@ExperimentalFoundationApi
 @Composable
 fun ChannelMessagingScreen(
     messageLimit: Int = 30,
@@ -100,9 +105,22 @@ fun ChannelMessagingScreen(
                 }
             )
         },
-    ) {
+        bottomBar = {
+            CustomInput(
+                modifier = Modifier.background(ChatTheme.colors.barsBackground),
+                channelId = channelId,
+                channelName = title,
+                composerViewModel = composerViewModel,
+                onMessageSent = {
+                    composerViewModel.sendMessage(Message()) // WIP
+                }
+            )
+        }
+    ) { paddingValues ->
         MessageList(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(paddingValues),
             currentState = listViewModel.currentMessagesState,
             itemContent = {
                 MessageCustomRow(messageItem = it)
