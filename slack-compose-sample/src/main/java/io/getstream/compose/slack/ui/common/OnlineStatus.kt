@@ -21,6 +21,7 @@ fun OnlineStatus(
     isOnlineStatus: Boolean,
     modifier: Modifier = Modifier
 ) {
+    // TODO Suggestion : Surface
     Box(
         modifier = modifier
             .clip(CircleShape)

@@ -58,6 +58,7 @@ class RootActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ChatTheme(shapes = shapes()) {
+                // TODO extract RootContent - function in this activity
                 val navController = rememberNavController()
                 // create a scaffold state, set it to close by default
                 val scaffoldState = rememberScaffoldState(rememberDrawerState(DrawerValue.Closed))
@@ -165,6 +166,8 @@ class RootActivity : ComponentActivity() {
                     },
                     drawerGesturesEnabled = showDrawerState,
                 ) {
+                    // Todo handle padding values
+                    // val new modifier
                     Navigation(navController = navController) { channel ->
                         startActivity(
                             MessagingActivity.getIntent(
