@@ -14,7 +14,8 @@ import androidx.compose.ui.unit.dp
 /**
  * A simple view component representation for User online status green indicator.
  *
- * @param modifier - Modifier for styling
+ * @param isOnlineStatus - boolean representation to show green or grey dot.
+ * @param modifier - Modifier for styling.
  */
 @Composable
 fun OnlineStatus(

@@ -20,7 +20,7 @@ class MessagingActivity : ComponentActivity() {
                 LocalBackPressedDispatcher provides this.onBackPressedDispatcher
             ) {
                 ChatTheme(shapes = shapes()) {
-                    MessageScreen(
+                    CustomMessageScreen(
                         channelId = channelId,
                         onBackPressed = { finish() }
                     )
