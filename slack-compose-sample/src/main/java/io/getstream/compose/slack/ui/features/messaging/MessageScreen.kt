@@ -8,6 +8,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
@@ -15,6 +16,7 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -22,8 +24,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.models.Message
+import io.getstream.chat.android.client.models.name
+import io.getstream.chat.android.compose.state.messages.Thread
+import io.getstream.chat.android.compose.ui.messages.composer.MessageComposer
 import io.getstream.chat.android.compose.ui.messages.list.MessageList
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
+import io.getstream.chat.android.compose.viewmodel.messages.AttachmentsPickerViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessagesViewModelFactory
@@ -41,32 +47,51 @@ import io.getstream.compose.slack.R
  * @param onBackPressed - Handler for screen back press.
  * @param onChannelInfoClicked - a click handler to handle clicks when this view is clicked
  * @param topBarTitleView - Custom composable component which is a representation of channel info.
- * @param title - current selected channel name to load the header text component.
  * @param channelId -  current selected channel ID to load messages from.
  * */
-@ExperimentalFoundationApi
 @Composable
-fun ChannelMessagingScreen(
+fun MessageScreen(
     messageLimit: Int = 30,
     onBackPressed: () -> Unit = {},
     onChannelInfoClicked: () -> Unit = {},
-    topBarTitleView: @Composable () -> Unit = {
+    topBarTitleView: @Composable (String) -> Unit = { title ->
         MessageHeaderView(title = title) {
             onChannelInfoClicked()
         }
     },
-    title: String,
     channelId: String
 ) {
     val factory = buildViewModelFactory(LocalContext.current, channelId, messageLimit)
     val listViewModel = viewModel(MessageListViewModel::class.java, factory = factory)
     val composerViewModel = viewModel(MessageComposerViewModel::class.java, factory = factory)
+    val attachmentsPickerViewModel =
+        viewModel(AttachmentsPickerViewModel::class.java, factory = factory)
+
+    val messageMode = listViewModel.messageMode
+
+    val backAction = {
+        val isInThread = listViewModel.isInThread
+        val isShowingOverlay = listViewModel.isShowingOverlay
+
+        when {
+            attachmentsPickerViewModel.isShowingAttachments -> attachmentsPickerViewModel.changeAttachmentState(
+                false
+            )
+            isShowingOverlay -> listViewModel.selectMessage(null)
+            isInThread -> {
+                listViewModel.leaveThread()
+                composerViewModel.leaveThread()
+            }
+            else -> onBackPressed()
+        }
+    }
+    BackPressHandler(backAction)
 
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    topBarTitleView()
+                    topBarTitleView(listViewModel.channel.name)
                 },
                 backgroundColor = ChatTheme.colors.barsBackground,
                 navigationIcon = {
@@ -76,7 +101,7 @@ fun ChannelMessagingScreen(
                             indication = rememberRipple(color = ChatTheme.colors.textHighEmphasis)
                         ) {},
                         onClick = {
-                            onBackPressed()
+                            backAction()
                         }
                     ) {
                         Icon(
@@ -106,15 +131,18 @@ fun ChannelMessagingScreen(
             )
         },
         bottomBar = {
-            CustomInput(
-                modifier = Modifier.background(ChatTheme.colors.barsBackground),
-                channelId = channelId,
-                channelName = title,
-                composerViewModel = composerViewModel,
-                onMessageSent = {
-                    composerViewModel.sendMessage(Message()) // WIP
+            MessageComposer(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight(),
+                viewModel = composerViewModel,
+                onAttachmentsClick = { attachmentsPickerViewModel.changeAttachmentState(true) },
+                onCancelAction = {
+                    listViewModel.dismissAllMessageActions()
+                    composerViewModel.dismissMessageActions()
                 }
             )
+            // CustomMessageComposer(channelId, listViewModel, composerViewModel)
         }
     ) { paddingValues ->
         MessageList(
@@ -123,10 +151,33 @@ fun ChannelMessagingScreen(
                 .padding(paddingValues),
             currentState = listViewModel.currentMessagesState,
             itemContent = {
-                MessageCustomRow(messageItem = it)
+                MessageCustomRow(
+                    messageItem = it,
+                    onThreadClick = { message ->
+                        composerViewModel.setMessageMode(Thread(message))
+                        listViewModel.openMessageThread(message)
+                    })
             }
         )
     }
+}
+
+/**
+ * Custom input composer
+ */
+@Composable
+fun CustomMessageComposer(
+    channelId: String,
+    listViewModel: MessageListViewModel,
+    composerViewModel: MessageComposerViewModel
+) {
+    CustomInput(
+        modifier = Modifier.background(ChatTheme.colors.barsBackground),
+        channelName = listViewModel.channel.name,
+        onMessageSent = {
+            composerViewModel.sendMessage(Message(text = it, cid = channelId)) // WIP
+        }
+    )
 }
 
 /**
