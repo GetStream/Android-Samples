@@ -49,6 +49,14 @@ android {
     }
 }
 
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        freeCompilerArgs += [
+                '-Xopt-in=kotlin.RequiresOptIn',
+        ]
+    }
+}
+
 dependencies {
     implementation Dependencies.androidxActivityKtx
     implementation Dependencies.androidxCoreKtx
