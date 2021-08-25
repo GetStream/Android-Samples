@@ -20,6 +20,6 @@ fun shapes(): StreamShapes {
             bottomEnd = 16.dp
         ),
         inputField = RoundedCornerShape(8.dp),
-        attachment = RoundedCornerShape(16.dp)
+        attachment = RoundedCornerShape(8.dp)
     )
 }
