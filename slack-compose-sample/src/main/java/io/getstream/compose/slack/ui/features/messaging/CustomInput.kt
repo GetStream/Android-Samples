@@ -68,16 +68,14 @@ import io.getstream.compose.slack.R
  * A View component to provide message composer bar at bottom of a screen.
  *
  * @param modifier - Modifier for styling.
- * @param channelId - Channel id should be passed in to send messages on given channel
- * @param composerViewModel - Stream Message composer ViewModel to bind state for composer/ message input component
+ * @param channelName - Name of the current channel or a DM to show an input hint.
+ * @param resetScroll - Callback for when Text field is focused.
  */
-@ExperimentalFoundationApi
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CustomInput(
     onMessageSent: (String) -> Unit,
-    channelId: String,
     channelName: String,
-    composerViewModel: MessageComposerViewModel,
     modifier: Modifier = Modifier,
     resetScroll: () -> Unit = {},
 ) {
@@ -129,8 +127,6 @@ fun CustomInput(
 }
 
 
-// TODO attachment picker -  other types if possible to suggest ( validation )
-@ExperimentalFoundationApi
 @Preview(showBackground = true)
 @Composable
 fun UserInputPreview() {
@@ -144,8 +140,6 @@ fun UserInputPreview() {
 
         CustomInput(
             channelName = "Channel name",
-            channelId = "randomId",
-            composerViewModel = composerViewModel,
             onMessageSent = {}
         )
     }
@@ -180,7 +174,6 @@ private fun buildViewModelFactory(
 val KeyboardShownKey = SemanticsPropertyKey<Boolean>("KeyboardShownKey")
 var SemanticsPropertyReceiver.keyboardShownProperty by KeyboardShownKey
 
-@ExperimentalFoundationApi
 @Composable
 private fun UserInputText(
     keyboardType: KeyboardType = KeyboardType.Text,
