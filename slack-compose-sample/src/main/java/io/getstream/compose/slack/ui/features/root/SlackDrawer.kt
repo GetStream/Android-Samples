@@ -57,7 +57,7 @@ fun SlackDrawerContent(
     }
 }
 
-/** [WIP]
+/*
  * A view state less view component , representation of each drawer row based on [DrawerWorkspaces].
  *
  * @param modifier - Modifier to customize the specs on the root element.
@@ -97,7 +97,7 @@ fun SlackDrawerRow(
                 style = ChatTheme.typography.footnote
             )
         }
-        Spacer(modifier = Modifier.width(72.dp)) // TODO fix or find better way to move Icon on right edge
+        Spacer(modifier = Modifier.width(72.dp))
         IconButton(
             onClick = {
                 // No-op click

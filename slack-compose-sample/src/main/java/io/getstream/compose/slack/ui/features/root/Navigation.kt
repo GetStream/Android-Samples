@@ -1,6 +1,7 @@
 package io.getstream.compose.slack.ui.features.root
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -16,13 +17,22 @@ import io.getstream.compose.slack.ui.features.search.SearchScreen
  * A view component to draw a bottom navigation bar,
  * items clicked will navigate to corresponding screen.
  *
+ * @param modifier - Styling the NavHost root component.
  * @param navController - [NavHostController] instance for deciding when a particular screen/route
  * is loaded , corresponding composable screen content to be drawn.
  * @param onChannelClick - Handler for Channel item clicks.
  */
 @Composable
-fun Navigation(navController: NavHostController, onChannelClick: (Channel) -> Unit) {
-    NavHost(navController, startDestination = NavigationItem.Home.route) {
+fun Navigation(
+    modifier: Modifier = Modifier,
+    navController: NavHostController,
+    onChannelClick: (Channel) -> Unit
+) {
+    NavHost(
+        modifier = modifier,
+        navController = navController,
+        startDestination = NavigationItem.Home.route
+    ) {
         composable(NavigationItem.Home.route) {
             HomeScreen { channel ->
                 onChannelClick(channel)
