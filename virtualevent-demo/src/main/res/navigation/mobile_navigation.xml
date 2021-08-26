@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_overview">
+
+    <fragment
+        android:id="@+id/navigation_overview"
+        android:name="io.getstream.chat.virtualevent.feature.overview.OverviewFragment"
+        android:label="@string/title_overview"
+        tools:layout="@layout/fragment_overview" />
+
+    <fragment
+        android:id="@+id/navigation_events"
+        android:name="io.getstream.chat.virtualevent.feature.events.EventsFragment"
+        android:label="@string/title_events"
+        tools:layout="@layout/fragment_events" />
+
+    <fragment
+        android:id="@+id/navigation_dm"
+        android:name="io.getstream.chat.virtualevent.feature.dm.DMFragment"
+        android:label="@string/title_dm"
+        tools:layout="@layout/fragment_dm" />
+</navigation>
