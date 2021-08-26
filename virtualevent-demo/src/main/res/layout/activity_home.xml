@@ -16,8 +16,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:itemIconTint="@drawable/tab_item_foreground"
-        app:itemTextColor="@drawable/tab_item_foreground"
+        app:itemIconTint="@color/tab_item_foreground"
+        app:itemTextColor="@color/tab_item_foreground"
         app:menu="@menu/bottom_nav_menu" />
 
     <fragment
