@@ -105,9 +105,9 @@ fun HomeScreen(
             viewModel = listViewModel,
             itemContent = {
                 if (it.memberCount == 2) {
-                    DefaultDirectMessageChannelItem(channel = it, onChannelClick = onItemClick)
+                    DefaultDirectMessageChannelContainer(channel = it, onChannelClick = onItemClick)
                 } else {
-                    DefaultGroupChannelItem(channel = it, onChannelClick = onItemClick)
+                    DefaultGroupChannelContainer(channel = it, onChannelClick = onItemClick)
                 }
             }
         )
@@ -122,7 +122,7 @@ fun HomeScreen(
  * @param onChannelClick - Handler for a single tap on an item.
  * */
 @Composable
-internal fun DefaultGroupChannelItem(
+internal fun DefaultGroupChannelContainer(
     channel: Channel,
     onChannelClick: (Channel) -> Unit,
     modifier: Modifier = Modifier,
@@ -160,7 +160,7 @@ internal fun DefaultGroupChannelItem(
  * @param onChannelClick - Handler for a single tap on an item.
  * */
 @Composable
-internal fun DefaultDirectMessageChannelItem(
+internal fun DefaultDirectMessageChannelContainer(
     channel: Channel,
     onChannelClick: (Channel) -> Unit,
     modifier: Modifier = Modifier,
