@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="route_home">home</string>
+    <string name="route_dm">dm</string>
+    <string name="route_mentions">mentions</string>
+    <string name="route_search">search</string>
+    <string name="route_you">you</string>
+
+    <string name="navigation_home">Home</string>
+    <string name="navigation_dm">DMs</string>
+    <string name="navigation_mentions">Mentions</string>
+    <string name="navigation_search">Search</string>
+    <string name="navigation_profile">You</string>
+
+</resources>

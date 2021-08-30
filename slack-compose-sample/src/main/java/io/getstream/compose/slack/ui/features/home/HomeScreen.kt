@@ -93,7 +93,6 @@ fun HomeScreen(
                     .padding(horizontal = 12.dp, vertical = 8.dp)
                     .fillMaxWidth(),
                 query = searchQuery,
-                onSearchStarted = {},
                 onValueChange = {
                     searchQuery = it
                     listViewModel.setSearchQuery(it)
@@ -106,9 +105,9 @@ fun HomeScreen(
             viewModel = listViewModel,
             itemContent = {
                 if (it.memberCount == 2) {
-                    CustomOneOnOneChannelRow(channel = it, onChannelClick = onItemClick)
+                    DefaultDirectMessageChannelItem(channel = it, onChannelClick = onItemClick)
                 } else {
-                    CustomChannelRow(channel = it, onChannelClick = onItemClick)
+                    DefaultGroupChannelItem(channel = it, onChannelClick = onItemClick)
                 }
             }
         )
@@ -123,7 +122,7 @@ fun HomeScreen(
  * @param onChannelClick - Handler for a single tap on an item.
  * */
 @Composable
-internal fun CustomChannelRow(
+internal fun DefaultGroupChannelItem(
     channel: Channel,
     onChannelClick: (Channel) -> Unit,
     modifier: Modifier = Modifier,
@@ -161,7 +160,7 @@ internal fun CustomChannelRow(
  * @param onChannelClick - Handler for a single tap on an item.
  * */
 @Composable
-internal fun CustomOneOnOneChannelRow(
+internal fun DefaultDirectMessageChannelItem(
     channel: Channel,
     onChannelClick: (Channel) -> Unit,
     modifier: Modifier = Modifier,
@@ -178,7 +177,7 @@ internal fun CustomOneOnOneChannelRow(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .size(12.dp),
-            isOnlineStatus = channel.members.first().user.online
+            isOnline = channel.members.first().user.online
         )
         Text(
             text = channel.getDisplayName(),

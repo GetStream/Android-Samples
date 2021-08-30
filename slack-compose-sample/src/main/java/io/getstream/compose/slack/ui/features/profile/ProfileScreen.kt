@@ -51,7 +51,7 @@ fun ProfileScreen() {
         }
         FullAvatar(
             modifier = Modifier.padding(start = 16.dp, top = 16.dp),
-            isOnlineStatus = isOnline.value
+            isOnline = isOnline.value
         )
         StatusInput(
             modifier = Modifier

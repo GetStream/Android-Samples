@@ -73,7 +73,7 @@ import io.getstream.compose.slack.R
  */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun CustomInput(
+fun SlackMessageInput(
     onMessageSent: (String) -> Unit,
     channelName: String,
     modifier: Modifier = Modifier,
@@ -87,36 +87,36 @@ fun CustomInput(
         BackPressHandler(onBackPressed = dismissKeyboard)
     }
 
-    var textState by remember { mutableStateOf(TextFieldValue()) }
+    var messageText by remember { mutableStateOf(TextFieldValue()) }
 
     // Used to decide if the keyboard should be shown
-    var textFieldFocusState by remember { mutableStateOf(false) }
+    var isInputFocused by remember { mutableStateOf(false) }
 
     Column(modifier) {
         Divider()
         UserInputText(
-            textFieldValue = textState,
-            onTextChanged = { textState = it },
+            textFieldValue = messageText,
+            onTextChanged = { messageText = it },
             // Only show the keyboard if there's no input selector and text field has focus
-            keyboardShown = currentInputSelector == InputSelector.NONE && textFieldFocusState,
+            keyboardShown = currentInputSelector == InputSelector.NONE && isInputFocused,
             // Close extended selector if text field receives focus
             onTextFieldFocused = { focused ->
                 if (focused) {
                     currentInputSelector = InputSelector.NONE
                     resetScroll()
                 }
-                textFieldFocusState = focused
+                isInputFocused = focused
             },
-            focusState = textFieldFocusState,
+            focusState = isInputFocused,
             channelName = channelName
         )
         UserInputSelector(
             onSelectorChange = { currentInputSelector = it },
-            sendMessageEnabled = textState.text.isNotBlank(),
+            sendMessageEnabled = messageText.text.isNotBlank(),
             onMessageSent = {
-                onMessageSent(textState.text)
+                onMessageSent(messageText.text)
                 // Reset text field and close keyboard
-                textState = TextFieldValue()
+                messageText = TextFieldValue()
                 // Move scroll to bottom
                 resetScroll()
                 dismissKeyboard()
@@ -138,7 +138,7 @@ fun UserInputPreview() {
         )
         val composerViewModel = viewModel(MessageComposerViewModel::class.java, factory = factory)
 
-        CustomInput(
+        SlackMessageInput(
             channelName = "Channel name",
             onMessageSent = {}
         )

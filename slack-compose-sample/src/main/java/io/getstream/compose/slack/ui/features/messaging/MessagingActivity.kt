@@ -20,7 +20,7 @@ class MessagingActivity : ComponentActivity() {
                 LocalBackPressedDispatcher provides this.onBackPressedDispatcher
             ) {
                 ChatTheme(shapes = shapes()) {
-                    CustomMessageScreen(
+                    SlackMessageScreen(
                         channelId = channelId,
                         onBackPressed = { finish() }
                     )

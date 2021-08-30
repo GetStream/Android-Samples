@@ -25,8 +25,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -35,6 +37,7 @@ import io.getstream.chat.android.client.api.models.FilterObject
 import io.getstream.chat.android.client.api.models.QuerySort
 import io.getstream.chat.android.client.models.Channel
 import io.getstream.chat.android.client.models.Filters
+import io.getstream.chat.android.client.models.Message
 import io.getstream.chat.android.client.models.User
 import io.getstream.chat.android.compose.ui.channel.list.ChannelList
 import io.getstream.chat.android.compose.ui.common.SearchInput
@@ -55,22 +58,22 @@ import java.util.Locale
  *
  * It can be used without most parameters for default behavior, that can be tweaked if necessary.
  *
+ * @param filters - Default filters for direct message channel type.
  * @param querySort - Default query sort for channels.
  * @param isShowingSearch - If we show the search input or hide it.
  * @param onItemClick - Handler for Channel item clicks.
  * */
 @Composable
-fun DMScreen(
+fun DirectMessagesScreen(
+    filters: FilterObject = Filters.and(
+        Filters.eq("type", "messaging"),
+        Filters.eq("member_count", 2),
+        Filters.`in`("members", listOf(ChatClient.instance().getCurrentUser()?.id ?: ""))
+    ),
     querySort: QuerySort<Channel> = QuerySort.desc("last_updated"),
     isShowingSearch: Boolean = true,
     onItemClick: (Channel) -> Unit = {},
 ) {
-    val filters: FilterObject = Filters.and(
-        Filters.eq("type", "messaging"),
-        Filters.eq("member_count", 2),
-        Filters.`in`("members", listOf(ChatClient.instance().getCurrentUser()?.id ?: ""))
-    )
-
     val listViewModel: ChannelListViewModel = viewModel(
         ChannelListViewModel::class.java,
         factory = ChannelViewModelFactory(
@@ -115,7 +118,7 @@ fun DMScreen(
                 .fillMaxSize(),
             viewModel = listViewModel,
             itemContent = { channel ->
-                CustomDMChannelRow(
+                DefaultDirectMessageItem(
                     channel = channel,
                     currentUser = currentUser,
                     onChannelClick = onItemClick
@@ -126,7 +129,7 @@ fun DMScreen(
 }
 
 /**
- * A group channel row component, that shows the channel in a list row and exposes single click action.
+ * A 1-1 direct message channel row component, that shows the channel in a list row and exposes single click action.
  *
  * @param modifier - For special styling, like theming.
  * @param channel - The channel data to show.
@@ -134,7 +137,7 @@ fun DMScreen(
  * @param onChannelClick - Handler for a single tap on an item.
  * */
 @Composable
-internal fun CustomDMChannelRow(
+internal fun DefaultDirectMessageItem(
     channel: Channel,
     currentUser: User?,
     onChannelClick: (Channel) -> Unit,
@@ -150,27 +153,19 @@ internal fun CustomDMChannelRow(
             },
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Box(
-            Modifier
+        ChannelAvatar(
+            modifier = Modifier
                 .padding(start = 8.dp)
-        ) {
-            Box(
-                modifier = Modifier
-                    .clip(CircleShape)
-                    .background(ChatTheme.colors.borders)
-                    .size(36.dp)
-            )
-            ChannelAvatar(
-                modifier = Modifier.size(36.dp),
-                channel = channel,
-                currentUser = currentUser
-            )
-        }
+                .size(36.dp),
+            channel = channel,
+            currentUser = currentUser
+        )
 
         Spacer(Modifier.width(8.dp))
 
         val lastMessage = channel.messages.lastOrNull()
 
+        // Channel info - name and then last message
         Column(
             modifier = Modifier
                 .weight(1f)
@@ -200,21 +195,43 @@ internal fun CustomDMChannelRow(
         }
 
         if (lastMessage != null) {
-            Row(
+            Text(
                 modifier = Modifier
                     .padding(start = 8.dp, end = 8.dp, bottom = 4.dp)
                     .wrapContentHeight()
                     .align(Alignment.Bottom),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Text(
-                    text = SimpleDateFormat("MMM dd", Locale.ENGLISH).format(
-                        channel.lastUpdated ?: Date()
-                    ),
-                    fontSize = 14.sp,
-                    color = ChatTheme.colors.textLowEmphasis,
-                )
-            }
+                text = SimpleDateFormat("MMM dd", Locale.ENGLISH).format(
+                    channel.lastUpdated ?: Date()
+                ),
+                fontSize = 14.sp,
+                color = ChatTheme.colors.textLowEmphasis,
+            )
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DefaultDirectMessageItemPreview() {
+    ChatTheme {
+        val user = User(
+            id = "aditlal",
+            extraData = mutableMapOf(
+                "name" to "Adit Lal",
+                "image" to "https://picsum.photos/id/237/200/300",
+            ),
+            online = true
+        )
+
+        val channel = Channel(
+            cid = "test",
+            extraData = mutableMapOf(
+                "name" to "test",
+                "image" to "https://picsum.photos/id/237/200/300"
+            ),
+            messages = listOf(Message(id = "test", cid = "test", text = "Yolo", user = user))
+        )
+
+        DefaultDirectMessageItem(channel = channel, currentUser = user, onChannelClick = {})
     }
 }

@@ -13,8 +13,7 @@ import androidx.compose.runtime.staticCompositionLocalOf
 /**
  * This [Composable] can be used with a [LocalBackPressedDispatcher] to intercept a back press.
  *
- * @param onBackPressed (Event) What to do when back is intercepted
- *
+ * @param onBackPressed - (Event) What to do when back is intercepted.
  */
 @Composable
 fun BackPressHandler(onBackPressed: () -> Unit) {

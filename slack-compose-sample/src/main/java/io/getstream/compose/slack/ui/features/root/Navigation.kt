@@ -2,12 +2,13 @@ package io.getstream.compose.slack.ui.features.root
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import io.getstream.chat.android.client.models.Channel
 import io.getstream.compose.slack.models.NavigationItem
-import io.getstream.compose.slack.ui.features.direct.DMScreen
+import io.getstream.compose.slack.ui.features.direct.DirectMessagesScreen
 import io.getstream.compose.slack.ui.features.home.HomeScreen
 import io.getstream.compose.slack.ui.features.mentions.MentionsScreen
 import io.getstream.compose.slack.ui.features.profile.ProfileScreen
@@ -28,28 +29,34 @@ fun Navigation(
     navController: NavHostController,
     onChannelClick: (Channel) -> Unit
 ) {
+    val homeRoute = stringResource(id = NavigationItem.Home.route)
+    val dmsRoute = stringResource(id = NavigationItem.DM.route)
+    val mentionsRoute = stringResource(id = NavigationItem.Mentions.route)
+    val searchRoute = stringResource(id = NavigationItem.Search.route)
+    val profileRoute = stringResource(id = NavigationItem.Profile.route)
+
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = NavigationItem.Home.route
+        startDestination = stringResource(id = NavigationItem.Home.route)
     ) {
-        composable(NavigationItem.Home.route) {
+        composable(homeRoute) {
             HomeScreen { channel ->
                 onChannelClick(channel)
             }
         }
-        composable(NavigationItem.DM.route) {
-            DMScreen { channel ->
+        composable(dmsRoute) {
+            DirectMessagesScreen { channel ->
                 onChannelClick(channel)
             }
         }
-        composable(NavigationItem.Mentions.route) {
+        composable(mentionsRoute) {
             MentionsScreen()
         }
-        composable(NavigationItem.Search.route) {
+        composable(searchRoute) {
             SearchScreen()
         }
-        composable(NavigationItem.Profile.route) {
+        composable(profileRoute) {
             ProfileScreen()
         }
     }

@@ -2,7 +2,6 @@ package io.getstream.compose.slack.ui.features.messaging
 
 import android.content.ClipboardManager
 import android.content.Context
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -21,8 +20,6 @@ import androidx.compose.material.icons.filled.Chat
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.FileCopy
-import androidx.compose.material.icons.filled.Reply
-import androidx.compose.material.icons.filled.VolumeMute
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -44,8 +41,6 @@ import io.getstream.chat.android.compose.state.messages.list.Copy
 import io.getstream.chat.android.compose.state.messages.list.Delete
 import io.getstream.chat.android.compose.state.messages.list.Edit
 import io.getstream.chat.android.compose.state.messages.list.MessageOption
-import io.getstream.chat.android.compose.state.messages.list.MuteUser
-import io.getstream.chat.android.compose.state.messages.list.Reply
 import io.getstream.chat.android.compose.state.messages.list.ThreadReply
 import io.getstream.chat.android.compose.state.messages.list.buildMessageOption
 import io.getstream.chat.android.compose.ui.common.SimpleDialog
@@ -54,7 +49,6 @@ import io.getstream.chat.android.compose.ui.messages.composer.MessageComposer
 import io.getstream.chat.android.compose.ui.messages.header.MessageListHeader
 import io.getstream.chat.android.compose.ui.messages.list.MessageList
 import io.getstream.chat.android.compose.ui.messages.overlay.SelectedMessageOverlay
-import io.getstream.chat.android.compose.ui.messages.overlay.defaultMessageOptions
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.messages.AttachmentsPickerViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
@@ -76,7 +70,7 @@ import io.getstream.compose.slack.R
  * @param channelId -  current selected channel ID to load messages from.
  * */
 @Composable
-fun CustomMessageScreen(
+fun SlackMessageScreen(
     messageLimit: Int = 30,
     onBackPressed: () -> Unit = {},
     onChannelInfoClicked: () -> Unit = {},
@@ -292,7 +286,7 @@ private fun CustomMessageComposer(
     listViewModel: MessageListViewModel,
     composerViewModel: MessageComposerViewModel
 ) {
-    CustomInput(
+    SlackMessageInput(
         modifier = modifier.background(ChatTheme.colors.barsBackground),
         channelName = listViewModel.channel.name,
         onMessageSent = {

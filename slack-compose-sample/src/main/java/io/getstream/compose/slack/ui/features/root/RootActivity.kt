@@ -43,6 +43,9 @@ import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.compose.slack.R
 import io.getstream.compose.slack.models.DrawerWorkspaces
 import io.getstream.compose.slack.models.NavigationItem
+import io.getstream.compose.slack.models.Workspace1
+import io.getstream.compose.slack.models.Workspace2
+import io.getstream.compose.slack.models.Workspace3
 import io.getstream.compose.slack.shapes
 import io.getstream.compose.slack.ui.features.messaging.MessagingActivity
 import kotlinx.coroutines.launch
@@ -136,18 +139,20 @@ class RootActivity : ComponentActivity() {
                     val currentRoute = navBackStackEntry?.destination?.route
 
                     navigationItems.forEach { item ->
+                        val title = stringResource(id = item.title)
+
                         BottomNavigationItem(
                             icon = {
                                 Icon(
-                                    painterResource(id = item.icon),
-                                    contentDescription = item.title
+                                    painter = painterResource(id = item.icon),
+                                    contentDescription = title
                                 )
                             },
-                            label = { Text(text = item.title) },
+                            label = { Text(text = title) },
                             selectedContentColor = ChatTheme.colors.textHighEmphasis,
                             unselectedContentColor = ChatTheme.colors.disabled,
                             alwaysShowLabel = true,
-                            selected = currentRoute == item.route,
+                            selected = currentRoute == stringResource(id = item.route),
                             onClick = {
                                 fabVisibilityState = when (item) {
                                     NavigationItem.DM -> true
@@ -159,7 +164,7 @@ class RootActivity : ComponentActivity() {
                                     NavigationItem.Home -> true
                                     else -> false
                                 }
-                                drawerTitle = item.title
+                                drawerTitle = title
                                 navigateToPage(navController, item)
                             }
                         )
@@ -170,9 +175,9 @@ class RootActivity : ComponentActivity() {
             drawerContent = {
                 SlackDrawerContent(
                     workspaces = listOf(
-                        DrawerWorkspaces.Workspace1,
-                        DrawerWorkspaces.Workspace2,
-                        DrawerWorkspaces.Workspace3
+                        Workspace1(),
+                        Workspace2(),
+                        Workspace3()
                     )
                 )
             },
@@ -205,7 +210,10 @@ class RootActivity : ComponentActivity() {
         navController: NavHostController,
         item: NavigationItem
     ) {
-        navController.navigate(item.route) {
+        // Get Route string resource
+        val route = getString(item.route)
+
+        navController.navigate(route) {
             // Pop up to the start destination of the graph to
             // avoid building up a large stack of destinations
             // on the back stack as users select items
