@@ -148,10 +148,11 @@ fun SlackMessageScreen(
             MessageList(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .background(ChatTheme.colors.appBackground)
                     .padding(paddingValues),
                 currentState = listViewModel.currentMessagesState,
                 itemContent = {
-                    MessageCustomRow(
+                    DefaultMessageContent(
                         messageItem = it,
                         onLongItemClick = { message -> listViewModel.selectMessage(message) },
                         onThreadClick = { message ->
@@ -315,6 +316,7 @@ private fun buildViewModelFactory(
         ChatClient.instance(),
         ChatDomain.instance(),
         channelId,
+        true,
         messageLimit
     )
 }

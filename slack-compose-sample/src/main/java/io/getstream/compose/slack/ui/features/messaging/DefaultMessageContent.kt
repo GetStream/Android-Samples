@@ -45,7 +45,7 @@ import java.util.Locale
  */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun MessageCustomRow(
+fun DefaultMessageContent(
     messageItem: MessageItem,
     modifier: Modifier = Modifier,
     onLongItemClick: (Message) -> Unit = {},
@@ -53,7 +53,8 @@ fun MessageCustomRow(
 ) {
     val (message) = messageItem
 
-    val attachmentFactory = ChatTheme.attachmentFactories.firstOrNull { it.canHandle(message) }
+    val attachmentFactory =
+        ChatTheme.attachmentFactories.firstOrNull { it.canHandle(message.attachments) }
     val hasThread = message.threadParticipants.isNotEmpty()
 
     val clickModifier = Modifier.combinedClickable(
@@ -69,7 +70,7 @@ fun MessageCustomRow(
 
     Row(
         modifier = modifier
-            .padding(start = 8.dp, bottom = 2.dp),
+            .padding(start = 8.dp, bottom = 8.dp),
         verticalAlignment = Alignment.Top
     ) {
         UserAvatar(
@@ -114,14 +115,17 @@ fun MessageCustomRow(
                     color = ChatTheme.colors.textHighEmphasis
                 )
             }
-
-            attachmentFactory?.factory?.invoke(
-                AttachmentState(
-                    modifier = Modifier.padding(4.dp),
-                    message = messageItem,
-                    onLongItemClick = onLongItemClick
-                )
-            )
+            if (message.attachments.isNotEmpty()) {
+                attachmentFactory?.content?.let {
+                    it(
+                        AttachmentState(
+                            modifier = Modifier.padding(4.dp),
+                            message = messageItem,
+                            onLongItemClick = onLongItemClick
+                        )
+                    )
+                }
+            }
             if (hasThread) {
                 ThreadParticipants(modifier = modifier, participants = message.threadParticipants)
             }
@@ -167,7 +171,7 @@ internal fun ThreadParticipants(
 @Composable
 fun MessageItemPreview() {
     ChatTheme(shapes = shapes()) {
-        MessageCustomRow(
+        DefaultMessageContent(
             messageItem = MessageItem(
                 message = Message(
                     id = "testId",

@@ -166,6 +166,7 @@ private fun buildViewModelFactory(
         ChatClient.instance(),
         ChatDomain.instance(),
         channelId,
+        true,
         messageLimit
     )
 }
