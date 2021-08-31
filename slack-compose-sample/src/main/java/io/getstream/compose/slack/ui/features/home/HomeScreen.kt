@@ -59,7 +59,6 @@ fun HomeScreen(
             Filters.eq("type", "messaging"),
             Filters.eq("muted", true),
         ),
-        Filters.greaterThanEquals("member_count", 2),
         Filters.`in`("members", listOf(ChatClient.instance().getCurrentUser()?.id ?: ""))
     ),
     querySort: QuerySort<Channel> = QuerySort.desc("member_count"),
