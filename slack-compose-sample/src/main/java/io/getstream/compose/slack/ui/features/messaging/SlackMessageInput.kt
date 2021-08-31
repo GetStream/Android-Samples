@@ -1,261 +1,153 @@
 package io.getstream.compose.slack.ui.features.messaging
 
-import android.content.ClipboardManager
-import android.content.Context
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.LocalContentColor
-import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.AlternateEmail
-import androidx.compose.material.icons.outlined.InsertPhoto
-import androidx.compose.material.icons.outlined.Mood
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.focus.onFocusChanged
-import androidx.compose.ui.graphics.SolidColor
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.SemanticsPropertyKey
-import androidx.compose.ui.semantics.SemanticsPropertyReceiver
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import io.getstream.chat.android.client.ChatClient
+import io.getstream.chat.android.client.models.Attachment
+import io.getstream.chat.android.compose.state.messages.list.MessageAction
+import io.getstream.chat.android.compose.ui.messages.composer.components.MessageInput
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
-import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
-import io.getstream.chat.android.compose.viewmodel.messages.MessagesViewModelFactory
-import io.getstream.chat.android.offline.ChatDomain
 import io.getstream.compose.slack.R
+import io.getstream.compose.slack.darkColors
+import io.getstream.compose.slack.lightColors
+import io.getstream.compose.slack.shapes
 
 /**
  * A View component to provide message composer bar at bottom of a screen.
  *
- * @param modifier - Modifier for styling.
+ * @param onSendMessage - Handler when the input field value changes.
  * @param channelName - Name of the current channel or a DM to show an input hint.
+ * @param attachments - Currently selected and visible list of attachments.
+ * @param activeAction - Currently active action (for Edit UI).
+ * @param modifier - Modifier for styling.
+ * @param label  - The input field label (hint).
  * @param resetScroll - Callback for when Text field is focused.
  */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SlackMessageInput(
-    onMessageSent: (String) -> Unit,
+    onSendMessage: (String, List<Attachment>) -> Unit,
     channelName: String,
+    attachments: List<Attachment>,
+    activeAction: MessageAction?,
     modifier: Modifier = Modifier,
+    label: @Composable () -> Unit = {
+        DefaultInputLabel(channelName, modifier = Modifier)
+    },
+    onAttachmentsClick: () -> Unit = {},
     resetScroll: () -> Unit = {},
 ) {
-    var currentInputSelector by rememberSaveable { mutableStateOf(InputSelector.NONE) }
-    val dismissKeyboard = { currentInputSelector = InputSelector.NONE }
-
-    // Intercept back navigation if there's a InputSelector visible
-    if (currentInputSelector != InputSelector.NONE) {
-        BackPressHandler(onBackPressed = dismissKeyboard)
-    }
-
-    var messageText by remember { mutableStateOf(TextFieldValue()) }
-
-    // Used to decide if the keyboard should be shown
-    var isInputFocused by remember { mutableStateOf(false) }
+    var messageText by remember { mutableStateOf("") }
 
     Column(modifier) {
-        Divider()
-        UserInputText(
-            textFieldValue = messageText,
-            onTextChanged = { messageText = it },
-            // Only show the keyboard if there's no input selector and text field has focus
-            keyboardShown = currentInputSelector == InputSelector.NONE && isInputFocused,
-            // Close extended selector if text field receives focus
-            onTextFieldFocused = { focused ->
-                if (focused) {
-                    currentInputSelector = InputSelector.NONE
-                    resetScroll()
-                }
-                isInputFocused = focused
-            },
-            focusState = isInputFocused,
-            channelName = channelName
+        Divider(
+            color = ChatTheme.colors.textLowEmphasis
         )
+        MessageInput(
+            modifier = Modifier
+                .fillMaxWidth(),
+            label = label,
+            value = messageText,
+            attachments = attachments,
+            activeAction = activeAction,
+            onValueChange = { messageText = it },
+            onAttachmentRemoved = { }
+        )
+
+        val isInputValid = messageText.isNotEmpty() || attachments.isNotEmpty()
+
         UserInputSelector(
-            onSelectorChange = { currentInputSelector = it },
-            sendMessageEnabled = messageText.text.isNotBlank(),
+            sendMessageEnabled = isInputValid,
             onMessageSent = {
-                onMessageSent(messageText.text)
+                onSendMessage(messageText, attachments)
                 // Reset text field and close keyboard
-                messageText = TextFieldValue()
+                messageText = ""
                 // Move scroll to bottom
                 resetScroll()
-                dismissKeyboard()
             },
-            currentInputSelector = currentInputSelector
+            onAttachmentsClick = onAttachmentsClick
         )
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable
 fun UserInputPreview() {
-    ChatTheme {
-        val factory = buildViewModelFactory(
-            LocalContext.current,
-            "randomId",
-            30
-        )
-        val composerViewModel = viewModel(MessageComposerViewModel::class.java, factory = factory)
-
+    ChatTheme(
+        shapes = shapes(),
+        colors = if (isSystemInDarkTheme()) darkColors() else lightColors()
+    ) {
         SlackMessageInput(
+            modifier = Modifier.background(ChatTheme.colors.appBackground),
             channelName = "Channel name",
-            onMessageSent = {}
+            onSendMessage = { _, _ -> },
+            onAttachmentsClick = {},
+            activeAction = null,
+            attachments = emptyList()
         )
     }
 }
 
-
 /**
- * Builds the [MessagesViewModelFactory] required to run the Conversation/Messages screen.
+ * Default input field label that the user can override in [SlackMessageInput].
  *
- * @param context - Used to build the [ClipboardManager].
- * @param channelId - The current channel ID, to load the messages from.
- * @param messageLimit - The limit when loading messages.
+ * @param channelName - Name of the current channel or a DM to show an input hint.
+ * @param modifier - Modifier for styling.
  * */
-private fun buildViewModelFactory(
-    context: Context,
-    channelId: String,
-    messageLimit: Int,
-): MessagesViewModelFactory {
-    val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-
-    return MessagesViewModelFactory(
-        context,
-        clipboardManager,
-        ChatClient.instance(),
-        ChatDomain.instance(),
-        channelId,
-        true,
-        messageLimit
+@Composable
+fun DefaultInputLabel(
+    channelName: String,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        modifier = modifier,
+        textAlign = TextAlign.Center,
+        text = stringResource(id = R.string.composer_hint, channelName),
+        color = ChatTheme.colors.textLowEmphasis
     )
 }
 
-
-val KeyboardShownKey = SemanticsPropertyKey<Boolean>("KeyboardShownKey")
-var SemanticsPropertyReceiver.keyboardShownProperty by KeyboardShownKey
-
-@Composable
-private fun UserInputText(
-    keyboardType: KeyboardType = KeyboardType.Text,
-    onTextChanged: (TextFieldValue) -> Unit,
-    textFieldValue: TextFieldValue,
-    channelName: String,
-    keyboardShown: Boolean,
-    onTextFieldFocused: (Boolean) -> Unit,
-    focusState: Boolean
-) {
-    val inputFieldDescription = stringResource(id = R.string.accessibility_text_input)
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(48.dp)
-            .semantics {
-                contentDescription = inputFieldDescription
-                keyboardShownProperty = keyboardShown
-            },
-        horizontalArrangement = Arrangement.End
-    ) {
-        Surface {
-            Box(
-                modifier = Modifier
-                    .height(48.dp)
-                    .weight(1f)
-                    .align(Alignment.Bottom)
-            ) {
-                var lastFocusState by remember { mutableStateOf(false) }
-                BasicTextField(
-                    value = textFieldValue,
-                    onValueChange = { onTextChanged(it) },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 16.dp)
-                        .align(Alignment.CenterStart)
-                        .onFocusChanged { state ->
-                            if (lastFocusState != state.isFocused) {
-                                onTextFieldFocused(state.isFocused)
-                            }
-                            lastFocusState = state.isFocused
-                        },
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = keyboardType,
-                        imeAction = ImeAction.Send
-                    ),
-                    maxLines = 1,
-                    cursorBrush = SolidColor(LocalContentColor.current),
-                    textStyle = LocalTextStyle.current.copy(color = LocalContentColor.current)
-                )
-
-                val disableContentColor =
-                    MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled)
-                if (textFieldValue.text.isEmpty() && !focusState) {
-                    Text(
-                        modifier = Modifier
-                            .align(Alignment.CenterStart)
-                            .padding(start = 16.dp),
-                        text = stringResource(id = R.string.composer_hint, channelName),
-                        style = MaterialTheme.typography.body1.copy(color = disableContentColor)
-                    )
-                }
-            }
-        }
-    }
-}
-
-enum class InputSelector {
-    NONE,
-    EMOJI,
-    DM,
-    PICTURE
-}
-
+/**
+ * Composable that represents the bottom half of message composer,
+ * which includes attachments and send button.
+ *
+ * @param sendMessageEnabled - Boolean state to decide if message is valid.
+ * @param onMessageSent - Handler for send button is clicked.
+ * @param modifier - Modifier for styling.
+ * @param onAttachmentsClick - Handler when the user selects attachments.
+ * */
 @Composable
 private fun UserInputSelector(
-    onSelectorChange: (InputSelector) -> Unit,
     sendMessageEnabled: Boolean,
     onMessageSent: () -> Unit,
-    currentInputSelector: InputSelector,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onAttachmentsClick: () -> Unit = {}
 ) {
     Row(
         modifier = modifier
@@ -264,23 +156,25 @@ private fun UserInputSelector(
             .padding(horizontal = 4.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        InputSelectorButton(
-            onClick = { onSelectorChange(InputSelector.EMOJI) },
-            icon = Icons.Outlined.Mood,
-            selected = currentInputSelector == InputSelector.EMOJI,
-            description = stringResource(id = R.string.accessibility_emoji_btn)
-        )
-        InputSelectorButton(
-            onClick = { onSelectorChange(InputSelector.DM) },
-            icon = Icons.Outlined.AlternateEmail,
-            selected = currentInputSelector == InputSelector.DM,
-            description = stringResource(id = R.string.accessibility_dm_btn)
-        )
-        InputSelectorButton(
-            onClick = { onSelectorChange(InputSelector.PICTURE) },
-            icon = Icons.Outlined.InsertPhoto,
-            selected = currentInputSelector == InputSelector.PICTURE,
-            description = stringResource(id = R.string.accessibility_photo_btn)
+        // Attachments
+        IconButton(
+            modifier = Modifier
+                .padding(8.dp)
+                .align(Alignment.CenterVertically)
+                .clip(RoundedCornerShape(8.dp))
+                .width(40.dp)
+                .height(40.dp)
+                .padding(8.dp),
+            content = {
+                Icon(
+                    painter = painterResource(R.drawable.ic_attach),
+                    contentDescription = stringResource(id = R.string.accessibility_photo),
+                    tint = ChatTheme.colors.textHighEmphasis
+                )
+            },
+            onClick = {
+                onAttachmentsClick()
+            }
         )
         Spacer(modifier = Modifier.weight(1f))
 
@@ -307,29 +201,5 @@ private fun UserInputSelector(
                 }
             }
         )
-    }
-}
-
-
-@Composable
-private fun InputSelectorButton(
-    onClick: () -> Unit,
-    icon: ImageVector,
-    description: String,
-    selected: Boolean
-) {
-    IconButton(onClick = onClick) {
-        CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-            val tint =
-                if (selected) ChatTheme.colors.textHighEmphasis else ChatTheme.colors.disabled
-            Icon(
-                icon,
-                tint = tint,
-                modifier = Modifier
-                    .padding(12.dp)
-                    .size(20.dp),
-                contentDescription = description
-            )
-        }
     }
 }

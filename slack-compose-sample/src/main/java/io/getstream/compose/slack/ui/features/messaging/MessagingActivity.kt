@@ -5,8 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.CompositionLocalProvider
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
+import io.getstream.compose.slack.darkColors
+import io.getstream.compose.slack.lightColors
 import io.getstream.compose.slack.shapes
 
 class MessagingActivity : ComponentActivity() {
@@ -19,7 +22,10 @@ class MessagingActivity : ComponentActivity() {
             CompositionLocalProvider(
                 LocalBackPressedDispatcher provides this.onBackPressedDispatcher
             ) {
-                ChatTheme(shapes = shapes()) {
+                ChatTheme(
+                    shapes = shapes(),
+                    colors = if (isSystemInDarkTheme()) darkColors() else lightColors()
+                ) {
                     SlackMessageScreen(
                         channelId = channelId,
                         onBackPressed = { finish() }

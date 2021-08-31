@@ -116,20 +116,6 @@ class RootActivity : ComponentActivity() {
                     }
                 )
             },
-            floatingActionButton = {
-                AnimatedVisibility(visible = fabVisibilityState) {
-                    FloatingActionButton(
-                        modifier = Modifier.size(size.value),
-                        backgroundColor = ChatTheme.colors.primaryAccent,
-                        onClick = { /*do something*/ }) {
-                        Icon(
-                            imageVector = Icons.Filled.Edit,
-                            tint = ChatTheme.colors.textHighEmphasis,
-                            contentDescription = stringResource(R.string.accessibility_fab_start_message)
-                        )
-                    }
-                }
-            },
             scaffoldState = scaffoldState,
             bottomBar = {
                 BottomNavigation(

@@ -15,7 +15,7 @@
     <string name="details">View details</string>
     <string name="composer_hint">"Message %1$s"</string>
     <string name="accessibility_dm_btn">Direct Message</string>
-    <string name="accessibility_photo_btn">Attach Photo</string>
+    <string name="accessibility_photo">Attach button</string>
     <string name="accessibility_send">Send message</string>
     <string name="message_footer_thread_counter">%1$d replies</string>
 
