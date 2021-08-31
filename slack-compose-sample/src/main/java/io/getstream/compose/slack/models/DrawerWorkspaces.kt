@@ -20,7 +20,6 @@ class Workspace1 : DrawerWorkspaces {
     override val title: String = "Workspace 1"
     override val description: String = "workspace1.slackc.com"
     override val image: Int = R.drawable.dummy1
-
 }
 
 class Workspace2 : DrawerWorkspaces {

@@ -41,7 +41,7 @@ fun SearchScreen() {
 @Preview(showBackground = true)
 @Composable
 fun SearchScreenPreview() {
-   ChatTheme(shapes = shapes()) {
+    ChatTheme(shapes = shapes()) {
         SearchScreen()
     }
 }

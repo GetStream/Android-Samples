@@ -6,10 +6,8 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -32,9 +30,6 @@ import io.getstream.chat.android.compose.ui.common.avatar.UserAvatar
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.compose.slack.R
 import io.getstream.compose.slack.shapes
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 /**
  * This is a component to render custom message or comments.
@@ -188,4 +183,3 @@ fun MessageItemPreview() {
         )
     }
 }
-

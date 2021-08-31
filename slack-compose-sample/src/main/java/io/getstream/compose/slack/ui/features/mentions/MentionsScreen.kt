@@ -41,7 +41,7 @@ fun MentionsScreen() {
 @Preview(showBackground = true)
 @Composable
 fun MentionsScreenPreview() {
-   ChatTheme(shapes = shapes()) {
+    ChatTheme(shapes = shapes()) {
         MentionsScreen()
     }
 }

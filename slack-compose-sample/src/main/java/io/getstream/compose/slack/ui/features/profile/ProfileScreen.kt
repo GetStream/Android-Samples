@@ -22,7 +22,6 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.SettingsApplications
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,7 +40,6 @@ import io.getstream.compose.slack.ui.features.profile.ProfileScreenRowIcons.NOTI
 import io.getstream.compose.slack.ui.features.profile.ProfileScreenRowIcons.PROFILE
 import io.getstream.compose.slack.ui.features.profile.ProfileScreenRowIcons.SETTINGS
 import java.util.Locale
-
 
 /**
  * A screen component to represent profile or a settings page for the slack workspace example.
@@ -185,7 +183,6 @@ data class ProfileScreenRowItem(
     val icon: ProfileScreenRowIcons,
     val title: String
 )
-
 
 /**
  * Represents the types of icons for each row in our profile screen.

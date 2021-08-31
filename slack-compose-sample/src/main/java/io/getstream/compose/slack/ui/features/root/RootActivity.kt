@@ -253,7 +253,6 @@ class RootActivity : ComponentActivity() {
         }
     }
 
-
     /**
      * A view component to draw a bottom navigation bar,
      * items clicked will navigate to corresponding screen.
