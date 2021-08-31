@@ -297,7 +297,9 @@ class RootActivity : ComponentActivity() {
                 SearchScreen()
             }
             composable(profileRoute) {
-                ProfileScreen()
+                ProfileScreen(
+                    isOnline = true
+                )
             }
         }
     }

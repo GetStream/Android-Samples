@@ -26,18 +26,19 @@ import io.getstream.compose.slack.R
  * The status input component that allows the user to fill in a status message.
  *
  * @param modifier - Modifier for styling.
- * @param input - Current input status value, by default empty.
  * @param onValueChange - Handler when the value changes.
+ * @param input - Current input status value, by default empty.
+ * @param onInputFocus - Handler for when the input field is focused.
  * @param leadingIcon - The icon at the start of the status input component that's customizable, but shows
  * [DefaultStatusLeadingIcon] by default.
  * @param label - The label shown in the status input field component, when there's no input.
  * */
 @Composable
 fun StatusInput(
-    onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
+    onValueChange: (String) -> Unit = {},
     input: String = "",
-    onSearchStarted: () -> Unit = {},
+    onInputFocus: () -> Unit = {},
     leadingIcon: @Composable RowScope.() -> Unit = { DefaultStatusLeadingIcon() },
     label: @Composable () -> Unit = { DefaultStatusLabel() },
 ) {
@@ -49,7 +50,7 @@ fun StatusInput(
                 val wasPreviouslyFocused = isFocused
 
                 if (!wasPreviouslyFocused && newState.isFocused) {
-                    onSearchStarted()
+                    onInputFocus()
                 }
 
                 isFocused = newState.isFocused

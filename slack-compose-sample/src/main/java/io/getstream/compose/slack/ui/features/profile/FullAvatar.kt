@@ -24,22 +24,13 @@ import io.getstream.compose.slack.ui.common.OnlineStatus
 /**
  * A simple component to for showing user name, online status, etc.
  *
- * @param modifier - Modifier to customize the specs on the root element.
- * @param isOnline - boolean toggle to show current user online status indicator.
  * @param user - Optional parameter to pass in a [User] object to bind the data for this view component.
+ * @param modifier - Modifier to customize the specs on the root element.
  */
 @Composable
 fun FullAvatar(
+    user: User,
     modifier: Modifier = Modifier,
-    isOnline: Boolean,
-    user: User = User(
-        id = "aditlal",
-        extraData = mutableMapOf(
-            "name" to "Adit Lal",
-            "image" to "https://picsum.photos/id/237/200/300",
-        ),
-        online = isOnline
-    )
 ) {
     Row(
         modifier,
