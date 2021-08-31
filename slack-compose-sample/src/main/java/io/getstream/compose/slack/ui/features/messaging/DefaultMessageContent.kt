@@ -26,6 +26,7 @@ import io.getstream.chat.android.client.models.name
 import io.getstream.chat.android.compose.state.messages.attachments.AttachmentState
 import io.getstream.chat.android.compose.state.messages.items.MessageItem
 import io.getstream.chat.android.compose.state.messages.items.None
+import io.getstream.chat.android.compose.ui.common.Timestamp
 import io.getstream.chat.android.compose.ui.common.avatar.Avatar
 import io.getstream.chat.android.compose.ui.common.avatar.UserAvatar
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
@@ -51,7 +52,7 @@ fun DefaultMessageContent(
     onLongItemClick: (Message) -> Unit = {},
     onThreadClick: (Message) -> Unit = {}
 ) {
-    val (message) = messageItem
+    val message = messageItem.message
 
     val attachmentFactory =
         ChatTheme.attachmentFactories.firstOrNull { it.canHandle(message.attachments) }
@@ -75,8 +76,7 @@ fun DefaultMessageContent(
     ) {
         UserAvatar(
             modifier = Modifier
-                .width(40.dp)
-                .height(40.dp),
+                .size(40.dp),
             user = messageItem.message.user
         )
         // Content column
@@ -85,7 +85,10 @@ fun DefaultMessageContent(
                 .align(Alignment.CenterVertically)
                 .then(clickModifier)
         ) {
-            Row {
+            Row(
+                modifier = Modifier
+                    .align(Alignment.Start)
+            ) {
                 Text(
                     modifier = Modifier
                         .padding(start = 8.dp)
@@ -94,15 +97,12 @@ fun DefaultMessageContent(
                     style = ChatTheme.typography.title3Bold,
                     color = ChatTheme.colors.textHighEmphasis
                 )
-                Text(
+
+                Timestamp(
                     modifier = Modifier
                         .padding(start = 4.dp)
                         .align(Alignment.CenterVertically),
-                    text = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(
-                        messageItem.message.createdAt ?: Date()
-                    ),
-                    style = ChatTheme.typography.footnote,
-                    color = ChatTheme.colors.textLowEmphasis
+                    date = messageItem.message.updatedAt
                 )
             }
             if (message.text.isNotEmpty()) {
@@ -167,7 +167,7 @@ internal fun ThreadParticipants(
     }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun MessageItemPreview() {
     ChatTheme(shapes = shapes()) {

@@ -44,6 +44,7 @@ import io.getstream.chat.android.compose.state.messages.list.ThreadReply
 import io.getstream.chat.android.compose.state.messages.list.buildMessageOption
 import io.getstream.chat.android.compose.ui.common.SimpleDialog
 import io.getstream.chat.android.compose.ui.messages.attachments.AttachmentsPicker
+import io.getstream.chat.android.compose.ui.messages.header.MessageListHeader
 import io.getstream.chat.android.compose.ui.messages.list.MessageList
 import io.getstream.chat.android.compose.ui.messages.overlay.SelectedMessageOverlay
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
@@ -62,21 +63,15 @@ import io.getstream.compose.slack.R
  *
  * @param channelId -  current selected channel ID to load messages from.
  * @param messageLimit - The limit of messages per query.
- * @param onBackPressed - Handler for screen back press.
  * @param onChannelInfoClicked - a click handler to handle clicks when this view is clicked
- * @param topBarTitleView - Custom composable component which is a representation of channel info.
+ * @param onBackPressed - Handler for screen back press.
  * */
 @Composable
 fun SlackMessageScreen(
     channelId: String,
     messageLimit: Int = 30,
-    onBackPressed: () -> Unit = {},
     onChannelInfoClicked: () -> Unit = {},
-    topBarTitleView: @Composable (String) -> Unit = { title ->
-        MessageHeaderView(title = title) {
-            onChannelInfoClicked()
-        }
-    }
+    onBackPressed: () -> Unit = {},
 ) {
     val factory = buildViewModelFactory(LocalContext.current, channelId, messageLimit)
     val listViewModel = viewModel(MessageListViewModel::class.java, factory = factory)
@@ -85,6 +80,7 @@ fun SlackMessageScreen(
         viewModel(AttachmentsPickerViewModel::class.java, factory = factory)
 
     val currentState = listViewModel.currentMessagesState
+    val messageMode = listViewModel.messageMode
     val selectedMessage = currentState.selectedMessage
     val messageActions = listViewModel.messageActions
     val isShowingAttachments = attachmentsPickerViewModel.isShowingAttachments
@@ -109,11 +105,21 @@ fun SlackMessageScreen(
     BackPressHandler(backAction)
 
     val user by listViewModel.user.collectAsState()
+    val isNetworkAvailable by listViewModel.isOnline.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize()) {
         Scaffold(
             topBar = {
-                CustomMessageTopBar(topBarTitleView, listViewModel, backAction)
+                MessageListHeader(
+                    modifier = Modifier
+                        .height(56.dp),
+                    channel = listViewModel.channel,
+                    currentUser = user,
+                    isNetworkAvailable = isNetworkAvailable,
+                    messageMode = messageMode,
+                    onBackPressed = backAction,
+                    onHeaderActionClick = onChannelInfoClicked
+                )
             },
             bottomBar = {
                 SlackMessageInput(
@@ -190,73 +196,13 @@ fun SlackMessageScreen(
         if (deleteAction != null) {
             SimpleDialog(
                 modifier = Modifier.padding(16.dp),
-                title = stringResource(id = io.getstream.chat.android.compose.R.string.stream_compose_delete_message_title),
-                message = stringResource(id = io.getstream.chat.android.compose.R.string.stream_compose_delete_message_text),
+                title = stringResource(id = R.string.delete_message_title),
+                message = stringResource(id = R.string.delete_message_text),
                 onPositiveAction = { listViewModel.deleteMessage(deleteAction.message) },
                 onDismiss = { listViewModel.dismissMessageAction(deleteAction) }
             )
         }
     }
-}
-
-/**
- * Custom message screen TopBar.
- *
- * @param topBarTitleView - Custom composable component which is a representation of channel info.
- * @param listViewModel - [MessageListViewModel] to load messages and threads.
- * @param backAction - Handler for screen back press.
- * @param modifier - Modifier for styling.
- * @param onChannelInfoClicked - a click handler to handle clicks when this view is clicked
- */
-@Composable
-private fun CustomMessageTopBar(
-    topBarTitleView: @Composable (String) -> Unit,
-    listViewModel: MessageListViewModel,
-    backAction: () -> Unit,
-    modifier: Modifier = Modifier,
-    onChannelInfoClicked: () -> Unit = {},
-) {
-    TopAppBar(
-        modifier = modifier,
-        title = {
-            topBarTitleView(listViewModel.channel.name)
-        },
-        backgroundColor = ChatTheme.colors.barsBackground,
-        navigationIcon = {
-            IconButton(
-                modifier = Modifier.clickable(
-                    interactionSource = remember { MutableInteractionSource() },
-                    indication = rememberRipple(color = ChatTheme.colors.textHighEmphasis)
-                ) {},
-                onClick = {
-                    backAction()
-                }
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_left_navigation),
-                    contentDescription = stringResource(id = R.string.accessibility_back),
-                    tint = ChatTheme.colors.textHighEmphasis,
-                )
-            }
-        },
-        actions = {
-            IconButton(
-                modifier = Modifier.clickable(
-                    interactionSource = remember { MutableInteractionSource() },
-                    indication = rememberRipple(color = ChatTheme.colors.textHighEmphasis)
-                ) {},
-                onClick = {
-                    onChannelInfoClicked()
-                }
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_info),
-                    contentDescription = stringResource(id = R.string.accessibility_icon),
-                    tint = ChatTheme.colors.textHighEmphasis,
-                )
-            }
-        }
-    )
 }
 
 /**

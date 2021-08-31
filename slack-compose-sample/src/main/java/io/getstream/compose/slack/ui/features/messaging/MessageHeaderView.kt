@@ -34,14 +34,12 @@ fun MessageHeaderView(
             onClickedHandler()
         }
     ) {
-        // Title component
         Text(
             text = title,
             style = ChatTheme.typography.title3Bold,
             color = ChatTheme.colors.textHighEmphasis
         )
 
-        // Sub-title text component
         Text(
             text = subTitle ?: stringResource(id = R.string.details),
             style = ChatTheme.typography.body,
