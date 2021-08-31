@@ -6,6 +6,6 @@
         <item name="colorSecondary">@color/gray</item>
         <item name="colorSecondaryVariant">@color/gray</item>
         <item name="colorOnSecondary">@color/gray</item>
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorSecondary</item>
     </style>
 </resources>
