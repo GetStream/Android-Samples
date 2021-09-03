@@ -26,7 +26,7 @@
             android:id="@+id/logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="18dp"
+            android:layout_margin="@dimen/margin_medium"
             android:background="@drawable/bg_event_logo"
             android:src="@drawable/ic_event_logo"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -36,7 +36,7 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="18dp"
+            android:layout_marginHorizontal="@dimen/margin_medium"
             android:text="World Hacker Summit 2021"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             app:layout_constraintLeft_toRightOf="@+id/logo"
@@ -45,7 +45,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="18dp"
+            android:layout_marginHorizontal="@dimen/margin_medium"
             android:text="Presented by Stream"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
             app:layout_constraintLeft_toRightOf="@+id/logo"
@@ -55,7 +55,7 @@
             android:id="@+id/stats_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="18dp"
+            android:layout_margin="@dimen/margin_medium"
             android:text="Stats"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/black"
@@ -92,7 +92,7 @@
 
             <LinearLayout
                 android:layout_columnWeight="1"
-                android:layout_margin="8dp"
+                android:layout_margin="@dimen/margin_small"
                 android:orientation="horizontal">
 
                 <TextView
@@ -111,7 +111,7 @@
 
             <LinearLayout
                 android:layout_columnWeight="1"
-                android:layout_margin="8dp"
+                android:layout_margin="@dimen/margin_small"
                 android:orientation="horizontal">
 
                 <TextView
@@ -130,7 +130,7 @@
 
             <LinearLayout
                 android:layout_columnWeight="1"
-                android:layout_margin="8dp"
+                android:layout_margin="@dimen/margin_small"
                 android:orientation="horizontal">
 
                 <TextView
@@ -149,7 +149,7 @@
 
             <LinearLayout
                 android:layout_columnWeight="1"
-                android:layout_margin="8dp"
+                android:layout_margin="@dimen/margin_small"
                 android:orientation="horizontal">
 
                 <TextView
@@ -171,7 +171,7 @@
             android:id="@+id/description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="18dp"
+            android:layout_margin="@dimen/margin_medium"
             android:text="Description"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/black"
@@ -183,7 +183,7 @@
             android:id="@+id/description_body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="18dp"
+            android:layout_margin="@dimen/margin_medium"
             android:text="@string/overview_description"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/description" />
@@ -193,7 +193,7 @@
             style="@style/OverviewHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="18dp"
+            android:layout_margin="@dimen/margin_medium"
             android:text="Partners"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/description_body" />
@@ -202,7 +202,7 @@
             android:id="@+id/partners_logos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="18dp"
+            android:layout_margin="@dimen/margin_medium"
             android:layout_marginVertical="12dp"
             android:columnCount="2"
             app:layout_constraintTop_toBottomOf="@+id/partners">
@@ -210,25 +210,25 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="0dp"
                 android:layout_columnWeight="1"
-                android:layout_margin="8dp"
+                android:layout_margin="@dimen/margin_small"
                 android:src="@drawable/ic_red_canary_logo" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="0dp"
                 android:layout_columnWeight="1"
-                android:layout_margin="8dp"
+                android:layout_margin="@dimen/margin_small"
                 android:src="@drawable/ic_symantec_logo" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="0dp"
                 android:layout_columnWeight="1"
-                android:layout_margin="8dp"
+                android:layout_margin="@dimen/margin_small"
                 android:src="@drawable/ic_crowdstrike_logo" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="0dp"
                 android:layout_columnWeight="1"
-                android:layout_margin="8dp"
+                android:layout_margin="@dimen/margin_small"
                 android:src="@drawable/ic_cybereason_logo" />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -240,7 +240,7 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="0dp"
                 android:layout_columnWeight="1"
-                android:layout_margin="8dp"
+                android:layout_margin="@dimen/margin_small"
                 android:src="@drawable/ic_logrythm_logo" />
 
         </GridLayout>
@@ -267,7 +267,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="@dimen/margin_medium">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/hypercube_header"
@@ -282,8 +282,8 @@
                     style="@style/OverviewHeader"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:drawablePadding="16dp"
+                    android:layout_margin="@dimen/margin_medium"
+                    android:drawablePadding="@dimen/margin_medium"
                     android:text="ESG Data - How to create it"
                     app:drawableLeftCompat="@drawable/ic_presentation"
                     app:layout_constraintTop_toBottomOf="@+id/hypercube_header" />
@@ -292,8 +292,8 @@
                     android:id="@+id/hypercube_body"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_margin="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_medium"
                     android:text="ESG Regulations, Standards and Disclosure: Who to publish it for and how to make it meaningful."
                     app:layout_constraintTop_toBottomOf="@+id/hypercube_title" />
 
@@ -301,7 +301,7 @@
                     android:id="@+id/participants_logo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
+                    android:layout_marginLeft="@dimen/margin_medium"
                     android:layout_marginBottom="20dp"
                     android:layout_marginTop="12dp"
                     android:drawablePadding="8dp"
@@ -313,7 +313,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
+                    android:layout_marginLeft="@dimen/margin_medium"
                     android:layout_marginBottom="20dp"
                     android:layout_marginTop="12dp"
                     android:drawablePadding="8dp"
@@ -325,9 +325,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="@dimen/margin_medium"
+                    android:layout_marginRight="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_medium"
                     android:background="@drawable/bg_private_badge"
                     android:padding="8dp"
                     android:text="Private"
@@ -364,8 +364,8 @@
                     style="@style/OverviewHeader"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:drawablePadding="16dp"
+                    android:layout_margin="@dimen/margin_medium"
+                    android:drawablePadding="@dimen/margin_medium"
                     android:text="Data strategy and executive communication"
                     app:drawableTint="@color/gray"
                     app:drawableLeftCompat="@drawable/ic_qa"
@@ -375,8 +375,8 @@
                     android:id="@+id/layers_body"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_margin="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_medium"
                     android:text="How to set a business plans to use information to a competitive advantage and support enterprise goals."
                     app:layout_constraintTop_toBottomOf="@+id/layers_title" />
 
@@ -384,7 +384,7 @@
                     android:id="@+id/participants_logo2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
+                    android:layout_marginLeft="@dimen/margin_medium"
                     android:layout_marginBottom="20dp"
                     android:layout_marginTop="12dp"
                     android:drawablePadding="8dp"
@@ -396,7 +396,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
+                    android:layout_marginLeft="@dimen/margin_medium"
                     android:layout_marginBottom="20dp"
                     android:layout_marginTop="12dp"
                     android:drawablePadding="8dp"
@@ -408,9 +408,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="@dimen/margin_medium"
+                    android:layout_marginRight="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_medium"
                     android:background="@drawable/bg_moderated_badge"
                     android:padding="8dp"
                     android:text="Moderated"
