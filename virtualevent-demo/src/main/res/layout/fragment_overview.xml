@@ -7,7 +7,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
         tools:context=".feature.overview.OverviewFragment">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -189,13 +190,11 @@
 
         <TextView
             android:id="@+id/partners"
+            style="@style/OverviewHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="18dp"
             android:text="Partners"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/black"
-            android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/description_body" />
 
@@ -203,47 +202,222 @@
             android:id="@+id/partners_logos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="18dp"
             android:layout_marginVertical="12dp"
             android:columnCount="2"
             app:layout_constraintTop_toBottomOf="@+id/partners">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_margin="8dp"
-                android:layout_columnWeight="1"
                 android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
                 android:src="@drawable/ic_red_canary_logo" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_columnWeight="1"
                 android:layout_width="0dp"
+                android:layout_columnWeight="1"
                 android:layout_margin="8dp"
                 android:src="@drawable/ic_symantec_logo" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_margin="8dp"
-                android:layout_columnWeight="1"
                 android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
                 android:src="@drawable/ic_crowdstrike_logo" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_columnWeight="1"
                 android:layout_width="0dp"
+                android:layout_columnWeight="1"
                 android:layout_margin="8dp"
                 android:src="@drawable/ic_cybereason_logo" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_margin="8dp"
-                android:layout_columnWeight="1"
                 android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
                 android:src="@drawable/ic_goguardian_logo" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_columnWeight="1"
                 android:layout_width="0dp"
+                android:layout_columnWeight="1"
                 android:layout_margin="8dp"
                 android:src="@drawable/ic_logrythm_logo" />
 
         </GridLayout>
+
+        <TextView
+            android:id="@+id/schedule"
+            style="@style/OverviewHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="18dp"
+            android:text="Schedule"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/partners_logos" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/event1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:elevation="6dp"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/schedule">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/hypercube_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="162dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/bg_hypercube_header"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/hypercube_title"
+                    style="@style/OverviewHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:drawablePadding="16dp"
+                    android:text="ESG Data - How to create it"
+                    app:drawableLeftCompat="@drawable/ic_presentation"
+                    app:layout_constraintTop_toBottomOf="@+id/hypercube_header" />
+
+                <TextView
+                    android:id="@+id/hypercube_body"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="ESG Regulations, Standards and Disclosure: Who to publish it for and how to make it meaningful."
+                    app:layout_constraintTop_toBottomOf="@+id/hypercube_title" />
+
+                <TextView
+                    android:id="@+id/participants_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="12dp"
+                    android:drawablePadding="8dp"
+                    android:text="2"
+                    app:drawableLeftCompat="@drawable/ic_participant"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/hypercube_body" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="12dp"
+                    android:drawablePadding="8dp"
+                    android:text="150"
+                    app:drawableLeftCompat="@drawable/ic_eye"
+                    app:layout_constraintLeft_toRightOf="@+id/participants_logo"
+                    app:layout_constraintTop_toBottomOf="@+id/hypercube_body" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/bg_private_badge"
+                    android:padding="8dp"
+                    android:text="Private"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/hypercube_body" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/event2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:elevation="6dp"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/event1">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/layers_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="162dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/bg_overview_layers"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/layers_title"
+                    style="@style/OverviewHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:drawablePadding="16dp"
+                    android:text="Data strategy and executive communication"
+                    app:drawableTint="@color/gray"
+                    app:drawableLeftCompat="@drawable/ic_qa"
+                    app:layout_constraintTop_toBottomOf="@+id/layers_header" />
+
+                <TextView
+                    android:id="@+id/layers_body"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="How to set a business plans to use information to a competitive advantage and support enterprise goals."
+                    app:layout_constraintTop_toBottomOf="@+id/layers_title" />
+
+                <TextView
+                    android:id="@+id/participants_logo2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="12dp"
+                    android:drawablePadding="8dp"
+                    android:text="6/9"
+                    app:drawableLeftCompat="@drawable/ic_participant"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layers_body" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="12dp"
+                    android:drawablePadding="8dp"
+                    android:text="150"
+                    app:drawableLeftCompat="@drawable/ic_eye"
+                    app:layout_constraintLeft_toRightOf="@+id/participants_logo2"
+                    app:layout_constraintTop_toBottomOf="@+id/layers_body" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/bg_moderated_badge"
+                    android:padding="8dp"
+                    android:text="Moderated"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layers_body" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

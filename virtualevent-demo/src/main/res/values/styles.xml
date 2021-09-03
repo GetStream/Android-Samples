@@ -9,4 +9,10 @@
         <item name="android:layout_marginHorizontal">12dp</item>
         <item name="android:padding">8dp</item>
     </style>
+    <style name="OverviewHeader">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
+    </style>
+
 </resources>
