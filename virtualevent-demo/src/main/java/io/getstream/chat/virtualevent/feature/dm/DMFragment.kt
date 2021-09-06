@@ -4,37 +4,41 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import io.getstream.chat.android.ui.channel.list.adapter.viewholder.ChannelListItemViewHolderFactory
+import io.getstream.chat.android.ui.channel.list.viewmodel.ChannelListViewModel
+import io.getstream.chat.android.ui.channel.list.viewmodel.bindView
+import io.getstream.chat.android.ui.channel.list.viewmodel.factory.ChannelListViewModelFactory
 import io.getstream.chat.virtualevent.databinding.FragmentDmBinding
 
 class DMFragment : Fragment() {
+    private val dmViewModel: DMViewModel by viewModels()
+    private val channelListViewModel: ChannelListViewModel by viewModels {
+        ChannelListViewModelFactory()
+    }
 
-    private lateinit var dmViewModel: DMViewModel
     private var _binding: FragmentDmBinding? = null
-
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        dmViewModel = ViewModelProvider(this).get(DMViewModel::class.java)
-
+    ): View {
         _binding = FragmentDmBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        return binding.root
+    }
 
-        val textView: TextView = binding.textNotifications
-        dmViewModel.text.observe(
-            viewLifecycleOwner,
-            Observer {
-                textView.text = it
-            }
-        )
-        return root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        channelListViewModel.bindView(binding.channelListView, viewLifecycleOwner)
+
+        binding.channelListView.setChannelItemClickListener { channel ->
+            // TODO: navigate to participant selection screen
+        }
+        // TODO: implement custom channel item ViewHolder
+        binding.channelListView.setViewHolderFactory(ChannelListItemViewHolderFactory())
     }
 
     override fun onDestroyView() {
