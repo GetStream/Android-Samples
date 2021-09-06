@@ -31,4 +31,6 @@
     <string name="overview_layers_title">Data strategy and executive communication</string>
     <string name="overview_layers_body">How to set a business plans to use information to a competitive advantage and support enterprise goals.</string>
 
+    <string name="direct_messages_empty_title">No direct message yet</string>
+    <string name="direct_messages_empty_description">You will see your first direct message here when you receive it.</string>
 </resources>
