@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default theme colors -->
+    <color name="primary_accent">#006CFF</color>
+    <color name="app_canvas">#0E1723</color>
+    <color name="text_high_emphasis">#FFFFFF</color>
+    <color name="text_mid_emphasis">#868B91</color>
+    <color name="text_low_emphasis">#57606B</color>
+    <color name="text_self">#FFFFFF</color>
+    <color name="text_pressed">#FFFFFF</color>
+    <color name="card_background">#152438</color>
+    <color name="card_alt_background">#0E1723</color>
+    <color name="card_self_bg">#69727D</color>
+    <color name="stroke">#1B2D46</color>
+    <color name="stroke_low_emphasis">#1A232E</color>
+</resources>

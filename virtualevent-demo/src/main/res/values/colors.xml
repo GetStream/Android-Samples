@@ -8,4 +8,18 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#8A898E</color>
+
+    <!-- Default theme colors -->
+    <color name="primary_accent">#006CFF</color>
+    <color name="app_canvas">#FFFFFF</color>
+    <color name="text_high_emphasis">#0E1621</color>
+    <color name="text_mid_emphasis">#8A898E</color>
+    <color name="text_low_emphasis">#B2B1B5</color>
+    <color name="text_self">#FFFFFF</color>
+    <color name="text_pressed">#FFFFFF</color>
+    <color name="card_background">#F2F2F2</color>
+    <color name="card_alt_background">#FFFFFF</color>
+    <color name="card_self_bg">#41AFFC</color>
+    <color name="stroke">#E5E5E6</color>
+    <color name="stroke_low_emphasis">#F2F2F2</color>
 </resources>
