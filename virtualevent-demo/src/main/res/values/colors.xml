@@ -9,6 +9,23 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#8A898E</color>
 
+    <!-- Static colors -->
+    <color name="static_white">#FFFFFF</color>
+    <color name="static_light_grey">#BCBEC2</color>
+    <color name="static_grey">#72757E</color>
+    <color name="static_dark_grey">#0E1420</color>
+    <color name="static_black">#000000</color>
+    <color name="static_overlay">#CC000000</color>
+    <color name="static_flagged_bg">#0CFF0000</color>
+
+    <!-- Static accents -->
+    <color name="accent_red">#FF0000</color>
+    <color name="accent_red_low_emphasis">#FF9999</color>
+    <color name="accent_green">#00DDB5</color>
+    <color name="accent_green_low_emphasis">#A6F2E4</color>
+    <color name="accent_orange">#F9AC17</color>
+    <color name="accent_orange_low_emphasis">#F9AC17</color>
+
     <!-- Default theme colors -->
     <color name="primary_accent">#006CFF</color>
     <color name="app_canvas">#FFFFFF</color>

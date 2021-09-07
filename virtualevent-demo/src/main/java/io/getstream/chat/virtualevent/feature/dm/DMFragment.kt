@@ -43,6 +43,7 @@ class DMFragment : Fragment() {
         binding.channelListView.setViewHolderFactory(ChannelListItemViewHolderFactory())
 
         setupEmptyView()
+        setupStartChatButton()
     }
 
     private fun setupEmptyView() {
@@ -52,6 +53,12 @@ class DMFragment : Fragment() {
             FrameLayout.LayoutParams.MATCH_PARENT,
         )
         binding.channelListView.setEmptyStateView(emptyView, layoutParams)
+    }
+
+    private fun setupStartChatButton() {
+        binding.startChatButton.setOnClickListener {
+            // TODO: navigate to participant selection screen
+        }
     }
 
     override fun onDestroyView() {
