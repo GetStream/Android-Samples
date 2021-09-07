@@ -261,6 +261,8 @@
             android:layout_margin="32dp"
             android:elevation="6dp"
             app:cardCornerRadius="16dp"
+            android:clickable="true"
+            android:background="?selectableItemBackground"
             app:layout_constraintTop_toBottomOf="@+id/schedule">
 
             <androidx.constraintlayout.widget.ConstraintLayout
