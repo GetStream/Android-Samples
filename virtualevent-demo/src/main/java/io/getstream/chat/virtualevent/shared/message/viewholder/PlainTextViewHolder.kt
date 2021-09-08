@@ -1,6 +1,5 @@
 package io.getstream.chat.virtualevent.shared.message.viewholder
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.getstream.sdk.chat.adapter.MessageListItem
