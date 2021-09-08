@@ -7,15 +7,17 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import io.getstream.chat.android.ui.channel.list.adapter.viewholder.ChannelListItemViewHolderFactory
 import io.getstream.chat.android.ui.channel.list.viewmodel.ChannelListViewModel
 import io.getstream.chat.android.ui.channel.list.viewmodel.bindView
 import io.getstream.chat.android.ui.channel.list.viewmodel.factory.ChannelListViewModelFactory
+import io.getstream.chat.virtualevent.MainFragmentDirections
+import io.getstream.chat.virtualevent.R
 import io.getstream.chat.virtualevent.databinding.FragmentDmBinding
 import io.getstream.chat.virtualevent.databinding.ViewEmptyDirectMessagesBinding
 
 class DMFragment : Fragment() {
-    private val dmViewModel: DMViewModel by viewModels()
     private val channelListViewModel: ChannelListViewModel by viewModels {
         ChannelListViewModelFactory()
     }
@@ -37,7 +39,9 @@ class DMFragment : Fragment() {
         channelListViewModel.bindView(binding.channelListView, viewLifecycleOwner)
 
         binding.channelListView.setChannelItemClickListener { channel ->
-            // TODO: navigate to participant selection screen
+            requireActivity()
+                .findNavController(R.id.hostFragmentContainer)
+                .navigate(MainFragmentDirections.actionToMessageListFragment(channel.cid))
         }
         // TODO: implement custom channel item ViewHolder
         binding.channelListView.setViewHolderFactory(ChannelListItemViewHolderFactory())
@@ -57,7 +61,9 @@ class DMFragment : Fragment() {
 
     private fun setupStartChatButton() {
         binding.startChatButton.setOnClickListener {
-            // TODO: navigate to participant selection screen
+            requireActivity()
+                .findNavController(R.id.hostFragmentContainer)
+                .navigate(R.id.action_to_selectUserFragment)
         }
     }
 

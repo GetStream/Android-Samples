@@ -22,4 +22,5 @@
         android:name="io.getstream.chat.virtualevent.feature.dm.DMFragment"
         android:label="@string/title_dm"
         tools:layout="@layout/fragment_dm" />
+
 </navigation>
