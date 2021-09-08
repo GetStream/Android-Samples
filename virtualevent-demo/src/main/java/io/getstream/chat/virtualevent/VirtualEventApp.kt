@@ -11,13 +11,13 @@ class VirtualEventApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        val client = ChatClient.Builder("bfsgvmwp9gqx", applicationContext)
+        val client = ChatClient.Builder("js6fh2y78g6w", applicationContext)
             .logLevel(ChatLogLevel.ALL)
             .build()
         ChatDomain.Builder(client, applicationContext).build()
 
         val user = User(
-            id = "5531a8cb-3b81-4a54-b424-7ae4e27bf8ba",
+            id = "samuel_urbanowicz",
             extraData = mutableMapOf(
                 "name" to "Samuel",
                 "image" to "https://firebasestorage.googleapis.com/v0/b/stream-chat-internal.appspot.com/o/users%2FJc.png?alt=media",
@@ -26,7 +26,7 @@ class VirtualEventApp : Application() {
 
         client.connectUser(
             user = user,
-            token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiNTUzMWE4Y2ItM2I4MS00YTU0LWI0MjQtN2FlNGUyN2JmOGJhIn0.PXkmukg3JU4igH_YUMr7WC7a1EcwKBr_C5V2ouBlmIs"
+            token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoic2FtdWVsX3VyYmFub3dpY3oifQ.Zsn_9f5LbvyV9F5jQ-_h7YvQNnNsnUQ6_IMRMemA334"
         ).enqueue()
     }
 }
