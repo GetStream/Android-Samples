@@ -17,6 +17,15 @@
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
     </style>
 
+    <style name="StreamUiTextAppearance.Body.LivestreamMessageTimeLabel" parent="StreamUiTextAppearance.Body">
+        <item name="fontFamily">@font/roboto_regular</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/stream_ui_text_color_secondary</item>
+    </style>
+
     <!-- Typography -->
 
     <style name="BaseTextAppearance"></style>
