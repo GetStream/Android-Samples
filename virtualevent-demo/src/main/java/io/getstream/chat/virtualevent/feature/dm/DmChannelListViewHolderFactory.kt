@@ -9,7 +9,7 @@ import io.getstream.chat.android.ui.channel.list.adapter.viewholder.BaseChannelL
 import io.getstream.chat.android.ui.channel.list.adapter.viewholder.ChannelListItemViewHolderFactory
 import io.getstream.chat.android.ui.common.extensions.getDisplayName
 import io.getstream.chat.android.ui.common.extensions.getLastMessage
-import io.getstream.chat.virtualevent.databinding.ItemDmChannelListBinding
+import io.getstream.chat.virtualevent.databinding.ItemDmChannelBinding
 
 class DmChannelListViewHolderFactory : ChannelListItemViewHolderFactory() {
 
@@ -21,7 +21,7 @@ class DmChannelListViewHolderFactory : ChannelListItemViewHolderFactory() {
 class DmChannelListItemViewHolder(
     parent: ViewGroup,
     private val channelClickListener: ChannelListView.ChannelClickListener,
-    private val binding: ItemDmChannelListBinding = ItemDmChannelListBinding.inflate(
+    private val binding: ItemDmChannelBinding = ItemDmChannelBinding.inflate(
         LayoutInflater.from(parent.context),
         parent,
         false
