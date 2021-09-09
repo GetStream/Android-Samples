@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import io.getstream.chat.android.client.models.User
 import io.getstream.chat.android.client.models.name
 import io.getstream.chat.virtualevent.databinding.ItemUserBinding
+import io.getstream.chat.virtualevent.util.randomCompany
 
 class UserListAdapter(
     private val userClickListener: (user: User) -> Unit
@@ -46,11 +47,11 @@ class UserListAdapter(
 
         fun bind(user: User) {
             this.user = user
-
-            binding.userAvatarView.setUserData(user)
-            binding.nameTextView.text = user.name
-            // TODO: prepare text users according to the designs
-            binding.companyTextView.text = "${user.name} LLC"
+            with(binding) {
+                userAvatarView.setUserData(user)
+                nameTextView.text = user.name
+                companyTextView.text = randomCompany()
+            }
         }
     }
 }
