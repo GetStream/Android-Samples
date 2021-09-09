@@ -11,77 +11,64 @@ import io.getstream.chat.android.client.errors.ChatError
 import io.getstream.chat.android.client.models.Filters
 import io.getstream.chat.android.client.models.User
 import io.getstream.chat.android.livedata.utils.Event
-import io.getstream.chat.android.offline.ChatDomain
+import io.getstream.chat.virtualevent.util.currentUserId
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel responsible for loading and showing available users.
+ *
+ * **Note**: For simplicity, pagination is not implemented in this ViewModel.
+ * Only the first page of available users is loaded.
+ */
 class SelectUserViewModel(
     private val chatClient: ChatClient = ChatClient.instance(),
-    private val chatDomain: ChatDomain = ChatDomain.instance()
 ) : ViewModel() {
 
-    private val _usersState: MutableLiveData<State> = MutableLiveData()
-    private val _navigationEvents: MutableLiveData<Event<NavigationEvent>> = MutableLiveData()
-    val usersState: LiveData<State> = _usersState
-    val navigationEvents: LiveData<Event<NavigationEvent>> = _navigationEvents
+    private val _state: MutableLiveData<State> = MutableLiveData()
+    private val _events: MutableLiveData<Event<UiEvent>> = MutableLiveData()
+    val state: LiveData<State> = _state
+    val events: LiveData<Event<UiEvent>> = _events
 
     init {
-        _usersState.postValue(State.Loading)
+        _state.postValue(State.Loading)
         viewModelScope.launch {
             val result = chatClient.queryUsers(
                 QueryUsersRequest(
-                    filter = Filters.ne("id", ChatClient.instance().getCurrentUser()?.id ?: ""),
+                    filter = Filters.ne("id", currentUserId()),
                     offset = 0,
-                    limit = QUERY_LIMIT,
+                    limit = 30,
                 )
             ).await()
             if (result.isSuccess) {
-                _usersState.postValue(State.Content(result.data()))
+                _state.postValue(State.Content(result.data()))
             } else {
-                _usersState.postValue(State.Error(result.error()))
+                _state.postValue(State.Error(result.error()))
             }
         }
     }
 
-    fun onAction(action: Action) {
-        when (action) {
-            is Action.UserClicked -> {
-                onUserSelected(action.user)
-            }
-        }
-    }
-
-    private fun onUserSelected(user: User) {
+    fun onUserSelected(user: User) {
         viewModelScope.launch(Dispatchers.IO) {
-            val currentUserId =
-                chatDomain.user.value?.id ?: error("User must be set before create new channel!")
             val result = chatClient.createChannel(
                 channelType = "messaging",
-                members = listOf(user.id, currentUserId),
+                members = listOf(user.id, currentUserId()),
                 extraData = mapOf()
             ).await()
             if (result.isSuccess) {
                 val cid = result.data().cid
-                _navigationEvents.postValue(Event(NavigationEvent.RedirectToChat(cid)))
+                _events.postValue(Event(UiEvent.NavigateToChat(cid)))
             }
         }
-    }
-
-    sealed class Action {
-        data class UserClicked(val user: User) : Action()
     }
 
     sealed class State {
         object Loading : State()
         data class Content(val users: List<User>) : State()
-        data class Error(val chatError: ChatError) : State()
+        data class Error(val error: ChatError) : State()
     }
 
-    sealed class NavigationEvent {
-        data class RedirectToChat(val cid: String) : NavigationEvent()
-    }
-
-    companion object {
-        private const val QUERY_LIMIT = 30
+    sealed class UiEvent {
+        data class NavigateToChat(val cid: String) : UiEvent()
     }
 }

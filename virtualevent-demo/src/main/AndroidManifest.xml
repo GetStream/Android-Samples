@@ -24,6 +24,8 @@
         <activity
             android:name="io.getstream.chat.virtualevent.feature.event.EventDetailsActivity"
             android:parentActivityName=".MainActivity" />
+        <activity android:name="io.getstream.chat.virtualevent.feature.dm.DmActivity" />
+        <activity android:name="io.getstream.chat.virtualevent.feature.dm.SelectUserActivity" />
     </application>
 
 </manifest>
