@@ -29,17 +29,11 @@ class OverviewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         this._binding?.event1?.setOnClickListener {
-            openEventDetails()
+            EventDetailsActivity.openActivity(requireContext(), EventDetailsActivity.cid1)
         }
 
         this._binding?.event2?.setOnClickListener {
-            openEventDetails()
-        }
-    }
-
-    private fun openEventDetails() {
-        context?.let {
-            startActivity(Intent(it, EventDetailsActivity::class.java))
+            EventDetailsActivity.openActivity(requireContext(), EventDetailsActivity.cid2)
         }
     }
 

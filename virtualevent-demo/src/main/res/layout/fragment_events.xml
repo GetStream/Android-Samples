@@ -7,8 +7,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <include layout="@layout/layout_event_1" />
-        <include layout="@layout/layout_event_2" />
+        <include layout="@layout/layout_event_1" android:id="@+id/event_1" />
+        <include layout="@layout/layout_event_2" android:id="@+id/event_2" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </ScrollView>
