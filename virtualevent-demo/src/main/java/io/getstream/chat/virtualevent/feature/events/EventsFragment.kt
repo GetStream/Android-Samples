@@ -5,24 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import com.getstream.sdk.chat.viewmodel.MessageInputViewModel
-import com.getstream.sdk.chat.viewmodel.messages.MessageListViewModel
-import io.getstream.chat.android.ui.message.input.viewmodel.bindView
-import io.getstream.chat.android.ui.message.list.viewmodel.bindView
-import io.getstream.chat.android.ui.message.list.viewmodel.factory.MessageListViewModelFactory
 import io.getstream.chat.virtualevent.databinding.FragmentEventsBinding
-import io.getstream.chat.virtualevent.shared.message.LivestreamMessageViewHolderFactory
+import io.getstream.chat.virtualevent.feature.event.EventDetailsActivity
 
 class EventsFragment : Fragment() {
 
-    private val cid: String = "livestream:data-strategy_cfe253a5-785b-4c77-a5a0-ec63693d4e58"
-    private val factory: MessageListViewModelFactory by lazy { MessageListViewModelFactory(cid = cid) }
-    private val messageListViewModel: MessageListViewModel by viewModels { factory }
-    private val messageInputViewModel: MessageInputViewModel by viewModels { factory }
-
-    private lateinit var eventsViewModel: EventsViewModel
     private var _binding: FragmentEventsBinding? = null
 
     private val binding get() = _binding!!
@@ -31,47 +18,17 @@ class EventsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        eventsViewModel = ViewModelProvider(this).get(EventsViewModel::class.java)
-
+    ): View {
         _binding = FragmentEventsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initMessagesViewModel()
-        initMessageInputViewModel()
-    }
-
-    private fun initMessagesViewModel() {
-        binding.messageListView.setMessageViewHolderFactory(LivestreamMessageViewHolderFactory())
-        messageListViewModel.apply {
-            bindView(binding.messageListView, viewLifecycleOwner)
+        binding.event1.root.setOnClickListener {
+            EventDetailsActivity.openActivity(requireContext(), EventDetailsActivity.cid1)
         }
-    }
-
-    private fun initMessageInputViewModel() {
-        messageInputViewModel.apply {
-            bindView(binding.messageInputView, viewLifecycleOwner)
-            messageListViewModel.mode.observe(viewLifecycleOwner) {
-                when (it) {
-                    is MessageListViewModel.Mode.Thread -> {
-                        messageInputViewModel.setActiveThread(it.parentMessage)
-                    }
-                    is MessageListViewModel.Mode.Normal -> {
-                        messageInputViewModel.resetThread()
-                    }
-                }
-            }
-            binding.messageListView.setMessageEditHandler(::postMessageToEdit)
+        binding.event2.root.setOnClickListener {
+            EventDetailsActivity.openActivity(requireContext(), EventDetailsActivity.cid2)
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
