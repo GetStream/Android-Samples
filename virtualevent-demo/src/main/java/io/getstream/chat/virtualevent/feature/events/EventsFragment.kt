@@ -22,7 +22,6 @@ class EventsFragment : Fragment() {
     private val messageListViewModel: MessageListViewModel by viewModels { factory }
     private val messageInputViewModel: MessageInputViewModel by viewModels { factory }
 
-    private lateinit var eventsViewModel: EventsViewModel
     private var _binding: FragmentEventsBinding? = null
 
     private val binding get() = _binding!!
@@ -32,8 +31,6 @@ class EventsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        eventsViewModel = ViewModelProvider(this).get(EventsViewModel::class.java)
-
         _binding = FragmentEventsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
