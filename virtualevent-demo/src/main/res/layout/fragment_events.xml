@@ -1,29 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".feature.events.EventsFragment">
+    android:layout_height="match_parent">
 
-    <io.getstream.chat.android.ui.message.list.MessageListView
-        android:id="@+id/messageListView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="0dp"
-        android:clipToPadding="false"
-        android:layout_alignParentTop="true"
-        android:layout_above="@id/messageInputView"
-        app:streamUiFlagMessageConfirmationEnabled="true"
-        app:streamUiMuteUserEnabled="false"
-        app:streamUiPinMessageEnabled="true"
-        />
-
-    <io.getstream.chat.android.ui.message.input.MessageInputView
-        android:id="@+id/messageInputView"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:streamUiAttachButtonEnabled="false"
-        />
-</RelativeLayout>
+        android:orientation="vertical">
+        <include layout="@layout/layout_event_1" />
+        <include layout="@layout/layout_event_2" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</ScrollView>
