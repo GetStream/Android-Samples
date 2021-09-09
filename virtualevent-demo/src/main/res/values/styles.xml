@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="OverviewStatsItemNumber">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
         <item name="android:textColor">@color/black</item>
@@ -9,6 +10,7 @@
         <item name="android:layout_marginHorizontal">12dp</item>
         <item name="android:padding">8dp</item>
     </style>
+
     <style name="OverviewHeader">
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/black</item>
@@ -24,4 +26,79 @@
         <item name="android:textColor">@color/stream_ui_text_color_secondary</item>
     </style>
 
+    <!-- Typography -->
+
+    <style name="BaseTextAppearance"></style>
+
+    <style name="Title1" parent="@style/BaseTextAppearance">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+    </style>
+
+    <style name="Title2" parent="@style/BaseTextAppearance">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+    </style>
+
+    <style name="Title2Bold" parent="@style/BaseTextAppearance">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+    </style>
+
+    <style name="Title3" parent="@style/BaseTextAppearance">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+    </style>
+
+    <style name="Title3Bold" parent="@style/BaseTextAppearance">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+    </style>
+
+    <style name="Body" parent="@style/BaseTextAppearance">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+    </style>
+
+    <style name="BodyItalic" parent="@style/BaseTextAppearance">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+    </style>
+
+    <style name="BodyBold" parent="@style/BaseTextAppearance">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+    </style>
+
+    <style name="Footnote" parent="@style/BaseTextAppearance">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+    </style>
+
+    <style name="FootnoteItalic" parent="@style/BaseTextAppearance">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+    </style>
+
+    <style name="FootnoteBold" parent="@style/BaseTextAppearance">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+    </style>
+
+    <style name="Caption" parent="@style/BaseTextAppearance">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:lineSpacingExtra">2sp</item>
+    </style>
 </resources>
