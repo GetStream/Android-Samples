@@ -26,17 +26,25 @@ class EventDetailsActivity : AppCompatActivity() {
         binding = ActivityEventDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.apply {
-            setDisplayHomeAsUpEnabled(true)
-        }
-
         val cid = intent.getStringExtra(KEY_EXTRA_CID)!!
         val factory = MessageListViewModelFactory(cid = cid)
         messageListViewModel = factory.create(MessageListViewModel::class.java)
         messageInputViewModel = factory.create(MessageInputViewModel::class.java)
 
+        setupToolbar()
         setupMessageListView()
         setupMessageInputView()
+    }
+
+    private fun setupToolbar() {
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.apply {
+            setDisplayShowHomeEnabled(true)
+            setDisplayHomeAsUpEnabled(true)
+            binding.toolbar.setNavigationOnClickListener {
+                onBackPressed()
+            }
+        }
     }
 
     private fun setupMessageListView() {
