@@ -13,4 +13,7 @@
     <color name="card_self_bg">#69727D</color>
     <color name="stroke">#1B2D46</color>
     <color name="stroke_low_emphasis">#1A232E</color>
+
+    <!-- Make status bar icons light -->
+    <bool name="windowLightStatusBar">false</bool>
 </resources>
