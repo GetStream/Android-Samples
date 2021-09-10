@@ -15,7 +15,7 @@
     <color name="accent_green">#00DDB5</color>
     <color name="accent_green_low_emphasis">#A6F2E4</color>
     <color name="accent_orange">#F9AC17</color>
-    <color name="accent_orange_low_emphasis">#F9AC17</color>
+    <color name="accent_orange_low_emphasis">#FBCA6A</color>
 
     <!-- Default theme colors -->
     <color name="primary_accent">#006CFF</color>
