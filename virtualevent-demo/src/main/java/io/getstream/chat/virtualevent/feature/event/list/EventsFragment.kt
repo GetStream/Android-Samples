@@ -1,23 +1,20 @@
-package io.getstream.chat.virtualevent.feature.overview
+package io.getstream.chat.virtualevent.feature.event.list
 
 import android.os.Bundle
-import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import io.getstream.chat.virtualevent.AppConfig
-import io.getstream.chat.virtualevent.R
-import io.getstream.chat.virtualevent.databinding.FragmentOverviewBinding
+import io.getstream.chat.virtualevent.databinding.FragmentEventsBinding
 import io.getstream.chat.virtualevent.feature.event.detail.EventDetailsActivity
 
 /**
- * Fragment that shows information about the conference: title, description,
- * statistics, partners, schedule, etc.
+ * Fragment with a list of conference events.
  */
-class OverviewFragment : Fragment() {
+class EventsFragment : Fragment() {
 
-    private var _binding: FragmentOverviewBinding? = null
+    private var _binding: FragmentEventsBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -25,16 +22,12 @@ class OverviewFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return FragmentOverviewBinding.inflate(inflater, container, false)
+        return FragmentEventsBinding.inflate(inflater, container, false)
             .apply { _binding = this }
             .root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.titleSectionInclude.eventSubtitleTextView.text = Html.fromHtml(
-            getString(R.string.overview_subtitle),
-            Html.FROM_HTML_MODE_COMPACT
-        )
         binding.event1Include.event1CardView.setOnClickListener {
             startActivity(
                 EventDetailsActivity.createIntent(
@@ -51,10 +44,5 @@ class OverviewFragment : Fragment() {
                 )
             )
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

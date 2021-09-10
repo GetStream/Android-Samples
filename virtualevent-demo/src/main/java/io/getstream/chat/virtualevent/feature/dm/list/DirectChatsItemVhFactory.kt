@@ -1,4 +1,4 @@
-package io.getstream.chat.virtualevent.feature.dm
+package io.getstream.chat.virtualevent.feature.dm.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,14 +11,17 @@ import io.getstream.chat.android.ui.common.extensions.getDisplayName
 import io.getstream.chat.android.ui.common.extensions.getLastMessage
 import io.getstream.chat.virtualevent.databinding.ItemDmChannelBinding
 
-class DmChannelListViewHolderFactory : ChannelListItemViewHolderFactory() {
+class DirectChatListItemVhFactory : ChannelListItemViewHolderFactory() {
 
     override fun createChannelViewHolder(parentView: ViewGroup): BaseChannelListItemViewHolder {
-        return DmChannelListItemViewHolder(parentView, listenerContainer.channelClickListener)
+        return DirectChatListItemViewHolder(
+            parentView,
+            listenerContainer.channelClickListener
+        )
     }
 }
 
-class DmChannelListItemViewHolder(
+class DirectChatListItemViewHolder(
     parent: ViewGroup,
     private val channelClickListener: ChannelListView.ChannelClickListener,
     private val binding: ItemDmChannelBinding = ItemDmChannelBinding.inflate(

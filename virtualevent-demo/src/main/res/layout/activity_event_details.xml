@@ -4,6 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:background="@color/app_canvas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <io.getstream.chat.android.ui.message.list.MessageListView
         android:id="@+id/messageListView"
         android:layout_width="match_parent"
@@ -13,7 +22,7 @@
         android:layout_marginHorizontal="0dp"
         android:clipToPadding="false"
         app:layout_constraintBottom_toTopOf="@+id/messageInputView"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:streamUiFlagMessageConfirmationEnabled="true"
         app:streamUiMuteUserEnabled="false"
         app:streamUiPinMessageEnabled="true" />

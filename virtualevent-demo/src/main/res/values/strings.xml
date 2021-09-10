@@ -1,12 +1,20 @@
 <resources>
-    <string name="app_name">VirtualEvent demo app</string>
+    <string name="app_name">VirtualEvent Demo</string>
+
+    <!-- Bottom Navigation Tabs -->
     <string name="title_overview">Overview</string>
     <string name="title_events">Events</string>
     <string name="title_dm">DM</string>
 
+    <!-- Events -->
     <string name="private_label">Private</string>
     <string name="moderated_label">Moderated</string>
 
+    <!-- Overview Screen -->
+    <string name="overview_title">World Hacker Summit 2021</string>
+    <string name="overview_subtitle"><![CDATA[Presented by <b>Stream</b>]]></string>
+    <string name="overview_stats_title">Stats</string>
+    <string name="overview_description_title">Description</string>
     <string name="overview_description">
         <![CDATA["Welcome to the inaugural World Hacker Summit!
     \nThe goal of today's event is to spotlight innovative thought leaders and to provide an opportunity to share and exchange new ideas, technology trends and networking.
@@ -21,16 +29,13 @@
     \n4. Submit your completed passport to Dorah Nielsen at dorah.nielsen@whs.com by 10 a.m. EST on 3/6.
     \n5. Stay tuned. Winners will be announced on 3/6 on our social media sites! "]]>
     </string>
-    <string name="overview_title">World Hacker Summit 2021</string>
-    <string name="overview_subtitle">Presented by Stream</string>
-    <string name="overview_stats_title">Stats</string>
-    <string name="overview_description_title">Description</string>
     <string name="overview_partners_title">Partners</string>
     <string name="overview_schedule_title">Schedule</string>
-    <string name="overview_hypercube_body">ESG Regulations, Standards and Disclosure: Who to publish it for and how to make it meaningful.</string>
+    <string name="overview_hypercube_description">ESG Regulations, Standards and Disclosure: Who to publish it for and how to make it meaningful.</string>
     <string name="overview_layers_title">Data strategy and executive communication</string>
-    <string name="overview_layers_body">How to set a business plans to use information to a competitive advantage and support enterprise goals.</string>
+    <string name="overview_layers_description">How to set a business plans to use information to a competitive advantage and support enterprise goals.</string>
 
+    <!-- Direct Messages -->
     <string name="direct_messages_empty_title">No direct message yet</string>
     <string name="direct_messages_empty_description">You will see your first direct message here when you receive it.</string>
     <string name="direct_message_start_chat">Start a chat</string>

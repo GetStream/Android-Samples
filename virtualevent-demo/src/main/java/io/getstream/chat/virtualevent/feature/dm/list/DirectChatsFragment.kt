@@ -1,4 +1,4 @@
-package io.getstream.chat.virtualevent.feature.dm
+package io.getstream.chat.virtualevent.feature.dm.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,15 +10,21 @@ import androidx.fragment.app.viewModels
 import io.getstream.chat.android.ui.channel.list.viewmodel.ChannelListViewModel
 import io.getstream.chat.android.ui.channel.list.viewmodel.bindView
 import io.getstream.chat.android.ui.channel.list.viewmodel.factory.ChannelListViewModelFactory
-import io.getstream.chat.virtualevent.databinding.FragmentDmBinding
+import io.getstream.chat.virtualevent.databinding.FragmentDirectChatsBinding
 import io.getstream.chat.virtualevent.databinding.ViewDmEmptyBinding
+import io.getstream.chat.virtualevent.feature.dm.DirectChatActivity
+import io.getstream.chat.virtualevent.feature.dm.start.StartDirectChatActivity
 
-class DMFragment : Fragment() {
+/**
+ * Fragment that shows a list of direct (1-to-1) conversations.
+ */
+class DirectChatsFragment : Fragment() {
+
     private val channelListViewModel: ChannelListViewModel by viewModels {
         ChannelListViewModelFactory()
     }
 
-    private var _binding: FragmentDmBinding? = null
+    private var _binding: FragmentDirectChatsBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -26,8 +32,9 @@ class DMFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDmBinding.inflate(inflater, container, false)
-        return binding.root
+        return FragmentDirectChatsBinding.inflate(inflater, container, false)
+            .apply { _binding = this }
+            .root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,12 +49,13 @@ class DMFragment : Fragment() {
             )
         )
         binding.channelListView.setChannelItemClickListener { channel ->
-            startActivity(DmActivity.createIntent(requireContext(), channel.cid))
+            startActivity(DirectChatActivity.createIntent(requireContext(), channel.cid))
         }
         binding.startChatButton.setOnClickListener {
-            startActivity(SelectUserActivity.createIntent(requireContext()))
+            startActivity(StartDirectChatActivity.createIntent(requireContext()))
         }
-        binding.channelListView.setViewHolderFactory(DmChannelListViewHolderFactory())
+        // TODO: implement custom direct chat ViewHolder factory
+        // binding.channelListView.setViewHolderFactory(DirectChatListItemVhFactory())
     }
 
     override fun onDestroyView() {

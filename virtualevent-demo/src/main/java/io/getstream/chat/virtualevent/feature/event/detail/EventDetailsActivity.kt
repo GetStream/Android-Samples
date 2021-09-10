@@ -1,4 +1,4 @@
-package io.getstream.chat.virtualevent.feature.event
+package io.getstream.chat.virtualevent.feature.event.detail
 
 import android.content.Context
 import android.content.Intent
@@ -10,8 +10,12 @@ import io.getstream.chat.android.ui.message.input.viewmodel.bindView
 import io.getstream.chat.android.ui.message.list.viewmodel.bindView
 import io.getstream.chat.android.ui.message.list.viewmodel.factory.MessageListViewModelFactory
 import io.getstream.chat.virtualevent.databinding.ActivityEventDetailsBinding
-import io.getstream.chat.virtualevent.shared.message.LivestreamMessageViewHolderFactory
+import io.getstream.chat.virtualevent.util.setupToolbar
 
+/**
+ * Activity that shows a live video stream and a list of comments
+ * associated with this stream.
+ */
 class EventDetailsActivity : AppCompatActivity() {
 
     private lateinit var messageListViewModel: MessageListViewModel
@@ -20,25 +24,21 @@ class EventDetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityEventDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        supportActionBar?.apply {
-            setDisplayHomeAsUpEnabled(true)
-        }
 
         val cid = intent.getStringExtra(KEY_EXTRA_CID)!!
         val factory = MessageListViewModelFactory(cid = cid)
         messageListViewModel = factory.create(MessageListViewModel::class.java)
         messageInputViewModel = factory.create(MessageInputViewModel::class.java)
 
+        setupToolbar(binding.toolbar)
         setupMessageListView()
         setupMessageInputView()
     }
 
     private fun setupMessageListView() {
-        binding.messageListView.setMessageViewHolderFactory(LivestreamMessageViewHolderFactory())
+        binding.messageListView.setMessageViewHolderFactory(LivestreamMessageItemVhFactory())
         messageListViewModel.apply {
             bindView(binding.messageListView, this@EventDetailsActivity)
         }
@@ -51,15 +51,10 @@ class EventDetailsActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val KEY_EXTRA_CID = "extra_cid"
-        const val cid1: String = "livestream:esg_data_f22160f7-01fd-423f-b622-fe7060ec10d8"
-        const val cid2: String = "livestream:data-strategy_cfe253a5-785b-4c77-a5a0-ec63693d4e58"
+        private const val KEY_EXTRA_CID: String = "extra_cid"
 
-        fun openActivity(context: Context, cid: String) {
-            val intent = Intent(context, EventDetailsActivity::class.java).apply {
-                putExtra(KEY_EXTRA_CID, cid)
-            }
-            context.startActivity(intent)
+        fun createIntent(context: Context, cid: String): Intent {
+            return Intent(context, EventDetailsActivity::class.java).putExtra(KEY_EXTRA_CID, cid)
         }
     }
 }

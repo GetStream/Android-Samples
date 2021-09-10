@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/partnerLogosGridLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/margin_medium"
+    android:columnCount="2">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        style="@style/OverviewPartnerLogo"
+        android:src="@drawable/ic_partner_red_canary" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        style="@style/OverviewPartnerLogo"
+        android:src="@drawable/ic_partner_symantec" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        style="@style/OverviewPartnerLogo"
+        android:src="@drawable/ic_partner_crowdstrike" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        style="@style/OverviewPartnerLogo"
+        android:src="@drawable/ic_partner_cybereason" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        style="@style/OverviewPartnerLogo"
+        android:src="@drawable/ic_partner_goguardian" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        style="@style/OverviewPartnerLogo"
+        android:src="@drawable/ic_partner_logrythm" />
+
+</GridLayout>
