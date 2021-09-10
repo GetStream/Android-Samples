@@ -1,4 +1,4 @@
-package io.getstream.chat.virtualevent.feature.dm
+package io.getstream.chat.virtualevent.feature.dm.start
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,11 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import io.getstream.chat.android.client.models.User
 import io.getstream.chat.android.client.models.name
 import io.getstream.chat.virtualevent.databinding.ItemUserBinding
-import io.getstream.chat.virtualevent.util.randomCompany
 
-class UserListAdapter(
+class ParticipantListAdapter(
     private val userClickListener: (user: User) -> Unit
-) : RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
+) : RecyclerView.Adapter<ParticipantListAdapter.ParticipantViewHolder>() {
 
     private val users: MutableList<User> = mutableListOf()
 
@@ -22,17 +21,17 @@ class UserListAdapter(
 
     override fun getItemCount(): Int = users.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ParticipantViewHolder {
         return ItemUserBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
-            .let { UserViewHolder(it, userClickListener) }
+            .let { ParticipantViewHolder(it, userClickListener) }
     }
 
-    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ParticipantViewHolder, position: Int) {
         holder.bind(users[position])
     }
 
-    class UserViewHolder(
+    class ParticipantViewHolder(
         private val binding: ItemUserBinding,
         private val userClickListener: (user: User) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -53,5 +52,34 @@ class UserListAdapter(
                 companyTextView.text = randomCompany()
             }
         }
+    }
+
+    companion object {
+        /**
+         * Mock user companies according to the design.
+         */
+        private val COMPANY_LIST: Set<String> = setOf(
+            "Reilly LLC",
+            "Miller, O'Conner and Nicolas",
+            "Grimes, Bashirian and Nolan",
+            "Borer, Hamill and Mante",
+            "Steuber Inc",
+            "Baumbach, Weissnat and Herzog",
+            "Upton, Pfeffer and Hodkiewicz",
+            "Mraz Group",
+            "Harvey Inc",
+            "Kihn LLC",
+            "Designer. Speaker, Lifelong Learner.",
+            "Feest - Lakin",
+            "Kihn - Parisian",
+            "Nolan Inc",
+            "Keebler LLC",
+            "Huels - Daniel"
+        )
+
+        /**
+         * Returns a random company name.
+         */
+        fun randomCompany(): String = COMPANY_LIST.random()
     }
 }

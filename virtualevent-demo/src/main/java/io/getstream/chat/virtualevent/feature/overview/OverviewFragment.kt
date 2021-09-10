@@ -9,11 +9,11 @@ import androidx.fragment.app.Fragment
 import io.getstream.chat.virtualevent.AppConfig
 import io.getstream.chat.virtualevent.R
 import io.getstream.chat.virtualevent.databinding.FragmentOverviewBinding
-import io.getstream.chat.virtualevent.feature.event.EventDetailsActivity
+import io.getstream.chat.virtualevent.feature.event.detail.EventDetailsActivity
 
 /**
- * Fragment that shows information about the conference: name of the conference,
- * statistics, description, partners, schedule, etc.
+ * Fragment that shows information about the conference: title, description,
+ * statistics, partners, schedule, etc.
  */
 class OverviewFragment : Fragment() {
 
@@ -35,7 +35,6 @@ class OverviewFragment : Fragment() {
             getString(R.string.overview_subtitle),
             Html.FROM_HTML_MODE_COMPACT
         )
-
         binding.event1Include.event1CardView.setOnClickListener {
             startActivity(
                 EventDetailsActivity.createIntent(
@@ -44,7 +43,6 @@ class OverviewFragment : Fragment() {
                 )
             )
         }
-
         binding.event2Include.event2CardView.setOnClickListener {
             startActivity(
                 EventDetailsActivity.createIntent(

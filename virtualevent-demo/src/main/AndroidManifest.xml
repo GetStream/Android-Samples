@@ -8,12 +8,11 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
+        android:supportsRtl="false"
         android:theme="@style/Theme.VirtualEvent">
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,10 +21,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="io.getstream.chat.virtualevent.feature.event.EventDetailsActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name="io.getstream.chat.virtualevent.feature.dm.DmActivity" />
-        <activity android:name="io.getstream.chat.virtualevent.feature.dm.SelectUserActivity" />
+            android:name="io.getstream.chat.virtualevent.feature.event.detail.EventDetailsActivity"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="io.getstream.chat.virtualevent.feature.dm.DirectChatActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="io.getstream.chat.virtualevent.feature.dm.start.StartDirectChatActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

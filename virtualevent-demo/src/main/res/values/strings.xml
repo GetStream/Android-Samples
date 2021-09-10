@@ -1,9 +1,12 @@
 <resources>
-    <string name="app_name">VirtualEvent demo app</string>
+    <string name="app_name">VirtualEvent Demo</string>
+
+    <!-- Bottom Navigation Tabs -->
     <string name="title_overview">Overview</string>
     <string name="title_events">Events</string>
     <string name="title_dm">DM</string>
 
+    <!-- Events -->
     <string name="private_label">Private</string>
     <string name="moderated_label">Moderated</string>
 
@@ -32,6 +35,7 @@
     <string name="overview_layers_title">Data strategy and executive communication</string>
     <string name="overview_layers_description">How to set a business plans to use information to a competitive advantage and support enterprise goals.</string>
 
+    <!-- Direct Messages -->
     <string name="direct_messages_empty_title">No direct message yet</string>
     <string name="direct_messages_empty_description">You will see your first direct message here when you receive it.</string>
     <string name="direct_message_start_chat">Start a chat</string>

@@ -16,9 +16,9 @@ import io.getstream.chat.android.ui.message.list.header.viewmodel.MessageListHea
 import io.getstream.chat.android.ui.message.list.header.viewmodel.bindView
 import io.getstream.chat.android.ui.message.list.viewmodel.bindView
 import io.getstream.chat.android.ui.message.list.viewmodel.factory.MessageListViewModelFactory
-import io.getstream.chat.virtualevent.databinding.ActivityDmBinding
+import io.getstream.chat.virtualevent.databinding.ActivityDirectChatBinding
 
-class DmActivity : AppCompatActivity() {
+class DirectChatActivity : AppCompatActivity() {
 
     private val cid: String by lazy {
         intent.getStringExtra(KEY_EXTRA_CID)!!
@@ -29,11 +29,11 @@ class DmActivity : AppCompatActivity() {
     private val messageListHeaderViewModel: MessageListHeaderViewModel by viewModels { factory }
     private val messageInputViewModel: MessageInputViewModel by viewModels { factory }
 
-    private lateinit var binding: ActivityDmBinding
+    private lateinit var binding: ActivityDirectChatBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDmBinding.inflate(layoutInflater)
+        binding = ActivityDirectChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupMessageListHeader(binding.messageListHeaderView)
@@ -43,14 +43,14 @@ class DmActivity : AppCompatActivity() {
 
     private fun setupMessageListHeader(messageListHeaderView: MessageListHeaderView) {
         with(messageListHeaderView) {
-            messageListHeaderViewModel.bindView(this, this@DmActivity)
+            messageListHeaderViewModel.bindView(this, this@DirectChatActivity)
 
             val backHandler = {
                 messageListViewModel.onEvent(MessageListViewModel.Event.BackButtonPressed)
             }
             setBackButtonClickListener(backHandler)
             onBackPressedDispatcher.addCallback(
-                this@DmActivity,
+                this@DirectChatActivity,
                 object : OnBackPressedCallback(true) {
                     override fun handleOnBackPressed() {
                         backHandler()
@@ -61,9 +61,9 @@ class DmActivity : AppCompatActivity() {
     }
 
     private fun setupMessageList(messageListView: MessageListView) {
-        messageListViewModel.bindView(messageListView, this@DmActivity)
+        messageListViewModel.bindView(messageListView, this@DirectChatActivity)
 
-        messageListViewModel.state.observe(this@DmActivity) {
+        messageListViewModel.state.observe(this@DirectChatActivity) {
             when (it) {
                 is MessageListViewModel.State.Loading -> Unit
                 is MessageListViewModel.State.Result -> Unit
@@ -74,9 +74,9 @@ class DmActivity : AppCompatActivity() {
 
     private fun setupMessageInput(messageInputView: MessageInputView) {
         messageInputViewModel.apply {
-            messageInputViewModel.bindView(messageInputView, this@DmActivity)
+            messageInputViewModel.bindView(messageInputView, this@DirectChatActivity)
 
-            messageListViewModel.mode.observe(this@DmActivity) {
+            messageListViewModel.mode.observe(this@DirectChatActivity) {
                 when (it) {
                     is MessageListViewModel.Mode.Thread -> {
                         messageListHeaderViewModel.setActiveThread(it.parentMessage)
@@ -96,7 +96,7 @@ class DmActivity : AppCompatActivity() {
         private const val KEY_EXTRA_CID: String = "extra_cid"
 
         fun createIntent(context: Context, cid: String): Intent {
-            return Intent(context, DmActivity::class.java).putExtra(KEY_EXTRA_CID, cid)
+            return Intent(context, DirectChatActivity::class.java).putExtra(KEY_EXTRA_CID, cid)
         }
     }
 }

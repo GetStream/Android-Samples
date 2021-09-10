@@ -1,4 +1,4 @@
-package io.getstream.chat.virtualevent.feature.events
+package io.getstream.chat.virtualevent.feature.event.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import io.getstream.chat.virtualevent.AppConfig
 import io.getstream.chat.virtualevent.databinding.FragmentEventsBinding
-import io.getstream.chat.virtualevent.feature.event.EventDetailsActivity
+import io.getstream.chat.virtualevent.feature.event.detail.EventDetailsActivity
 
 /**
- * Fragment with a list of events.
+ * Fragment with a list of conference events.
  */
 class EventsFragment : Fragment() {
 

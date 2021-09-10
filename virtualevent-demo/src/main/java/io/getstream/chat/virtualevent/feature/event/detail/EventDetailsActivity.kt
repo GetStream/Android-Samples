@@ -1,4 +1,4 @@
-package io.getstream.chat.virtualevent.feature.event
+package io.getstream.chat.virtualevent.feature.event.detail
 
 import android.content.Context
 import android.content.Intent
@@ -10,8 +10,11 @@ import io.getstream.chat.android.ui.message.input.viewmodel.bindView
 import io.getstream.chat.android.ui.message.list.viewmodel.bindView
 import io.getstream.chat.android.ui.message.list.viewmodel.factory.MessageListViewModelFactory
 import io.getstream.chat.virtualevent.databinding.ActivityEventDetailsBinding
-import io.getstream.chat.virtualevent.shared.message.LivestreamMessageViewHolderFactory
 
+/**
+ * Activity that shows a live video stream and a list of comments
+ * associated with this stream.
+ */
 class EventDetailsActivity : AppCompatActivity() {
 
     private lateinit var messageListViewModel: MessageListViewModel
@@ -20,7 +23,6 @@ class EventDetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityEventDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -38,7 +40,7 @@ class EventDetailsActivity : AppCompatActivity() {
     }
 
     private fun setupMessageListView() {
-        binding.messageListView.setMessageViewHolderFactory(LivestreamMessageViewHolderFactory())
+        binding.messageListView.setMessageViewHolderFactory(LivestreamMessageItemVhFactory())
         messageListViewModel.apply {
             bindView(binding.messageListView, this@EventDetailsActivity)
         }

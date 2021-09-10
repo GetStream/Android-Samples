@@ -21,10 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_tiny"
         android:text="@string/direct_messages_empty_title"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-        android:textColor="@color/text_high_emphasis"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textAppearance="@style/Title3Bold"
+        android:textColor="@color/text_high_emphasis" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,7 +30,7 @@
         android:layout_margin="@dimen/margin_tiny"
         android:gravity="center"
         android:text="@string/direct_messages_empty_description"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        android:textAppearance="@style/Body"
         android:textColor="@color/text_mid_emphasis" />
 
 </LinearLayout>
