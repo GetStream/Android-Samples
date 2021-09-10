@@ -17,7 +17,7 @@
             android:layout_marginBottom="@dimen/margin_medium">
 
             <ImageView
-                android:id="@+id/hypercubeHeaderImageView"
+                android:id="@+id/layersHeaderImageView"
                 android:layout_width="match_parent"
                 android:layout_height="162dp"
                 android:scaleType="centerCrop"
@@ -27,7 +27,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/hypercubeTitleTextView"
+                android:id="@+id/layersTitleTextView"
                 style="@style/OverviewSectionTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -36,10 +36,10 @@
                 android:drawablePadding="@dimen/margin_small"
                 android:text="@string/overview_layers_title"
                 app:drawableLeftCompat="@drawable/ic_qa"
-                app:layout_constraintTop_toBottomOf="@+id/hypercubeHeaderImageView" />
+                app:layout_constraintTop_toBottomOf="@+id/layersHeaderImageView" />
 
             <TextView
-                android:id="@+id/hypercubeDescriptionTextView"
+                android:id="@+id/layersDescriptionTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_medium"
@@ -47,10 +47,10 @@
                 android:text="@string/overview_layers_description"
                 android:textAppearance="@style/Body"
                 android:textColor="@color/text_high_emphasis"
-                app:layout_constraintTop_toBottomOf="@+id/hypercubeTitleTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/layersTitleTextView" />
 
             <TextView
-                android:id="@+id/hypercubeParticipantsLogoImageView"
+                android:id="@+id/layersParticipantsLogoImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_medium"
@@ -61,10 +61,10 @@
                 android:textColor="@color/text_high_emphasis"
                 app:drawableLeftCompat="@drawable/ic_participant"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/hypercubeDescriptionTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/layersDescriptionTextView" />
 
             <TextView
-                android:id="@+id/hypercubeParticipantsCountTextView"
+                android:id="@+id/layersParticipantsCountTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_medium"
@@ -73,9 +73,9 @@
                 android:text="150"
                 android:textColor="@color/text_high_emphasis"
                 app:drawableLeftCompat="@drawable/ic_eye"
-                app:layout_constraintBottom_toBottomOf="@+id/hypercubeParticipantsLogoImageView"
-                app:layout_constraintStart_toEndOf="@+id/hypercubeParticipantsLogoImageView"
-                app:layout_constraintTop_toTopOf="@+id/hypercubeParticipantsLogoImageView" />
+                app:layout_constraintBottom_toBottomOf="@+id/layersParticipantsLogoImageView"
+                app:layout_constraintStart_toEndOf="@+id/layersParticipantsLogoImageView"
+                app:layout_constraintTop_toTopOf="@+id/layersParticipantsLogoImageView" />
 
             <TextView
                 android:layout_width="wrap_content"
