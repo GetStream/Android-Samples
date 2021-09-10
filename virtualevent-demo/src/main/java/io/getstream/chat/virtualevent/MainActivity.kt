@@ -6,11 +6,13 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.virtualevent.databinding.ActivityMainBinding
+import io.getstream.chat.virtualevent.util.ThemeHelper
 import java.lang.IllegalArgumentException
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var themeHelper: ThemeHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +26,11 @@ class MainActivity : AppCompatActivity() {
     private fun setupToolbar() {
         ChatClient.instance().getCurrentUser()?.let {
             binding.userAvatarView.setUserData(it)
+        }
+
+        themeHelper = ThemeHelper(applicationContext)
+        binding.themeSwitchImageView.setOnClickListener {
+            themeHelper.toggleDarkTheme()
         }
     }
 

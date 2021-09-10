@@ -25,14 +25,25 @@
                 android:layout_height="wrap_content"
                 android:text="@string/title_overview"
                 android:textAppearance="@style/Title2Bold"
+                android:textColor="@color/text_high_emphasis"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageView
+                android:id="@+id/themeSwitchImageView"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:src="@drawable/ic_theme_switch"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/userAvatarView"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <io.getstream.chat.android.ui.avatar.AvatarView
                 android:id="@+id/userAvatarView"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:layout_marginEnd="@dimen/margin_medium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +71,7 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
+        android:background="@color/app_canvas"
         app:itemIconTint="@color/tab_item_selector"
         app:itemTextColor="@color/tab_item_selector"
         app:layout_constraintBottom_toBottomOf="parent"

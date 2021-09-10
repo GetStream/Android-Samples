@@ -46,6 +46,7 @@
         <item name="android:layout_marginHorizontal">@dimen/margin_large</item>
         <item name="android:layout_marginVertical">@dimen/margin_medium</item>
         <item name="elevation">4dp</item>
+        <item name="cardBackgroundColor">@color/app_canvas</item>
         <item name="cardCornerRadius">16dp</item>
     </style>
 

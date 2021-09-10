@@ -7,8 +7,7 @@
         <item name="colorSecondary">@color/static_grey</item>
         <item name="colorSecondaryVariant">@color/static_grey</item>
         <item name="colorOnSecondary">@color/static_grey</item>
-        <item name="android:navigationBarColor">@color/app_canvas</item>
         <item name="android:statusBarColor">@color/app_canvas</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightStatusBar">@bool/windowLightStatusBar</item>
     </style>
 </resources>
