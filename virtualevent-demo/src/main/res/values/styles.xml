@@ -1,20 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="OverviewStatsItemNumber">
-        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:background">@drawable/bg_overview_stats_item</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:layout_marginHorizontal">12dp</item>
-        <item name="android:padding">8dp</item>
+    <!-- Overview Screen -->
+
+    <style name="OverviewStatsItem">
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingVertical">@dimen/margin_tiny</item>
     </style>
 
-    <style name="OverviewHeader">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
+    <style name="OverviewStatsItemBadge">
+        <item name="android:textAppearance">@style/BodyBold</item>
+        <item name="android:textColor">@color/text_high_emphasis</item>
+        <item name="android:background">@drawable/bg_badge_stats</item>
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="OverviewStatsItemDescription">
+        <item name="android:textAppearance">@style/Body</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/text_mid_emphasis</item>
+        <item name="android:layout_marginStart">@dimen/margin_small</item>
+    </style>
+
+    <style name="OverviewSectionTitle">
+        <item name="android:textColor">@color/text_high_emphasis</item>
+        <item name="android:textAppearance">@style/Title3Bold</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="OverviewPartnerLogo">
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:layout_margin">12dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">44dp</item>
+    </style>
+
+    <!-- Event Cards -->
+
+    <style name="EventCard">
+        <item name="android:layout_marginHorizontal">@dimen/margin_large</item>
+        <item name="android:layout_marginVertical">@dimen/margin_medium</item>
+        <item name="elevation">4dp</item>
+        <item name="cardCornerRadius">16dp</item>
     </style>
 
     <style name="StreamUiTextAppearance.Body.LivestreamMessageTimeLabel" parent="StreamUiTextAppearance.Body">

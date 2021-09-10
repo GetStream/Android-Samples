@@ -12,7 +12,7 @@
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_margin="@dimen/margin_medium"
-        android:src="@drawable/ic_direct_messages_empty"
+        android:src="@drawable/ic_direct_message"
         app:tint="@color/stroke"
         tools:ignore="ContentDescription" />
 

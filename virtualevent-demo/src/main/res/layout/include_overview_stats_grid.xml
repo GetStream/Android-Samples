@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/statsGridLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/margin_medium"
+    android:columnCount="2">
+
+    <LinearLayout style="@style/OverviewStatsItem">
+
+        <TextView
+            style="@style/OverviewStatsItemBadge"
+            android:text="2" />
+
+        <TextView
+            style="@style/OverviewStatsItemDescription"
+            android:text="Days" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/OverviewStatsItem">
+
+        <TextView
+            style="@style/OverviewStatsItemBadge"
+            android:text="120" />
+
+        <TextView
+            style="@style/OverviewStatsItemDescription"
+            android:text="Speakers" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/OverviewStatsItem">
+
+        <TextView
+            style="@style/OverviewStatsItemBadge"
+            android:text="4" />
+
+        <TextView
+            style="@style/OverviewStatsItemDescription"
+            android:text="Main events" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/OverviewStatsItem">
+
+        <TextView
+            style="@style/OverviewStatsItemBadge"
+            android:text="2k" />
+
+        <TextView
+            style="@style/OverviewStatsItemDescription"
+            android:text="Tickets sold" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/OverviewStatsItem">
+
+        <TextView
+            style="@style/OverviewStatsItemBadge"
+            android:text="38" />
+
+        <TextView
+            style="@style/OverviewStatsItemDescription"
+            android:text="Rooms" />
+
+    </LinearLayout>
+
+</GridLayout>

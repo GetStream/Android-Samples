@@ -51,15 +51,10 @@ class EventDetailsActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val KEY_EXTRA_CID = "extra_cid"
-        const val cid1: String = "livestream:esg_data_f22160f7-01fd-423f-b622-fe7060ec10d8"
-        const val cid2: String = "livestream:data-strategy_cfe253a5-785b-4c77-a5a0-ec63693d4e58"
+        private const val KEY_EXTRA_CID: String = "extra_cid"
 
-        fun openActivity(context: Context, cid: String) {
-            val intent = Intent(context, EventDetailsActivity::class.java).apply {
-                putExtra(KEY_EXTRA_CID, cid)
-            }
-            context.startActivity(intent)
+        fun createIntent(context: Context, cid: String): Intent {
+            return Intent(context, EventDetailsActivity::class.java).putExtra(KEY_EXTRA_CID, cid)
         }
     }
 }

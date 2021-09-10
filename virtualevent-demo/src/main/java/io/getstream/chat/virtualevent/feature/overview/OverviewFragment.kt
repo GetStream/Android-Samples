@@ -1,17 +1,23 @@
 package io.getstream.chat.virtualevent.feature.overview
 
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import io.getstream.chat.virtualevent.AppConfig
+import io.getstream.chat.virtualevent.R
 import io.getstream.chat.virtualevent.databinding.FragmentOverviewBinding
 import io.getstream.chat.virtualevent.feature.event.EventDetailsActivity
 
+/**
+ * Fragment that shows information about the conference: name of the conference,
+ * statistics, description, partners, schedule, etc.
+ */
 class OverviewFragment : Fragment() {
 
     private var _binding: FragmentOverviewBinding? = null
-
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -19,18 +25,33 @@ class OverviewFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentOverviewBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        return FragmentOverviewBinding.inflate(inflater, container, false)
+            .apply { _binding = this }
+            .root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        this._binding?.event1?.setOnClickListener {
-            EventDetailsActivity.openActivity(requireContext(), EventDetailsActivity.cid1)
+        binding.titleSectionInclude.eventSubtitleTextView.text = Html.fromHtml(
+            getString(R.string.overview_subtitle),
+            Html.FROM_HTML_MODE_COMPACT
+        )
+
+        binding.event1Include.event1CardView.setOnClickListener {
+            startActivity(
+                EventDetailsActivity.createIntent(
+                    requireContext(),
+                    AppConfig.LIVESTREAM_CHANNEL_1
+                )
+            )
         }
 
-        this._binding?.event2?.setOnClickListener {
-            EventDetailsActivity.openActivity(requireContext(), EventDetailsActivity.cid2)
+        binding.event2Include.event2CardView.setOnClickListener {
+            startActivity(
+                EventDetailsActivity.createIntent(
+                    requireContext(),
+                    AppConfig.LIVESTREAM_CHANNEL_2
+                )
+            )
         }
     }
 

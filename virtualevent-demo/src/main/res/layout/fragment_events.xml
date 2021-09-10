@@ -3,12 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <include layout="@layout/layout_event_1" android:id="@+id/event_1" />
-        <include layout="@layout/layout_event_2" android:id="@+id/event_2" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <include
+            android:id="@+id/event1Include"
+            layout="@layout/include_event_1" />
+
+        <include
+            android:id="@+id/event2Include"
+            layout="@layout/include_event_2" />
+
+    </LinearLayout>
 
 </ScrollView>
