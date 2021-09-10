@@ -1,9 +1,9 @@
 <resources>
 
     <style name="Theme.VirtualEvent" parent="Theme.MaterialComponents.DayNight">
-        <item name="colorPrimary">@color/static_black</item>
-        <item name="colorPrimaryVariant">@color/static_black</item>
-        <item name="colorOnPrimary">@color/static_black</item>
+        <item name="colorPrimary">@color/app_canvas</item>
+        <item name="colorPrimaryVariant">@color/app_canvas</item>
+        <item name="colorOnPrimary">@color/app_canvas</item>
         <item name="colorSecondary">@color/static_grey</item>
         <item name="colorSecondaryVariant">@color/static_grey</item>
         <item name="colorOnSecondary">@color/static_grey</item>
