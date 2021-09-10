@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import io.getstream.chat.android.livedata.utils.EventObserver
 import io.getstream.chat.virtualevent.databinding.ActivityStartDirectChatBinding
 import io.getstream.chat.virtualevent.feature.dm.DirectChatActivity
+import io.getstream.chat.virtualevent.util.setupToolbar
 
 /**
  * Activity that shows a list of available users and allows to start
@@ -27,6 +28,7 @@ class StartDirectChatActivity : AppCompatActivity() {
         binding = ActivityStartDirectChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupToolbar(binding.toolbar)
         binding.usersRecyclerView.adapter = adapter
         with(viewModel) {
             state.observe(this@StartDirectChatActivity, ::renderUsersState)

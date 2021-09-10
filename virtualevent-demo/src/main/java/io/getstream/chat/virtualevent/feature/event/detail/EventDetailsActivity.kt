@@ -10,6 +10,7 @@ import io.getstream.chat.android.ui.message.input.viewmodel.bindView
 import io.getstream.chat.android.ui.message.list.viewmodel.bindView
 import io.getstream.chat.android.ui.message.list.viewmodel.factory.MessageListViewModelFactory
 import io.getstream.chat.virtualevent.databinding.ActivityEventDetailsBinding
+import io.getstream.chat.virtualevent.util.setupToolbar
 
 /**
  * Activity that shows a live video stream and a list of comments
@@ -31,20 +32,9 @@ class EventDetailsActivity : AppCompatActivity() {
         messageListViewModel = factory.create(MessageListViewModel::class.java)
         messageInputViewModel = factory.create(MessageInputViewModel::class.java)
 
-        setupToolbar()
+        setupToolbar(binding.toolbar)
         setupMessageListView()
         setupMessageInputView()
-    }
-
-    private fun setupToolbar() {
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.apply {
-            setDisplayShowHomeEnabled(true)
-            setDisplayHomeAsUpEnabled(true)
-            binding.toolbar.setNavigationOnClickListener {
-                onBackPressed()
-            }
-        }
     }
 
     private fun setupMessageListView() {
