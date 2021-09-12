@@ -39,7 +39,8 @@ class OverviewFragment : Fragment() {
             startActivity(
                 EventDetailsActivity.createIntent(
                     requireContext(),
-                    AppConfig.LIVESTREAM_CHANNEL_1
+                    AppConfig.LIVESTREAM_CHANNEL_1,
+                    requireContext().getString(R.string.overview_hypercube_title)
                 )
             )
         }
@@ -47,7 +48,8 @@ class OverviewFragment : Fragment() {
             startActivity(
                 EventDetailsActivity.createIntent(
                     requireContext(),
-                    AppConfig.LIVESTREAM_CHANNEL_2
+                    AppConfig.LIVESTREAM_CHANNEL_2,
+                    requireContext().getString(R.string.overview_layers_title)
                 )
             )
         }

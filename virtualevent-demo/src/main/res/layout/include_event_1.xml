@@ -34,7 +34,7 @@
                 android:layout_marginHorizontal="@dimen/margin_medium"
                 android:layout_marginTop="@dimen/margin_medium"
                 android:drawablePadding="@dimen/margin_small"
-                android:text="ESG Data - How to create it"
+                android:text="@string/overview_hypercube_title"
                 app:drawableLeftCompat="@drawable/ic_presentation"
                 app:layout_constraintTop_toBottomOf="@+id/hypercubeHeaderImageView" />
 

@@ -32,9 +32,14 @@ class EventDetailsActivity : AppCompatActivity() {
         messageListViewModel = factory.create(MessageListViewModel::class.java)
         messageInputViewModel = factory.create(MessageInputViewModel::class.java)
 
-        setupToolbar(binding.toolbar)
+        setupToolbar()
         setupMessageListView()
         setupMessageInputView()
+    }
+
+    private fun setupToolbar() {
+        setupToolbar(binding.toolbar)
+        binding.titleTextView.text = intent.getStringExtra(KEY_EVENT_TITLE)!!
     }
 
     private fun setupMessageListView() {
@@ -52,9 +57,16 @@ class EventDetailsActivity : AppCompatActivity() {
 
     companion object {
         private const val KEY_EXTRA_CID: String = "extra_cid"
+        private const val KEY_EVENT_TITLE: String = "extra_title"
 
-        fun createIntent(context: Context, cid: String): Intent {
-            return Intent(context, EventDetailsActivity::class.java).putExtra(KEY_EXTRA_CID, cid)
+        fun createIntent(
+            context: Context,
+            cid: String,
+            title: String
+        ): Intent {
+            return Intent(context, EventDetailsActivity::class.java)
+                .putExtra(KEY_EXTRA_CID, cid)
+                .putExtra(KEY_EVENT_TITLE, title)
         }
     }
 }

@@ -7,11 +7,24 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:background="@color/app_canvas"
+        android:layout_height="44dp"
+        android:background="@color/static_black"
+        android:elevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_back">
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textAppearance="@style/Body"
+            android:textColor="@color/static_white" />
+
+    </androidx.appcompat.widget.Toolbar>
 
     <io.getstream.chat.android.ui.message.list.MessageListView
         android:id="@+id/messageListView"

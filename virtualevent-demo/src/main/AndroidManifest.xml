@@ -22,7 +22,8 @@
         </activity>
         <activity
             android:name="io.getstream.chat.virtualevent.feature.event.detail.EventDetailsActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.VirtualEvent.BlackStatusBar" />
         <activity
             android:name="io.getstream.chat.virtualevent.feature.dm.DirectChatActivity"
             android:screenOrientation="portrait" />
