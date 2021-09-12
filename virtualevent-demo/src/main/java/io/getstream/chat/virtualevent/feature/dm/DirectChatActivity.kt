@@ -3,9 +3,12 @@ package io.getstream.chat.virtualevent.feature.dm
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.descendants
+import androidx.core.view.setPadding
 import com.getstream.sdk.chat.viewmodel.MessageInputViewModel
 import com.getstream.sdk.chat.viewmodel.messages.MessageListViewModel
 import io.getstream.chat.android.ui.message.input.MessageInputView
@@ -57,6 +60,14 @@ class DirectChatActivity : AppCompatActivity() {
                     }
                 }
             )
+
+            // Workaround to remove back button padding
+            messageListHeaderView.descendants
+                .firstOrNull { it is ImageView }
+                ?.let {
+                    it.setPadding(0)
+                    it.background = null
+                }
         }
     }
 

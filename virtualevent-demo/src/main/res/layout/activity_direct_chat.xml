@@ -10,7 +10,10 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:streamUiMessageListHeaderBackButtonIcon="@drawable/ic_back"
+        app:streamUiMessageListHeaderBackground="@color/app_canvas"
+        app:streamUiMessageListHeaderShowUserAvatar="false" />
 
     <io.getstream.chat.android.ui.message.list.MessageListView
         android:id="@+id/messageListView"
