@@ -13,7 +13,7 @@ import io.getstream.chat.android.ui.channel.list.viewmodel.factory.ChannelListVi
 import io.getstream.chat.virtualevent.databinding.FragmentDirectChatsBinding
 import io.getstream.chat.virtualevent.databinding.ViewDmEmptyBinding
 import io.getstream.chat.virtualevent.feature.dm.DirectChatActivity
-import io.getstream.chat.virtualevent.feature.dm.start.StartDirectChatActivity
+import io.getstream.chat.virtualevent.feature.dm.new.SelectParticipantActivity
 
 /**
  * Fragment that shows a list of direct (1-to-1) conversations.
@@ -52,7 +52,7 @@ class DirectChatsFragment : Fragment() {
             startActivity(DirectChatActivity.createIntent(requireContext(), channel.cid))
         }
         binding.startChatButton.setOnClickListener {
-            startActivity(StartDirectChatActivity.createIntent(requireContext()))
+            startActivity(SelectParticipantActivity.createIntent(requireContext()))
         }
         // TODO: implement custom direct chat ViewHolder factory
         // binding.channelListView.setViewHolderFactory(DirectChatListItemVhFactory())

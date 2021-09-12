@@ -28,7 +28,7 @@
             android:name="io.getstream.chat.virtualevent.feature.dm.DirectChatActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="io.getstream.chat.virtualevent.feature.dm.start.StartDirectChatActivity"
+            android:name="io.getstream.chat.virtualevent.feature.dm.new.SelectParticipantActivity"
             android:screenOrientation="portrait" />
     </application>
 

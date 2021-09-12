@@ -1,4 +1,4 @@
-package io.getstream.chat.virtualevent.feature.dm.start
+package io.getstream.chat.virtualevent.feature.dm.new
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
