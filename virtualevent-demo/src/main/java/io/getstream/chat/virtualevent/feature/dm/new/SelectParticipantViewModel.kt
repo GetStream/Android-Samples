@@ -35,7 +35,10 @@ class SelectParticipantViewModel(
         viewModelScope.launch {
             val result = chatClient.queryUsers(
                 QueryUsersRequest(
-                    filter = Filters.ne("id", currentUserId()),
+                    filter = Filters.and(
+                        Filters.ne("id", currentUserId()),
+                        Filters.ne("role", "admin"),
+                    ),
                     offset = 0,
                     limit = 30,
                 )
