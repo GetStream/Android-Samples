@@ -54,8 +54,6 @@ class DirectChatsFragment : Fragment() {
         binding.startChatButton.setOnClickListener {
             startActivity(SelectParticipantActivity.createIntent(requireContext()))
         }
-        // TODO: implement custom direct chat ViewHolder factory
-        // binding.channelListView.setViewHolderFactory(DirectChatListItemVhFactory())
     }
 
     override fun onDestroyView() {
