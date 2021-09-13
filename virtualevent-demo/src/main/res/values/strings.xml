@@ -31,12 +31,20 @@
     </string>
     <string name="overview_partners_title">Partners</string>
     <string name="overview_schedule_title">Schedule</string>
+    <string name="overview_hypercube_title">ESG Data - How to create it</string>
     <string name="overview_hypercube_description">ESG Regulations, Standards and Disclosure: Who to publish it for and how to make it meaningful.</string>
     <string name="overview_layers_title">Data strategy and executive communication</string>
     <string name="overview_layers_description">How to set a business plans to use information to a competitive advantage and support enterprise goals.</string>
 
-    <!-- Direct Messages -->
+    <!-- Start Direct Chat Screen -->
+    <string name="start_direct_chat_title">Select a participant</string>
+
+    <!-- Direct Chat Screen -->
     <string name="direct_messages_empty_title">No direct message yet</string>
     <string name="direct_messages_empty_description">You will see your first direct message here when you receive it.</string>
     <string name="direct_message_start_chat">Start a chat</string>
+
+    <!-- Switch User Screen -->
+    <string name="switch_user_title">Select User</string>
+    <string name="switch_user_description">Select a user to try the Android SDK:</string>
 </resources>

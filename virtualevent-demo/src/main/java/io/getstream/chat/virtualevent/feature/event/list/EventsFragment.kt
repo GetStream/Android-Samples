@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import io.getstream.chat.virtualevent.AppConfig
+import io.getstream.chat.virtualevent.R
 import io.getstream.chat.virtualevent.databinding.FragmentEventsBinding
 import io.getstream.chat.virtualevent.feature.event.detail.EventDetailsActivity
 
@@ -32,7 +33,8 @@ class EventsFragment : Fragment() {
             startActivity(
                 EventDetailsActivity.createIntent(
                     requireContext(),
-                    AppConfig.LIVESTREAM_CHANNEL_1
+                    AppConfig.LIVESTREAM_ESG_DATA,
+                    requireContext().getString(R.string.overview_hypercube_title)
                 )
             )
         }
@@ -40,7 +42,8 @@ class EventsFragment : Fragment() {
             startActivity(
                 EventDetailsActivity.createIntent(
                     requireContext(),
-                    AppConfig.LIVESTREAM_CHANNEL_2
+                    AppConfig.LIVESTREAM_DATA_STRATEGY,
+                    requireContext().getString(R.string.overview_layers_title)
                 )
             )
         }

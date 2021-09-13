@@ -1,4 +1,4 @@
-package io.getstream.chat.virtualevent.feature.dm.start
+package io.getstream.chat.virtualevent.feature.dm.new
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
  * **Note**: For simplicity, pagination is not implemented in this ViewModel.
  * Only the first page of available users is loaded.
  */
-class StartDirectChatViewModel(
+class SelectParticipantViewModel(
     private val chatClient: ChatClient = ChatClient.instance(),
 ) : ViewModel() {
 
@@ -35,7 +35,10 @@ class StartDirectChatViewModel(
         viewModelScope.launch {
             val result = chatClient.queryUsers(
                 QueryUsersRequest(
-                    filter = Filters.ne("id", currentUserId()),
+                    filter = Filters.and(
+                        Filters.ne("id", currentUserId()),
+                        Filters.ne("role", "admin"),
+                    ),
                     offset = 0,
                     limit = 30,
                 )
@@ -64,7 +67,7 @@ class StartDirectChatViewModel(
 
     sealed class State {
         object Loading : State()
-        data class Content(val users: List<User>) : State()
+        data class Content(val participants: List<User>) : State()
         data class Error(val error: ChatError) : State()
     }
 

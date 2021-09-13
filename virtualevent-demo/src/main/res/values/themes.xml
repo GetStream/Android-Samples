@@ -10,4 +10,9 @@
         <item name="android:statusBarColor">@color/app_canvas</item>
         <item name="android:windowLightStatusBar">@bool/windowLightStatusBar</item>
     </style>
+
+    <style name="Theme.VirtualEvent.BlackStatusBar" parent="Theme.VirtualEvent">
+        <item name="android:statusBarColor">@color/static_black</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
 </resources>
