@@ -5,52 +5,56 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import io.getstream.chat.android.client.models.User
 import io.getstream.chat.android.client.models.name
-import io.getstream.chat.virtualevent.databinding.ItemUserBinding
+import io.getstream.chat.virtualevent.databinding.ItemParticipantBinding
 
 class ParticipantListAdapter(
-    private val userClickListener: (user: User) -> Unit
+    private val participantClickListener: (user: User) -> Unit
 ) : RecyclerView.Adapter<ParticipantListAdapter.ParticipantViewHolder>() {
 
-    private val users: MutableList<User> = mutableListOf()
+    private val participants: MutableList<User> = mutableListOf()
 
-    fun setUsers(users: List<User>) {
-        this.users.clear()
-        this.users.addAll(users)
+    fun setParticipants(participants: List<User>) {
+        this.participants.clear()
+        this.participants.addAll(participants)
         notifyDataSetChanged()
     }
 
-    override fun getItemCount(): Int = users.size
+    override fun getItemCount(): Int = participants.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ParticipantViewHolder {
-        return ItemUserBinding
+        return ItemParticipantBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
-            .let { ParticipantViewHolder(it, userClickListener) }
+            .let { ParticipantViewHolder(it, participantClickListener) }
     }
 
     override fun onBindViewHolder(holder: ParticipantViewHolder, position: Int) {
-        holder.bind(users[position])
+        holder.bind(participants[position])
     }
 
     class ParticipantViewHolder(
-        private val binding: ItemUserBinding,
-        private val userClickListener: (user: User) -> Unit
+        private val binding: ItemParticipantBinding,
+        private val participantClickListener: (user: User) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        lateinit var user: User
+        lateinit var participants: User
 
         init {
             binding.root.setOnClickListener {
-                userClickListener(user)
+                participantClickListener(participants)
             }
         }
 
-        fun bind(user: User) {
-            this.user = user
+        fun bind(participants: User) {
+            this.participants = participants
             with(binding) {
-                userAvatarView.setUserData(user)
-                nameTextView.text = user.name
-                companyTextView.text = user.extraData["company"] as? String
+                userAvatarView.setUserData(participants)
+                nameTextView.text = participants.name
+                companyTextView.text = participants.extraData[EXTRA_COMPANY] as? String
             }
         }
+    }
+
+    companion object {
+        private const val EXTRA_COMPANY = "company"
     }
 }

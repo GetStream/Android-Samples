@@ -67,7 +67,7 @@ class SelectParticipantViewModel(
 
     sealed class State {
         object Loading : State()
-        data class Content(val users: List<User>) : State()
+        data class Content(val participants: List<User>) : State()
         data class Error(val error: ChatError) : State()
     }
 

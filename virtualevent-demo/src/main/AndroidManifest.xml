@@ -30,6 +30,9 @@
         <activity
             android:name="io.getstream.chat.virtualevent.feature.dm.new.SelectParticipantActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="io.getstream.chat.virtualevent.feature.user.SwitchUserActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

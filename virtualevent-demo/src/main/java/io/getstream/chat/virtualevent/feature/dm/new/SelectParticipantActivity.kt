@@ -29,16 +29,16 @@ class SelectParticipantActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupToolbar(binding.toolbar)
-        binding.usersRecyclerView.adapter = adapter
+        binding.participantsRecyclerView.adapter = adapter
         with(viewModel) {
-            state.observe(this@SelectParticipantActivity, ::renderUsersState)
+            state.observe(this@SelectParticipantActivity, ::renderParticipantsState)
             events.observe(this@SelectParticipantActivity, EventObserver(::handleEvent))
         }
     }
 
-    private fun renderUsersState(state: SelectParticipantViewModel.State) {
+    private fun renderParticipantsState(state: SelectParticipantViewModel.State) {
         when (state) {
-            is SelectParticipantViewModel.State.Content -> adapter.setUsers(state.users)
+            is SelectParticipantViewModel.State.Content -> adapter.setParticipants(state.participants)
         }
     }
 
