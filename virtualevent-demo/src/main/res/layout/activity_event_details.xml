@@ -8,8 +8,9 @@
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="44dp"
-        android:background="@color/static_black"
+        android:background="@color/static_dark_grey"
         android:elevation="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/playerContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,6 +27,67 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <FrameLayout
+        android:id="@+id/playerContainer"
+        android:layout_width="0dp"
+        android:layout_height="210dp"
+        android:foreground="@drawable/bg_video_border"
+        app:layout_constraintBottom_toTopOf="@id/messageListView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_small"
+            android:background="@color/static_dark_grey" />
+
+        <com.google.android.exoplayer2.ui.PlayerView
+            android:id="@+id/playerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin_tiny"
+            app:resize_mode="zoom"
+            app:use_controller="false"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_gravity="bottom|start"
+            android:layout_margin="@dimen/margin_tiny"
+            android:background="@drawable/bg_badge_livestream"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="2dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_tiny"
+                android:text="Lita Sherman"
+                android:textAppearance="@style/Footnote"
+                android:textColor="@color/static_white" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/micOnAnimationView"
+                android:layout_width="24dp"
+                android:layout_height="match_parent"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/mic_on" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/margin_tiny"
+            android:background="@drawable/bg_badge_livestream"
+            android:src="@drawable/ic_connection" />
+
+    </FrameLayout>
+
     <io.getstream.chat.android.ui.message.list.MessageListView
         android:id="@+id/messageListView"
         android:layout_width="match_parent"
@@ -35,7 +97,7 @@
         android:layout_marginHorizontal="0dp"
         android:clipToPadding="false"
         app:layout_constraintBottom_toTopOf="@+id/messageInputView"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/playerContainer"
         app:streamUiFlagMessageConfirmationEnabled="true"
         app:streamUiMuteUserEnabled="false"
         app:streamUiPinMessageEnabled="true" />

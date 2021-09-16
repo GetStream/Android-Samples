@@ -46,4 +46,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.15.0'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.15.0'
+    implementation 'com.airbnb.android:lottie:4.1.0'
 }

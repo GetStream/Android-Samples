@@ -12,7 +12,6 @@ import io.getstream.chat.android.client.models.Filters
 import io.getstream.chat.android.client.models.User
 import io.getstream.chat.android.livedata.utils.Event
 import io.getstream.chat.virtualevent.util.currentUserId
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 /**
@@ -52,7 +51,7 @@ class SelectParticipantViewModel(
     }
 
     fun onUserSelected(user: User) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             val result = chatClient.createChannel(
                 channelType = "messaging",
                 members = listOf(user.id, currentUserId()),
