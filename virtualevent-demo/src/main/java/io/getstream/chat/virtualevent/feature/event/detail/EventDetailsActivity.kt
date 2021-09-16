@@ -2,10 +2,14 @@ package io.getstream.chat.virtualevent.feature.event.detail
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.getstream.sdk.chat.viewmodel.MessageInputViewModel
 import com.getstream.sdk.chat.viewmodel.messages.MessageListViewModel
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.SimpleExoPlayer
 import io.getstream.chat.android.ui.message.input.viewmodel.bindView
 import io.getstream.chat.android.ui.message.list.viewmodel.bindView
 import io.getstream.chat.android.ui.message.list.viewmodel.factory.MessageListViewModelFactory
@@ -22,6 +26,8 @@ class EventDetailsActivity : AppCompatActivity() {
     private lateinit var messageInputViewModel: MessageInputViewModel
     private lateinit var binding: ActivityEventDetailsBinding
 
+    private var player: SimpleExoPlayer? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEventDetailsBinding.inflate(layoutInflater)
@@ -35,6 +41,18 @@ class EventDetailsActivity : AppCompatActivity() {
         setupToolbar()
         setupMessageListView()
         setupMessageInputView()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        initializePlayer()
+        binding.playerView?.onResume()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        binding.playerView?.onPause()
+        releasePlayer()
     }
 
     private fun setupToolbar() {
@@ -53,6 +71,25 @@ class EventDetailsActivity : AppCompatActivity() {
         messageInputViewModel.apply {
             bindView(binding.messageInputView, this@EventDetailsActivity)
         }
+    }
+
+    private fun initializePlayer() {
+        player = SimpleExoPlayer.Builder(this)
+            .build()
+            .also { exoPlayer ->
+                binding.playerView.player = exoPlayer
+
+                val videoUri = Uri.parse("asset:///speaker.mp4")
+                exoPlayer.setMediaItem(MediaItem.fromUri(videoUri))
+                exoPlayer.repeatMode = Player.REPEAT_MODE_ONE
+                exoPlayer.prepare()
+                exoPlayer.play()
+            }
+    }
+
+    private fun releasePlayer() {
+        player?.release()
+        player = null
     }
 
     companion object {
