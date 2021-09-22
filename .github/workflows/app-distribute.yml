@@ -33,4 +33,4 @@ jobs:
           appId: ${{secrets.FIREBASE_UI_VIRTUAL_EVENT_SAMPLE_APP_ID}}
           token: ${{secrets.FIREBASE_TOKEN}}
           groups: stream-testers
-          file: virtualevent-demo/build/outputs/apk/demo/release/virtualevent-demo-release.apk
+          file: virtualevent-demo/build/outputs/apk/release/virtualevent-demo-release.apk
