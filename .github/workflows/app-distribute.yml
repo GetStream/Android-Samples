@@ -1,9 +1,6 @@
 name: App Distribute CI
 
-on:
-  push:
-    branches:
-      - main
+on: push
 
 jobs:
   build_virtualevent_sample_app:
