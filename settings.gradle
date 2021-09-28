@@ -2,5 +2,6 @@ include(
         ':livestream-sample',
         ':whatsapp-clone-sample',
         ':video-chat-sample',
-        ':virtualevent-demo'
+        ':virtualevent-demo',
+        ':slack-clone-compose-sample'
 )
