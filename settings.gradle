@@ -3,5 +3,4 @@ include(
         ':whatsapp-clone-sample',
         ':video-chat-sample',
         ':virtualevent-demo',
-        ':slack-clone-compose-sample'
 )
