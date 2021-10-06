@@ -15,18 +15,20 @@ import io.getstream.slack.compose.R
 import io.getstream.slack.compose.model.Workspace
 import io.getstream.slack.compose.ui.messages.MessagesActivity
 import io.getstream.slack.compose.ui.theme.SlackTheme
+import io.getstream.slack.compose.ui.util.currentUserId
 
 class ChannelsActivity : ComponentActivity() {
 
     private val factory by lazy {
         ChannelViewModelFactory(
-            ChatClient.instance(), ChatDomain.instance(),
+            ChatClient.instance(),
+            ChatDomain.instance(),
             QuerySort
-                .desc<Channel>("unread_count")
-                .desc("last_updated"),
+                .desc<Channel>("has_unread")
+                .desc("last_message_at"),
             Filters.and(
                 Filters.eq("type", "messaging"),
-                Filters.`in`("members", listOf(ChatClient.instance().getCurrentUser()?.id ?: ""))
+                Filters.`in`("members", listOf(currentUserId()))
             ),
         )
     }
@@ -39,10 +41,7 @@ class ChannelsActivity : ComponentActivity() {
             SlackTheme {
                 ChannelsScreen(
                     listViewModel = listViewModel,
-                    workspace = Workspace(
-                        title = "getstream",
-                        logo = R.drawable.ic_channel
-                    ),
+                    workspace = streamWorkspace,
                     onItemClick = ::openMessages
                 )
             }
@@ -51,5 +50,15 @@ class ChannelsActivity : ComponentActivity() {
 
     private fun openMessages(channel: Channel) {
         startActivity(MessagesActivity.getIntent(this, channel.cid))
+    }
+
+    companion object {
+        /**
+         * For the sake of example we hardcoded the "Stream" workspace.
+         */
+        private val streamWorkspace = Workspace(
+            title = "getstream",
+            logo = R.drawable.ic_channel
+        )
     }
 }

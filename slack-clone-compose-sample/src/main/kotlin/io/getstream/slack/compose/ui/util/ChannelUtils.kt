@@ -33,6 +33,6 @@ private fun Channel.includesCurrentUser(): Boolean {
  * Returns the first user in this channel apart from the current user.
  */
 fun Channel.getOtherUser(): User? {
-    val currentUserId = ChatClient.instance().getCurrentUser()?.id
+    val currentUserId = currentUserId()
     return members.find { it.user.id != currentUserId }?.user
 }
