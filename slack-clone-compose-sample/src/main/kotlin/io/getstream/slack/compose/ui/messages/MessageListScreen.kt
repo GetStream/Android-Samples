@@ -1,4 +1,4 @@
-package io.getstream.slack.compose.ui.message_list
+package io.getstream.slack.compose.ui.messages
 
 import androidx.compose.runtime.Composable
 

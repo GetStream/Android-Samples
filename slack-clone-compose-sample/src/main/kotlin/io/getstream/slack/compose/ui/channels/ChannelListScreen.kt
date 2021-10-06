@@ -1,4 +1,4 @@
-package io.getstream.slack.compose.ui.channel_list
+package io.getstream.slack.compose.ui.channels
 
 import androidx.compose.runtime.Composable
 
