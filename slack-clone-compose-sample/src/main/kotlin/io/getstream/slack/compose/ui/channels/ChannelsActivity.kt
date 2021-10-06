@@ -58,7 +58,7 @@ class ChannelsActivity : ComponentActivity() {
          */
         private val streamWorkspace = Workspace(
             title = "getstream",
-            logo = R.drawable.ic_channel
+            logo = R.drawable.ic_stream_logo
         )
     }
 }

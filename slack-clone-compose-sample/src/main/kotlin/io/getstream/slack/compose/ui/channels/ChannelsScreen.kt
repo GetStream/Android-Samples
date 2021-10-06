@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
@@ -56,9 +57,11 @@ fun ChannelsScreen(
             trailingContent = { Spacer(Modifier.width(36.dp)) },
             leadingContent = {
                 Image(
-                    painter = painterResource(id = R.drawable.ic_channel),
+                    painter = painterResource(id = workspace.logo),
                     contentDescription = null,
-                    modifier = Modifier.clip(RoundedCornerShape(10.dp)),
+                    modifier = Modifier
+                        .size(36.dp)
+                        .clip(RoundedCornerShape(8.dp)),
                 )
             }
         )
