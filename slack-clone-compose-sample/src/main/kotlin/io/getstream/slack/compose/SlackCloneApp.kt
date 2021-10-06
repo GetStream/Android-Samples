@@ -18,7 +18,9 @@ class SlackCloneApp : Application() {
         val client = ChatClient.Builder("qx5us2v6xvmh", applicationContext)
             .logLevel(ChatLogLevel.ALL)
             .build()
-        ChatDomain.Builder(client, applicationContext).build()
+        ChatDomain.Builder(client, applicationContext)
+            .userPresenceEnabled()
+            .build()
     }
 
     private fun connectUser() {

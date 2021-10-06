@@ -1,6 +1,8 @@
 package io.getstream.slack.compose.ui.messages
 
 import android.content.ClipboardManager
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -98,7 +100,9 @@ class MessagesActivity : AppCompatActivity() {
         }
 
         MessageListHeader(
-            modifier = Modifier.fillMaxWidth().height(56.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp),
             channel = listViewModel.channel,
             currentUser = user,
             isNetworkAvailable = isNetworkAvailable,
@@ -106,5 +110,15 @@ class MessagesActivity : AppCompatActivity() {
             onHeaderActionClick = {},
             onBackPressed = backAction
         )
+    }
+
+    companion object {
+        private const val KEY_CHANNEL_ID = "channelId"
+
+        fun getIntent(context: Context, channelId: String): Intent {
+            return Intent(context, MessagesActivity::class.java).apply {
+                putExtra(KEY_CHANNEL_ID, channelId)
+            }
+        }
     }
 }

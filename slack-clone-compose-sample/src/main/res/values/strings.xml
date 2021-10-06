@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Slack Clone Compose Sample</string>
+
+    <!-- Channel List Screen -->
+    <string name="search_input_hint">Jump to…</string>
+
+    <!-- Message List Screen -->
+
 </resources>
