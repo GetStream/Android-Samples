@@ -71,7 +71,7 @@ fun DirectOneToOneChatItem(
             OnlineIndicator(
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
-                    .size(12.dp),
+                    .size(10.dp),
                 isOnline = user.online
             )
         }

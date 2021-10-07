@@ -11,11 +11,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import io.getstream.chat.android.compose.ui.common.avatar.UserAvatar
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.slack.compose.ui.theme.SlackTheme
 
 /**
- * A simple view component representation for User online status green indicator.
+ * Component that represents an online indicator to be used with [UserAvatar].
  *
  * @param isOnline - boolean toggle to update to either a green or grey dot.
  * @param modifier - Modifier for styling.
@@ -27,11 +28,13 @@ fun OnlineIndicator(
     modifier: Modifier = Modifier,
     shape: Shape = CircleShape,
 ) {
+    val borderColor = if (isOnline) Color.Transparent else ChatTheme.colors.borders
+    val indicatorColor = if (isOnline) ChatTheme.colors.infoAccent else Color.White
     Box(
         modifier = modifier
+            .border(2.dp, borderColor, shape)
             .clip(shape)
-            .background(if (isOnline) ChatTheme.colors.infoAccent else Color.Transparent)
-            .border(2.dp, if (isOnline) Color.Transparent else ChatTheme.colors.borders)
+            .background(indicatorColor)
     )
 }
 
