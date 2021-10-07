@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -24,6 +25,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -60,8 +62,14 @@ fun ChannelsScreen(
             currentUser = currentUser,
             title = workspace.title,
             isNetworkAvailable = isNetworkAvailable,
+            leadingContent = { WorkspaceLogo(logo = workspace.logo) },
+            titleContent = {
+                WorkspaceTitle(
+                    modifier = Modifier.weight(1f),
+                    title = workspace.title
+                )
+            },
             trailingContent = { Spacer(Modifier.width(36.dp)) },
-            leadingContent = { WorkspaceLogo(logo = workspace.logo) }
         )
 
         SearchInput(
@@ -119,6 +127,22 @@ private fun WorkspaceLogo(@DrawableRes logo: Int) {
                 .clip(RoundedCornerShape(8.dp)),
         )
     }
+}
+
+@Composable
+internal fun WorkspaceTitle(
+    title: String,
+    modifier: Modifier = Modifier,
+) {
+    Text(
+        modifier = modifier
+            .wrapContentWidth(align = Alignment.Start)
+            .padding(horizontal = 16.dp),
+        text = title,
+        style = ChatTheme.typography.title1,
+        maxLines = 1,
+        color = Color.White,
+    )
 }
 
 /**
