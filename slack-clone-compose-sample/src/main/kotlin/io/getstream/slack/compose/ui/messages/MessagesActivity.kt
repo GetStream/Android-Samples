@@ -1,6 +1,5 @@
 package io.getstream.slack.compose.ui.messages
 
-import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -33,10 +32,9 @@ class MessagesActivity : AppCompatActivity() {
         val channelId = "messaging:sample-app-channel-0" // TODO: obtain cid from Intent
         return@lazy MessagesViewModelFactory(
             context = this,
-            clipboardManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager,
+            channelId = channelId,
             chatClient = ChatClient.instance(),
             chatDomain = ChatDomain.instance(),
-            channelId = channelId,
             enforceUniqueReactions = true,
             messageLimit = 30
         )
