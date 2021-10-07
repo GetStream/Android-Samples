@@ -47,9 +47,9 @@ dependencies {
     implementation Dependencies.composeMaterial
     implementation Dependencies.composeMaterialIconsCore
     implementation Dependencies.composeMaterialIconsExtended
-
     implementation Dependencies.composeActivity
     implementation Dependencies.composeViewModel
     implementation Dependencies.composeAccompanistPermissions
     implementation Dependencies.composeAccompanistPager
+    implementation Dependencies.composeAccompanistSystemUiController
 }

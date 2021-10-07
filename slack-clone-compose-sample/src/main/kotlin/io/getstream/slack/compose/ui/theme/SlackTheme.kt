@@ -11,9 +11,12 @@ import io.getstream.chat.android.compose.ui.theme.ChatTheme
  * used by the SDK.
  */
 @Composable
-fun SlackTheme(content: @Composable () -> Unit) {
+fun SlackTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
+) {
     ChatTheme(
-        colors = if (isSystemInDarkTheme()) slackDarkColors() else slackLightColors(),
+        colors = if (darkTheme) slackDarkColors() else slackLightColors(),
         typography = slackTypography,
         shapes = slackShapes()
     ) {

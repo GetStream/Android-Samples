@@ -4,10 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.api.models.QuerySort
 import io.getstream.chat.android.client.models.Channel
 import io.getstream.chat.android.client.models.Filters
+import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.channel.ChannelListViewModel
 import io.getstream.chat.android.compose.viewmodel.channel.ChannelViewModelFactory
 import io.getstream.chat.android.offline.ChatDomain
@@ -39,12 +43,35 @@ class ChannelsActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SlackTheme {
+                SetupSystemUI()
                 ChannelsScreen(
                     listViewModel = listViewModel,
                     workspace = streamWorkspace,
                     onItemClick = ::openMessages
                 )
             }
+        }
+    }
+
+    /**
+     * Responsible for updating the system UI.
+     */
+    @Composable
+    private fun SetupSystemUI() {
+        val systemUiController = rememberSystemUiController()
+
+        val statusBarColor = ChatTheme.colors.barsBackground
+        val navigationBarColor = ChatTheme.colors.appBackground
+
+        SideEffect {
+            systemUiController.setStatusBarColor(
+                color = statusBarColor,
+                darkIcons = false
+            )
+            systemUiController.setNavigationBarColor(
+                color = navigationBarColor,
+                darkIcons = false
+            )
         }
     }
 
