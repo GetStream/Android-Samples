@@ -9,7 +9,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import io.getstream.chat.android.compose.ui.theme.ChatTheme
+import io.getstream.slack.compose.ui.theme.SlackTheme
 
 /**
  * A simple view component representation for User online status green indicator.
@@ -27,7 +30,23 @@ fun OnlineIndicator(
     Box(
         modifier = modifier
             .clip(shape)
-            .background(if (isOnline) Color.Green else Color.Transparent)
-            .border(1.dp, if (isOnline) Color.Transparent else Color.Gray)
+            .background(if (isOnline) ChatTheme.colors.infoAccent else Color.Transparent)
+            .border(2.dp, if (isOnline) Color.Transparent else ChatTheme.colors.borders)
     )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun OnlineIndicatorPreviewOnline() {
+    SlackTheme {
+        OnlineIndicator(isOnline = true)
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun OnlineIndicatorPreviewOffline() {
+    SlackTheme {
+        OnlineIndicator(isOnline = false)
+    }
 }

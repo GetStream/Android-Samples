@@ -8,7 +8,7 @@ import io.getstream.chat.android.compose.ui.theme.StreamShapes
 @Composable
 fun slackShapes(): StreamShapes {
     return StreamShapes(
-        avatar = RoundedCornerShape(8.dp),
+        avatar = RoundedCornerShape(4.dp),
         myMessageBubble = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp, bottomStart = 16.dp),
         otherMessageBubble = RoundedCornerShape(
             topStart = 16.dp,

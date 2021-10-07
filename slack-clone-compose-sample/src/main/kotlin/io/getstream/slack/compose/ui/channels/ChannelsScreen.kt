@@ -1,8 +1,10 @@
 package io.getstream.slack.compose.ui.channels
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -55,15 +57,7 @@ fun ChannelsScreen(
             title = workspace.title,
             isNetworkAvailable = isNetworkAvailable,
             trailingContent = { Spacer(Modifier.width(36.dp)) },
-            leadingContent = {
-                Image(
-                    painter = painterResource(id = workspace.logo),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(36.dp)
-                        .clip(RoundedCornerShape(8.dp)),
-                )
-            }
+            leadingContent = { WorkspaceLogo(logo = workspace.logo) }
         )
 
         SearchInput(
@@ -76,13 +70,7 @@ fun ChannelsScreen(
                 listViewModel.setSearchQuery(it)
             },
             leadingIcon = { Spacer(Modifier.width(8.dp)) },
-            label = {
-                Text(
-                    text = stringResource(id = R.string.search_input_hint),
-                    style = ChatTheme.typography.body,
-                    color = ChatTheme.colors.textLowEmphasis,
-                )
-            }
+            label = { SearchLabel() }
         )
 
         ChannelList(
@@ -107,4 +95,28 @@ fun ChannelsScreen(
             }
         )
     }
+}
+
+@Composable
+private fun WorkspaceLogo(@DrawableRes logo: Int) {
+    Row {
+        Spacer(Modifier.width(8.dp))
+
+        Image(
+            painter = painterResource(id = logo),
+            contentDescription = null,
+            modifier = Modifier
+                .size(36.dp)
+                .clip(RoundedCornerShape(8.dp)),
+        )
+    }
+}
+
+@Composable
+private fun SearchLabel() {
+    Text(
+        text = stringResource(id = R.string.search_input_hint),
+        style = ChatTheme.typography.body,
+        color = ChatTheme.colors.textLowEmphasis,
+    )
 }

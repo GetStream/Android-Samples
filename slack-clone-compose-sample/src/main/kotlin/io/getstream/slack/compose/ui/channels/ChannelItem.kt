@@ -1,14 +1,18 @@
 package io.getstream.slack.compose.ui.channels
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -16,7 +20,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.getstream.chat.android.client.models.Channel
@@ -26,6 +32,7 @@ import io.getstream.chat.android.compose.ui.util.getDisplayName
 import io.getstream.slack.compose.R
 import io.getstream.slack.compose.ui.channels.components.OnlineIndicator
 import io.getstream.slack.compose.ui.channels.components.UnreadCountBadge
+import io.getstream.slack.compose.ui.theme.SlackTheme
 import io.getstream.slack.compose.ui.util.getOtherUser
 
 /**
@@ -55,8 +62,14 @@ fun GroupChannelItem(
             modifier = Modifier
                 .size(12.dp),
             painter = painterResource(id = R.drawable.ic_channel),
-            contentDescription = null
-        )
+            contentDescription = null,
+            tint = if (channel.hasUnread) {
+                ChatTheme.colors.textHighEmphasis
+            } else {
+                ChatTheme.colors.textLowEmphasis
+            },
+
+            )
 
         Spacer(Modifier.width(16.dp))
 
@@ -64,6 +77,28 @@ fun GroupChannelItem(
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+fun GroupChannelItemPreview() {
+    SlackTheme {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(ChatTheme.colors.appBackground)
+        ) {
+            DirectMessagingChannelItem(
+                Channel(
+                    watcherCount = 3,
+                    extraData = mutableMapOf(
+                        "name" to "test test",
+                        "image" to "",
+                    )
+                ),
+                {},
+            )
+        }
+    }
+}
 
 /**
  * Component that represents a distinct channel item.
@@ -88,27 +123,31 @@ fun DirectMessagingChannelItem(
             .height(24.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Text(
-            modifier = Modifier
-                .padding(horizontal = 16.dp),
-            text = "" + (channel.memberCount - 1),
-            style = if (channel.hasUnread) ChatTheme.typography.bodyBold else ChatTheme.typography.body,
-            fontSize = 12.sp,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            color = ChatTheme.colors.textHighEmphasis,
-        )
-
+        Spacer(Modifier.width(10.dp))
+        Box(
+            modifier = modifier
+                .clip(RoundedCornerShape(4.dp))
+                .size(24.dp)
+                .background(ChatTheme.colors.borders),
+        ) {
+            Text(
+                modifier = Modifier
+                    .align(Alignment.Center),
+                text = "" + (channel.memberCount - 1),
+                style = ChatTheme.typography.captionBold,
+                fontSize = 12.sp,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                color = ChatTheme.colors.textHighEmphasis,
+            )
+        }
+        Spacer(Modifier.width(10.dp))
         ChannelName(channel)
     }
 }
 
 /**
  * Component that represents a one-to-one channel item.
- *
- * One-to-one cha
- *
- * / If the other user is online, then show the green presence indicator next to his name
  *
  * @param channel The channel to display.
  * @param onChannelClick Handler for a single tap on an item.
@@ -123,23 +162,23 @@ fun OneToOneChannelItem(
     Row(
         modifier = modifier
             .clickable { onChannelClick(channel) }
-            .padding(vertical = 8.dp)
+            .padding(vertical = 2.dp, horizontal = 16.dp)
             .fillMaxWidth()
-            .height(24.dp),
+            .height(40.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-
         val user = channel.getOtherUser()!!
 
         Box(
             modifier = Modifier
                 .clip(ChatTheme.shapes.avatar)
-                .size(24.dp),
+                .size(36.dp),
         ) {
             UserAvatar(
                 modifier = Modifier
-                    .width(56.dp)
-                    .height(56.dp),
+                    .width(32.dp)
+                    .height(32.dp)
+                    .align(Alignment.Center),
                 user = user
             )
             OnlineIndicator(
@@ -150,6 +189,8 @@ fun OneToOneChannelItem(
             )
         }
 
+        Spacer(Modifier.width(10.dp))
+
         ChannelName(channel)
 
         val unreadCount = channel.unreadCount ?: 0
@@ -159,18 +200,19 @@ fun OneToOneChannelItem(
     }
 }
 
+/**
+ * Component that represents a channel name.
+ *
+ * @param channel The channel used to display the name.
+ */
 @Composable
 fun ChannelName(channel: Channel) {
-    val textStyle = if (channel.hasUnread) {
-        ChatTheme.typography.title3Bold
-    } else {
-        ChatTheme.typography.body
-    }
     Text(
         text = channel.getDisplayName(),
-        style = textStyle,
+        style = ChatTheme.typography.body,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
         color = ChatTheme.colors.textHighEmphasis,
+        fontWeight = if (channel.hasUnread) FontWeight.Bold else FontWeight.Normal
     )
 }
