@@ -3,11 +3,13 @@ package io.getstream.slack.compose.ui.channels
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -19,10 +21,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import io.getstream.chat.android.client.models.Channel
 import io.getstream.chat.android.compose.ui.channel.header.ChannelListHeader
@@ -32,8 +36,8 @@ import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.channel.ChannelListViewModel
 import io.getstream.slack.compose.R
 import io.getstream.slack.compose.model.Workspace
-import io.getstream.slack.compose.ui.util.isDirectMessaging
-import io.getstream.slack.compose.ui.util.isOneToOne
+import io.getstream.slack.compose.ui.util.isDirectGroupChat
+import io.getstream.slack.compose.ui.util.isDirectOneToOneChat
 
 @Composable
 fun ChannelsScreen(
@@ -62,32 +66,34 @@ fun ChannelsScreen(
 
         SearchInput(
             modifier = Modifier
-                .padding(horizontal = 12.dp, vertical = 8.dp)
+                .padding(16.dp)
+                .height(36.dp)
                 .fillMaxWidth(),
             query = searchQuery,
             onValueChange = {
                 searchQuery = it
                 listViewModel.setSearchQuery(it)
             },
-            leadingIcon = { Spacer(Modifier.width(8.dp)) },
-            label = { SearchLabel() }
+            leadingIcon = { Spacer(Modifier.width(16.dp)) },
+            label = { SearchInputHint() }
         )
 
         ChannelList(
             modifier = Modifier.fillMaxSize(),
             viewModel = listViewModel,
             onChannelClick = onItemClick,
+            emptyContent = { EmptyContent() },
             itemContent = {
                 when {
-                    it.isOneToOne() -> OneToOneChannelItem(
+                    it.isDirectOneToOneChat() -> DirectOneToOneChatItem(
                         channel = it,
                         onChannelClick = onItemClick
                     )
-                    it.isDirectMessaging() -> DirectMessagingChannelItem(
+                    it.isDirectGroupChat() -> DirectGroupChatItem(
                         channel = it,
                         onChannelClick = onItemClick
                     )
-                    else -> GroupChannelItem(
+                    else -> ChannelItem(
                         channel = it,
                         onChannelClick = onItemClick
                     )
@@ -97,6 +103,9 @@ fun ChannelsScreen(
     }
 }
 
+/**
+ * Component that represents the workspace switch shown in the toolbar.
+ */
 @Composable
 private fun WorkspaceLogo(@DrawableRes logo: Int) {
     Row {
@@ -112,11 +121,35 @@ private fun WorkspaceLogo(@DrawableRes logo: Int) {
     }
 }
 
+/**
+ * Component that represents the label shown in the search component, when there's no input.
+ */
 @Composable
-private fun SearchLabel() {
+private fun SearchInputHint() {
     Text(
         text = stringResource(id = R.string.search_input_hint),
         style = ChatTheme.typography.body,
         color = ChatTheme.colors.textLowEmphasis,
     )
+}
+
+/**
+ * Component that represents the empty content if there are no channels.
+ */
+@Composable
+private fun EmptyContent() {
+    Box(
+        modifier = Modifier
+            .background(color = ChatTheme.colors.appBackground)
+            .fillMaxSize(),
+    ) {
+        Text(
+            modifier = Modifier
+                .align(Alignment.Center),
+            text = stringResource(id = R.string.search_no_results),
+            style = ChatTheme.typography.bodyBold,
+            color = ChatTheme.colors.textHighEmphasis,
+            textAlign = TextAlign.Center
+        )
+    }
 }
