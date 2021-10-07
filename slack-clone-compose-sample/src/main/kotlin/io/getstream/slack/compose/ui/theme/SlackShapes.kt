@@ -7,17 +7,8 @@ import io.getstream.chat.android.compose.ui.theme.StreamShapes
 
 @Composable
 fun slackShapes(): StreamShapes {
-    return StreamShapes(
+    return StreamShapes.defaultShapes().copy(
         avatar = RoundedCornerShape(4.dp),
-        myMessageBubble = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp, bottomStart = 16.dp),
-        otherMessageBubble = RoundedCornerShape(
-            topStart = 16.dp,
-            topEnd = 16.dp,
-            bottomEnd = 16.dp
-        ),
-        inputField = RoundedCornerShape(0.dp),
-        attachment = RoundedCornerShape(8.dp),
-        imageThumbnail = RoundedCornerShape(8.dp),
-        bottomSheet = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
+        inputField = RoundedCornerShape(8.dp),
     )
 }
