@@ -25,7 +25,7 @@ import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.ui.util.getDisplayName
 import io.getstream.slack.compose.R
 import io.getstream.slack.compose.ui.channels.components.OnlineIndicator
-import io.getstream.slack.compose.ui.channels.components.UnreadCount
+import io.getstream.slack.compose.ui.channels.components.UnreadCountBadge
 import io.getstream.slack.compose.ui.util.getOtherUser
 
 /**
@@ -152,7 +152,10 @@ fun OneToOneChannelItem(
 
         ChannelName(channel)
 
-        UnreadCount()
+        val unreadCount = channel.unreadCount ?: 0
+        if (unreadCount > 0) {
+            UnreadCountBadge(unreadCount)
+        }
     }
 }
 
