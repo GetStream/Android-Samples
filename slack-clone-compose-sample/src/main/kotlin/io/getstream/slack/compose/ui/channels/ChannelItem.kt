@@ -5,7 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -48,10 +48,10 @@ fun DirectOneToOneChatItem(
 ) {
     Row(
         modifier = modifier
-            .clickable { onChannelClick(channel) }
-            .padding(vertical = 2.dp, horizontal = 16.dp)
-            .fillMaxWidth()
-            .height(40.dp),
+            .clip(shape = RoundedCornerShape(6.dp))
+            .clickable (onClick = { onChannelClick(channel) })
+            .padding(horizontal = 8.dp)
+            .fillMaxSize(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         val user = channel.getOtherUser()!!
@@ -59,25 +59,25 @@ fun DirectOneToOneChatItem(
         Box(
             modifier = Modifier
                 .clip(ChatTheme.shapes.avatar)
-                .size(36.dp),
+                .height(32.dp)
+                .width(30.dp),
         ) {
             UserAvatar(
                 modifier = Modifier
-                    .width(32.dp)
-                    .height(32.dp)
-                    .align(Alignment.Center),
+                    .width(24.dp)
+                    .height(24.dp)
+                    .align(Alignment.CenterStart),
                 user = user
             )
             OnlineIndicator(
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
-                    .size(10.dp),
+                    .size(14.dp),
                 isOnline = user.online
             )
         }
 
-        Spacer(Modifier.width(10.dp))
-
+        Spacer(Modifier.width(6.dp))
         ChannelName(channel)
 
         val unreadCount = channel.unreadCount ?: 0
@@ -104,13 +104,12 @@ fun DirectGroupChatItem(
 ) {
     Row(
         modifier = modifier
-            .clickable { onChannelClick(channel) }
-            .padding(vertical = 8.dp)
-            .fillMaxWidth()
-            .height(24.dp),
+            .clip(shape = RoundedCornerShape(6.dp))
+            .clickable (onClick = { onChannelClick(channel) })
+            .padding(horizontal = 8.dp)
+            .fillMaxSize(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Spacer(Modifier.width(10.dp))
         Box(
             modifier = modifier
                 .clip(RoundedCornerShape(4.dp))
@@ -118,8 +117,7 @@ fun DirectGroupChatItem(
                 .background(ChatTheme.colors.borders),
         ) {
             Text(
-                modifier = Modifier
-                    .align(Alignment.Center),
+                modifier = Modifier.align(Alignment.Center),
                 text = "" + (channel.memberCount - 1),
                 style = ChatTheme.typography.captionBold,
                 fontSize = 12.sp,
@@ -128,7 +126,7 @@ fun DirectGroupChatItem(
                 color = ChatTheme.colors.textHighEmphasis,
             )
         }
-        Spacer(Modifier.width(10.dp))
+        Spacer(Modifier.width(12.dp))
         ChannelName(channel)
     }
 }
@@ -149,17 +147,15 @@ fun ChannelItem(
 ) {
     Row(
         modifier = modifier
-            .clickable { onChannelClick(channel) }
-            .padding(vertical = 8.dp)
-            .fillMaxWidth()
-            .height(24.dp),
+            .clip(shape = RoundedCornerShape(6.dp))
+            .clickable (onClick = { onChannelClick(channel) })
+            .padding(horizontal = 8.dp)
+            .fillMaxSize(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Spacer(Modifier.width(16.dp))
-
+        Spacer(Modifier.width(2.dp))
         Icon(
-            modifier = Modifier
-                .size(12.dp),
+            modifier = Modifier.size(16.dp),
             painter = painterResource(id = R.drawable.ic_channel),
             contentDescription = null,
             tint = if (channel.hasUnread) {
@@ -168,9 +164,7 @@ fun ChannelItem(
                 ChatTheme.colors.textLowEmphasis
             },
         )
-
-        Spacer(Modifier.width(16.dp))
-
+        Spacer(Modifier.width(18.dp))
         ChannelName(channel)
     }
 }
@@ -187,7 +181,9 @@ fun ChannelName(channel: Channel) {
         style = ChatTheme.typography.body,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
-        color = ChatTheme.colors.textHighEmphasis,
+        color = if (channel.hasUnread) {
+            ChatTheme.colors.textHighEmphasis
+        } else ChatTheme.colors.textLowEmphasis,
         fontWeight = if (channel.hasUnread) FontWeight.Bold else FontWeight.Normal
     )
 }

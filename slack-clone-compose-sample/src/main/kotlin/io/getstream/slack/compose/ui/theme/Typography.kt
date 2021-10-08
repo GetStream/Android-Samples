@@ -4,6 +4,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import io.getstream.chat.android.compose.ui.theme.StreamTypography
 import io.getstream.slack.compose.R
 
@@ -33,7 +34,7 @@ private fun StreamTypography.withFontFamily(fontFamily: FontFamily): StreamTypog
         title1 = title1.withFontFamily(fontFamily),
         title3 = title3.withFontFamily(fontFamily),
         title3Bold = title3Bold.withFontFamily(fontFamily),
-        body = body.withFontFamily(fontFamily),
+        body = body.withFontFamily(fontFamily).copy(fontSize = 15.sp),
         bodyItalic = bodyItalic.withFontFamily(fontFamily),
         bodyBold = bodyBold.withFontFamily(fontFamily),
         footnote = footnote.withFontFamily(fontFamily),

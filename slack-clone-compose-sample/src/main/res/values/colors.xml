@@ -11,7 +11,7 @@
     <color name="text_low_emphasis">#72767E</color>
     <color name="disabled">#B4B7BB</color>
     <color name="borders">#D7D7D7</color>
-    <color name="input_background">#E9EAED</color>
+    <color name="input_background">#FFFFFF</color>
     <color name="app_background">#FFFFFF</color>
     <color name="bars_background">#39133E</color>
     <color name="link_background">#E9F1FF</color>

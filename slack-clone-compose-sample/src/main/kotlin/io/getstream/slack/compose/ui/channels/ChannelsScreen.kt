@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -45,7 +46,7 @@ import io.getstream.slack.compose.ui.util.isDirectOneToOneChat
 fun ChannelsScreen(
     listViewModel: ChannelListViewModel,
     workspace: Workspace,
-    onItemClick: (Channel) -> Unit = {},
+    onItemClick: (Channel) -> Unit = {}
 ) {
     val currentUser by listViewModel.user.collectAsState()
     val isNetworkAvailable by listViewModel.isOnline.collectAsState()
@@ -59,6 +60,7 @@ fun ChannelsScreen(
     ) {
 
         ChannelListHeader(
+            modifier = Modifier.height(56.dp),
             currentUser = currentUser,
             title = workspace.title,
             isNetworkAvailable = isNetworkAvailable,
@@ -72,19 +74,25 @@ fun ChannelsScreen(
             trailingContent = { Spacer(Modifier.width(36.dp)) },
         )
 
-        SearchInput(
+        Card(
             modifier = Modifier
-                .padding(16.dp)
-                .height(36.dp)
+                .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 8.dp)
+                .height(44.dp)
                 .fillMaxWidth(),
-            query = searchQuery,
-            onValueChange = {
-                searchQuery = it
-                listViewModel.setSearchQuery(it)
-            },
-            leadingIcon = { Spacer(Modifier.width(16.dp)) },
-            label = { SearchInputHint() }
-        )
+            elevation = 2.dp,
+            shape = ChatTheme.shapes.inputField
+        ) {
+            SearchInput(
+                modifier = Modifier.fillMaxSize(),
+                query = searchQuery,
+                onValueChange = {
+                    searchQuery = it
+                    listViewModel.setSearchQuery(it)
+                },
+                leadingIcon = { Spacer(Modifier.width(16.dp)) },
+                label = { SearchInputHint() }
+            )
+        }
 
         ChannelList(
             modifier = Modifier.fillMaxSize(),
@@ -92,19 +100,26 @@ fun ChannelsScreen(
             onChannelClick = onItemClick,
             emptyContent = { EmptyContent() },
             itemContent = {
-                when {
-                    it.isDirectOneToOneChat() -> DirectOneToOneChatItem(
-                        channel = it,
-                        onChannelClick = onItemClick
-                    )
-                    it.isDirectGroupChat() -> DirectGroupChatItem(
-                        channel = it,
-                        onChannelClick = onItemClick
-                    )
-                    else -> ChannelItem(
-                        channel = it,
-                        onChannelClick = onItemClick
-                    )
+                Box(
+                    modifier = Modifier
+                        .padding(horizontal = 8.dp)
+                        .fillMaxWidth()
+                        .height(45.dp),
+                ) {
+                    when {
+                        it.isDirectOneToOneChat() -> DirectOneToOneChatItem(
+                            channel = it,
+                            onChannelClick = onItemClick
+                        )
+                        it.isDirectGroupChat() -> DirectGroupChatItem(
+                            channel = it,
+                            onChannelClick = onItemClick
+                        )
+                        else -> ChannelItem(
+                            channel = it,
+                            onChannelClick = onItemClick
+                        )
+                    }
                 }
             }
         )
