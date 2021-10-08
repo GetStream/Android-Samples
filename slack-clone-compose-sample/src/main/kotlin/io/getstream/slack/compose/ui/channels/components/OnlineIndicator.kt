@@ -18,18 +18,21 @@ import io.getstream.slack.compose.ui.theme.SlackTheme
 /**
  * Component that represents an online indicator to be used with [UserAvatar].
  *
- * @param isOnline - boolean toggle to update to either a green or grey dot.
- * @param modifier - Modifier for styling.
- * @param shape - The shape of the online indicator.
+ * By default, the indicator is a green dot when the user is online and a grey
+ * dot when the user is offline.
+ *
+ * @param online If the user is online.
+ * @param modifier Modifier for styling.
+ * @param shape The shape of the online indicator.
  */
 @Composable
 fun OnlineIndicator(
-    isOnline: Boolean,
+    online: Boolean,
     modifier: Modifier = Modifier,
     shape: Shape = CircleShape,
 ) {
-    val borderColor = if (isOnline) ChatTheme.colors.infoAccent else ChatTheme.colors.disabled
-    val indicatorColor = if (isOnline) ChatTheme.colors.infoAccent else ChatTheme.colors.appBackground
+    val borderColor = if (online) ChatTheme.colors.infoAccent else ChatTheme.colors.disabled
+    val indicatorColor = if (online) ChatTheme.colors.infoAccent else ChatTheme.colors.appBackground
     Box(
         modifier = modifier
             .border(2.5.dp, ChatTheme.colors.appBackground, shape)
@@ -44,7 +47,7 @@ fun OnlineIndicator(
 @Composable
 fun OnlineIndicatorPreviewOnline() {
     SlackTheme {
-        OnlineIndicator(isOnline = true)
+        OnlineIndicator(online = true)
     }
 }
 
@@ -52,6 +55,6 @@ fun OnlineIndicatorPreviewOnline() {
 @Composable
 fun OnlineIndicatorPreviewOffline() {
     SlackTheme {
-        OnlineIndicator(isOnline = false)
+        OnlineIndicator(online = false)
     }
 }

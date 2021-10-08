@@ -49,7 +49,7 @@ fun DirectOneToOneChatItem(
     Row(
         modifier = modifier
             .clip(shape = RoundedCornerShape(6.dp))
-            .clickable (onClick = { onChannelClick(channel) })
+            .clickable(onClick = { onChannelClick(channel) })
             .padding(horizontal = 8.dp)
             .fillMaxSize(),
         verticalAlignment = Alignment.CenterVertically,
@@ -73,7 +73,7 @@ fun DirectOneToOneChatItem(
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
                     .size(14.dp),
-                isOnline = user.online
+                online = user.online
             )
         }
 
@@ -105,7 +105,7 @@ fun DirectGroupChatItem(
     Row(
         modifier = modifier
             .clip(shape = RoundedCornerShape(6.dp))
-            .clickable (onClick = { onChannelClick(channel) })
+            .clickable(onClick = { onChannelClick(channel) })
             .padding(horizontal = 8.dp)
             .fillMaxSize(),
         verticalAlignment = Alignment.CenterVertically,
@@ -148,7 +148,7 @@ fun ChannelItem(
     Row(
         modifier = modifier
             .clip(shape = RoundedCornerShape(6.dp))
-            .clickable (onClick = { onChannelClick(channel) })
+            .clickable(onClick = { onChannelClick(channel) })
             .padding(horizontal = 8.dp)
             .fillMaxSize(),
         verticalAlignment = Alignment.CenterVertically,

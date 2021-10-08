@@ -33,11 +33,11 @@ class ChannelsActivity : ComponentActivity() {
             Filters.and(
                 Filters.eq("type", "messaging"),
                 Filters.`in`("members", listOf(currentUserId()))
-            ),
+            )
         )
     }
 
-    private val listViewModel: ChannelListViewModel by viewModels { factory }
+    private val listViewModel: ChannelListViewModel by viewModels(::factory)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +46,7 @@ class ChannelsActivity : ComponentActivity() {
                 SetupSystemUI()
                 ChannelsScreen(
                     listViewModel = listViewModel,
-                    workspace = streamWorkspace,
+                    workspace = sampleWorkspace,
                     onItemClick = ::openMessages
                 )
             }
@@ -81,11 +81,8 @@ class ChannelsActivity : ComponentActivity() {
 
     companion object {
         /**
-         * For the sake of example we hardcoded the "Stream" workspace.
+         * For the sake of this sample app, the workspace is hardcoded.
          */
-        private val streamWorkspace = Workspace(
-            title = "getstream",
-            logo = R.drawable.ic_stream_logo
-        )
+        private val sampleWorkspace = Workspace("getstream", R.drawable.ic_stream_logo)
     }
 }
