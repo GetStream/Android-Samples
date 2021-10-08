@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
@@ -78,7 +79,10 @@ fun DirectOneToOneChatItem(
         }
 
         Spacer(Modifier.width(6.dp))
-        ChannelName(channel)
+        ChannelName(
+            channel = channel,
+            modifier = Modifier.weight(1f),
+        )
 
         val unreadCount = channel.unreadCount ?: 0
         if (unreadCount > 0) {
@@ -173,17 +177,21 @@ fun ChannelItem(
  * Component that represents a channel name.
  *
  * @param channel The channel used to display the name.
+ * @param modifier Modifier for styling.
  */
 @Composable
-fun ChannelName(channel: Channel) {
+fun ChannelName(
+    channel: Channel,
+    modifier: Modifier = Modifier
+) {
     Text(
+        modifier = modifier
+            .wrapContentWidth(align = Alignment.Start),
         text = channel.getDisplayName(),
         style = ChatTheme.typography.body,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
-        color = if (channel.hasUnread) {
-            ChatTheme.colors.textHighEmphasis
-        } else ChatTheme.colors.textLowEmphasis,
+        color = if (channel.hasUnread) ChatTheme.colors.textHighEmphasis else ChatTheme.colors.textLowEmphasis,
         fontWeight = if (channel.hasUnread) FontWeight.Bold else FontWeight.Normal
     )
 }
