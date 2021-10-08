@@ -39,8 +39,6 @@ import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.channel.ChannelListViewModel
 import io.getstream.slack.compose.R
 import io.getstream.slack.compose.model.Workspace
-import io.getstream.slack.compose.ui.util.isDirectGroupChat
-import io.getstream.slack.compose.ui.util.isDirectOneToOneChat
 
 @Composable
 fun ChannelsScreen(
@@ -58,7 +56,6 @@ fun ChannelsScreen(
             .fillMaxSize()
             .background(ChatTheme.colors.appBackground)
     ) {
-
         ChannelListHeader(
             modifier = Modifier.height(56.dp),
             currentUser = currentUser,
@@ -99,29 +96,7 @@ fun ChannelsScreen(
             viewModel = listViewModel,
             onChannelClick = onItemClick,
             emptyContent = { EmptyContent() },
-            itemContent = {
-                Box(
-                    modifier = Modifier
-                        .padding(horizontal = 8.dp)
-                        .fillMaxWidth()
-                        .height(45.dp),
-                ) {
-                    when {
-                        it.isDirectOneToOneChat() -> DirectOneToOneChatItem(
-                            channel = it,
-                            onChannelClick = onItemClick
-                        )
-                        it.isDirectGroupChat() -> DirectGroupChatItem(
-                            channel = it,
-                            onChannelClick = onItemClick
-                        )
-                        else -> ChannelItem(
-                            channel = it,
-                            onChannelClick = onItemClick
-                        )
-                    }
-                }
-            }
+            itemContent = { ChannelItem(it, onItemClick) }
         )
     }
 }
