@@ -29,6 +29,12 @@ android {
         kotlinCompilerExtensionVersion '1.0.1'
         kotlinCompilerVersion '1.5.21'
     }
+
+    sourceSets {
+        all {
+            it.java.srcDir "src/$it.name/kotlin"
+        }
+    }
 }
 
 dependencies {

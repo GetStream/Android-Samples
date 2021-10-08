@@ -39,7 +39,6 @@ class MessagesActivity : AppCompatActivity() {
         }
     }
 
-
     companion object {
         private const val KEY_CHANNEL_ID = "channelId"
 

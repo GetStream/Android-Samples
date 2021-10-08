@@ -135,7 +135,6 @@ fun DirectGroupChatItem(
     }
 }
 
-
 /**
  * Component that represents a regular named channel.
  *
