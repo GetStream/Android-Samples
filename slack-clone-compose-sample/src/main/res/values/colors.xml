@@ -1,8 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="slackish">#57265A</color>
+    <color name="slackish">#39133E</color>
     <color name="black">#FF000000</color>
     <color name="dark_gray">#FF111111</color>
     <color name="light_gray">#FFEEEEEE</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Overridden Default colors -->
+    <color name="text_high_emphasis">#000000</color>
+    <color name="text_low_emphasis">#72767E</color>
+    <color name="disabled">#B4B7BB</color>
+    <color name="borders">#D7D7D7</color>
+    <color name="input_background">#FFFFFF</color>
+    <color name="app_background">#FFFFFF</color>
+    <color name="bars_background">#39133E</color>
+    <color name="link_background">#E9F1FF</color>
+    <color name="overlay_regular">#80000000</color>
+    <color name="overlay_dark">#99000000</color>
+    <color name="primary_accent">#006CFF</color>
+    <color name="error_accent">#CF375C</color>
+    <color name="info_accent">#34785D</color>
+    <color name="highlight">#FBF4DD</color>
+
+    <!-- Overridden Dark colors -->
+    <color name="text_high_emphasis_dark">#FFFFFF</color>
+    <color name="text_low_emphasis_dark">#72767E</color>
+    <color name="disabled_dark">#4C525C</color>
+    <color name="borders_dark">#313337</color>
+    <color name="input_background_dark">#1C1E22</color>
+    <color name="app_background_dark">#1B1D22</color>
+    <color name="bars_background_dark">#19161D</color>
+    <color name="link_background_dark">#00193D</color>
+    <color name="overlay_regular_dark">#33000000</color>
+    <color name="overlay_dark_dark">#99FFFFFF</color>
+    <color name="primary_accent_dark">#006CFF</color>
+    <color name="error_accent_dark">#CF375C</color>
+    <color name="info_accent_dark">#34785D</color>
+    <color name="highlight_dark">#302D22</color>
 </resources>
