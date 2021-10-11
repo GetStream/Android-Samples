@@ -8,6 +8,7 @@ buildscript {
         mavenCentral()
         google()
         jcenter()
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     }
     dependencies {
         classpath Dependencies.androidGradlePlugin
@@ -26,6 +27,7 @@ allprojects {
         maven {
             url "https://jitpack.io"
         }
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     }
 }
 
