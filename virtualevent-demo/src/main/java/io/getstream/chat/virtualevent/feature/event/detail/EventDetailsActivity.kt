@@ -63,10 +63,11 @@ class EventDetailsActivity : AppCompatActivity() {
 
     private fun setupMessageListView() {
         binding.messageListView.setMessageViewHolderFactory(LivestreamMessageItemVhFactory())
-        binding.messageListView.setCustomLinearLayoutManager(LinearLayoutManager(this)
-            .apply {
+        binding.messageListView.setCustomLinearLayoutManager(
+            LinearLayoutManager(this).apply {
                 stackFromEnd = false
-            })
+            }
+        )
         messageListViewModel.apply {
             bindView(binding.messageListView, this@EventDetailsActivity)
         }
