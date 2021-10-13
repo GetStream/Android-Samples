@@ -5,6 +5,5 @@
         <item name="colorOnPrimary">@color/white</item>
         <item name="android:colorAccent">@color/light_gray</item>
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>

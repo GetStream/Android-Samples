@@ -15,7 +15,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
-import io.getstream.slack.compose.ui.theme.SlackTheme
+import io.getstream.slack.compose.ui.theme.SlackChannelsTheme
 
 /**
  * Component that represents a badge with the number of unread messages.
@@ -59,7 +59,7 @@ fun UnreadCountBadge(
 @Preview(showBackground = true)
 @Composable
 fun UnreadCountBadgePreviewFew() {
-    SlackTheme {
+    SlackChannelsTheme {
         UnreadCountBadge(unreadCount = 5)
     }
 }
@@ -67,7 +67,7 @@ fun UnreadCountBadgePreviewFew() {
 @Preview(showBackground = true)
 @Composable
 fun UnreadCountBadgePreviewMany() {
-    SlackTheme {
+    SlackChannelsTheme {
         UnreadCountBadge(unreadCount = 150)
     }
 }

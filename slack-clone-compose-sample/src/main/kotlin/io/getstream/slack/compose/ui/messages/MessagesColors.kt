@@ -1,19 +1,20 @@
-package io.getstream.slack.compose.ui.theme
+package io.getstream.slack.compose.ui.messages
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import io.getstream.chat.android.compose.ui.theme.StreamColors
 import io.getstream.slack.compose.R
 
 @Composable
-fun slackLightColors(): StreamColors = StreamColors(
+fun slackMessagesLightColors(): StreamColors = StreamColors(
     textHighEmphasis = colorResource(R.color.text_high_emphasis),
     textLowEmphasis = colorResource(R.color.text_low_emphasis),
     disabled = colorResource(R.color.disabled),
     borders = colorResource(R.color.borders),
     inputBackground = colorResource(R.color.input_background),
     appBackground = colorResource(R.color.app_background),
-    barsBackground = colorResource(R.color.bars_background),
+    barsBackground = colorResource(R.color.white),
     linkBackground = colorResource(R.color.link_background),
     overlay = colorResource(R.color.overlay_regular),
     overlayDark = colorResource(R.color.overlay_dark),
@@ -24,7 +25,7 @@ fun slackLightColors(): StreamColors = StreamColors(
 )
 
 @Composable
-fun slackDarkColors(): StreamColors = StreamColors(
+fun slackMessagesDarkColors(): StreamColors = StreamColors(
     textHighEmphasis = colorResource(R.color.text_high_emphasis_dark),
     textLowEmphasis = colorResource(R.color.text_low_emphasis_dark),
     disabled = colorResource(R.color.disabled_dark),

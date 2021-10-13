@@ -18,7 +18,7 @@ import io.getstream.chat.android.offline.ChatDomain
 import io.getstream.slack.compose.R
 import io.getstream.slack.compose.model.Workspace
 import io.getstream.slack.compose.ui.messages.MessagesActivity
-import io.getstream.slack.compose.ui.theme.SlackTheme
+import io.getstream.slack.compose.ui.theme.SlackChannelsTheme
 import io.getstream.slack.compose.ui.util.currentUserId
 
 class ChannelsActivity : ComponentActivity() {
@@ -42,7 +42,7 @@ class ChannelsActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            SlackTheme {
+            SlackChannelsTheme {
                 SetupSystemUI()
                 ChannelsScreen(
                     listViewModel = listViewModel,

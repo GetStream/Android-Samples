@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.getstream.chat.android.compose.ui.common.avatar.UserAvatar
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
-import io.getstream.slack.compose.ui.theme.SlackTheme
+import io.getstream.slack.compose.ui.theme.SlackChannelsTheme
 
 /**
  * Component that represents an online indicator to be used with [UserAvatar].
@@ -46,7 +46,7 @@ fun OnlineIndicator(
 @Preview(showBackground = true)
 @Composable
 fun OnlineIndicatorPreviewOnline() {
-    SlackTheme {
+    SlackChannelsTheme {
         OnlineIndicator(online = true)
     }
 }
@@ -54,7 +54,7 @@ fun OnlineIndicatorPreviewOnline() {
 @Preview(showBackground = true)
 @Composable
 fun OnlineIndicatorPreviewOffline() {
-    SlackTheme {
+    SlackChannelsTheme {
         OnlineIndicator(online = false)
     }
 }

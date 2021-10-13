@@ -24,26 +24,28 @@ fun MessagesScreen(
     attachmentsPickerViewModel: AttachmentsPickerViewModel,
     onBackPressed: () -> Unit = {},
 ) {
-    Scaffold(
-        modifier = Modifier.fillMaxSize(),
-        topBar = {
-            Header(
-                composerViewModel = composerViewModel,
-                listViewModel = listViewModel,
-                attachmentsPickerViewModel = attachmentsPickerViewModel,
-                onBackPressed = onBackPressed
+    SlackMessagesTheme {
+        Scaffold(
+            modifier = Modifier.fillMaxSize(),
+            topBar = {
+                Header(
+                    composerViewModel = composerViewModel,
+                    listViewModel = listViewModel,
+                    attachmentsPickerViewModel = attachmentsPickerViewModel,
+                    onBackPressed = onBackPressed,
+                )
+            },
+            bottomBar = {
+                MessageComposer(viewModel = composerViewModel)
+            }
+        ) {
+            MessageList(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(it),
+                viewModel = listViewModel,
             )
-        },
-        bottomBar = {
-            MessageComposer(viewModel = composerViewModel)
         }
-    ) {
-        MessageList(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(it),
-            viewModel = listViewModel,
-        )
     }
 }
 

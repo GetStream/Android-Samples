@@ -6,6 +6,10 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.messages.AttachmentsPickerViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
@@ -28,7 +32,8 @@ class MessagesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ChatTheme {
+            SlackMessagesTheme {
+                SetupSystemUI()
                 MessagesScreen(
                     listViewModel = listViewModel,
                     composerViewModel = composerViewModel,
@@ -36,6 +41,29 @@ class MessagesActivity : AppCompatActivity() {
                     onBackPressed = { finish() },
                 )
             }
+        }
+    }
+
+    /**
+     * Responsible for updating the system UI.
+     */
+    @Composable
+    private fun SetupSystemUI() {
+        val systemUiController = rememberSystemUiController()
+
+        val statusBarColor = ChatTheme.colors.barsBackground
+        val navigationBarColor = ChatTheme.colors.barsBackground
+
+        val isDarkTheme = isSystemInDarkTheme()
+        SideEffect {
+            systemUiController.setStatusBarColor(
+                color = statusBarColor,
+                darkIcons = !isDarkTheme
+            )
+            systemUiController.setNavigationBarColor(
+                color = navigationBarColor,
+                darkIcons = !isDarkTheme
+            )
         }
     }
 

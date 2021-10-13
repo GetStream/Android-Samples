@@ -5,6 +5,5 @@
         <item name="colorOnPrimary">@color/black</item>
         <item name="android:colorAccent">@color/slackish</item>
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <item name="android:windowLightStatusBar">true</item>
     </style>
 </resources>
