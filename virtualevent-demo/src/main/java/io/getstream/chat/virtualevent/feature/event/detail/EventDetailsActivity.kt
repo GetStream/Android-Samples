@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.getstream.sdk.chat.viewmodel.MessageInputViewModel
 import com.getstream.sdk.chat.viewmodel.messages.MessageListViewModel
 import com.google.android.exoplayer2.MediaItem
@@ -62,6 +63,10 @@ class EventDetailsActivity : AppCompatActivity() {
 
     private fun setupMessageListView() {
         binding.messageListView.setMessageViewHolderFactory(LivestreamMessageItemVhFactory())
+        binding.messageListView.setCustomLinearLayoutManager(LinearLayoutManager(this)
+            .apply {
+                stackFromEnd = false
+            })
         messageListViewModel.apply {
             bindView(binding.messageListView, this@EventDetailsActivity)
         }
