@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -26,6 +25,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -71,25 +71,20 @@ fun ChannelsScreen(
             trailingContent = { Spacer(Modifier.width(36.dp)) },
         )
 
-        Card(
+        SearchInput(
             modifier = Modifier
                 .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 8.dp)
                 .height(44.dp)
-                .fillMaxWidth(),
-            elevation = 2.dp,
-            shape = ChatTheme.shapes.inputField
-        ) {
-            SearchInput(
-                modifier = Modifier.fillMaxSize(),
-                query = searchQuery,
-                onValueChange = {
-                    searchQuery = it
-                    listViewModel.setSearchQuery(it)
-                },
-                leadingIcon = { Spacer(Modifier.width(16.dp)) },
-                label = { SearchInputHint() }
-            )
-        }
+                .fillMaxWidth()
+                .shadow(elevation = 4.dp, shape = ChatTheme.shapes.inputField, clip = false),
+            query = searchQuery,
+            onValueChange = {
+                searchQuery = it
+                listViewModel.setSearchQuery(it)
+            },
+            leadingIcon = { Spacer(Modifier.width(16.dp)) },
+            label = { SearchInputHint() }
+        )
 
         ChannelList(
             modifier = Modifier.fillMaxSize(),
