@@ -107,12 +107,11 @@ fun ChannelsScreen(
 @Composable
 private fun WorkspaceLogo(@DrawableRes logo: Int) {
     Row {
-        Spacer(Modifier.width(8.dp))
-
         Image(
             painter = painterResource(id = logo),
             contentDescription = null,
             modifier = Modifier
+                .padding(start = 8.dp)
                 .size(36.dp)
                 .clip(RoundedCornerShape(8.dp)),
         )
