@@ -9,19 +9,6 @@ import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import com.squareup.picasso.Picasso
-import io.getstream.chat.android.client.models.User
-
-var User.image: String
-    get() = extraData["image"] as String
-    set(value) {
-        extraData["image"] = value
-    }
-
-var User.name: String
-    get() = extraData["name"] as String
-    set(value) {
-        extraData["name"] = value
-    }
 
 fun ImageView.loadUrl(url: String, @DrawableRes placeholder: Int) {
     if (url.isNotEmpty()) {

@@ -26,16 +26,16 @@ class ChannelListFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         val user = User(
-            id = "1f37e58d-d8b0-476a-a4f2-f8611e0d85d9",
+            id = "jc",
             extraData = mutableMapOf(
-                "name" to "Tutorial Droid",
-                "image" to "https://bit.ly/2TIt8NR",
+                "name" to "Jc Miñarro",
+                "image" to "https://ca.slack-edge.com/T02RM6X6B-U011KEXDPB2-891dbb8df64f-128",
             ),
         )
         ChatClient.instance()
             .connectUser(
                 user = user,
-                token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMWYzN2U1OGQtZDhiMC00NzZhLWE0ZjItZjg2MTFlMGQ4NWQ5In0.l3u9P1NKhJ91rI1tzOcABGh045Kj69-iVkC2yUtohVw"
+                token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiamMifQ.2_5Hae3LKjVSfA0gQxXlZn54Bq6xDlhjPx2J7azUNB4"
             )
             .enqueue()
     }

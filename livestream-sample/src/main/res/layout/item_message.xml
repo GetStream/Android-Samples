@@ -21,7 +21,6 @@
 
     </androidx.cardview.widget.CardView>
 
-
     <TextView
         android:id="@+id/userNameTextView"
         style="@style/TextAppearance.AppCompat.Title"
@@ -43,7 +42,7 @@
         android:ellipsize="end"
         android:maxLines="3"
         app:layout_constraintStart_toEndOf="@+id/avatarContainer"
-        app:layout_constraintTop_toBottomOf="@+id/userName"
+        app:layout_constraintTop_toBottomOf="@+id/userNameTextView"
         tools:text="Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text " />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

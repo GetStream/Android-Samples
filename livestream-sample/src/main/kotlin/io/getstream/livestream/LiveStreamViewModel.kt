@@ -9,6 +9,9 @@ import io.getstream.chat.android.client.channel.ChannelClient
 import io.getstream.chat.android.client.events.NewMessageEvent
 import io.getstream.chat.android.client.models.Message
 import io.getstream.chat.android.client.models.User
+import io.getstream.chat.android.client.models.image
+import io.getstream.chat.android.client.models.name
+import io.getstream.chat.android.client.subscribeFor
 import timber.log.Timber
 
 class LiveStreamViewModel : ViewModel() {
@@ -44,7 +47,7 @@ class LiveStreamViewModel : ViewModel() {
     }
 
     private fun subscribeToNewMessageEvent() {
-        chatClient.subscribeForSingle(NewMessageEvent::class.java) {
+        chatClient.subscribeFor<NewMessageEvent> {
             _viewState.postValue(State.NewMessage(it.message))
         }
     }
@@ -66,19 +69,15 @@ class LiveStreamViewModel : ViewModel() {
     }
 
     companion object {
-        private const val USER_ID = "bob"
         private const val CHANNEL_TYPE = "livestream"
-        private const val CHANNEL_ID =
-            "livestream-clone-android" // You'll want to make it unique per video
-        private const val USER_TOKEN =
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMWYzN2U1OGQtZDhiMC00NzZhLWE0ZjItZjg2MTFlMGQ4NWQ5In0.l3u9P1NKhJ91rI1tzOcABGh045Kj69-iVkC2yUtohVw"
+        private const val CHANNEL_ID = "livestream-clone-android"
 
-        private val chatUser = User(id = USER_ID).apply {
-            name = USER_ID
-            image = getDummyAvatar(USER_ID)
+        private val chatUser = User(id = "jc").apply {
+            name = "Jc Miñarro"
+            image = "https://ca.slack-edge.com/T02RM6X6B-U011KEXDPB2-891dbb8df64f-128"
         }
-
-        private fun getDummyAvatar(id: String) = "https://api.adorable.io/avatars/285/$id.png"
+        private const val USER_TOKEN =
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiamMifQ.2_5Hae3LKjVSfA0gQxXlZn54Bq6xDlhjPx2J7azUNB4"
     }
 }
 
