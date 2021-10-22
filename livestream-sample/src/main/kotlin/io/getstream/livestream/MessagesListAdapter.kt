@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import io.getstream.chat.android.client.models.Message
+import io.getstream.chat.android.client.models.image
+import io.getstream.chat.android.client.models.name
 import io.getstream.livestream.databinding.ItemMessageBinding
 
 class MessagesListAdapter :
