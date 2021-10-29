@@ -47,7 +47,7 @@ fun ChannelsScreen(
     onItemClick: (Channel) -> Unit = {}
 ) {
     val currentUser by listViewModel.user.collectAsState()
-    val isNetworkAvailable by listViewModel.isOnline.collectAsState()
+    val connectionState by listViewModel.connectionState.collectAsState()
 
     var searchQuery by rememberSaveable { mutableStateOf("") }
 
@@ -60,7 +60,7 @@ fun ChannelsScreen(
             modifier = Modifier.height(56.dp),
             currentUser = currentUser,
             title = workspace.title,
-            isNetworkAvailable = isNetworkAvailable,
+            connectionState = connectionState,
             leadingContent = { WorkspaceLogo(logo = workspace.logo) },
             titleContent = {
                 WorkspaceTitle(

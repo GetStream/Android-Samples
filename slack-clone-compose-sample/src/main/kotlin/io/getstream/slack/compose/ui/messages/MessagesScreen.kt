@@ -55,7 +55,7 @@ fun Header(
     onBackPressed: () -> Unit = {},
 ) {
     val user by listViewModel.user.collectAsState()
-    val isNetworkAvailable by listViewModel.isOnline.collectAsState()
+    val connectionState by listViewModel.connectionState.collectAsState()
     val messageMode = listViewModel.messageMode
     val backAction = {
         val isInThread = listViewModel.isInThread
@@ -80,7 +80,7 @@ fun Header(
             .height(56.dp),
         channel = listViewModel.channel,
         currentUser = user,
-        isNetworkAvailable = isNetworkAvailable,
+        connectionState = connectionState,
         messageMode = messageMode,
         onHeaderActionClick = {},
         onBackPressed = backAction
