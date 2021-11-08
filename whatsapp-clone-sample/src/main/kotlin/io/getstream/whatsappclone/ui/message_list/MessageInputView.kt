@@ -2,15 +2,12 @@ package io.getstream.whatsappclone.ui.message_list
 
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
-import com.getstream.sdk.chat.viewmodel.MessageInputViewModel
 import io.getstream.whatsappclone.R
 import io.getstream.whatsappclone.databinding.ViewMessageInputBinding
 
@@ -32,16 +29,11 @@ class MessageInputView @JvmOverloads constructor(
 
     private var binding: ViewMessageInputBinding =
         ViewMessageInputBinding.inflate(LayoutInflater.from(context), this, true)
-    private var micDrawable: Drawable? =
-        ContextCompat.getDrawable(context, R.drawable.ic_mic_black_24dp)
-    private var sendDrawable: Drawable? =
-        ContextCompat.getDrawable(context, R.drawable.ic_send_black_24dp)
 
     fun initViews(sendMessage: (String) -> Unit, keystroke: () -> Unit) {
         binding.voiceRecordingOrSend.setOnClickListener {
 
             sendMessage.invoke(binding.messageInput.text.toString())
-//            viewModel.sendMessage(binding.messageInput.text.toString())
             binding.messageInput.setText("")
         }
 
@@ -50,10 +42,10 @@ class MessageInputView @JvmOverloads constructor(
             if (it.toString().isNotEmpty()) {
                 keystroke.invoke()
                 binding.takePicture.isVisible = false
-                binding.voiceRecordingOrSend.setImageDrawable(sendDrawable)
+                binding.voiceRecordingOrSend.setImageResource(R.drawable.ic_send_black_24dp)
             } else {
                 binding.takePicture.isVisible = true
-                binding.voiceRecordingOrSend.setImageDrawable(micDrawable)
+                binding.voiceRecordingOrSend.setImageResource(R.drawable.ic_mic_black_24dp)
             }
         }
     }
