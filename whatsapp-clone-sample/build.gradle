@@ -44,7 +44,7 @@ android {
 
 dependencies {
     // Stream SDK dependency
-    implementation 'io.getstream:stream-chat-android-ui-components:4.8.0'
+    implementation "io.getstream:stream-chat-android-ui-components:4.21.0"
 
     implementation Dependencies.kotlinStdLib
     implementation Dependencies.androidxAppCompat
