@@ -2,7 +2,6 @@ package io.getstream.samples
 
 private const val KOTLIN_VERSION = "1.5.21"
 private const val ANDROID_GRADLE_PLUGIN_VERSION = "7.0.0"
-private const val GLIDE_VERSION = "4.11.0"
 private const val ANDROIDX_ACTIVITY_KTX_VERSION = "1.2.0"
 private const val ANDROIDX_APPCOMPAT_VERSION = "1.3.1"
 private const val ANDROIDX_CARD_VIEW_VERSION = "1.0.0"
@@ -27,7 +26,6 @@ private const val KTLINT_PLUGIN_VERSION = "10.0.0"
 
 object Dependencies {
     const val androidGradlePlugin = "com.android.tools.build:gradle:$ANDROID_GRADLE_PLUGIN_VERSION"
-    const val glide = "com.github.bumptech.glide:glide:$GLIDE_VERSION"
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:$KOTLIN_VERSION"
     const val androidxActivityKtx = "androidx.activity:activity-ktx:$ANDROIDX_ACTIVITY_KTX_VERSION"
     const val androidxAppCompat = "androidx.appcompat:appcompat:$ANDROIDX_APPCOMPAT_VERSION"

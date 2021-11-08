@@ -54,7 +54,6 @@ dependencies {
     implementation Dependencies.materialComponents
     implementation Dependencies.androidxRecyclerview
     implementation Dependencies.androidxLifecycleExtensions
-    implementation Dependencies.glide
     implementation Dependencies.fragmentKtx
     implementation Dependencies.navigationUiKtx
     implementation Dependencies.navigationFragmentKtx
