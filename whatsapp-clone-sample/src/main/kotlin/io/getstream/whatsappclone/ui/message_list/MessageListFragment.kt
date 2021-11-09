@@ -19,7 +19,6 @@ import io.getstream.chat.android.ui.message.list.header.viewmodel.MessageListHea
 import io.getstream.chat.android.ui.message.list.viewmodel.bindView
 import io.getstream.chat.android.ui.message.list.viewmodel.factory.MessageListViewModelFactory
 import io.getstream.whatsappclone.R
-import io.getstream.whatsappclone.databinding.FragmentHomeBinding
 import io.getstream.whatsappclone.databinding.FragmentMessageListBinding
 
 class MessageListFragment : Fragment() {
