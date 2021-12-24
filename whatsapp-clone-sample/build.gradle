@@ -15,6 +15,7 @@ android {
         versionCode Configuration.versionCode
         versionName Configuration.versionName
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -44,7 +45,7 @@ android {
 
 dependencies {
     // Stream SDK dependency
-    implementation "io.getstream:stream-chat-android-ui-components:4.21.0"
+    implementation "io.getstream:stream-chat-android-ui-components:4.25.0"
 
     implementation Dependencies.kotlinStdLib
     implementation Dependencies.androidxAppCompat
