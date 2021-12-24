@@ -12,7 +12,8 @@
         android:supportsRtl="false"
         android:name="io.getstream.livestream.App"
         android:theme="@style/AppTheme">
-        <activity android:name="io.getstream.livestream.LiveStreamActivity">
+        <activity android:name="io.getstream.livestream.LiveStreamActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
