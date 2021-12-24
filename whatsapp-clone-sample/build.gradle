@@ -48,13 +48,8 @@ dependencies {
     implementation "io.getstream:stream-chat-android-ui-components:4.25.0"
 
     implementation Dependencies.kotlinStdLib
-    implementation Dependencies.androidxAppCompat
-    implementation Dependencies.androidxCoreKtx
-    implementation Dependencies.androidxConstraintLayout
     implementation Dependencies.androidxViewPager2
     implementation Dependencies.materialComponents
-    implementation Dependencies.androidxRecyclerview
-    implementation Dependencies.androidxLifecycleExtensions
     implementation Dependencies.fragmentKtx
     implementation Dependencies.navigationUiKtx
     implementation Dependencies.navigationFragmentKtx
