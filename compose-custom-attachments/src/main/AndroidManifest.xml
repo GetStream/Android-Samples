@@ -11,7 +11,7 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.ComposeCustomAttachments">
         <activity
-            android:name=".channels.ChannelsActivity"
+            android:name=".activity.ChannelsActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".messages.MessagesActivity"
+            android:name=".activity.MessagesActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize" />
     </application>
