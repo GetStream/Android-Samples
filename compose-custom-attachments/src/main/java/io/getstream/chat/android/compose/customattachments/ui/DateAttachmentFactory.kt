@@ -23,46 +23,46 @@ import io.getstream.chat.android.compose.customattachments.R
 import io.getstream.chat.android.compose.state.messages.attachments.AttachmentState
 import io.getstream.chat.android.compose.ui.attachments.AttachmentFactory
 import io.getstream.chat.android.compose.ui.components.CancelIcon
-import io.getstream.chat.android.compose.ui.components.composer.MessageInput
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.core.ExperimentalStreamChatApi
 
 @ExperimentalStreamChatApi
-val eventAttachmentFactory: AttachmentFactory = AttachmentFactory(
-    canHandle = { attachments -> attachments.any { it.type == "event" } },
+val dateAttachmentFactory: AttachmentFactory = AttachmentFactory(
+    canHandle = { attachments -> attachments.any { it.type == "date" } },
     content = @Composable { modifier, attachmentState ->
-        EventAttachmentContent(
+        DateAttachmentContent(
             modifier = modifier,
             attachmentState = attachmentState
         )
     },
     previewContent = { modifier, attachments, onAttachmentRemoved ->
-        EventAttachmentPreviewContent(
+        DateAttachmentPreviewContent(
             modifier = modifier,
             attachments = attachments,
             onAttachmentRemoved = onAttachmentRemoved
         )
     },
-    textFormatter = { attachment -> attachment.title ?: "" },
+    textFormatter = { attachment ->
+        attachment.extraData["date"].toString()
+    },
 )
 
 /**
- * UI for currently selected event attachments, within the [MessageInput].
+ * The UI that will be shown in the message composer.
  *
  * @param attachments Selected attachments.
  * @param onAttachmentRemoved Handler when the user removes an attachment from the list.
  * @param modifier Modifier for styling.
  */
 @Composable
-fun EventAttachmentPreviewContent(
+fun DateAttachmentPreviewContent(
     attachments: List<Attachment>,
     onAttachmentRemoved: (Attachment) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val attachment = attachments.first { it.type == "event" }
+    val attachment = attachments.first { it.type == "date" }
 
-    val eventTitle = attachment.title
-    val eventDate = attachment.extraData["date"].toString()
+    val date = attachment.extraData["date"].toString()
 
     Box(
         modifier = modifier
@@ -75,7 +75,7 @@ fun EventAttachmentPreviewContent(
                 .align(Alignment.CenterStart)
                 .padding(16.dp)
                 .fillMaxWidth(),
-            text = "$eventDate $eventTitle",
+            text = date,
             style = ChatTheme.typography.body,
             maxLines = 1,
             color = ChatTheme.colors.textHighEmphasis
@@ -91,20 +91,19 @@ fun EventAttachmentPreviewContent(
 }
 
 /**
- * Builds an event attachment message, which shows the event date and title.
+ * The UI that will be shown in the message list.
  *
  * @param attachmentState The state of the attachment.
  * @param modifier Modifier for styling.
  */
 @Composable
-fun EventAttachmentContent(
+fun DateAttachmentContent(
     attachmentState: AttachmentState,
     modifier: Modifier = Modifier,
 ) {
-    val attachment = attachmentState.message.attachments.first { it.type == "event" }
+    val attachment = attachmentState.message.attachments.first { it.type == "date" }
 
-    val eventTitle = attachment.title ?: ""
-    val eventDate = attachment.extraData["date"].toString()
+    val date = attachment.extraData["date"].toString()
 
     Column(
         modifier = modifier
@@ -126,18 +125,11 @@ fun EventAttachmentContent(
             )
 
             Text(
-                text = eventDate,
+                text = date,
                 style = ChatTheme.typography.body,
                 maxLines = 1,
                 color = ChatTheme.colors.textHighEmphasis
             )
         }
-
-        Text(
-            text = eventTitle,
-            style = ChatTheme.typography.bodyBold,
-            maxLines = 1,
-            color = ChatTheme.colors.textHighEmphasis
-        )
     }
 }
