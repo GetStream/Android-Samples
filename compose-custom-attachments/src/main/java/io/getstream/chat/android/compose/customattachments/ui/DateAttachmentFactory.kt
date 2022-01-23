@@ -25,7 +25,12 @@ import io.getstream.chat.android.compose.ui.attachments.AttachmentFactory
 import io.getstream.chat.android.compose.ui.components.CancelIcon
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.core.ExperimentalStreamChatApi
+import java.text.DateFormat
+import java.util.*
 
+/**
+ * A custom [AttachmentFactory] that adds support for date attachments.
+ */
 @ExperimentalStreamChatApi
 val dateAttachmentFactory: AttachmentFactory = AttachmentFactory(
     canHandle = { attachments -> attachments.any { it.type == "date" } },
@@ -42,16 +47,14 @@ val dateAttachmentFactory: AttachmentFactory = AttachmentFactory(
             onAttachmentRemoved = onAttachmentRemoved
         )
     },
-    textFormatter = { attachment ->
-        attachment.extraData["date"].toString()
-    },
+    textFormatter = { attachment -> attachment.getFormattedDate() },
 )
 
 /**
- * The UI that will be shown in the message composer.
+ * Represents the UI shown in the message input preview before sending.
  *
  * @param attachments Selected attachments.
- * @param onAttachmentRemoved Handler when the user removes an attachment from the list.
+ * @param onAttachmentRemoved Handler when the user removes an attachment.
  * @param modifier Modifier for styling.
  */
 @Composable
@@ -61,8 +64,6 @@ fun DateAttachmentPreviewContent(
     modifier: Modifier = Modifier,
 ) {
     val attachment = attachments.first { it.type == "date" }
-
-    val date = attachment.extraData["date"].toString()
 
     Box(
         modifier = modifier
@@ -75,7 +76,7 @@ fun DateAttachmentPreviewContent(
                 .align(Alignment.CenterStart)
                 .padding(16.dp)
                 .fillMaxWidth(),
-            text = date,
+            text = attachment.getFormattedDate(),
             style = ChatTheme.typography.body,
             maxLines = 1,
             color = ChatTheme.colors.textHighEmphasis
@@ -91,7 +92,7 @@ fun DateAttachmentPreviewContent(
 }
 
 /**
- * The UI that will be shown in the message list.
+ * Represents the UI shown in the message list for date attachments.
  *
  * @param attachmentState The state of the attachment.
  * @param modifier Modifier for styling.
@@ -102,8 +103,6 @@ fun DateAttachmentContent(
     modifier: Modifier = Modifier,
 ) {
     val attachment = attachmentState.message.attachments.first { it.type == "date" }
-
-    val date = attachment.extraData["date"].toString()
 
     Column(
         modifier = modifier
@@ -125,11 +124,16 @@ fun DateAttachmentContent(
             )
 
             Text(
-                text = date,
+                text = attachment.getFormattedDate(),
                 style = ChatTheme.typography.body,
                 maxLines = 1,
                 color = ChatTheme.colors.textHighEmphasis
             )
         }
     }
+}
+
+private fun Attachment.getFormattedDate(): String {
+    val dateMillis = extraData["date"] as Long
+    return DateFormat.getDateInstance(DateFormat.LONG).format(Date(dateMillis))
 }

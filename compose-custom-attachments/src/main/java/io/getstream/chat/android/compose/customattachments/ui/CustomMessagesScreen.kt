@@ -33,14 +33,12 @@ import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessagesViewModelFactory
-import java.text.DateFormat
-import java.util.Date
 
 /**
  * A custom [MessagesScreen] with the support for date attachments.
  *
  * @param channelId The ID of the opened channel.
- * @param onBackPressed Handler for when the user taps on the Back button.
+ * @param onBackPressed Handler for the back action.
  */
 @Composable
 fun CustomMessagesScreen(
@@ -76,11 +74,9 @@ fun CustomMessagesScreen(
                 CustomMessageComposer(
                     viewModel = composerViewModel,
                     onDateSelected = {
-                        val date = DateFormat.getDateInstance(DateFormat.LONG).format(Date(it))
-
                         val attachment = Attachment(
                             type = "date",
-                            extraData = mutableMapOf("date" to date)
+                            extraData = mutableMapOf("date" to it)
                         )
                         composerViewModel.addSelectedAttachments(listOf(attachment))
                     }

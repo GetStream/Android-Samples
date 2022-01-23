@@ -32,7 +32,7 @@ android {
 
 dependencies {
     // Stream SDK
-    implementation "io.getstream:stream-chat-android-compose:4.25.1-beta"
+    implementation "io.getstream:stream-chat-android-compose:4.26.0-beta"
 
     implementation Dependencies.androidxCoreKtx
     implementation Dependencies.androidxAppCompat
