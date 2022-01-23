@@ -33,6 +33,8 @@ import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessagesViewModelFactory
+import java.text.DateFormat
+import java.util.Date
 
 /**
  * A custom [MessagesScreen] with the support for date attachments.
@@ -74,10 +76,14 @@ fun CustomMessagesScreen(
                 CustomMessageComposer(
                     viewModel = composerViewModel,
                     onDateSelected = {
+                        val date = DateFormat
+                            .getDateInstance(DateFormat.LONG)
+                            .format(Date(it))
                         val attachment = Attachment(
                             type = "date",
-                            extraData = mutableMapOf("date" to it)
+                            extraData = mutableMapOf("payload" to date)
                         )
+
                         composerViewModel.addSelectedAttachments(listOf(attachment))
                     }
                 )
@@ -99,7 +105,7 @@ fun CustomMessagesScreen(
 }
 
 /**
- * A custom [MessageComposer] with a button to show [MaterialDatePicker].
+ * A custom [MessageComposer] with a button that shows [MaterialDatePicker].
  *
  * @param viewModel The ViewModel that provides pieces of data to show in the composer, like the
  * currently selected integration data or the user input. It also handles sending messages.

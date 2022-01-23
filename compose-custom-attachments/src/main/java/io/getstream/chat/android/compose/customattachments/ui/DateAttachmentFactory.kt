@@ -25,8 +25,6 @@ import io.getstream.chat.android.compose.ui.attachments.AttachmentFactory
 import io.getstream.chat.android.compose.ui.components.CancelIcon
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.core.ExperimentalStreamChatApi
-import java.text.DateFormat
-import java.util.*
 
 /**
  * A custom [AttachmentFactory] that adds support for date attachments.
@@ -47,7 +45,7 @@ val dateAttachmentFactory: AttachmentFactory = AttachmentFactory(
             onAttachmentRemoved = onAttachmentRemoved
         )
     },
-    textFormatter = { attachment -> attachment.getFormattedDate() },
+    textFormatter = { attachment -> attachment.extraData["payload"].toString() },
 )
 
 /**
@@ -64,6 +62,7 @@ fun DateAttachmentPreviewContent(
     modifier: Modifier = Modifier,
 ) {
     val attachment = attachments.first { it.type == "date" }
+    val formattedDate = attachment.extraData["payload"].toString()
 
     Box(
         modifier = modifier
@@ -76,7 +75,7 @@ fun DateAttachmentPreviewContent(
                 .align(Alignment.CenterStart)
                 .padding(16.dp)
                 .fillMaxWidth(),
-            text = attachment.getFormattedDate(),
+            text = formattedDate,
             style = ChatTheme.typography.body,
             maxLines = 1,
             color = ChatTheme.colors.textHighEmphasis
@@ -103,6 +102,7 @@ fun DateAttachmentContent(
     modifier: Modifier = Modifier,
 ) {
     val attachment = attachmentState.message.attachments.first { it.type == "date" }
+    val formattedDate = attachment.extraData["payload"].toString()
 
     Column(
         modifier = modifier
@@ -124,16 +124,11 @@ fun DateAttachmentContent(
             )
 
             Text(
-                text = attachment.getFormattedDate(),
+                text = formattedDate,
                 style = ChatTheme.typography.body,
                 maxLines = 1,
                 color = ChatTheme.colors.textHighEmphasis
             )
         }
     }
-}
-
-private fun Attachment.getFormattedDate(): String {
-    val dateMillis = extraData["date"] as Long
-    return DateFormat.getDateInstance(DateFormat.LONG).format(Date(dateMillis))
 }
