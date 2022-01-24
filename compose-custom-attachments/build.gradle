@@ -1,0 +1,49 @@
+import io.getstream.samples.Dependencies
+
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdkVersion 31
+
+    defaultConfig {
+        applicationId "io.getstream.chat.android.compose.customattachments"
+        minSdk 21
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion "1.0.1"
+    }
+}
+
+dependencies {
+    // Stream SDK
+    implementation "io.getstream:stream-chat-android-compose:4.26.0-beta"
+
+    implementation Dependencies.androidxCoreKtx
+    implementation Dependencies.androidxAppCompat
+    implementation Dependencies.materialComponents
+
+    // Compose
+    implementation Dependencies.composeCompiler
+    implementation Dependencies.composeUi
+    implementation Dependencies.composeUiTooling
+    implementation Dependencies.composeFoundation
+    implementation Dependencies.composeMaterial
+    implementation Dependencies.composeActivity
+    implementation Dependencies.composeViewModel
+}
