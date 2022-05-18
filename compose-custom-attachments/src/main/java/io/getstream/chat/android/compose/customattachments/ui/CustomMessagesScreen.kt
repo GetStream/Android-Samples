@@ -1,5 +1,6 @@
 package io.getstream.chat.android.compose.customattachments.ui
 
+import androidx.activity.compose.BackHandler
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -24,7 +25,6 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import io.getstream.chat.android.client.models.Attachment
 import io.getstream.chat.android.common.state.MessageMode
 import io.getstream.chat.android.compose.customattachments.R
-import io.getstream.chat.android.compose.handlers.SystemBackPressedHandler
 import io.getstream.chat.android.compose.ui.messages.MessagesScreen
 import io.getstream.chat.android.compose.ui.messages.composer.MessageComposer
 import io.getstream.chat.android.compose.ui.messages.header.MessageListHeader
@@ -58,7 +58,7 @@ fun CustomMessagesScreen(
     val messageMode = messageListViewModel.messageMode
     val currentUser by messageListViewModel.user.collectAsState()
 
-    SystemBackPressedHandler(isEnabled = true, onBackPressed = onBackPressed)
+    BackHandler(enabled = true, onBack = onBackPressed)
 
     Box(modifier = Modifier.fillMaxSize()) {
         Scaffold(

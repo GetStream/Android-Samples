@@ -4,7 +4,9 @@ import android.app.Application
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.logger.ChatLogLevel
 import io.getstream.chat.android.client.models.User
-import io.getstream.chat.android.livedata.ChatDomain
+import io.getstream.chat.android.offline.model.message.attachments.UploadAttachmentsNetworkType
+import io.getstream.chat.android.offline.plugin.configuration.Config
+import io.getstream.chat.android.offline.plugin.factory.StreamOfflinePluginFactory
 
 class CustomAttachmentsApp : Application() {
     override fun onCreate() {
@@ -14,10 +16,19 @@ class CustomAttachmentsApp : Application() {
     }
 
     private fun setupStreamSdk() {
-        val client = ChatClient.Builder("qx5us2v6xvmh", applicationContext)
+        val offlinePluginFactory = StreamOfflinePluginFactory(
+            config = Config(
+                backgroundSyncEnabled = true,
+                userPresence = true,
+                persistenceEnabled = true,
+                uploadAttachmentsNetworkType = UploadAttachmentsNetworkType.NOT_ROAMING,
+            ),
+            appContext = applicationContext,
+        )
+        ChatClient.Builder("qx5us2v6xvmh", applicationContext)
             .logLevel(ChatLogLevel.ALL)
+            .withPlugin(offlinePluginFactory)
             .build()
-        ChatDomain.Builder(client, applicationContext).build()
     }
 
     private fun connectUser() {
