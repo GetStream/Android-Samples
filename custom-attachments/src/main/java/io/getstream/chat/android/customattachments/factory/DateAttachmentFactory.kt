@@ -54,4 +54,3 @@ class DateAttachmentFactory : AttachmentFactory {
         }
     }
 }
-
