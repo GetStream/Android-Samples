@@ -10,7 +10,7 @@ import io.getstream.chat.android.ui.message.MessageListActivity
 import io.getstream.chat.android.ui.message.MessageListFragment
 import io.getstream.chat.android.ui.message.input.MessageInputView
 import java.text.DateFormat
-import java.util.Date
+import java.util.*
 
 class MessagesActivity : MessageListActivity() {
 
@@ -28,25 +28,28 @@ class MessagesActivity : MessageListActivity() {
         override fun setupMessageInput(messageInputView: MessageInputView) {
             super.setupMessageInput(messageInputView)
 
+            // 1. Build a date picker
+            val dialogPickerDialog = MaterialDatePicker.Builder
+                .datePicker()
+                .build()
+
+            // 2. Add a listener that will add a date attachment on positive click
+            dialogPickerDialog.addOnPositiveButtonClickListener {
+                val date = DateFormat
+                    .getDateInstance(DateFormat.LONG)
+                    .format(Date(it))
+                val attachment = Attachment(
+                    type = "date",
+                    extraData = mutableMapOf("payload" to date)
+                )
+                messageInputView.submitCustomAttachments(
+                    attachments = listOf(attachment),
+                    viewHolderFactory = DateAttachmentPreviewFactory()
+                )
+            }
+
+            // 3. Show the date picker dialog
             messageInputView.setAttachmentButtonClickListener {
-                val dialogPickerDialog = MaterialDatePicker.Builder
-                    .datePicker()
-                    .build()
-
-                dialogPickerDialog.addOnPositiveButtonClickListener {
-                    val date = DateFormat
-                        .getDateInstance(DateFormat.LONG)
-                        .format(Date(it))
-                    val attachment = Attachment(
-                        type = "date",
-                        extraData = mutableMapOf("payload" to date)
-                    )
-                    messageInputView.submitCustomAttachments(
-                        attachments = listOf(attachment),
-                        viewHolderFactory = DateAttachmentPreviewFactory()
-                    )
-                }
-
                 dialogPickerDialog.show(requireActivity().supportFragmentManager, null)
             }
         }
