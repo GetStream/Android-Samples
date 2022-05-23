@@ -17,6 +17,7 @@ import io.getstream.chat.android.compose.customattachments.R
 import io.getstream.chat.android.compose.state.messages.attachments.AttachmentState
 import io.getstream.chat.android.compose.ui.attachments.AttachmentFactory
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -48,14 +49,23 @@ fun QuotedDateAttachmentContent(
     val attachment = attachmentState.message.attachments.first { it.type == "date" }
     val date = attachment.extraData["payload"].toString()
     val formattedDate = StringBuilder().apply {
-        val dateTime = SimpleDateFormat("MMMMM dd, yyyy", Locale.getDefault()).parse(date) ?: return@apply
-        val year = Calendar.getInstance().apply {
-            timeInMillis = dateTime.time
-        }.get(Calendar.YEAR)
-        if (Calendar.getInstance().get(Calendar.YEAR) != year) {
-            append(year).append("\n")
+        try {
+            val dateTime = SimpleDateFormat("MMMMM dd, yyyy", Locale.getDefault()).parse(date)
+            val year = if (dateTime != null) {
+                Calendar.getInstance().apply {
+                    timeInMillis = dateTime.time
+                }.get(Calendar.YEAR)
+            } else {
+                append(date)
+                return@apply
+            }
+            if (Calendar.getInstance().get(Calendar.YEAR) != year) {
+                append(year).append("\n")
+            }
+            append(date.replace(", $year", ""))
+        }catch (exception: ParseException) {
+            append(date)
         }
-        append(date.replace(", $year", ""))
     }.toString()
 
     Column(
