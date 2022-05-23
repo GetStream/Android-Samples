@@ -29,12 +29,12 @@ class MessagesActivity : MessageListActivity() {
             super.setupMessageInput(messageInputView)
 
             // 1. Build a date picker
-            val dialogPickerDialog = MaterialDatePicker.Builder
+            val datePickerDialog = MaterialDatePicker.Builder
                 .datePicker()
                 .build()
 
             // 2. Add a listener that will add a date attachment on positive click
-            dialogPickerDialog.addOnPositiveButtonClickListener {
+            datePickerDialog.addOnPositiveButtonClickListener {
                 val date = DateFormat
                     .getDateInstance(DateFormat.LONG)
                     .format(Date(it))
@@ -50,7 +50,7 @@ class MessagesActivity : MessageListActivity() {
 
             // 3. Show the date picker dialog
             messageInputView.setAttachmentButtonClickListener {
-                dialogPickerDialog.show(requireActivity().supportFragmentManager, null)
+                datePickerDialog.show(requireActivity().supportFragmentManager, null)
             }
         }
     }
