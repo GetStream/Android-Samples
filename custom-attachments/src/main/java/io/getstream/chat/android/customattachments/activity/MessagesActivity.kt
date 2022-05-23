@@ -10,7 +10,7 @@ import io.getstream.chat.android.ui.message.MessageListActivity
 import io.getstream.chat.android.ui.message.MessageListFragment
 import io.getstream.chat.android.ui.message.input.MessageInputView
 import java.text.DateFormat
-import java.util.*
+import java.util.Date
 
 class MessagesActivity : MessageListActivity() {
 
