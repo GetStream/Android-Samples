@@ -8,6 +8,7 @@ import io.getstream.chat.android.ui.message.input.attachment.selected.internal.B
 import io.getstream.chat.android.ui.message.input.attachment.selected.internal.SelectedCustomAttachmentViewHolderFactory
 
 class DateAttachmentPreviewFactory : SelectedCustomAttachmentViewHolderFactory {
+
     override fun createAttachmentViewHolder(
         attachments: List<Attachment>,
         parent: ViewGroup,
