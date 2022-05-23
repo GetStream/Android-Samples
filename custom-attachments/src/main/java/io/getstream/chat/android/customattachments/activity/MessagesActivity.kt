@@ -17,7 +17,7 @@ class MessagesActivity : MessageListActivity() {
     override fun createMessageListFragment(cid: String, messageId: String?): MessageListFragment {
         return MessageListFragment.newInstance(cid) {
             setFragment(CustomMessageListFragment())
-            customTheme(R.style.StreamUiTheme)
+            customTheme(R.style.CustomStreamUiTheme)
             showHeader(true)
             messageId(messageId)
         }
