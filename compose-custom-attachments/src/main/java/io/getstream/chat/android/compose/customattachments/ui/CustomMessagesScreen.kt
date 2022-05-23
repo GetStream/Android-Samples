@@ -24,6 +24,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.android.material.datepicker.MaterialDatePicker
 import io.getstream.chat.android.client.models.Attachment
 import io.getstream.chat.android.common.state.MessageMode
+import io.getstream.chat.android.common.state.Reply
 import io.getstream.chat.android.compose.customattachments.R
 import io.getstream.chat.android.compose.ui.messages.MessagesScreen
 import io.getstream.chat.android.compose.ui.messages.composer.MessageComposer
@@ -98,6 +99,9 @@ fun CustomMessagesScreen(
                 onThreadClick = { message ->
                     composerViewModel.setMessageMode(MessageMode.MessageThread(message))
                     messageListViewModel.openMessageThread(message)
+                },
+                onLongItemClick = {
+                    composerViewModel.performMessageAction(Reply(it))
                 }
             )
         }
