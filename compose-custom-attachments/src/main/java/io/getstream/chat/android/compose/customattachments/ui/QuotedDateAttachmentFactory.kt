@@ -63,7 +63,7 @@ fun QuotedDateAttachmentContent(
                 append(year).append("\n")
             }
             append(date.replace(", $year", ""))
-        }catch (exception: ParseException) {
+        } catch (exception: ParseException) {
             append(date)
         }
     }.toString()
