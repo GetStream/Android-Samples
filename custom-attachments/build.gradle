@@ -1,0 +1,30 @@
+import io.getstream.samples.Dependencies
+
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "io.getstream.chat.android.customattachments"
+        minSdk 21
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    // Stream SDK dependency
+    implementation "io.getstream:stream-chat-android-ui-components:5.2.0"
+
+    implementation Dependencies.androidxCoreKtx
+    implementation Dependencies.androidxActivityKtx
+    implementation Dependencies.materialComponents
+}
