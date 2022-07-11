@@ -5,4 +5,5 @@ include(
         ':virtualevent-demo',
         ':compose-custom-attachments',
         ':custom-attachments',
+        ':custom-attachments-v2',
 )
