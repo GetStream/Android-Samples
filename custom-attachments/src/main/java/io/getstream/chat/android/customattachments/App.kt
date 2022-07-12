@@ -5,12 +5,15 @@ import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.logger.ChatLogLevel
 import io.getstream.chat.android.client.models.User
 import io.getstream.chat.android.customattachments.factory.DateAttachmentFactory
+import io.getstream.chat.android.customattachments.factory.QuotedDateAttachmentFactory
 import io.getstream.chat.android.offline.plugin.configuration.Config
 import io.getstream.chat.android.offline.plugin.factory.StreamOfflinePluginFactory
 import io.getstream.chat.android.ui.ChatUI
 import io.getstream.chat.android.ui.message.list.adapter.viewholder.attachment.AttachmentFactoryManager
+import io.getstream.chat.android.ui.message.list.adapter.viewholder.attachment.DefaultQuotedAttachmentMessageFactory
+import io.getstream.chat.android.ui.message.list.adapter.viewholder.attachment.QuotedAttachmentFactoryManager
 
-class CustomAttachmentsApp : Application() {
+class App : Application() {
     override fun onCreate() {
         super.onCreate()
         setupStreamSdk()
@@ -28,6 +31,13 @@ class CustomAttachmentsApp : Application() {
             .build()
 
         ChatUI.attachmentFactoryManager = AttachmentFactoryManager(listOf(DateAttachmentFactory()))
+
+        ChatUI.quotedAttachmentFactoryManager = QuotedAttachmentFactoryManager(
+            listOf(
+                QuotedDateAttachmentFactory(),
+                DefaultQuotedAttachmentMessageFactory()
+            )
+        )
     }
 
     private fun connectUser() {
