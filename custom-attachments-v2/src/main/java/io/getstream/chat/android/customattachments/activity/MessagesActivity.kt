@@ -87,18 +87,18 @@ class MessagesActivity : AppCompatActivity() {
             backHandler()
         }
 
-        // 1. Set custom leading content view
+        // Set custom leading content view
         binding.messageComposerView.setLeadingContent(
             CustomMessageComposerLeadingContent(this).also {
                 it.attachmentsButtonClickListener = { binding.messageComposerView.attachmentsButtonClickListener() }
                 it.commandsButtonClickListener = { binding.messageComposerView.commandsButtonClickListener() }
                 it.calendarButtonClickListener = {
-                    // 2. Build a date picker
+                    // Create an instance of a date picker dialog
                     val datePickerDialog = MaterialDatePicker.Builder
                         .datePicker()
                         .build()
 
-                    // 3. Add a listener that will add a date attachment on positive click
+                    // Add an attachment to the message input when the user selects a date
                     datePickerDialog.addOnPositiveButtonClickListener {
                         val date = DateFormat
                             .getDateInstance(DateFormat.LONG)
@@ -110,7 +110,7 @@ class MessagesActivity : AppCompatActivity() {
                         messageComposerViewModel.addSelectedAttachments(listOf(attachment))
                     }
 
-                    // 4. Show the date picker dialog
+                    // Show the date picker dialog when the attachment button is clicked
                     datePickerDialog.show(supportFragmentManager, null)
                 }
             }
@@ -126,7 +126,7 @@ class MessagesActivity : AppCompatActivity() {
         var attachmentsButtonClickListener: () -> Unit = {}
         var commandsButtonClickListener: () -> Unit = {}
 
-        // 1. Add a listener for date picker button
+        // Click listener for the date picker button
         var calendarButtonClickListener: () -> Unit = {}
 
         constructor(context: Context) : this(context, null)
@@ -142,7 +142,7 @@ class MessagesActivity : AppCompatActivity() {
             binding.attachmentsButton.setOnClickListener { attachmentsButtonClickListener() }
             binding.commandsButton.setOnClickListener { commandsButtonClickListener() }
 
-            // 2. Add
+            // Set click listener for the date picker button
             binding.calendarButton.setOnClickListener { calendarButtonClickListener() }
         }
 
