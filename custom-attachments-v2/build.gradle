@@ -8,7 +8,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "io.getstream.chat.android.customattachments"
+        applicationId "io.getstream.chat.android.customattachmentsv2"
         minSdk 21
         targetSdk 31
         versionCode 1
@@ -17,6 +17,14 @@ android {
 
     buildFeatures {
         viewBinding true
+    }
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        freeCompilerArgs += [
+                '-Xopt-in=kotlin.RequiresOptIn',
+        ]
     }
 }
 
