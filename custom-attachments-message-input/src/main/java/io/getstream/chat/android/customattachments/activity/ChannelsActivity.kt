@@ -2,14 +2,7 @@ package io.getstream.chat.android.customattachments.activity
 
 import android.graphics.Canvas
 import android.graphics.Paint
-import android.telecom.Call
-import android.util.AttributeSet
-import android.widget.ImageView
-import com.getstream.sdk.chat.adapter.MessageListItem
 import com.getstream.sdk.chat.enums.GiphyAction
-import com.getstream.sdk.chat.images.load
-import com.getstream.sdk.chat.images.loadAndResize
-import com.getstream.sdk.chat.images.loadVideoThumbnail
 import com.getstream.sdk.chat.navigation.destinations.ChatDestination
 import com.getstream.sdk.chat.utils.GridSpacingItemDecoration
 import com.getstream.sdk.chat.utils.LegacyDateFormatter
@@ -31,8 +24,6 @@ import io.getstream.chat.android.client.errors.ChatError
 import io.getstream.chat.android.client.models.Channel
 import io.getstream.chat.android.client.models.Message
 import io.getstream.chat.android.client.models.User
-import io.getstream.chat.android.core.internal.InternalStreamChatApi
-import io.getstream.chat.android.customattachments.R
 import io.getstream.chat.android.ui.channel.ChannelListActivity
 import io.getstream.chat.android.ui.channel.ChannelListFragment
 import java.util.*
@@ -43,11 +34,7 @@ class ChannelsActivity : ChannelListActivity(), ChannelListFragment.ChannelListI
         startActivity(MessagesActivity.createIntent(this, channel.cid))
     }
 
-    @OptIn(InternalStreamChatApi::class)
     private fun testImports(){
-        ImageView(applicationContext).apply {
-            load("", getDrawable(R.drawable.ic_calendar,)!!,)
-        }
 
         object: ChatDestination(applicationContext){
             override fun navigate() {
