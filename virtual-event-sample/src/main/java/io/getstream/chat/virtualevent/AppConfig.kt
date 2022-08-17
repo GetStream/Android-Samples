@@ -1,8 +1,6 @@
 package io.getstream.chat.virtualevent
 
 object AppConfig {
-    const val API_KEY = "7de6n9dsyzjx"
-
     /**
      * Available livestream channels.
      */

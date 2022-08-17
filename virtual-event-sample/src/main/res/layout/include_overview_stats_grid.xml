@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:columnCount="2"
     android:id="@+id/statsGridLayout"
-    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/margin_medium"
-    android:columnCount="2">
+    android:layout_width="match_parent"
+    >
 
     <LinearLayout style="@style/OverviewStatsItem">
 
         <TextView
             style="@style/OverviewStatsItemBadge"
-            android:text="2" />
+            android:text="2"
+            />
 
         <TextView
             style="@style/OverviewStatsItemDescription"
-            android:text="Days" />
+            android:text="Days"
+            />
 
     </LinearLayout>
 
@@ -22,11 +25,13 @@
 
         <TextView
             style="@style/OverviewStatsItemBadge"
-            android:text="120" />
+            android:text="120"
+            />
 
         <TextView
             style="@style/OverviewStatsItemDescription"
-            android:text="Speakers" />
+            android:text="Speakers"
+            />
 
     </LinearLayout>
 
@@ -34,11 +39,13 @@
 
         <TextView
             style="@style/OverviewStatsItemBadge"
-            android:text="4" />
+            android:text="4"
+            />
 
         <TextView
             style="@style/OverviewStatsItemDescription"
-            android:text="Main events" />
+            android:text="Main events"
+            />
 
     </LinearLayout>
 
@@ -46,11 +53,13 @@
 
         <TextView
             style="@style/OverviewStatsItemBadge"
-            android:text="2k" />
+            android:text="2k"
+            />
 
         <TextView
             style="@style/OverviewStatsItemDescription"
-            android:text="Tickets sold" />
+            android:text="Tickets sold"
+            />
 
     </LinearLayout>
 
@@ -58,11 +67,13 @@
 
         <TextView
             style="@style/OverviewStatsItemBadge"
-            android:text="38" />
+            android:text="38"
+            />
 
         <TextView
             style="@style/OverviewStatsItemDescription"
-            android:text="Rooms" />
+            android:text="Rooms"
+            />
 
     </LinearLayout>
 

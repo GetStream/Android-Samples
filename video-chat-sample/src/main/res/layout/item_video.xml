@@ -3,14 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    >
 
     <ImageView
         android:id="@+id/videoImageView"
-        android:layout_width="104dp"
         android:layout_height="64dp"
         android:layout_margin="8dp"
+        android:layout_width="104dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -19,14 +20,14 @@
 
     <TextView
         android:id="@+id/videoNameTextView"
-        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:text="@tools:sample/lorem"
         android:layout_margin="8dp"
+        android:layout_width="0dp"
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="@+id/videoImageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/videoImageView"
         app:layout_constraintTop_toTopOf="@+id/videoImageView"
+        tools:text="@tools:sample/lorem"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

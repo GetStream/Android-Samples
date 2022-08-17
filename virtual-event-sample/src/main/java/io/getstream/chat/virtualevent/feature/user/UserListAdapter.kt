@@ -7,7 +7,7 @@ import io.getstream.chat.android.client.models.User
 import io.getstream.chat.virtualevent.databinding.ItemUserBinding
 
 class UserListAdapter(
-    private val userClickListener: (user: User) -> Unit
+    private val userClickListener: (user: User) -> Unit,
 ) : RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
 
     private val users: MutableList<User> = mutableListOf()
@@ -32,7 +32,7 @@ class UserListAdapter(
 
     class UserViewHolder(
         private val binding: ItemUserBinding,
-        private val userClickListener: (user: User) -> Unit
+        private val userClickListener: (user: User) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         lateinit var user: User

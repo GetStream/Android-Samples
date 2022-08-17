@@ -2,48 +2,52 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="48dp"
     android:background="?attr/selectableItemBackground"
+    android:layout_height="48dp"
+    android:layout_width="match_parent"
     android:paddingHorizontal="@dimen/margin_small"
-    android:paddingVertical="@dimen/margin_tiny">
+    android:paddingVertical="@dimen/margin_tiny"
+    >
 
     <io.getstream.chat.android.ui.avatar.AvatarView
         android:id="@+id/userAvatarView"
-        android:layout_width="32dp"
         android:layout_height="32dp"
+        android:layout_width="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:streamUiAvatarBorderWidth="0dp"
-        tools:src="@tools:sample/avatars" />
+        tools:src="@tools:sample/avatars"
+        />
 
     <TextView
+        android:ellipsize="end"
         android:id="@+id/nameTextView"
-        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_tiny"
-        android:ellipsize="end"
+        android:layout_width="0dp"
         android:singleLine="true"
         android:textAppearance="@style/BodyBold"
         android:textColor="@color/text_high_emphasis"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/userAvatarView"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Jerome Abbadi" />
+        tools:text="Jerome Abbadi"
+        />
 
     <TextView
+        android:ellipsize="end"
         android:id="@+id/companyTextView"
-        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_tiny"
-        android:ellipsize="end"
+        android:layout_width="0dp"
         android:singleLine="true"
         android:textAppearance="@style/Body"
         android:textColor="@color/text_high_emphasis"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/userAvatarView"
-        tools:text="Harvey Inc" />
+        tools:text="Harvey Inc"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

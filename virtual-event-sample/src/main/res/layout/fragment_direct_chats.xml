@@ -2,31 +2,33 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".feature.dm.list.DirectChatsFragment">
+    android:layout_width="match_parent"
+    tools:context=".feature.dm.list.DirectChatsFragment"
+    >
 
     <io.getstream.chat.android.ui.channel.list.ChannelListView
-        android:id="@+id/channelListView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
         android:background="@color/card_background"
+        android:id="@+id/channelListView"
+        android:layout_height="0dp"
+        android:layout_width="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:streamUiForegroundLayoutColor="@color/app_canvas" />
+        app:streamUiForegroundLayoutColor="@color/app_canvas"
+        />
 
     <com.google.android.material.button.MaterialButton
+        android:elevation="0dp"
         android:id="@+id/startChatButton"
-        android:layout_width="match_parent"
+        android:insetBottom="0dp"
+        android:insetLeft="0dp"
+        android:insetRight="0dp"
+        android:insetTop="0dp"
         android:layout_height="40dp"
         android:layout_margin="@dimen/margin_small"
-        android:elevation="0dp"
-        android:insetLeft="0dp"
-        android:insetTop="0dp"
-        android:insetRight="0dp"
-        android:insetBottom="0dp"
+        android:layout_width="match_parent"
         android:stateListAnimator="@null"
         android:text="@string/direct_message_start_chat"
         android:textAllCaps="false"
@@ -36,6 +38,7 @@
         app:cornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

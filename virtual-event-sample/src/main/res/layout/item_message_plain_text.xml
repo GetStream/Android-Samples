@@ -2,40 +2,43 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:paddingBottom="@dimen/margin_small"
     android:paddingTop="@dimen/margin_tiny"
-    android:paddingBottom="@dimen/margin_small">
+    >
 
     <io.getstream.chat.android.ui.avatar.AvatarView
-        android:id="@+id/avatarView"
         style="?attr/streamUiMessageListItemAvatarStyle"
+        android:id="@+id/avatarView"
         android:layout_marginTop="@dimen/margin_tiny"
         app:layout_constraintStart_toStartOf="@id/marginStart"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_height="32dp"
         tools:layout_width="32dp"
-        tools:src="@tools:sample/avatars" />
+        tools:src="@tools:sample/avatars"
+        />
 
     <TextView
+        android:hyphenationFrequency="normal"
         android:id="@+id/usernameTextView"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_tiny"
-        android:hyphenationFrequency="normal"
+        android:layout_width="wrap_content"
         android:textAppearance="@style/BodyBold"
         android:textColor="@color/text_high_emphasis"
         android:textColorLink="@color/primary_accent"
         app:layout_constraintStart_toEndOf="@id/avatarView"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Lincoln Culhane" />
+        tools:text="Lincoln Culhane"
+        />
 
     <TextView
+        android:hyphenationFrequency="normal"
         android:id="@+id/messageTimeTextView"
-        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_small"
-        android:hyphenationFrequency="normal"
+        android:layout_width="0dp"
         android:maxLines="1"
         android:textAppearance="@style/Footnote"
         android:textColor="@color/text_mid_emphasis"
@@ -44,33 +47,37 @@
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toEndOf="@id/usernameTextView"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="2 mins" />
+        tools:text="2 mins"
+        />
 
     <TextView
-        android:id="@+id/messageTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:hyphenationFrequency="normal"
+        android:id="@+id/messageTextView"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
         android:textAppearance="@style/Body"
         android:textColor="@color/text_high_emphasis"
         android:textColorLink="@color/primary_accent"
         app:layout_constraintEnd_toEndOf="@id/marginEnd"
         app:layout_constraintStart_toStartOf="@id/usernameTextView"
         app:layout_constraintTop_toBottomOf="@id/usernameTextView"
-        tools:text="You can't transmit the alarm without quantifying the haptic AGP card!" />
+        tools:text="You can't transmit the alarm without quantifying the haptic AGP card!"
+        />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/marginStart"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="8dp" />
+        app:layout_constraintGuide_begin="8dp"
+        />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/marginEnd"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="8dp" />
+        app:layout_constraintGuide_end="8dp"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

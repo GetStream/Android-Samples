@@ -10,7 +10,6 @@ import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.virtualevent.databinding.ActivityMainBinding
 import io.getstream.chat.virtualevent.feature.user.SwitchUserActivity
 import io.getstream.chat.virtualevent.util.ThemeHelper
-import java.lang.IllegalArgumentException
 
 class MainActivity : AppCompatActivity() {
 

@@ -20,12 +20,12 @@ class SwitchUserViewModel : ViewModel() {
 
     init {
         val users = AppConfig.availableUsers
-            .map { userCredentials ->
+            .map { (id, name, _, image) ->
                 User(
-                    id = userCredentials.id,
+                    id = id,
                     extraData = mutableMapOf(
-                        "name" to userCredentials.name,
-                        "image" to userCredentials.image
+                        "name" to name,
+                        "image" to image
                     )
                 )
             }

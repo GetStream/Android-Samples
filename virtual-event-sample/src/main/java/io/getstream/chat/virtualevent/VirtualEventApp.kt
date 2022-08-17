@@ -11,32 +11,25 @@ class VirtualEventApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        setupStreamSdk()
-        connectUser()
-    }
-
-    private fun setupStreamSdk() {
         val offlinePluginFactory = StreamOfflinePluginFactory(
             config = Config(),
             appContext = this
         )
-
-        ChatClient.Builder(AppConfig.API_KEY, applicationContext)
+        ChatClient.Builder("7de6n9dsyzjx", applicationContext)
             .withPlugin(offlinePluginFactory)
             .logLevel(ChatLogLevel.ALL)
             .build()
-    }
 
-    private fun connectUser() {
         val userCredentials = AppConfig.availableUsers[0]
+        val user = User(
+            id = userCredentials.id,
+            extraData = mutableMapOf(
+                "name" to userCredentials.name,
+                "image" to userCredentials.image
+            )
+        )
         ChatClient.instance().connectUser(
-            user = User(
-                id = userCredentials.id,
-                extraData = mutableMapOf(
-                    "name" to userCredentials.name,
-                    "image" to userCredentials.image
-                )
-            ),
+            user = user,
             token = userCredentials.token
         ).enqueue()
     }

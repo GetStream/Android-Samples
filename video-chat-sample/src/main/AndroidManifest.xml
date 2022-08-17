@@ -1,18 +1,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.getstream.videochat">
+    package="io.getstream.videochat"
+    >
 
     <application
-        android:name=".VideoChatApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:name=".VideoChatApp"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        >
 
         <activity
+            android:exported="true"
             android:name="io.getstream.videochat.ui.list.VideosListActivity"
-            android:exported="true">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,9 +24,10 @@
         </activity>
 
         <activity
-            android:name="io.getstream.videochat.ui.detail.VideoActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:name="io.getstream.videochat.ui.detail.VideoActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            />
 
     </application>
 
