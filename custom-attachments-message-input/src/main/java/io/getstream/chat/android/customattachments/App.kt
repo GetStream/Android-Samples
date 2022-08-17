@@ -1,14 +1,19 @@
-package io.getstream.chat.android.compose.customattachments
+package io.getstream.chat.android.customattachments
 
 import android.app.Application
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.logger.ChatLogLevel
 import io.getstream.chat.android.client.models.User
-import io.getstream.chat.android.offline.model.message.attachments.UploadAttachmentsNetworkType
+import io.getstream.chat.android.customattachments.factory.DateAttachmentFactory
+import io.getstream.chat.android.customattachments.factory.QuotedDateAttachmentFactory
 import io.getstream.chat.android.offline.plugin.configuration.Config
 import io.getstream.chat.android.offline.plugin.factory.StreamOfflinePluginFactory
+import io.getstream.chat.android.ui.ChatUI
+import io.getstream.chat.android.ui.message.list.adapter.viewholder.attachment.AttachmentFactoryManager
+import io.getstream.chat.android.ui.message.list.adapter.viewholder.attachment.DefaultQuotedAttachmentMessageFactory
+import io.getstream.chat.android.ui.message.list.adapter.viewholder.attachment.QuotedAttachmentFactoryManager
 
-class CustomAttachmentsApp : Application() {
+class App : Application() {
     override fun onCreate() {
         super.onCreate()
         setupStreamSdk()
@@ -17,18 +22,22 @@ class CustomAttachmentsApp : Application() {
 
     private fun setupStreamSdk() {
         val offlinePluginFactory = StreamOfflinePluginFactory(
-            config = Config(
-                backgroundSyncEnabled = true,
-                userPresence = true,
-                persistenceEnabled = true,
-                uploadAttachmentsNetworkType = UploadAttachmentsNetworkType.NOT_ROAMING,
-            ),
+            config = Config(),
             appContext = applicationContext,
         )
         ChatClient.Builder("qx5us2v6xvmh", applicationContext)
             .logLevel(ChatLogLevel.ALL)
             .withPlugin(offlinePluginFactory)
             .build()
+
+        ChatUI.attachmentFactoryManager = AttachmentFactoryManager(listOf(DateAttachmentFactory()))
+
+        ChatUI.quotedAttachmentFactoryManager = QuotedAttachmentFactoryManager(
+            listOf(
+                QuotedDateAttachmentFactory(),
+                DefaultQuotedAttachmentMessageFactory()
+            )
+        )
     }
 
     private fun connectUser() {

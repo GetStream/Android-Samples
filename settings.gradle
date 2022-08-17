@@ -4,4 +4,6 @@ include(
         ':video-chat-sample',
         ':virtualevent-demo',
         ':compose-custom-attachments',
+        ':custom-attachments-message-input',
+        ':custom-attachments-message-composer',
 )

@@ -24,12 +24,10 @@ import io.getstream.chat.android.compose.state.messages.attachments.AttachmentSt
 import io.getstream.chat.android.compose.ui.attachments.AttachmentFactory
 import io.getstream.chat.android.compose.ui.components.CancelIcon
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
-import io.getstream.chat.android.core.ExperimentalStreamChatApi
 
 /**
  * A custom [AttachmentFactory] that adds support for date attachments.
  */
-@ExperimentalStreamChatApi
 val dateAttachmentFactory: AttachmentFactory = AttachmentFactory(
     canHandle = { attachments -> attachments.any { it.type == "date" } },
     content = @Composable { modifier, attachmentState ->
