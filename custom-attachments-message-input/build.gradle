@@ -1,9 +1,8 @@
-import io.getstream.samples.Dependencies
-
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
 }
+
 android {
     compileSdk 32
 
@@ -24,7 +23,7 @@ dependencies {
     // Stream SDK dependency
     implementation "io.getstream:stream-chat-android-ui-components:5.8.0"
 
-    implementation Dependencies.androidxCoreKtx
-    implementation Dependencies.androidxActivityKtx
-    implementation Dependencies.materialComponents
+    implementation libs.androidxCoreKtx
+    implementation libs.androidxActivityKtx
+    implementation libs.materialComponents
 }
