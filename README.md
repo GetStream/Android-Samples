@@ -27,6 +27,6 @@ A collection of sample apps that use [Android Stream SDK](https://github.com/Get
 
 - [Video chat](https://github.com/GetStream/android-samples/tree/main/video-chat-sample)
 
-- [Virtual event](https://github.com/GetStream/android-samples/tree/main/virtualevent-demo)
+- [Virtual event](https://github.com/GetStream/android-samples/tree/main/virtual-event-sample)
 
 - [WhatsApp clone](https://github.com/GetStream/android-samples/tree/main/whatsapp-clone-sample)

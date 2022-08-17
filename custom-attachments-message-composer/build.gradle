@@ -19,14 +19,6 @@ android {
     }
 }
 
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
-    kotlinOptions {
-        freeCompilerArgs += [
-                '-Xopt-in=kotlin.RequiresOptIn',
-        ]
-    }
-}
-
 dependencies {
     // Stream SDK dependency
     implementation "io.getstream:stream-chat-android-ui-components:5.8.0"
