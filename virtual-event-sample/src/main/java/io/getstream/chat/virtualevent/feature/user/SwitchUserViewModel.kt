@@ -23,10 +23,8 @@ class SwitchUserViewModel : ViewModel() {
             .map { (id, name, _, image) ->
                 User(
                     id = id,
-                    extraData = mutableMapOf(
-                        "name" to name,
-                        "image" to image
-                    )
+                    name = name,
+                    image = image,
                 )
             }
         _state.postValue(State.Content(users))

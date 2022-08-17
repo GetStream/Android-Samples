@@ -46,5 +46,4 @@
 
     <!-- Switch User Screen -->
     <string name="switch_user_title">Select User</string>
-    <string name="switch_user_description">Select a user to try the Android SDK:</string>
 </resources>
