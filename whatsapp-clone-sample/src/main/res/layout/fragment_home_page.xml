@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:background="@color/stream_ui_white"
     android:layout_height="match_parent"
-    android:background="@color/stream_ui_white">
+    android:layout_width="match_parent"
+    >
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
         android:textColor="@color/stream_ui_black"
-        android:textSize="24sp" />
+        android:textIsSelectable="false"
+        android:textSize="24sp"
+        />
 
 </FrameLayout>

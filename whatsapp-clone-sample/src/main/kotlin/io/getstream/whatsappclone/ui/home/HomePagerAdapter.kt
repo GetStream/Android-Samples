@@ -8,7 +8,7 @@ import io.getstream.whatsappclone.ui.channels.ChannelListFragment
 
 class HomePagerAdapter(
     fragmentManager: FragmentManager,
-    lifecycle: Lifecycle
+    lifecycle: Lifecycle,
 ) : FragmentStateAdapter(fragmentManager, lifecycle) {
 
     override fun getItemCount(): Int = PAGE_COUNT

@@ -47,7 +47,7 @@ class MessageListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentMessageListBinding.inflate(inflater, container, false)
         return binding.root
@@ -55,20 +55,9 @@ class MessageListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        messageListViewModel.bindView(binding.messageListView, this)
-
-        binding.messageInputView.initViews(
-            sendMessage = { message -> messageInputViewModel.sendMessage(message) },
-            keystroke = { messageInputViewModel.keystroke() }
-        )
-
-        messageListHeaderViewModel.channel.observe(viewLifecycleOwner) { channel ->
-            val user = ChatClient.instance().clientState.user.value
-            binding.channelNameTextView.text = ChatUI.channelNameFormatter.formatChannelName(channel, user)
-            binding.avatarView.setChannelData(channel)
-        }
-
         setupToolbar()
+        setupMessageList()
+        setupMessageInput()
     }
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
@@ -87,6 +76,23 @@ class MessageListFragment : Fragment() {
             setDisplayShowHomeEnabled(true)
             setDisplayShowTitleEnabled(false)
         }
+
+        messageListHeaderViewModel.channel.observe(viewLifecycleOwner) { channel ->
+            val user = ChatClient.instance().clientState.user.value
+            binding.channelNameTextView.text = ChatUI.channelNameFormatter.formatChannelName(channel, user)
+            binding.avatarView.setChannelData(channel)
+        }
+    }
+
+    private fun setupMessageList() {
+        messageListViewModel.bindView(binding.messageListView, this)
+    }
+
+    private fun setupMessageInput() {
+        binding.messageInputView.initViews(
+            sendMessage = { message -> messageInputViewModel.sendMessage(message) },
+            keystroke = { messageInputViewModel.keystroke() }
+        )
     }
 
     override fun onDestroyView() {

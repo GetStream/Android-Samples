@@ -4,4 +4,10 @@
     <string name="tab_chats">CHATS</string>
     <string name="tab_status">STATUS</string>
     <string name="tab_calls">CALLS</string>
+
+    <string name="menu_video">Video</string>
+    <string name="menu_phone">Phone</string>
+    <string name="menu_compose">Compose</string>
+
+    <string name="message_input_hint">Type a message</string>
 </resources>

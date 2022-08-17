@@ -15,12 +15,12 @@ class WhatsApp : Application() {
             config = Config(),
             appContext = this
         )
-
         ChatClient.Builder("qx5us2v6xvmh", this)
             .withPlugin(offlinePluginFactory)
             .build()
 
-        val user = User(id = "jc").apply {
+        val user = User().apply {
+            id = "jc"
             name = "Jc Miñarro"
             image = "https://ca.slack-edge.com/T02RM6X6B-U011KEXDPB2-891dbb8df64f-128"
         }
