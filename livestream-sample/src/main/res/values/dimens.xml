@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="margin_small">16dp</dimen>
-    <dimen name="margin_medium">24dp</dimen>
-    <dimen name="margin_large">36dp</dimen>
-    <dimen name="avatar_size">38dp</dimen>
-    <dimen name="margin_x_small">8dp</dimen>
-    <dimen name="avatar_circle_radius">19dp</dimen>
-</resources>

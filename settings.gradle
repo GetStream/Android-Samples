@@ -1,8 +1,9 @@
 include(
-        ':livestream-sample',
+        // Sample
         ':whatsapp-clone-sample',
         ':video-chat-sample',
         ':virtualevent-demo',
+        // Guides
         ':compose-custom-attachments',
         ':custom-attachments-message-input',
         ':custom-attachments-message-composer',
