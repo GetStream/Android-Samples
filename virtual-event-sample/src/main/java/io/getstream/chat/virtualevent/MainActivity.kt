@@ -3,10 +3,10 @@ package io.getstream.chat.virtualevent
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.virtualevent.databinding.ActivityMainBinding
 import io.getstream.chat.virtualevent.feature.user.SwitchUserActivity
 import io.getstream.chat.virtualevent.util.ThemeHelper
@@ -15,6 +15,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var themeHelper: ThemeHelper
+
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +28,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupToolbar() {
-        ChatClient.instance().getCurrentUser()?.let {
-            binding.userAvatarView.setUserData(it)
+        viewModel.currentUser.observe(this) { user ->
+            if (user != null) {
+                binding.userAvatarView.setUserData(user)
+            }
         }
         binding.userAvatarView.setOnClickListener {
             startActivity(SwitchUserActivity.createIntent(this))
