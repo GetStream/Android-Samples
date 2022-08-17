@@ -24,7 +24,6 @@ import io.getstream.videochat.R
 import io.getstream.videochat.Video
 import io.getstream.videochat.nicknameColor
 
-private const val VIDEO_INTENT_EXTRA = "VIDEO_INTENT_EXTRA"
 private const val CHANNEL_TYPE = "livestream"
 
 class VideoActivity : AppCompatActivity(R.layout.activity_video) {
@@ -38,7 +37,7 @@ class VideoActivity : AppCompatActivity(R.layout.activity_video) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val video = intent.getSerializableExtra(VIDEO_INTENT_EXTRA) as Video
+        val video = intent.getSerializableExtra(EXTRA_VIDEO) as Video
         val chatClient = ChatClient.instance()
         findViewById<YouTubePlayerView>(R.id.videoPlayer).apply {
             lifecycle.addObserver(this)
@@ -115,6 +114,16 @@ class VideoActivity : AppCompatActivity(R.layout.activity_video) {
                 channelClient.sendMessage(Message().apply { text = it }).enqueue()
             }
     }
+
+    companion object {
+        private const val EXTRA_VIDEO = "extra_video"
+
+        fun createIntent(context: Context, video: Video): Intent {
+            return Intent(context, VideoActivity::class.java).apply {
+                putExtra(EXTRA_VIDEO, video)
+            }
+        }
+    }
 }
 
 fun Message.toViewHolderMessage() =
@@ -126,8 +135,3 @@ fun Message.toViewHolderMessage() =
         user.nicknameColor,
         text
     )
-
-fun createVideoIntent(context: Context, video: Video) =
-    Intent(context, VideoActivity::class.java).apply {
-        putExtra(VIDEO_INTENT_EXTRA, video)
-    }

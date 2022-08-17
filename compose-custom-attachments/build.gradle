@@ -1,4 +1,5 @@
 import io.getstream.samples.Dependencies
+import io.getstream.samples.Versions
 
 plugins {
     id 'com.android.application'
@@ -6,12 +7,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
 
     defaultConfig {
         applicationId "io.getstream.chat.android.compose.customattachments"
         minSdk 21
-        targetSdk 31
+        targetSdk 32
         versionCode 1
         versionName "1.0"
     }
@@ -26,13 +27,13 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion "1.0.1"
+        kotlinCompilerExtensionVersion Versions.COMPOSE_COMPILER
     }
 }
 
 dependencies {
     // Stream SDK
-    implementation "io.getstream:stream-chat-android-compose:5.2.1-SNAPSHOT"
+    implementation "io.getstream:stream-chat-android-compose:5.8.0"
 
     implementation Dependencies.androidxCoreKtx
     implementation Dependencies.androidxAppCompat

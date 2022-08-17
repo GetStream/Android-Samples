@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import io.getstream.videochat.R
 import io.getstream.videochat.Video
-import io.getstream.videochat.ui.detail.createVideoIntent
+import io.getstream.videochat.ui.detail.VideoActivity
 import io.getstream.videochat.videos
 
 class VideosListActivity : AppCompatActivity(R.layout.activity_videos_list) {
@@ -26,7 +26,7 @@ class VideosListActivity : AppCompatActivity(R.layout.activity_videos_list) {
     }
 
     private fun onVideoSelected(video: Video) {
-        startActivity(createVideoIntent(this, video))
+        startActivity(VideoActivity.createIntent(this, video))
     }
 
     class VerticalDividerItemDecorator(
