@@ -13,7 +13,8 @@
             android:name=".video.VideoActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
 
-        <activity android:name=".video_list.VideosListActivity">
+        <activity android:name=".video_list.VideosListActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

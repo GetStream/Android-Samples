@@ -3,6 +3,7 @@ package io.getstream.whatsappclone.ui.home
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import io.getstream.whatsappclone.R
 
@@ -19,9 +20,7 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
 
         fun newInstance(name: String): HomePageFragment {
             return HomePageFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_NAME, name)
-                }
+                arguments = bundleOf(ARG_NAME to name)
             }
         }
     }

@@ -15,6 +15,7 @@ android {
         versionCode Configuration.versionCode
         versionName Configuration.versionName
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -34,27 +35,15 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-
-    sourceSets {
-        all {
-            it.java.srcDir "src/$it.name/kotlin"
-        }
-    }
 }
 
 dependencies {
     // Stream SDK dependency
-    implementation 'io.getstream:stream-chat-android-ui-components:4.8.0'
+    implementation "io.getstream:stream-chat-android-ui-components:4.25.0"
 
     implementation Dependencies.kotlinStdLib
-    implementation Dependencies.androidxAppCompat
-    implementation Dependencies.androidxCoreKtx
-    implementation Dependencies.androidxConstraintLayout
     implementation Dependencies.androidxViewPager2
     implementation Dependencies.materialComponents
-    implementation Dependencies.androidxRecyclerview
-    implementation Dependencies.androidxLifecycleExtensions
-    implementation Dependencies.glide
     implementation Dependencies.fragmentKtx
     implementation Dependencies.navigationUiKtx
     implementation Dependencies.navigationFragmentKtx

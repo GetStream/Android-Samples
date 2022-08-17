@@ -25,13 +25,11 @@ class ChannelListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val user = User(
-            id = "jc",
-            extraData = mutableMapOf(
-                "name" to "Jc Miñarro",
-                "image" to "https://ca.slack-edge.com/T02RM6X6B-U011KEXDPB2-891dbb8df64f-128",
-            ),
-        )
+        val user = User(id = "jc").apply {
+            name = "Jc Miñarro"
+            image = "https://ca.slack-edge.com/T02RM6X6B-U011KEXDPB2-891dbb8df64f-128"
+        }
+
         ChatClient.instance()
             .connectUser(
                 user = user,

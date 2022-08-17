@@ -30,29 +30,8 @@ class MessageListFragment : Fragment() {
     private val messageListViewModel: MessageListViewModel by viewModels { factory }
     private val messageInputViewModel: MessageInputViewModel by viewModels { factory }
 
-    lateinit var binding: FragmentMessageListBinding
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentMessageListBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        messageListViewModel.bindView(binding.messageListView, this)
-        binding.messageInputView.setViewModel(messageInputViewModel)
-
-        messageListHeaderViewModel.channelState
-            .observe(viewLifecycleOwner) {
-                binding.channelNameTextView.text = it.getDisplayName(requireContext())
-                binding.avatarView.setChannelData(it)
-            }
-    }
+    private var _binding: FragmentMessageListBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +43,33 @@ class MessageListFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentMessageListBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        messageListViewModel.bindView(binding.messageListView, this)
+        binding.messageInputView.initViews(
+            sendMessage = { message -> messageInputViewModel.sendMessage(message) },
+            keystroke = { messageInputViewModel.keystroke() }
+        )
+
+        messageListHeaderViewModel.channelState
+            .observe(viewLifecycleOwner) {
+                binding.channelNameTextView.text = it.getDisplayName(requireContext())
+                binding.avatarView.setChannelData(it)
+            }
+
+        initToolbar()
+    }
+
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
         if (menuItem.itemId == android.R.id.home) {
             findNavController().navigateUp()
@@ -72,8 +78,7 @@ class MessageListFragment : Fragment() {
         return false
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    private fun initToolbar() {
         val activity: AppCompatActivity = activity as AppCompatActivity
 
         // toolbar setup
@@ -83,5 +88,10 @@ class MessageListFragment : Fragment() {
             setDisplayShowHomeEnabled(true)
             setDisplayShowTitleEnabled(false)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
