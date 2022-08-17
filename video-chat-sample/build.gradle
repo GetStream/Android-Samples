@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "io.getstream.videochat"
-        minSdk 21
+        minSdk 23
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -40,6 +40,7 @@ dependencies {
     // Stream SDK dependency
     implementation 'io.getstream:stream-chat-android-client:5.8.0'
 
+    implementation libs.materialComponents
     implementation libs.kotlinStdLib
     implementation libs.androidxAppCompat
     implementation libs.androidxCoreKtx

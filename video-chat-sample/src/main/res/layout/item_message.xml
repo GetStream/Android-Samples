@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="8dp"
     >
 
     <ImageView
         android:id="@+id/avatarImageView"
         android:layout_height="32dp"
-        android:layout_margin="4dp"
         android:layout_width="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -18,9 +19,9 @@
 
     <TextView
         style="@style/TextAppearance.AppCompat.Body1"
-        android:id="@+id/userNameTextView"
+        android:id="@+id/nameTextView"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="4dp"
+        android:layout_marginStart="16dp"
         android:layout_width="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/avatarImageView"
@@ -32,11 +33,12 @@
         style="@style/TextAppearance.AppCompat.Body2"
         android:id="@+id/messageTextView"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_width="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/userNameTextView"
-        app:layout_constraintTop_toBottomOf="@+id/userNameTextView"
+        app:layout_constraintStart_toEndOf="@+id/avatarImageView"
+        app:layout_constraintTop_toBottomOf="@+id/nameTextView"
         tools:text="@tools:sample/lorem"
         />
 

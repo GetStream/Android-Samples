@@ -14,7 +14,8 @@
 
         <activity
             android:exported="true"
-            android:name="io.getstream.videochat.ui.list.VideosListActivity"
+            android:name="io.getstream.videochat.ui.list.VideoListActivity"
+            android:screenOrientation="portrait"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,8 +26,8 @@
 
         <activity
             android:exported="false"
-            android:name="io.getstream.videochat.ui.detail.VideoActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:name="io.getstream.videochat.ui.detail.VideoDetailActivity"
+            android:screenOrientation="portrait"
             />
 
     </application>

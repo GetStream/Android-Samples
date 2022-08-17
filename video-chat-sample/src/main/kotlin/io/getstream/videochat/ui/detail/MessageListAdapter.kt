@@ -5,35 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.ColorInt
-import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
+import io.getstream.chat.android.client.models.Message
 import io.getstream.videochat.R
-import kotlin.properties.Delegates
 
-class MessageListAdapter : RecyclerView.Adapter<MessageListAdapter.MessageViewHolder>() {
-    private var messages: List<MessageViewHolder.Message> by Delegates.observable(listOf()) { _, _, newMessages ->
-        asyncListDiffer.submitList(newMessages.takeIf { it.isNotEmpty() })
-    }
-    private val asyncListDiffer: AsyncListDiffer<MessageViewHolder.Message> by lazy {
-        AsyncListDiffer(
-            this,
-            object : DiffUtil.ItemCallback<MessageViewHolder.Message>() {
-                override fun areContentsTheSame(
-                    oldItem: MessageViewHolder.Message,
-                    newItem: MessageViewHolder.Message
-                ): Boolean = oldItem == newItem
-
-                override fun areItemsTheSame(
-                    oldItem: MessageViewHolder.Message,
-                    newItem: MessageViewHolder.Message
-                ): Boolean = oldItem.id == newItem.id
-            }
-        )
-    }
+class MessageListAdapter : ListAdapter<Message, MessageListAdapter.MessageViewHolder>(MessageDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
         return LayoutInflater
@@ -41,37 +21,31 @@ class MessageListAdapter : RecyclerView.Adapter<MessageListAdapter.MessageViewHo
             .let { MessageViewHolder(it) }
     }
 
-    override fun getItemCount(): Int = asyncListDiffer.currentList.size
-
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
-        holder.bind(asyncListDiffer.currentList[position])
-    }
-
-    fun addMessages(newMessages: List<MessageViewHolder.Message>) {
-        messages = (messages + newMessages).sortedBy { it.timestamp }
+        holder.bind(getItem(position))
     }
 
     class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val avatarImageView: ImageView by lazy { itemView.findViewById(R.id.avatarImageView) }
-        private val userNameTextView: TextView by lazy { itemView.findViewById(R.id.userNameTextView) }
+        private val userNameTextView: TextView by lazy { itemView.findViewById(R.id.nameTextView) }
         private val messageTextView: TextView by lazy { itemView.findViewById(R.id.messageTextView) }
 
         fun bind(message: Message) {
-            userNameTextView.text = message.userName
-            userNameTextView.setTextColor(message.colorName)
+            userNameTextView.text = message.user.name
             messageTextView.text = message.text
-            avatarImageView.load(message.avatarUrl) {
+            avatarImageView.load(message.user.image) {
                 transformations(CircleCropTransformation())
             }
         }
+    }
 
-        data class Message(
-            val id: String,
-            val timestamp: Long,
-            val avatarUrl: String,
-            val userName: String,
-            @ColorInt val colorName: Int,
-            val text: String
-        )
+    private object MessageDiffCallback : DiffUtil.ItemCallback<Message>() {
+        override fun areItemsTheSame(oldItem: Message, newItem: Message): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Message, newItem: Message): Boolean {
+            return oldItem == newItem
+        }
     }
 }

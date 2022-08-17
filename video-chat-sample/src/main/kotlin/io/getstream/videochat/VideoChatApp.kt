@@ -3,6 +3,7 @@ package io.getstream.videochat
 import android.app.Application
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.logger.ChatLogLevel
+import io.getstream.chat.android.client.models.User
 
 class VideoChatApp : Application() {
 
@@ -13,10 +14,14 @@ class VideoChatApp : Application() {
             .logLevel(ChatLogLevel.ALL)
             .build()
 
-        val user = SampleData.createUser()
+        val userCredentials = SampleData.createUsers().random()
         client.connectUser(
-            user = user,
-            token = user.token
+            user = User(
+                id = userCredentials.id,
+                name = userCredentials.name,
+                image = userCredentials.image
+            ),
+            token = userCredentials.token
         ).enqueue()
     }
 }
