@@ -1,4 +1,4 @@
-package io.getstream.whatsappclone.ui.message_list
+package io.getstream.whatsappclone.ui.messages
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -55,21 +55,20 @@ class MessageListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         messageListViewModel.bindView(binding.messageListView, this)
+
         binding.messageInputView.initViews(
             sendMessage = { message -> messageInputViewModel.sendMessage(message) },
             keystroke = { messageInputViewModel.keystroke() }
         )
 
-        messageListHeaderViewModel.channel
-            .observe(viewLifecycleOwner) {
-                val user = ChatClient.instance().clientState.user.value
-                binding.channelNameTextView.text = ChatUI.channelNameFormatter.formatChannelName(it, user)
-                binding.avatarView.setChannelData(it)
-            }
+        messageListHeaderViewModel.channel.observe(viewLifecycleOwner) { channel ->
+            val user = ChatClient.instance().clientState.user.value
+            binding.channelNameTextView.text = ChatUI.channelNameFormatter.formatChannelName(channel, user)
+            binding.avatarView.setChannelData(channel)
+        }
 
-        initToolbar()
+        setupToolbar()
     }
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
@@ -80,10 +79,8 @@ class MessageListFragment : Fragment() {
         return false
     }
 
-    private fun initToolbar() {
+    private fun setupToolbar() {
         val activity: AppCompatActivity = activity as AppCompatActivity
-
-        // toolbar setup
         activity.setSupportActionBar(binding.toolbar)
         activity.supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)

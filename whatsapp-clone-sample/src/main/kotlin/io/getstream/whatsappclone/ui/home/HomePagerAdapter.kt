@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import io.getstream.whatsappclone.ui.channel_list.ChannelListFragment
+import io.getstream.whatsappclone.ui.channels.ChannelListFragment
 
 class HomePagerAdapter(
     fragmentManager: FragmentManager,

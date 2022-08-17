@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/messageListFragment"
-        android:name="io.getstream.whatsappclone.ui.message_list.MessageListFragment"
+        android:name="io.getstream.whatsappclone.ui.messages.MessageListFragment"
         android:label="MessageListFragment"
         tools:layout="@layout/fragment_message_list">
         <argument

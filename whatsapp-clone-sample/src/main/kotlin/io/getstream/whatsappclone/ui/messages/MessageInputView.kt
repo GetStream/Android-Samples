@@ -1,4 +1,4 @@
-package io.getstream.whatsappclone.ui.message_list
+package io.getstream.whatsappclone.ui.messages
 
 import android.content.Context
 import android.util.AttributeSet
