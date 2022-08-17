@@ -4,6 +4,13 @@ import android.graphics.Color
 import io.getstream.chat.android.client.models.User
 import java.io.Serializable
 
+object SampleData {
+
+    fun createUser(): User {
+        return demoUsers.random()
+    }
+}
+
 data class Video(val id: String, val name: String, val image: String) : Serializable
 
 val videos = listOf(

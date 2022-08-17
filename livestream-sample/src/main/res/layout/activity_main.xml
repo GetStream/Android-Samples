@@ -7,7 +7,7 @@
     android:background="@color/background_color"
     android:backgroundTint="@color/background_color"
     android:fitsSystemWindows="true"
-    tools:context=".LiveStreamActivity">
+    tools:context=".ui.LiveStreamActivity">
 
     <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
         android:id="@+id/mockLiveStreamView"

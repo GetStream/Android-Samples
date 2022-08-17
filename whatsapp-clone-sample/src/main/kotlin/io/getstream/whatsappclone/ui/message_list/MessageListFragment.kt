@@ -14,7 +14,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.getstream.sdk.chat.viewmodel.MessageInputViewModel
 import com.getstream.sdk.chat.viewmodel.messages.MessageListViewModel
-import io.getstream.chat.android.ui.common.extensions.getDisplayName
+import io.getstream.chat.android.client.ChatClient
+import io.getstream.chat.android.ui.ChatUI
 import io.getstream.chat.android.ui.message.list.header.viewmodel.MessageListHeaderViewModel
 import io.getstream.chat.android.ui.message.list.viewmodel.bindView
 import io.getstream.chat.android.ui.message.list.viewmodel.factory.MessageListViewModelFactory
@@ -61,9 +62,10 @@ class MessageListFragment : Fragment() {
             keystroke = { messageInputViewModel.keystroke() }
         )
 
-        messageListHeaderViewModel.channelState
+        messageListHeaderViewModel.channel
             .observe(viewLifecycleOwner) {
-                binding.channelNameTextView.text = it.getDisplayName(requireContext())
+                val user = ChatClient.instance().clientState.user.value
+                binding.channelNameTextView.text = ChatUI.channelNameFormatter.formatChannelName(it, user)
                 binding.avatarView.setChannelData(it)
             }
 

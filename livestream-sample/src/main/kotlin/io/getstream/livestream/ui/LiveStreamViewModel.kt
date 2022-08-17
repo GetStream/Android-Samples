@@ -1,4 +1,4 @@
-package io.getstream.livestream
+package io.getstream.livestream.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,14 +8,12 @@ import io.getstream.chat.android.client.api.models.QueryChannelRequest
 import io.getstream.chat.android.client.channel.ChannelClient
 import io.getstream.chat.android.client.events.NewMessageEvent
 import io.getstream.chat.android.client.models.Message
-import io.getstream.chat.android.client.models.User
-import io.getstream.chat.android.client.models.image
-import io.getstream.chat.android.client.models.name
 import io.getstream.chat.android.client.subscribeFor
 import timber.log.Timber
 
-class LiveStreamViewModel : ViewModel() {
-    private val chatClient = ChatClient.instance()
+class LiveStreamViewModel(
+    private val chatClient: ChatClient = ChatClient.instance()
+) : ViewModel() {
     private val _viewState = MutableLiveData<State>()
 
     private lateinit var channelClient: ChannelClient
@@ -23,16 +21,9 @@ class LiveStreamViewModel : ViewModel() {
     val viewState: LiveData<State> = _viewState
 
     init {
-        chatClient.connectUser(chatUser, USER_TOKEN).enqueue {
-            if (it.isSuccess) {
-                channelClient = chatClient.channel(CHANNEL_TYPE, CHANNEL_ID)
-                requestChannel()
-                subscribeToNewMessageEvent()
-            } else {
-                _viewState.postValue(State.Error("User setting error"))
-                Timber.e(it.error().cause)
-            }
-        }
+        channelClient = chatClient.channel(CHANNEL_TYPE, CHANNEL_ID)
+        requestChannel()
+        subscribeToNewMessageEvent()
     }
 
     fun sendButtonClicked(text: String) {
@@ -71,13 +62,6 @@ class LiveStreamViewModel : ViewModel() {
     companion object {
         private const val CHANNEL_TYPE = "livestream"
         private const val CHANNEL_ID = "livestream-clone-android"
-
-        private val chatUser = User(id = "jc").apply {
-            name = "Jc Miñarro"
-            image = "https://ca.slack-edge.com/T02RM6X6B-U011KEXDPB2-891dbb8df64f-128"
-        }
-        private const val USER_TOKEN =
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiamMifQ.2_5Hae3LKjVSfA0gQxXlZn54Bq6xDlhjPx2J7azUNB4"
     }
 }
 

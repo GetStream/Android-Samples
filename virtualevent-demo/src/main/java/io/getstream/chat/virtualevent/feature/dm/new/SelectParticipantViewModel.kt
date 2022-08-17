@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.api.models.QueryUsersRequest
-import io.getstream.chat.android.client.call.await
 import io.getstream.chat.android.client.errors.ChatError
 import io.getstream.chat.android.client.models.Filters
 import io.getstream.chat.android.client.models.User
@@ -54,7 +53,8 @@ class SelectParticipantViewModel(
         viewModelScope.launch {
             val result = chatClient.createChannel(
                 channelType = "messaging",
-                members = listOf(user.id, currentUserId()),
+                channelId = "",
+                memberIds = listOf(user.id, currentUserId()),
                 extraData = mapOf()
             ).await()
             if (result.isSuccess) {

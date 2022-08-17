@@ -33,7 +33,7 @@ class SwitchUserViewModel : ViewModel() {
     }
 
     fun onUserSelected(user: User) {
-        ChatClient.instance().disconnect()
+        ChatClient.instance().disconnect(true).enqueue()
 
         // TODO: check why this doesn't work without a delay
         viewModelScope.launch {

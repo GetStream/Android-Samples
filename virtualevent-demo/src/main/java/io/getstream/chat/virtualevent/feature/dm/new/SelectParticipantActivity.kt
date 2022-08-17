@@ -39,6 +39,7 @@ class SelectParticipantActivity : AppCompatActivity() {
     private fun renderParticipantsState(state: SelectParticipantViewModel.State) {
         when (state) {
             is SelectParticipantViewModel.State.Content -> adapter.setParticipants(state.participants)
+            else -> {}
         }
     }
 

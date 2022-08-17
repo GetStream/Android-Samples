@@ -1,7 +1,8 @@
-package io.getstream.livestream
+package io.getstream.livestream.ui
 
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearSmoothScroller
@@ -9,13 +10,16 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
 import io.getstream.chat.android.client.models.Message
+import io.getstream.livestream.R
 import io.getstream.livestream.databinding.ActivityMainBinding
 
 class LiveStreamActivity : AppCompatActivity(R.layout.activity_main) {
-    private val adapter = MessagesListAdapter()
-    private val viewModel: LiveStreamViewModel by viewModels()
 
     private lateinit var binding: ActivityMainBinding
+
+    private val viewModel: LiveStreamViewModel by viewModels()
+
+    private val adapter = MessageListAdapter()
 
     private val messageListSmoothScroller by lazy {
         object : LinearSmoothScroller(this) {
@@ -39,15 +43,14 @@ class LiveStreamActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun observeViewState() {
         viewModel.viewState.observe(
-            this,
-            {
-                when (it) {
-                    is State.Messages -> updateMessagesList(it.messages)
-                    is State.NewMessage -> updateMessagesList(adapter.currentList + it.message)
-                    is State.Error -> showToast(it.message)
-                }
+            this
+        ) {
+            when (it) {
+                is State.Messages -> updateMessagesList(it.messages)
+                is State.NewMessage -> updateMessagesList(adapter.currentList + it.message)
+                is State.Error -> Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
             }
-        )
+        }
     }
 
     private fun setupView() {
@@ -55,8 +58,6 @@ class LiveStreamActivity : AppCompatActivity(R.layout.activity_main) {
         binding.sendMessageButton.setOnClickListener {
             viewModel.sendButtonClicked(binding.messageInput.text.toString())
             binding.messageInput.setText("")
-            binding.messageInput.clearFocus()
-            binding.messageInput.hideKeyboard()
         }
     }
 
@@ -69,7 +70,7 @@ class LiveStreamActivity : AppCompatActivity(R.layout.activity_main) {
     private fun playSampleVideo() {
         val playerListener = object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
-                youTubePlayer.loadVideo(videoId = "XYqrrpvTtU8", startSeconds = 0f)
+                youTubePlayer.loadVideo(videoId = "sJ0rDhmlMgM", startSeconds = 0f)
             }
         }
         val playerOptions = IFramePlayerOptions.Builder()

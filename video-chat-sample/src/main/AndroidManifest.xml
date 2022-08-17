@@ -10,16 +10,19 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".video.VideoActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-
-        <activity android:name=".video_list.VideosListActivity"
+            android:name="io.getstream.videochat.ui.list.VideosListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="io.getstream.videochat.ui.detail.VideoActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
 
     </application>
 

@@ -4,7 +4,8 @@ import android.app.Application
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.logger.ChatLogLevel
 import io.getstream.chat.android.client.models.User
-import io.getstream.chat.android.livedata.ChatDomain
+import io.getstream.chat.android.offline.plugin.configuration.Config
+import io.getstream.chat.android.offline.plugin.factory.StreamOfflinePluginFactory
 
 class VirtualEventApp : Application() {
 
@@ -15,10 +16,15 @@ class VirtualEventApp : Application() {
     }
 
     private fun setupStreamSdk() {
-        val client = ChatClient.Builder(AppConfig.API_KEY, applicationContext)
+        val offlinePluginFactory = StreamOfflinePluginFactory(
+            config = Config(),
+            appContext = this
+        )
+
+        ChatClient.Builder(AppConfig.API_KEY, applicationContext)
+            .withPlugin(offlinePluginFactory)
             .logLevel(ChatLogLevel.ALL)
             .build()
-        ChatDomain.Builder(client, applicationContext).build()
     }
 
     private fun connectUser() {

@@ -1,4 +1,4 @@
-package io.getstream.videochat.video
+package io.getstream.videochat.ui.detail
 
 import android.content.Context
 import android.content.Intent

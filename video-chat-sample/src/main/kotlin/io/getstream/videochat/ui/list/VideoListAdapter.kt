@@ -1,4 +1,4 @@
-package io.getstream.videochat.video_list
+package io.getstream.videochat.ui.list
 
 import android.view.LayoutInflater
 import android.view.View

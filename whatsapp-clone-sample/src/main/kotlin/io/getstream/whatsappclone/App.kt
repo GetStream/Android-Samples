@@ -2,17 +2,22 @@ package io.getstream.whatsappclone
 
 import android.app.Application
 import io.getstream.chat.android.client.ChatClient
-import io.getstream.chat.android.livedata.ChatDomain
+import io.getstream.chat.android.offline.plugin.configuration.Config
+import io.getstream.chat.android.offline.plugin.factory.StreamOfflinePluginFactory
 
 class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
 
-        val client = ChatClient.Builder(API_KEY, this)
-            .build()
+        val offlinePluginFactory = StreamOfflinePluginFactory(
+            config = Config(),
+            appContext = this
+        )
 
-        ChatDomain.Builder(client, this).build()
+        ChatClient.Builder(API_KEY, this)
+            .withPlugin(offlinePluginFactory)
+            .build()
     }
 
     companion object {
