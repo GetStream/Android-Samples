@@ -1,0 +1,87 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "io.getstream.chat.virtualevent"
+        minSdk 26
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    File signFile = rootProject.file('.sign/keystore.properties')
+    if (signFile.exists()) {
+        Properties properties = new Properties()
+        properties.load(new FileInputStream(signFile))
+        signingConfigs {
+            release {
+                storeFile rootProject.file(properties['keystore'])
+                storePassword properties['storePassword']
+                keyAlias properties['keyAlias']
+                keyPassword properties['keyPassword']
+            }
+        }
+    } else {
+        signingConfigs {
+            release {
+                storeFile rootProject.file('.sign/debug.keystore')
+                storePassword 'android'
+                keyAlias 'androiddebugkey'
+                keyPassword 'android'
+            }
+        }
+    }
+
+    signingConfigs.debug {
+        storeFile rootProject.file('.sign/debug.keystore')
+        storePassword 'android'
+        keyAlias 'androiddebugkey'
+        keyPassword 'android'
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    // Stream SDK dependency
+    implementation "io.getstream:stream-chat-android-ui-components:5.8.0"
+
+    implementation libs.androidxCoreKtx
+    implementation libs.androidxAppCompat
+    implementation libs.materialComponents
+    implementation libs.androidxConstraintLayout
+    implementation libs.navigationFragmentKtx
+    implementation libs.navigationUiKtx
+    implementation libs.androidxLifecycleLiveData
+    implementation libs.androidxLifecycleViewModel
+    implementation libs.exoplayerCore
+    implementation libs.exoplayerUi
+    implementation libs.lottie
+}

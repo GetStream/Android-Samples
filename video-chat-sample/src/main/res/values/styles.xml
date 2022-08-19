@@ -1,9 +1,14 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/app_canvas</item>
+        <item name="colorPrimaryVariant">@color/app_canvas</item>
+        <item name="colorOnPrimary">@color/app_canvas</item>
+        <item name="colorSecondary">@color/static_grey</item>
+        <item name="colorSecondaryVariant">@color/static_grey</item>
+        <item name="colorOnSecondary">@color/static_grey</item>
+        <item name="android:statusBarColor">@color/app_canvas</item>
+        <item name="android:windowLightStatusBar">@bool/windowLightStatusBar</item>
     </style>
 
 </resources>

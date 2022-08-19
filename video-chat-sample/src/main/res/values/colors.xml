@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <!-- Static colors -->
+    <color name="static_white">#FFFFFF</color>
+    <color name="static_light_grey">#BCBEC2</color>
+    <color name="static_grey">#72757E</color>
+    <color name="static_dark_grey">#0E1420</color>
+    <color name="static_black">#000000</color>
+    <color name="static_transparent">#00000000</color>
+
+    <!-- Default theme colors -->
+    <color name="primary_accent">#006CFF</color>
+    <color name="app_canvas">#FFFFFF</color>
+    <color name="text_high_emphasis">#0E1621</color>
+    <color name="text_low_emphasis">#B2B1B5</color>
+    <color name="input_background">#F2F2F2</color>
+
+    <!-- Make status bar icons light -->
+    <bool name="windowLightStatusBar">true</bool>
 </resources>

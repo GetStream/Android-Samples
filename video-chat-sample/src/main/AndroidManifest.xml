@@ -1,25 +1,34 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.getstream.videochat">
+    package="io.getstream.videochat"
+    >
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:name=".VideoChatApp"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        >
 
         <activity
-            android:name=".video.VideoActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-
-        <activity android:name=".video_list.VideosListActivity"
-            android:exported="true">
+            android:exported="true"
+            android:name="io.getstream.videochat.ui.list.VideoListActivity"
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:exported="false"
+            android:name="io.getstream.videochat.ui.detail.VideoDetailActivity"
+            android:screenOrientation="portrait"
+            />
 
     </application>
 

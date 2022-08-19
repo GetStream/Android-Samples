@@ -1,19 +1,16 @@
-import io.getstream.samples.Configuration
-import io.getstream.samples.Dependencies
-
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion Configuration.compileSdkVersion
+    compileSdk 32
 
     defaultConfig {
         applicationId "io.getstream.videochat"
-        minSdkVersion Configuration.minSdkVersion
-        targetSdkVersion Configuration.targetSdkVersion
-        versionCode Configuration.versionCode
-        versionName Configuration.versionName
+        minSdk 23
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
     }
 
     buildTypes {
@@ -41,15 +38,16 @@ android {
 
 dependencies {
     // Stream SDK dependency
-    implementation 'io.getstream:stream-chat-android-client:4.8.0'
+    implementation 'io.getstream:stream-chat-android-client:5.8.0'
 
-    implementation Dependencies.kotlinStdLib
-    implementation Dependencies.androidxAppCompat
-    implementation Dependencies.androidxCoreKtx
-    implementation Dependencies.androidxActivityKtx
-    implementation Dependencies.androidxLifecycleExtensions
-    implementation Dependencies.coil
-    implementation Dependencies.androidxRecyclerview
-    implementation Dependencies.androidxConstraintLayout
-    implementation Dependencies.youtubePlayer
+    implementation libs.materialComponents
+    implementation libs.kotlinStdLib
+    implementation libs.androidxAppCompat
+    implementation libs.androidxCoreKtx
+    implementation libs.androidxActivityKtx
+    implementation libs.androidxLifecycleExtensions
+    implementation libs.coil
+    implementation libs.androidxRecyclerview
+    implementation libs.androidxConstraintLayout
+    implementation libs.youtubePlayer
 }

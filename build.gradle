@@ -1,5 +1,3 @@
-import io.getstream.samples.Dependencies
-
 apply plugin: "org.jlleitschuh.gradle.ktlint"
 
 buildscript {
@@ -11,10 +9,10 @@ buildscript {
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     }
     dependencies {
-        classpath Dependencies.androidGradlePlugin
-        classpath Dependencies.kotlinGradlePlugin
-        classpath Dependencies.navigationSafeArgsGradlePlugin
-        classpath Dependencies.ktlintPlugin
+        classpath libs.androidGradlePlugin
+        classpath libs.kotlinGradlePlugin
+        classpath libs.navigationSafeArgsGradlePlugin
+        classpath libs.ktlintPlugin
     }
 }
 

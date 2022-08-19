@@ -1,19 +1,16 @@
-import io.getstream.samples.Configuration
-import io.getstream.samples.Dependencies
-
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
-    compileSdkVersion Configuration.compileSdkVersion
+    compileSdk 32
 
     defaultConfig {
         applicationId "io.getstream.whatsappclone"
-        minSdkVersion Configuration.minSdkVersion
-        targetSdkVersion Configuration.targetSdkVersion
-        versionCode Configuration.versionCode
-        versionName Configuration.versionName
+        minSdkVersion 21
+        targetSdkVersion 32
+        versionCode 1
+        versionName "1.0"
     }
 
     buildTypes {
@@ -39,13 +36,13 @@ android {
 
 dependencies {
     // Stream SDK dependency
-    implementation "io.getstream:stream-chat-android-ui-components:4.25.0"
+    implementation "io.getstream:stream-chat-android-ui-components:5.8.0"
 
-    implementation Dependencies.kotlinStdLib
-    implementation Dependencies.androidxViewPager2
-    implementation Dependencies.materialComponents
-    implementation Dependencies.fragmentKtx
-    implementation Dependencies.navigationUiKtx
-    implementation Dependencies.navigationFragmentKtx
-    implementation Dependencies.androidxLegacySupport
+    implementation libs.kotlinStdLib
+    implementation libs.androidxViewPager2
+    implementation libs.materialComponents
+    implementation libs.fragmentKtx
+    implementation libs.navigationUiKtx
+    implementation libs.navigationFragmentKtx
+    implementation libs.androidxLegacySupport
 }
