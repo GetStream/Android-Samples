@@ -34,7 +34,7 @@ This repository contains sample projects, guides, turorials, and links to helpfu
 
 | Project | |
 |:-----|---------|
-|  <br><h3>Video Chat Sample</h3> <br>Livestream app that demonstrates how to use the low level client to listen for events. <br><br>**[> Source Code](video-chat-sample)**<br><br> | <img src="previews/video-chat.gif" width="320" alt="Video Chat Sample Preview"> |
+|  <br><h3>Video Chat Sample</h3> <br>Livestream app that demonstrates how to use the low level client to listen for events. <br><br>• Video list and details<br>• Custom message list<br>• Low level client integration<br><br>**[> Source Code](video-chat-sample)**<br><br> | <img src="previews/video-chat.gif" width="320" alt="Video Chat Sample Preview"> |
 |  |  |
 |  <br><h3>Virtual Event Sample</h3> <br>Virtual event sample app. <br><br>**[> Source Code](virtual-event-sample)** <br><br> | <img src="previews/virtual-event.gif" width="320" alt="Virtual Event Sample Preview"> |
 |  |  |
