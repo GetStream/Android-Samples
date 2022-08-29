@@ -36,9 +36,9 @@ This repository contains sample projects, guides, turorials, and links to helpfu
 |:-----|---------|
 |  <br><h3>Video Chat Sample</h3> <br>Livestream app that demonstrates how to use the low level client to listen for events. <br><br>• Video list and details<br>• Custom message list<br>• Low level client integration<br><br>**[> Source Code](video-chat-sample)**<br><br> | <img src="previews/video-chat.gif" width="320" alt="Video Chat Sample Preview"> |
 |  |  |
-|  <br><h3>Virtual Event Sample</h3> <br>Virtual event sample app. <br><br>**[> Source Code](virtual-event-sample)** <br><br> | <img src="previews/virtual-event.gif" width="320" alt="Virtual Event Sample Preview"> |
+|  <br><h3>Virtual Event Sample</h3> <br>Virtual event sample app. <br><br>• Direct and livestream chats<br>• Light and dark modes<br>• Multiple user accounts<br><br>**[> Source Code](virtual-event-sample)** <br><br> | <img src="previews/virtual-event.gif" width="320" alt="Virtual Event Sample Preview"> |
 |  |  |
-|  <br><h3>WhatsApp Clone</h3> <br>WhatsApp clone app. <br><br>**[> Source Code](whatsapp-clone-sample)** <br><br> | <img src="previews/whatsapp-clone.gif" width="320" alt="WhatsApp Clone Preview"> |
+|  <br><h3>WhatsApp Clone</h3> <br>WhatsApp clone app. <br><br>• Custom message input<br>• Custom message list header<br><br>**[> Source Code](whatsapp-clone-sample)** <br><br> | <img src="previews/whatsapp-clone.gif" width="320" alt="WhatsApp Clone Preview"> |
 |  |  |
 |  <br><h3>WhatsApp Clone Compose</h3> <br>WhatsApp clone app built with Jetpack Compose and Stream Chat SDK for Compose. <br><br> **[> Source Code](https://github.com/GetStream/whatsApp-clone-compose)**<br><br> | <img src="previews/whatsapp-clone-compose.gif" width="320" alt="WhatsApp Clone Compose Preview"> |
 |  |  |
@@ -54,7 +54,7 @@ This repository contains sample projects, guides, turorials, and links to helpfu
 |  |  |
 
 ## Chat Guides
-See [here](https://getstream.io/chat/docs/sdk/flutter/) for all our chat guides.
+See [here](https://getstream.io/chat/docs/sdk/android/) for all our chat guides.
 
 These guides explore our UI components in greater detail and demonstrate how to easily perform a variety of common actions using the Stream Chat Android SDK, such as:
 
