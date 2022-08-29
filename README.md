@@ -2,7 +2,7 @@
 
 ## 😎 Repo Overview
 
-This repository contains sample projects, guides, turorials, and links to helpful resources to help you get started with [Android Stream SDK](https://github.com/GetStream/stream-chat-android).
+This repository contains sample projects, guides, tutorials, and links to helpful resources to help you get started with [Android Stream SDK](https://github.com/GetStream/stream-chat-android).
 
 ## 🔗 Quick Links
 
