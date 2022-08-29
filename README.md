@@ -34,25 +34,24 @@ This repository contains sample projects, guides, turorials, and links to helpfu
 
 | Project | |
 |:-----|---------|
-|  <br><h3>Video Chat Sample</h3> <br>A sample app. <br><br>**[> Source Code](video-chat-sample)**<br><br> | <img src="previews/video-chat.gif" width="320" alt="Stream Chat Flutter Sample App"> |
+|  <br><h3>Video Chat Sample</h3> <br>Livestream app that demonstrates how to use the low level client to listen for events. <br><br>**[> Source Code](video-chat-sample)**<br><br> | <img src="previews/video-chat.gif" width="320" alt="Video Chat Sample Preview"> |
 |  |  |
-|  <br><h3>Virtual Event Sample</h3> <br>A sample app. <br><br>**[> Source Code](virtual-event-sample)** <br><br> | <img src="previews/virtual-event.gif" width="320" alt="Chatter Application Preview"> |
+|  <br><h3>Virtual Event Sample</h3> <br>Virtual event sample app. <br><br>**[> Source Code](virtual-event-sample)** <br><br> | <img src="previews/virtual-event.gif" width="320" alt="Virtual Event Sample Preview"> |
 |  |  |
-|  <br><h3>WhatsApp Clone</h3> <br>A sample app. <br><br>**[> Source Code](whatsapp-clone-sample)** <br><br> | <img src="previews/whatsapp-clone.gif" width="320" alt="Chatter Application Preview"> |
+|  <br><h3>WhatsApp Clone</h3> <br>WhatsApp clone app. <br><br>**[> Source Code](whatsapp-clone-sample)** <br><br> | <img src="previews/whatsapp-clone.gif" width="320" alt="WhatsApp Clone Preview"> |
 |  |  |
-|  <br><h3>WhatsApp Clone Compose</h3> <br>A WhatsApp clone app built with Jetpack Compose and Stream Chat SDK for Compose. <br><br> **[> Source Code](https://github.com/GetStream/whatsApp-clone-compose)**<br><br> | <img src="previews/whatsapp-clone-compose.gif" width="320" alt="Stream Chat Flutter Sample App"> |
+|  <br><h3>WhatsApp Clone Compose</h3> <br>WhatsApp clone app built with Jetpack Compose and Stream Chat SDK for Compose. <br><br> **[> Source Code](https://github.com/GetStream/whatsApp-clone-compose)**<br><br> | <img src="previews/whatsapp-clone-compose.gif" width="320" alt="WhatsApp Clone Compose Preview"> |
 |  |  |
-|  <br><h3>Slack Clone Compose</h3> <br>A Slack clone app built with Jetpack Compose and Stream Chat SDK for Compose following clean architecture principles. <br><br>**[> Source Code](https://github.com/GetStream/stream-slack-clone-android)** <br><br> | <img src="previews/slack-clone-compose.gif" width="320" alt="Slack Clone Preview"> |
+|  <br><h3>Slack Clone Compose</h3> <br>Slack clone app built with Jetpack Compose and Stream Chat SDK for Compose following clean architecture principles. <br><br>**[> Source Code](https://github.com/GetStream/stream-slack-clone-android)** <br><br> | <img src="previews/slack-clone-compose.gif" width="320" alt="Slack Clone Compose Preview"> |
 |  |  |
-|  <br><h3>Avengers Chat</h3> <br>Avengers Chat Application. <br><br>**[> Source Code](https://github.com/GetStream/AvengersChat)** <br><br> | <img src="previews/avengers-chat.gif" width="320" alt="Avengers Chat Preview"> |
+|  <br><h3>Avengers Chat</h3> <br>Demo application based on modern Android tech stacks and Stream Chat SDK. <br><br>**[> Source Code](https://github.com/GetStream/AvengersChat)** <br><br> | <img src="previews/avengers-chat.gif" width="320" alt="Avengers Chat Preview"> |
 |  |  |
 |  <br><h3>Facebook Messenger Clone</h3> <br>Facebook Messenger clone using Stream SDK & Jetpack Compose. <br><br>**[> Source Code](https://github.com/MathRoda/Messenger-clone)** <br><br> | <img src="previews/facebook-messenger-clone.png" width="320" alt="Facebook Messenger Clone Preview"> |
 |  |  |
-|  <br><h3>Stream Draw</h3> <br>A real-time multiplayer drawing & chat game app built entirely with Jetpack Compose. <br><br>• Light and Dark themes<br>• Creating and joining a group channel<br>• Supports host mode and guest mode<br>• Welcome and exit messages<br>• Fetches a list of words from the network<br>• Real-time drawing on the sketchbook<br>• Real-time chat messaging with multiple users<br>• Real-time participants' list of a connected channel<br>• Guessing a word and congratulation animations<br>• Single message notification and real-time chat dialog for the host<br>• Restarting game by the host<br>• Exiting and deleting the channel by the host<br>• And a lot of additional features using Stream Chat SDK for Android!<br><br>**[> Source Code](https://github.com/GetStream/stream-draw-android)** <br><br> | <img src="previews/stream-draw.gif" width="320" alt="Stream Draw Preview"> |
+|  <br><h3>Stream Draw</h3> <br>Real-time multiplayer drawing & chat game app built entirely with Jetpack Compose. <br><br>• Light and Dark themes<br>• Creating and joining a group channel<br>• Supports host mode and guest mode<br>• Welcome and exit messages<br>• Fetches a list of words from the network<br>• Real-time drawing on the sketchbook<br>• Real-time chat messaging with multiple users<br>• Real-time participants' list of a connected channel<br>• Guessing a word and congratulation animations<br>• Single message notification and real-time chat dialog for the host<br>• Restarting game by the host<br>• Exiting and deleting the channel by the host<br>• And a lot of additional features using Stream Chat SDK for Android!<br><br>**[> Source Code](https://github.com/GetStream/stream-draw-android)** <br><br> | <img src="previews/stream-draw.gif" width="320" alt="Stream Draw Preview"> |
 |  |  |
-|  <br><h3>Foldable Chat</h3> <br>A foldable chat Android demonstrates adaptive and responsive UIs with Jetpack WindowManager API. <br><br>**[> Source Code](https://github.com/GetStream/foldable-chat-android)** <br><br> | <img src="previews/foldable-chat.png" width="320" alt="Foldable Chat Preview"> |
+|  <br><h3>Foldable Chat</h3> <br>Demonstrates adaptive and responsive UIs with Jetpack WindowManager API. <br><br>**[> Source Code](https://github.com/GetStream/foldable-chat-android)** <br><br> | <img src="previews/foldable-chat.png" width="320" alt="Foldable Chat Preview"> |
 |  |  |
-
 
 ## Chat Guides
 See [here](https://getstream.io/chat/docs/sdk/flutter/) for all our chat guides.
