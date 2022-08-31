@@ -1,4 +1,10 @@
-# Stream Android Samples
+# Android Sample Apps
+
+<p align="center">
+  <a href="https://github.com/GetStream/stream-chat-android">
+    <img src="/previews/sdk-hero-android.png"/>
+  </a>
+</p>
 
 ## 😎 Repo Overview
 
