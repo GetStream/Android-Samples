@@ -17,8 +17,8 @@ This repository contains sample projects, guides, tutorials, and links to helpfu
 
 **Tutorials:**
 
-- [Androd Chat Tutorial](https://github.com/GetStream/android-chat-tutorial)
-- [Compose Chat Tutorial](https://github.com/GetStream/compose-chat-tutorial)
+- [Androd Chat Tutorial](https://getstream.io/tutorials/android-chat/)
+- [Compose Chat Tutorial](https://getstream.io/chat/compose/tutorial/)
 
 **Documentation:**
 
