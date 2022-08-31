@@ -1,7 +1,15 @@
-# Livestream Video Chat
+# Video Chat Sample
 
-This is an example of a Twitch style livestream experience
+<img src="../previews/video-chat.gif" width="40%" />
 
-# Screenshots
+## Running the sample
 
-<img src="https://i.imgur.com/tFa1Ky2.gif" width="40%" />
+To run this sample app, start by cloning this repo:
+
+```shell
+git clone https://github.com/GetStream/Android-Samples.git
+```
+
+Next, open [Android Studio](https://developer.android.com/studio) and open the newly cloned project folder. Make sure you run the app in this module (`video-chat-sample`).
+
+![Android Studio app selection](../previews/video-chat-configuration.png)

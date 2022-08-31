@@ -1,17 +1,15 @@
 # WhatsApp Chat Clone
 
-WhatsApp chat clone sample application for Android
+<img src="../previews/whatsapp-clone.gif" width="40%" />
 
-# Screenshots
+## Running the sample
 
-## Light theme
-<p float="left">
-  <img src="image/screenshot1.png" width="40%" />
-  <img src="image/screenshot2.png" width="40%" />
-</p>
+To run this sample app, start by cloning this repo:
 
-## Dark theme
-<p float="left">
-  <img src="image/screenshot3.png" width="40%" />
-  <img src="image/screenshot4.png" width="40%" />
-</p>
+```shell
+git clone https://github.com/GetStream/Android-Samples.git
+```
+
+Next, open [Android Studio](https://developer.android.com/studio) and open the newly cloned project folder. Make sure you run the app in this module (`whatsapp-clone-sample`).
+
+![Android Studio app selection](../previews/whatsapp-clone-configuration.png)
