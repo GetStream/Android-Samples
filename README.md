@@ -6,6 +6,12 @@
   <a href="https://getstream.io"><img src="https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/HayesGordon/e7f3c4587859c17f3e593fd3ff5b13f4/raw/11d9d9385c9f34374ede25f6471dc743b977a914/badge.json" alt="Stream Feeds"></a>
 </p>
 
+<p align="center">
+  <a href="https://github.com/GetStream/stream-chat-android">
+    <img src="/previews/sdk-hero-android.png"/>
+  </a>
+</p>
+
 ## 😎 Repo Overview
 
 This repository contains sample projects, guides, tutorials, and links to helpful resources to help you get started with [Android Stream SDK](https://github.com/GetStream/stream-chat-android).
