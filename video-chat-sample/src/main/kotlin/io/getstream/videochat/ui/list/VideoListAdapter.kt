@@ -1,3 +1,19 @@
+/*
+ * Copyright 2022 Stream.IO, Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package io.getstream.videochat.ui.list
 
 import android.view.LayoutInflater
@@ -12,7 +28,7 @@ import io.getstream.videochat.R
 import io.getstream.videochat.YoutubeVideo
 
 class VideoListAdapter(
-    private val onVideoSelected: (YoutubeVideo) -> Unit,
+    private val onVideoSelected: (YoutubeVideo) -> Unit
 ) : RecyclerView.Adapter<VideoListAdapter.VideoViewHolder>() {
 
     private var videos: List<YoutubeVideo> = listOf()
@@ -36,7 +52,7 @@ class VideoListAdapter(
 
     class VideoViewHolder(
         itemView: View,
-        private val onVideoSelected: (YoutubeVideo) -> Unit,
+        private val onVideoSelected: (YoutubeVideo) -> Unit
     ) : RecyclerView.ViewHolder(itemView) {
 
         private lateinit var video: YoutubeVideo
