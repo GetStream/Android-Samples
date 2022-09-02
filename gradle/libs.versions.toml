@@ -24,7 +24,7 @@ materialComponents = "1.6.1"
 navigation = "2.5.1"
 timber = "5.0.1"
 youtubePlayer = "11.1.0"
-ktlintPlugin = "10.3.0"
+spotlessPlugin = "6.7.2"
 
 [libraries]
 androidGradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "androidGradlePlugin" }
@@ -64,4 +64,4 @@ navigationFragmentKtx = { module = "androidx.navigation:navigation-fragment-ktx"
 navigationUiKtx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 youtubePlayer = { module = "com.pierfrancescosoffritti.androidyoutubeplayer:core", version.ref = "youtubePlayer" }
-ktlintPlugin = { module = "org.jlleitschuh.gradle:ktlint-gradle", version.ref = "ktlintPlugin" }
+spotlessPlugin = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotlessPlugin" }
