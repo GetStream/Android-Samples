@@ -103,7 +103,8 @@ class MessageListFragment : Fragment() {
 
         messageListHeaderViewModel.channel.observe(viewLifecycleOwner) { channel ->
             val user = ChatClient.instance().clientState.user.value
-            binding.channelNameTextView.text = ChatUI.channelNameFormatter.formatChannelName(channel, user)
+            binding.channelNameTextView.text =
+                ChatUI.channelNameFormatter.formatChannelName(channel, user)
             binding.avatarView.setChannelData(channel)
         }
     }

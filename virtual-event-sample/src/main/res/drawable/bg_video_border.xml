@@ -23,22 +23,18 @@
     THE SOFTWARE.
 -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle"
-    >
+    android:shape="rectangle">
     <stroke
-        android:color="@color/accent_green"
         android:width="4dp"
-        />
+        android:color="@color/accent_green" />
     <padding
         android:bottom="4dp"
         android:left="4dp"
         android:right="4dp"
-        android:top="4dp"
-        />
+        android:top="4dp" />
     <corners
         android:bottomLeftRadius="8dp"
         android:bottomRightRadius="8dp"
         android:topLeftRadius="8dp"
-        android:topRightRadius="8dp"
-        />
+        android:topRightRadius="8dp" />
 </shape>

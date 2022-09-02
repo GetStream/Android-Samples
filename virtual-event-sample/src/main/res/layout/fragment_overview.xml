@@ -24,91 +24,80 @@
 -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    tools:context=".feature.overview.OverviewFragment"
-    >
+    android:layout_height="match_parent"
+    tools:context=".feature.overview.OverviewFragment">
 
     <LinearLayout
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/margin_medium"
-        >
+        android:paddingBottom="@dimen/margin_medium">
 
         <ImageView
             android:id="@+id/headerImageView"
-            android:layout_height="162dp"
             android:layout_width="match_parent"
+            android:layout_height="162dp"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_overview_header"
-            tools:ignore="ContentDescription"
-            />
+            tools:ignore="ContentDescription" />
 
         <include
-            layout="@layout/include_overview_title_section"
             android:id="@+id/titleSectionInclude"
-            />
+            layout="@layout/include_overview_title_section" />
 
         <TextView
-            style="@style/OverviewSectionTitle"
             android:id="@+id/statsTitleTextView"
-            android:layout_marginBottom="@dimen/margin_small"
+            style="@style/OverviewSectionTitle"
             android:layout_marginHorizontal="@dimen/margin_medium"
             android:layout_marginTop="@dimen/margin_medium"
-            android:text="@string/overview_stats_title"
-            />
+            android:layout_marginBottom="@dimen/margin_small"
+            android:text="@string/overview_stats_title" />
 
         <include layout="@layout/include_overview_stats_grid" />
 
         <TextView
-            style="@style/OverviewSectionTitle"
             android:id="@+id/descriptionTitleTextView"
-            android:layout_marginBottom="@dimen/margin_small"
+            style="@style/OverviewSectionTitle"
             android:layout_marginHorizontal="@dimen/margin_medium"
             android:layout_marginTop="@dimen/margin_large"
-            android:text="@string/overview_description_title"
-            />
+            android:layout_marginBottom="@dimen/margin_small"
+            android:text="@string/overview_description_title" />
 
         <TextView
             android:id="@+id/descriptionBodyTextView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_medium"
-            android:layout_width="match_parent"
             android:text="@string/overview_description"
             android:textAppearance="@style/Body"
-            android:textColor="@color/text_high_emphasis"
-            />
+            android:textColor="@color/text_high_emphasis" />
 
         <TextView
-            style="@style/OverviewSectionTitle"
             android:id="@+id/partnersTitleTextView"
-            android:layout_marginBottom="@dimen/margin_medium"
+            style="@style/OverviewSectionTitle"
             android:layout_marginHorizontal="@dimen/margin_large"
             android:layout_marginTop="48dp"
-            android:text="@string/overview_partners_title"
-            />
+            android:layout_marginBottom="@dimen/margin_medium"
+            android:text="@string/overview_partners_title" />
 
         <include layout="@layout/include_overview_partner_logos" />
 
         <TextView
-            style="@style/OverviewSectionTitle"
             android:id="@+id/scheduleTitleTextView"
-            android:layout_marginBottom="@dimen/margin_medium"
+            style="@style/OverviewSectionTitle"
             android:layout_marginHorizontal="@dimen/margin_large"
             android:layout_marginTop="68dp"
-            android:text="@string/overview_schedule_title"
-            />
+            android:layout_marginBottom="@dimen/margin_medium"
+            android:text="@string/overview_schedule_title" />
 
         <include
-            layout="@layout/include_event_1"
             android:id="@+id/event1Include"
-            />
+            layout="@layout/include_event_1" />
 
         <include
-            layout="@layout/include_event_2"
             android:id="@+id/event2Include"
-            />
+            layout="@layout/include_event_2" />
 
     </LinearLayout>
 

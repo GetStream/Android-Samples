@@ -23,27 +23,23 @@
     THE SOFTWARE.
 -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:icon="@drawable/ic_videocam_black_24dp"
         android:id="@+id/menuVideo"
+        android:icon="@drawable/ic_videocam_black_24dp"
         android:title="@string/menu_video"
         app:iconTint="@color/white"
-        app:showAsAction="ifRoom"
-        />
+        app:showAsAction="ifRoom" />
     <item
-        android:icon="@drawable/ic_phone_black_24dp"
         android:id="@+id/menuPhone"
+        android:icon="@drawable/ic_phone_black_24dp"
         android:title="@string/menu_phone"
         app:iconTint="@color/white"
-        app:showAsAction="ifRoom"
-        />
+        app:showAsAction="ifRoom" />
     <item
-        android:icon="@drawable/ic_search_black_24dp"
         android:id="@+id/menuCompose"
+        android:icon="@drawable/ic_search_black_24dp"
         android:title="@string/menu_compose"
         app:iconTint="@color/white"
-        app:showAsAction="never"
-        />
+        app:showAsAction="never" />
 </menu>

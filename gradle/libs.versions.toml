@@ -10,7 +10,7 @@ androidxLegacySupport = "1.0.0"
 androidxLifecycleExtensions = "2.2.0"
 androidxLifecycle = "2.5.1"
 androidxRecyclerView = "1.2.1"
-androidxViewPager2 =  "1.0.0"
+androidxViewPager2 = "1.0.0"
 coil = "2.1.0"
 compose = "1.2.1"
 composeCompiler = "1.3.0"
@@ -28,7 +28,7 @@ spotlessPlugin = "6.7.2"
 
 [libraries]
 androidGradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "androidGradlePlugin" }
-kotlinStdLib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin"}
+kotlinStdLib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 androidxActivityKtx = { module = "androidx.activity:activity-ktx", version.ref = "androidxActivityKtx" }
 androidxAppCompat = { module = "androidx.appcompat:appcompat", version.ref = "androidxAppCompat" }
 androidxCardView = { module = "androidx.cardview:cardview", version.ref = "androidxCardView" }

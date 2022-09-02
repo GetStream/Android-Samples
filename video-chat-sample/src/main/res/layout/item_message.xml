@@ -25,44 +25,40 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="wrap_content"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:paddingHorizontal="16dp"
-    android:paddingVertical="8dp"
-    >
+    android:paddingVertical="8dp">
 
     <ImageView
         android:id="@+id/avatarImageView"
-        android:layout_height="32dp"
         android:layout_width="32dp"
+        android:layout_height="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars"
-        />
+        tools:src="@tools:sample/avatars" />
 
     <TextView
-        style="@style/TextAppearance.AppCompat.Body1"
         android:id="@+id/nameTextView"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_width="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/avatarImageView"
         app:layout_constraintTop_toTopOf="@+id/avatarImageView"
-        tools:text="@tools:sample/first_names"
-        />
+        tools:text="@tools:sample/first_names" />
 
     <TextView
-        style="@style/TextAppearance.AppCompat.Body2"
         android:id="@+id/messageTextView"
+        style="@style/TextAppearance.AppCompat.Body2"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_width="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/avatarImageView"
         app:layout_constraintTop_toBottomOf="@+id/nameTextView"
-        tools:text="@tools:sample/lorem"
-        />
+        tools:text="@tools:sample/lorem" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
