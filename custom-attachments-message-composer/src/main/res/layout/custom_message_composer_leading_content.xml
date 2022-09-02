@@ -23,44 +23,39 @@
     THE SOFTWARE.
 -->
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:gravity="bottom"
-        android:layout_height="match_parent"
         android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
         android:orientation="horizontal"
         android:paddingHorizontal="4dp"
-        android:paddingVertical="12dp"
-        >
+        android:paddingVertical="12dp">
 
         <ImageView
             android:id="@+id/calendarButton"
-            android:layout_height="32dp"
             android:layout_width="32dp"
+            android:layout_height="32dp"
             android:padding="4dp"
             android:src="@drawable/ic_calendar"
-            tools:ignore="ContentDescription"
-            />
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/attachmentsButton"
-            android:layout_height="32dp"
             android:layout_width="32dp"
+            android:layout_height="32dp"
             android:padding="4dp"
             android:src="@drawable/stream_ui_ic_attach"
-            tools:ignore="ContentDescription"
-            />
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/commandsButton"
-            android:layout_height="32dp"
             android:layout_width="32dp"
+            android:layout_height="32dp"
             android:padding="4dp"
             android:src="@drawable/stream_ui_ic_command"
-            tools:ignore="ContentDescription"
-            />
+            tools:ignore="ContentDescription" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

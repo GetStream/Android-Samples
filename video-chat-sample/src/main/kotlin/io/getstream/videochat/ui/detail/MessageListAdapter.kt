@@ -37,7 +37,8 @@ import coil.transform.CircleCropTransformation
 import io.getstream.chat.android.client.models.Message
 import io.getstream.videochat.R
 
-class MessageListAdapter : ListAdapter<Message, MessageListAdapter.MessageViewHolder>(MessageDiffCallback) {
+class MessageListAdapter :
+    ListAdapter<Message, MessageListAdapter.MessageViewHolder>(MessageDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
         return LayoutInflater

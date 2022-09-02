@@ -50,7 +50,8 @@ class QuotedDateAttachmentFactory : QuotedAttachmentFactory {
 
     class QuotedDateAttachmentView(context: Context) : FrameLayout(context) {
 
-        private val binding = ViewQuotedDateAttachmentBinding.inflate(LayoutInflater.from(context), this)
+        private val binding =
+            ViewQuotedDateAttachmentBinding.inflate(LayoutInflater.from(context), this)
 
         fun showDate(attachment: Attachment) {
             binding.dateTextView.text = parseDate(attachment)
@@ -59,7 +60,8 @@ class QuotedDateAttachmentFactory : QuotedAttachmentFactory {
         private fun parseDate(attachment: Attachment): String {
             val date = attachment.extraData["payload"].toString()
             return StringBuilder().apply {
-                val dateTime = SimpleDateFormat("MMMMM dd, yyyy", Locale.getDefault()).parse(date) ?: return@apply
+                val dateTime = SimpleDateFormat("MMMMM dd, yyyy", Locale.getDefault()).parse(date)
+                    ?: return@apply
                 val year = Calendar.getInstance().apply {
                     timeInMillis = dateTime.time
                 }.get(Calendar.YEAR)

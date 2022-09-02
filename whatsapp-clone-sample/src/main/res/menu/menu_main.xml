@@ -23,20 +23,17 @@
     THE SOFTWARE.
 -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:icon="@drawable/ic_search_black_24dp"
         android:id="@+id/miSearch"
+        android:icon="@drawable/ic_search_black_24dp"
         android:title="Search"
         app:iconTint="@color/white"
-        app:showAsAction="ifRoom"
-        />
+        app:showAsAction="ifRoom" />
     <item
-        android:icon="@drawable/ic_search_black_24dp"
         android:id="@+id/miCompose"
+        android:icon="@drawable/ic_search_black_24dp"
         android:title="Compose"
         app:iconTint="@color/white"
-        app:showAsAction="never"
-        />
+        app:showAsAction="never" />
 </menu>

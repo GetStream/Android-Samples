@@ -114,8 +114,10 @@ class MessagesActivity : AppCompatActivity() {
         // Set custom leading content view
         binding.messageComposerView.setLeadingContent(
             CustomMessageComposerLeadingContent(this).also {
-                it.attachmentsButtonClickListener = { binding.messageComposerView.attachmentsButtonClickListener() }
-                it.commandsButtonClickListener = { binding.messageComposerView.commandsButtonClickListener() }
+                it.attachmentsButtonClickListener =
+                    { binding.messageComposerView.attachmentsButtonClickListener() }
+                it.commandsButtonClickListener =
+                    { binding.messageComposerView.commandsButtonClickListener() }
                 it.calendarButtonClickListener = {
                     // Create an instance of a date picker dialog
                     val datePickerDialog = MaterialDatePicker.Builder
@@ -162,7 +164,10 @@ class MessagesActivity : AppCompatActivity() {
             attrs,
             defStyleAttr
         ) {
-            binding = CustomMessageComposerLeadingContentBinding.inflate(LayoutInflater.from(context), this)
+            binding = CustomMessageComposerLeadingContentBinding.inflate(
+                LayoutInflater.from(context),
+                this
+            )
             binding.attachmentsButton.setOnClickListener { attachmentsButtonClickListener() }
             binding.commandsButton.setOnClickListener { commandsButtonClickListener() }
 
@@ -184,12 +189,14 @@ class MessagesActivity : AppCompatActivity() {
             val hasMentionSuggestions = state.mentionSuggestions.isNotEmpty()
             val isInEditMode = state.action is Edit
 
-            binding.attachmentsButton.isEnabled = !hasCommandInput && !hasCommandSuggestions && !hasMentionSuggestions
+            binding.attachmentsButton.isEnabled =
+                !hasCommandInput && !hasCommandSuggestions && !hasMentionSuggestions
             binding.attachmentsButton.isVisible =
                 style.attachmentsButtonVisible && canSendMessage && canUploadFile && !isInEditMode
 
             binding.commandsButton.isEnabled = !hasTextInput && !hasAttachments
-            binding.commandsButton.isVisible = style.commandsButtonVisible && canSendMessage && !isInEditMode
+            binding.commandsButton.isVisible =
+                style.commandsButtonVisible && canSendMessage && !isInEditMode
             binding.commandsButton.isSelected = hasCommandSuggestions
         }
     }

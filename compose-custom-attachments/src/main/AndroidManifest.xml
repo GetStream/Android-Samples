@@ -23,22 +23,19 @@
     THE SOFTWARE.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.getstream.chat.android.compose.customattachments"
-    >
+    package="io.getstream.chat.android.compose.customattachments">
 
     <application
+        android:name=".CustomAttachmentsApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".CustomAttachmentsApp"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
-        android:theme="@style/Theme.ComposeCustomAttachments"
-        >
+        android:theme="@style/Theme.ComposeCustomAttachments">
         <activity
-            android:exported="true"
             android:name=".activity.ChannelsActivity"
-            >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,10 +43,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:exported="true"
             android:name=".activity.MessagesActivity"
-            android:windowSoftInputMode="adjustResize"
-            />
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

@@ -25,31 +25,29 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="96dp"
     android:layout_width="match_parent"
-    >
+    android:layout_height="96dp">
 
     <ImageView
-        android:background="@drawable/bg_event_logo"
         android:id="@+id/eventLogoImageView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_medium"
         android:layout_marginStart="@dimen/margin_medium"
-        android:layout_width="wrap_content"
+        android:background="@drawable/bg_event_logo"
         android:padding="6dp"
         android:src="@drawable/ic_event_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription"
-        />
+        tools:ignore="ContentDescription" />
 
     <TextView
-        android:ellipsize="end"
         android:id="@+id/eventTitleTextView"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_medium"
-        android:layout_width="0dp"
+        android:ellipsize="end"
         android:singleLine="true"
         android:text="@string/overview_title"
         android:textAppearance="@style/Title2"
@@ -58,15 +56,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/eventLogoImageView"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        />
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
-        android:ellipsize="end"
         android:id="@+id/eventSubtitleTextView"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_medium"
-        android:layout_width="0dp"
+        android:ellipsize="end"
         android:singleLine="true"
         android:text="@string/overview_subtitle"
         android:textAppearance="@style/Body"
@@ -74,7 +71,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/eventLogoImageView"
-        app:layout_constraintTop_toBottomOf="@+id/eventTitleTextView"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/eventTitleTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

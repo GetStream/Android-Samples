@@ -78,8 +78,17 @@ class HomeFragment : Fragment() {
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
                 if (position == TAB_CAMERA) {
                     tab.setIcon(R.drawable.ic_camera_alt_black_24dp)
-                    val colors = ResourcesCompat.getColorStateList(resources, R.color.tab_icon, activity.theme)
-                    tab.icon?.apply { DrawableCompat.setTintList(DrawableCompat.wrap(this), colors) }
+                    val colors = ResourcesCompat.getColorStateList(
+                        resources,
+                        R.color.tab_icon,
+                        activity.theme
+                    )
+                    tab.icon?.apply {
+                        DrawableCompat.setTintList(
+                            DrawableCompat.wrap(this),
+                            colors
+                        )
+                    }
                 } else {
                     tab.text = TAB_TITLES[position]
                 }

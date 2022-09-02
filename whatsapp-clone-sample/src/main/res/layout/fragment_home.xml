@@ -25,82 +25,73 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    tools:context=".ui.MainActivity"
-    >
+    android:layout_height="match_parent"
+    tools:context=".ui.MainActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:background="@color/colorPrimary"
         android:id="@+id/toolbar"
-        android:layout_height="?attr/actionBarSize"
         android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
         android:orientation="vertical"
         android:theme="@style/ToolbarTheme"
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:titleTextAppearance="@style/Toolbar.TitleText"
-        app:titleTextColor="@android:color/white"
-        />
+        app:titleTextColor="@android:color/white" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:tabBackground="@color/colorPrimary"
         app:tabIconTint="@color/tab_inactive"
         app:tabIndicatorColor="@color/tab_active"
         app:tabSelectedTextColor="@color/tab_active"
-        app:tabTextColor="@color/tab_inactive"
-        >
+        app:tabTextColor="@color/tab_inactive">
 
         <com.google.android.material.tabs.TabItem
-            android:icon="@drawable/ic_camera_alt_black_24dp"
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            />
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_camera_alt_black_24dp" />
 
         <com.google.android.material.tabs.TabItem
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="@string/tab_chats"
-            />
+            android:layout_height="wrap_content"
+            android:text="@string/tab_chats" />
 
         <com.google.android.material.tabs.TabItem
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="@string/tab_status"
-            />
+            android:layout_height="wrap_content"
+            android:text="@string/tab_status" />
 
         <com.google.android.material.tabs.TabItem
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="@string/tab_calls"
-            />
+            android:layout_height="wrap_content"
+            android:text="@string/tab_calls" />
 
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_width="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tab_layout"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/tab_layout" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floating_action_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:layout_width="wrap_content"
         app:backgroundTint="@color/floating_message_create"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:srcCompat="@drawable/ic_message_black_24dp"
         app:tint="@color/white"
-        tools:ignore="ContentDescription"
-        />
+        tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
