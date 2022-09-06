@@ -16,6 +16,10 @@
 
 This repository contains sample projects, guides, tutorials, and links to helpful resources to help you get started with [Android Stream SDK](https://github.com/GetStream/stream-chat-android).
 
+<a href="https://getstream.io/chat/sdk/compose?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Aug2022_WhatsAppComposeClone&utm_term=DevRelOss">
+<img src="https://user-images.githubusercontent.com/24237865/138428440-b92e5fb7-89f8-41aa-96b1-71a5486c5849.png" align="right" width="12%"/>
+</a>
+
 ## 🔗 Quick Links
 
 - [Register For a Free Account](https://getstream.io/try-for-free/)
@@ -23,7 +27,7 @@ This repository contains sample projects, guides, tutorials, and links to helpfu
 
 **Tutorials:**
 
-- [Androd Chat Tutorial](https://getstream.io/tutorials/android-chat/)
+- [Android Chat Tutorial](https://getstream.io/tutorials/android-chat/)
 - [Compose Chat Tutorial](https://getstream.io/chat/compose/tutorial/)
 
 **Documentation:**
@@ -32,6 +36,13 @@ This repository contains sample projects, guides, tutorials, and links to helpfu
 - [UI Components Documentation](https://getstream.io/chat/docs/sdk/android/ui/overview/)
 - [Compose UI Components Documentation](https://getstream.io/chat/docs/sdk/android/compose/overview/)
 - [API docs](https://getstream.github.io/stream-chat-android/)
+
+## 🤝 Contribution
+
+Submissions are always welcomed! You can create your own open-source project or sample app by creating a new module for this project following our **[Android Chat Tutorial](https://getstream.io/tutorials/android-chat/)** or **[Compose Chat Tutorial](https://getstream.io/chat/compose/tutorial/)**.
+After building your project, create an issue or pull request. Your project will be categorized 😎 under our featuring list after reviewing the project in our team.
+
+We also welcome code changes that improve the apps or fix a problem. Please follow all best practices and add tests if applicable before submitting a Pull Request on Github.
 
 ## 🚀 Main Samples
 
@@ -104,13 +115,6 @@ With Stream's chat components, developers quickly add chat to their app for a va
 - Team style chat like Slack
 - Messaging style chat like Whatsapp or Facebook's messenger
 - Commerce chat like Drift or Intercom
-
-## 📈 Contributing
-
-- How can I submit a sample app?
-    - Apps submissions are always welcomed! 🥳 Open a pr with a proper description, and we'll review it as soon as possible
-- Spot a bug 🕷?
-    - We welcome code changes that improve the apps or fix a problem. Please follow all best practices and add tests if applicable before submitting a Pull Request on Github.
 
 ## 💼 We are hiring
 
