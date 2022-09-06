@@ -25,63 +25,65 @@
 package io.getstream.videochat.ui.list
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.NO_POSITION
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import io.getstream.videochat.R
 import io.getstream.videochat.YoutubeVideo
+import io.getstream.videochat.databinding.ItemVideoBinding
 
 class VideoListAdapter(
     private val onVideoSelected: (YoutubeVideo) -> Unit
-) : RecyclerView.Adapter<VideoListAdapter.VideoViewHolder>() {
-
-    private var videos: List<YoutubeVideo> = listOf()
-
-    fun setVideos(videos: List<YoutubeVideo>) {
-        this.videos = videos
-        notifyDataSetChanged()
-    }
+) : ListAdapter<YoutubeVideo, VideoListAdapter.VideoViewHolder>(VideoDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoViewHolder {
-        return LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_video, parent, false)
-            .let { VideoViewHolder(it, onVideoSelected) }
+        return VideoViewHolder(
+            ItemVideoBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        ).apply {
+            binding.root.setOnClickListener {
+                val position =
+                    bindingAdapterPosition.takeIf { it != NO_POSITION } ?: return@setOnClickListener
+                onVideoSelected(getItem(position))
+            }
+        }
     }
 
-    override fun getItemCount(): Int = videos.size
+    override fun getItemCount(): Int = currentList.size
 
     override fun onBindViewHolder(holder: VideoViewHolder, position: Int) {
-        holder.bind(videos[position])
+        holder.bind(getItem(position))
     }
 
     class VideoViewHolder(
-        itemView: View,
-        private val onVideoSelected: (YoutubeVideo) -> Unit
-    ) : RecyclerView.ViewHolder(itemView) {
-
-        private lateinit var video: YoutubeVideo
-
-        private val videoImageView: ImageView by lazy { itemView.findViewById(R.id.videoImageView) }
-        private val descriptionTextView: TextView by lazy { itemView.findViewById(R.id.descriptionTextView) }
-
-        init {
-            itemView.setOnClickListener { onVideoSelected(video) }
-        }
+        internal val binding: ItemVideoBinding,
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(video: YoutubeVideo) {
-            this.video = video
+            binding.descriptionTextView.text = video.name
 
-            descriptionTextView.text = video.name
-
-            val corners = videoImageView.context.resources
+            val corners = binding.videoImageView.context.resources
                 .getDimensionPixelSize(R.dimen.rounded_corners).toFloat()
-            videoImageView.load(video.image) {
+            binding.videoImageView.load(video.image) {
                 transformations(RoundedCornersTransformation(corners))
             }
+        }
+    }
+
+    private object VideoDiffCallback : DiffUtil.ItemCallback<YoutubeVideo>() {
+        override fun areItemsTheSame(oldItem: YoutubeVideo, newItem: YoutubeVideo): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: YoutubeVideo, newItem: YoutubeVideo): Boolean {
+            return oldItem == newItem
         }
     }
 }
