@@ -35,11 +35,12 @@ import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerCallback
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-import io.getstream.videochat.R
 import io.getstream.videochat.YoutubeVideo
+import io.getstream.videochat.databinding.ActivityVideoDetailBinding
 
-class VideoDetailActivity : AppCompatActivity(R.layout.activity_video_detail) {
+class VideoDetailActivity : AppCompatActivity() {
+
+    lateinit var binding: ActivityVideoDetailBinding
 
     private val video by lazy { intent.getSerializableExtra(EXTRA_VIDEO) as YoutubeVideo }
 
@@ -55,13 +56,17 @@ class VideoDetailActivity : AppCompatActivity(R.layout.activity_video_detail) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding = ActivityVideoDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         setupYoutubePlayer()
         setupMessageList()
         setupMessageInput()
     }
 
     private fun setupYoutubePlayer() {
-        findViewById<YouTubePlayerView>(R.id.videoPlayerView).apply {
+        binding.videoPlayerView.apply {
             lifecycle.addObserver(this)
             getYouTubePlayerWhenReady(object : YouTubePlayerCallback {
                 override fun onYouTubePlayer(youTubePlayer: YouTubePlayer) {
@@ -72,7 +77,7 @@ class VideoDetailActivity : AppCompatActivity(R.layout.activity_video_detail) {
     }
 
     private fun setupMessageList() {
-        messagesRecyclerView = findViewById<RecyclerView>(R.id.messagesRecyclerView).apply {
+        messagesRecyclerView = binding.messagesRecyclerView.apply {
             adapter = messageListAdapter
         }
         viewModel.messages.observe(this) { messages ->
@@ -85,12 +90,12 @@ class VideoDetailActivity : AppCompatActivity(R.layout.activity_video_detail) {
     }
 
     private fun setupMessageInput() {
-        inputEditText = findViewById<EditText>(R.id.inputEditText).apply {
+        inputEditText = binding.inputEditText.apply {
             addTextChangedListener {
                 sendMessageButton.isEnabled = it?.isNotBlank() ?: false
             }
         }
-        sendMessageButton = findViewById<ImageView>(R.id.sendButton).apply {
+        sendMessageButton = binding.sendButton.apply {
             setOnClickListener {
                 inputEditText.text
                     ?.toString()
