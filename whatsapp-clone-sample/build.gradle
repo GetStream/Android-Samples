@@ -3,12 +3,12 @@ apply plugin: 'kotlin-android'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "io.getstream.whatsappclone"
         minSdkVersion 21
-        targetSdkVersion 32
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
     }
@@ -36,7 +36,7 @@ android {
 
 dependencies {
     // Stream SDK dependency
-    implementation "io.getstream:stream-chat-android-ui-components:5.8.0"
+    implementation "io.getstream:stream-chat-android-ui-components:5.11.3"
 
     implementation libs.kotlinStdLib
     implementation libs.androidxViewPager2
