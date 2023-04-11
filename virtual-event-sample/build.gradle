@@ -71,7 +71,7 @@ android {
 
 dependencies {
     // Stream SDK dependency
-    implementation "io.getstream:stream-chat-android-ui-components:5.11.3"
+    implementation "io.getstream:stream-chat-android-ui-components:5.17.0"
 
     implementation libs.androidxCoreKtx
     implementation libs.androidxAppCompat
