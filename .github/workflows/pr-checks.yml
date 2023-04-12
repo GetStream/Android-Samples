@@ -5,7 +5,7 @@ on: [pull_request]
 jobs:
   lint:
     name: Spotless check
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Check out code
         uses: actions/checkout@v2
@@ -18,7 +18,7 @@ jobs:
 
   debug_build:
     name: Debug build
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Check out code
         uses: actions/checkout@v2
