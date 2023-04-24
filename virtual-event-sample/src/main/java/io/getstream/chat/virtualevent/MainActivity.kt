@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupToolbar() {
         viewModel.currentUser.observe(this) { user ->
             if (user != null) {
-                binding.userAvatarView.setUserData(user)
+                binding.userAvatarView.setUser(user)
             }
         }
         binding.userAvatarView.setOnClickListener {

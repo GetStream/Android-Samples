@@ -27,7 +27,7 @@ package io.getstream.chat.virtualevent.feature.user
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import io.getstream.chat.android.client.models.User
+import io.getstream.chat.android.models.User
 import io.getstream.chat.virtualevent.databinding.ItemUserBinding
 
 class UserListAdapter(
@@ -70,7 +70,7 @@ class UserListAdapter(
         fun bind(user: User) {
             this.user = user
             with(binding) {
-                userAvatarView.setUserData(user)
+                userAvatarView.setUser(user)
                 nameTextView.text = user.name
             }
         }

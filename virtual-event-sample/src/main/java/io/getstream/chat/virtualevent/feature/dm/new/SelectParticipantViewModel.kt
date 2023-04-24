@@ -31,9 +31,9 @@ import androidx.lifecycle.viewModelScope
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.api.models.QueryUsersRequest
 import io.getstream.chat.android.client.errors.ChatError
-import io.getstream.chat.android.client.models.Filters
-import io.getstream.chat.android.client.models.User
-import io.getstream.chat.android.livedata.utils.Event
+import io.getstream.chat.android.client.utils.flatMap
+import io.getstream.chat.android.models.Filters
+import io.getstream.chat.android.models.User
 import io.getstream.chat.virtualevent.util.currentUserId
 import kotlinx.coroutines.launch
 
@@ -48,14 +48,14 @@ class SelectParticipantViewModel(
 ) : ViewModel() {
 
     private val _state: MutableLiveData<State> = MutableLiveData()
-    private val _events: MutableLiveData<Event<UiEvent>> = MutableLiveData()
+    private val _events: MutableLiveData<UiEvent> = MutableLiveData()
     val state: LiveData<State> = _state
-    val events: LiveData<Event<UiEvent>> = _events
+    val events: LiveData<UiEvent> = _events
 
     init {
         _state.postValue(State.Loading)
         viewModelScope.launch {
-            val result = chatClient.queryUsers(
+            chatClient.queryUsers(
                 QueryUsersRequest(
                     filter = Filters.and(
                         Filters.ne("id", currentUserId()),
@@ -64,12 +64,10 @@ class SelectParticipantViewModel(
                     offset = 0,
                     limit = 30,
                 )
-            ).await()
-            if (result.isSuccess) {
-                _state.postValue(State.Content(result.data()))
-            } else {
-                _state.postValue(State.Error(result.error()))
-            }
+            )
+                .await()
+                .onSuccess { _state.postValue(State.Content(it)) }
+                .onError { _state.postValue(State.Error(it)) }
         }
     }
 
@@ -81,10 +79,7 @@ class SelectParticipantViewModel(
                 memberIds = listOf(user.id, currentUserId()),
                 extraData = mapOf()
             ).await()
-            if (result.isSuccess) {
-                val cid = result.data().cid
-                _events.postValue(Event(UiEvent.NavigateToChat(cid)))
-            }
+                .onSuccess { _events.postValue(UiEvent.NavigateToChat(it.cid)) }
         }
     }
 

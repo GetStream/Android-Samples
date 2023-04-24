@@ -30,14 +30,13 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.getstream.sdk.chat.viewmodel.MessageInputViewModel
-import com.getstream.sdk.chat.viewmodel.messages.MessageListViewModel
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
-import io.getstream.chat.android.ui.message.input.viewmodel.bindView
-import io.getstream.chat.android.ui.message.list.viewmodel.bindView
-import io.getstream.chat.android.ui.message.list.viewmodel.factory.MessageListViewModelFactory
+import io.getstream.chat.android.ui.viewmodel.messages.MessageComposerViewModel
+import io.getstream.chat.android.ui.viewmodel.messages.MessageListViewModel
+import io.getstream.chat.android.ui.viewmodel.messages.MessageListViewModelFactory
+import io.getstream.chat.android.ui.viewmodel.messages.bindView
 import io.getstream.chat.virtualevent.databinding.ActivityEventDetailsBinding
 import io.getstream.chat.virtualevent.util.setupToolbar
 
@@ -48,7 +47,7 @@ import io.getstream.chat.virtualevent.util.setupToolbar
 class EventDetailsActivity : AppCompatActivity() {
 
     private lateinit var messageListViewModel: MessageListViewModel
-    private lateinit var messageInputViewModel: MessageInputViewModel
+    private lateinit var messageInputViewModel: MessageComposerViewModel
     private lateinit var binding: ActivityEventDetailsBinding
 
     private var player: SimpleExoPlayer? = null
@@ -61,7 +60,7 @@ class EventDetailsActivity : AppCompatActivity() {
         val cid = intent.getStringExtra(KEY_EXTRA_CID)!!
         val factory = MessageListViewModelFactory(cid = cid)
         messageListViewModel = factory.create(MessageListViewModel::class.java)
-        messageInputViewModel = factory.create(MessageInputViewModel::class.java)
+        messageInputViewModel = factory.create(MessageComposerViewModel::class.java)
 
         setupToolbar()
         setupMessageListView()

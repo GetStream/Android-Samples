@@ -22,12 +22,15 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
 -->
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
-    <io.getstream.chat.android.ui.message.list.header.MessageListHeaderView
+    <io.getstream.chat.android.ui.feature.messages.header.MessageListHeaderView
         android:id="@+id/messageListHeaderView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -36,9 +39,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:streamUiMessageListHeaderBackButtonIcon="@drawable/ic_back"
         app:streamUiMessageListHeaderBackground="@color/app_canvas"
-        app:streamUiMessageListHeaderShowUserAvatar="false" />
+        app:streamUiMessageListHeaderShowUserAvatar="false"
+        />
 
-    <io.getstream.chat.android.ui.message.list.MessageListView
+    <io.getstream.chat.android.ui.feature.messages.list.MessageListView
         android:id="@+id/messageListView"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -48,16 +52,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/messageListHeaderView"
         app:streamUiFlagMessageConfirmationEnabled="true"
-        app:streamUiMuteUserEnabled="false"
-        app:streamUiPinMessageEnabled="false" />
+        app:streamUiPinMessageEnabled="false"
+        />
 
-    <io.getstream.chat.android.ui.message.input.MessageInputView
+    <io.getstream.chat.android.ui.feature.messages.composer.MessageComposerView
         android:id="@+id/messageInputView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/messageListView" />
-
+        app:layout_constraintTop_toBottomOf="@+id/messageListView"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

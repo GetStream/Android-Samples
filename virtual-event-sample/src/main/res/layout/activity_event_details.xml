@@ -22,10 +22,13 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
 -->
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -37,7 +40,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_left">
+        app:navigationIcon="@drawable/ic_left"
+        >
 
         <TextView
             android:id="@+id/titleTextView"
@@ -46,8 +50,8 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:textAppearance="@style/Body"
-            android:textColor="@color/static_white" />
-
+            android:textColor="@color/static_white"
+            />
     </androidx.appcompat.widget.Toolbar>
 
     <FrameLayout
@@ -58,12 +62,14 @@
         app:layout_constraintBottom_toTopOf="@id/messageListView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        >
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/margin_small"
-            android:background="@color/static_dark_grey" />
+            android:background="@color/static_dark_grey"
+            />
 
         <com.google.android.exoplayer2.ui.PlayerView
             android:id="@+id/playerView"
@@ -71,7 +77,8 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/margin_tiny"
             app:resize_mode="zoom"
-            app:use_controller="false" />
+            app:use_controller="false"
+            />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -89,7 +96,8 @@
                 android:layout_marginHorizontal="@dimen/margin_tiny"
                 android:text="Lita Sherman"
                 android:textAppearance="@style/Footnote"
-                android:textColor="@color/static_white" />
+                android:textColor="@color/static_white"
+                />
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/micOnAnimationView"
@@ -97,8 +105,8 @@
                 android:layout_height="match_parent"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
-                app:lottie_rawRes="@raw/mic_on" />
-
+                app:lottie_rawRes="@raw/mic_on"
+                />
         </LinearLayout>
 
         <ImageView
@@ -107,11 +115,11 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/margin_tiny"
             android:background="@drawable/bg_badge_livestream"
-            android:src="@drawable/ic_connection" />
-
+            android:src="@drawable/ic_connection"
+            />
     </FrameLayout>
 
-    <io.getstream.chat.android.ui.message.list.MessageListView
+    <io.getstream.chat.android.ui.feature.messages.list.MessageListView
         android:id="@+id/messageListView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -122,15 +130,14 @@
         app:layout_constraintBottom_toTopOf="@+id/messageInputView"
         app:layout_constraintTop_toBottomOf="@id/playerContainer"
         app:streamUiFlagMessageConfirmationEnabled="true"
-        app:streamUiMuteUserEnabled="false"
-        app:streamUiPinMessageEnabled="true" />
+        app:streamUiPinMessageEnabled="true"
+        />
 
-    <io.getstream.chat.android.ui.message.input.MessageInputView
+    <io.getstream.chat.android.ui.feature.messages.composer.MessageComposerView
         android:id="@+id/messageInputView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:streamUiAttachButtonEnabled="false" />
-
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

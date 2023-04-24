@@ -29,7 +29,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import io.getstream.chat.android.livedata.utils.EventObserver
+import androidx.lifecycle.Observer
 import io.getstream.chat.virtualevent.MainActivity
 import io.getstream.chat.virtualevent.databinding.ActivitySwitchUserBinding
 import io.getstream.chat.virtualevent.util.setupToolbar
@@ -52,7 +52,7 @@ class SwitchUserActivity : AppCompatActivity() {
         binding.usersRecyclerView.adapter = adapter
         with(viewModel) {
             state.observe(this@SwitchUserActivity, ::renderUsersState)
-            events.observe(this@SwitchUserActivity, EventObserver(::handleEvent))
+            events.observe(this@SwitchUserActivity, Observer(::handleEvent))
         }
     }
 

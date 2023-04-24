@@ -27,7 +27,7 @@ package io.getstream.chat.virtualevent.feature.dm.new
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import io.getstream.chat.android.client.models.User
+import io.getstream.chat.android.models.User
 import io.getstream.chat.virtualevent.databinding.ItemParticipantBinding
 
 class ParticipantListAdapter(
@@ -70,7 +70,7 @@ class ParticipantListAdapter(
         fun bind(participants: User) {
             this.participants = participants
             with(binding) {
-                userAvatarView.setUserData(participants)
+                userAvatarView.setUser(participants)
                 nameTextView.text = participants.name
                 companyTextView.text = participants.extraData[EXTRA_COMPANY] as? String
             }
