@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <io.getstream.chat.android.ui.avatar.AvatarView
+            <io.getstream.chat.android.ui.widgets.avatar.ChannelAvatarView
                 android:id="@+id/avatarView"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -71,7 +71,7 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <io.getstream.chat.android.ui.message.list.MessageListView
+    <io.getstream.chat.android.ui.feature.messages.list.MessageListView
         android:id="@+id/messageListView"
         android:layout_width="match_parent"
         android:layout_height="0dp"

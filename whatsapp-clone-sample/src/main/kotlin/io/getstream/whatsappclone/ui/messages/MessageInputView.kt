@@ -52,17 +52,16 @@ class MessageInputView @JvmOverloads constructor(
     private var binding: ViewMessageInputBinding =
         ViewMessageInputBinding.inflate(LayoutInflater.from(context), this, true)
 
-    fun initViews(sendMessage: (String) -> Unit, keystroke: () -> Unit) {
+    fun initViews(sendMessage: () -> Unit, keystroke: (String) -> Unit) {
         binding.voiceRecordingOrSend.setOnClickListener {
-
-            sendMessage.invoke(binding.messageInput.text.toString())
+            sendMessage()
             binding.messageInput.setText("")
         }
 
         // listen to typing events and connect to the view model
         binding.messageInput.doAfterTextChanged {
             if (it.toString().isNotEmpty()) {
-                keystroke.invoke()
+                keystroke.invoke(it.toString())
                 binding.takePicture.isVisible = false
                 binding.voiceRecordingOrSend.setImageResource(R.drawable.ic_send_black_24dp)
             } else {

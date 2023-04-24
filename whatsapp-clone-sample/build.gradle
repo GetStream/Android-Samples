@@ -36,7 +36,9 @@ android {
 
 dependencies {
     // Stream SDK dependency
-    implementation "io.getstream:stream-chat-android-ui-components:5.17.0"
+    implementation "io.getstream:stream-chat-android-ui-components:6.0.0-beta2"
+    implementation "io.getstream:stream-chat-android-state:6.0.0-beta2"
+    implementation "io.getstream:stream-chat-android-offline:6.0.0-beta2"
 
     implementation libs.kotlinStdLib
     implementation libs.androidxViewPager2

@@ -31,9 +31,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import io.getstream.chat.android.ui.channel.list.viewmodel.ChannelListViewModel
-import io.getstream.chat.android.ui.channel.list.viewmodel.bindView
-import io.getstream.chat.android.ui.channel.list.viewmodel.factory.ChannelListViewModelFactory
+import io.getstream.chat.android.ui.viewmodel.channels.ChannelListViewModel
+import io.getstream.chat.android.ui.viewmodel.channels.ChannelListViewModelFactory
+import io.getstream.chat.android.ui.viewmodel.channels.bindView
 import io.getstream.whatsappclone.databinding.FragmentChannelListBinding
 import io.getstream.whatsappclone.ui.home.HomeFragmentDirections
 
@@ -62,8 +62,10 @@ class ChannelListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.bindView(binding.channelList, viewLifecycleOwner)
 
-        binding.channelList.setChannelItemClickListener { (cid) ->
-            findNavController().navigate(HomeFragmentDirections.navHomeToChannel(cid))
+
+        binding.channelList.setChannelItemClickListener { channel ->
+            println("JcLog: cid -> ${channel.cid}")
+            findNavController().navigate(HomeFragmentDirections.navHomeToChannel(channel.cid))
         }
     }
 }

@@ -36,13 +36,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.getstream.sdk.chat.viewmodel.MessageInputViewModel
-import com.getstream.sdk.chat.viewmodel.messages.MessageListViewModel
 import io.getstream.chat.android.client.ChatClient
+import io.getstream.chat.android.state.extensions.globalState
 import io.getstream.chat.android.ui.ChatUI
-import io.getstream.chat.android.ui.message.list.header.viewmodel.MessageListHeaderViewModel
-import io.getstream.chat.android.ui.message.list.viewmodel.bindView
-import io.getstream.chat.android.ui.message.list.viewmodel.factory.MessageListViewModelFactory
+import io.getstream.chat.android.ui.viewmodel.messages.MessageComposerViewModel
+import io.getstream.chat.android.ui.viewmodel.messages.MessageListHeaderViewModel
+import io.getstream.chat.android.ui.viewmodel.messages.MessageListViewModel
+import io.getstream.chat.android.ui.viewmodel.messages.MessageListViewModelFactory
+import io.getstream.chat.android.ui.viewmodel.messages.bindView
 import io.getstream.whatsappclone.R
 import io.getstream.whatsappclone.databinding.FragmentMessageListBinding
 
@@ -53,7 +54,7 @@ class MessageListFragment : Fragment() {
     private val factory: MessageListViewModelFactory by lazy { MessageListViewModelFactory(args.cid) }
     private val messageListHeaderViewModel: MessageListHeaderViewModel by viewModels { factory }
     private val messageListViewModel: MessageListViewModel by viewModels { factory }
-    private val messageInputViewModel: MessageInputViewModel by viewModels { factory }
+    private val messageInputViewModel: MessageComposerViewModel by viewModels { factory }
 
     private var _binding: FragmentMessageListBinding? = null
     private val binding get() = _binding!!
@@ -102,10 +103,10 @@ class MessageListFragment : Fragment() {
         }
 
         messageListHeaderViewModel.channel.observe(viewLifecycleOwner) { channel ->
-            val user = ChatClient.instance().clientState.user.value
+            val user = ChatClient.instance().globalState.user.value
             binding.channelNameTextView.text =
                 ChatUI.channelNameFormatter.formatChannelName(channel, user)
-            binding.avatarView.setChannelData(channel)
+            binding.avatarView.setChannel(channel)
         }
     }
 
@@ -115,8 +116,8 @@ class MessageListFragment : Fragment() {
 
     private fun setupMessageInput() {
         binding.messageInputView.initViews(
-            sendMessage = { message -> messageInputViewModel.sendMessage(message) },
-            keystroke = { messageInputViewModel.keystroke() }
+            sendMessage = messageInputViewModel::sendMessage,
+            keystroke = messageInputViewModel::setMessageInput
         )
     }
 
