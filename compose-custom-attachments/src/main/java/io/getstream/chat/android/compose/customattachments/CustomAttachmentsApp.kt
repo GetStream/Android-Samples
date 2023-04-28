@@ -27,10 +27,11 @@ package io.getstream.chat.android.compose.customattachments
 import android.app.Application
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.logger.ChatLogLevel
-import io.getstream.chat.android.client.models.User
-import io.getstream.chat.android.offline.model.message.attachments.UploadAttachmentsNetworkType
-import io.getstream.chat.android.offline.plugin.configuration.Config
+import io.getstream.chat.android.models.UploadAttachmentsNetworkType
+import io.getstream.chat.android.models.User
 import io.getstream.chat.android.offline.plugin.factory.StreamOfflinePluginFactory
+import io.getstream.chat.android.state.plugin.config.StatePluginConfig
+import io.getstream.chat.android.state.plugin.factory.StreamStatePluginFactory
 
 class CustomAttachmentsApp : Application() {
     override fun onCreate() {
@@ -40,18 +41,18 @@ class CustomAttachmentsApp : Application() {
     }
 
     private fun setupStreamSdk() {
-        val offlinePluginFactory = StreamOfflinePluginFactory(
-            config = Config(
+        val offlinePluginFactory = StreamOfflinePluginFactory(appContext = applicationContext)
+        val statePluginFactory = StreamStatePluginFactory(
+            config = StatePluginConfig(
                 backgroundSyncEnabled = true,
                 userPresence = true,
-                persistenceEnabled = true,
-                uploadAttachmentsNetworkType = UploadAttachmentsNetworkType.NOT_ROAMING
             ),
-            appContext = applicationContext
+            appContext = applicationContext,
         )
         ChatClient.Builder("qx5us2v6xvmh", applicationContext)
             .logLevel(ChatLogLevel.ALL)
-            .withPlugin(offlinePluginFactory)
+            .uploadAttachmentsNetworkType(UploadAttachmentsNetworkType.NOT_ROAMING)
+            .withPlugins(offlinePluginFactory, statePluginFactory)
             .build()
     }
 
