@@ -26,10 +26,11 @@ package io.getstream.chat.android.customattachments.factory
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import io.getstream.chat.android.client.models.Attachment
 import io.getstream.chat.android.customattachments.databinding.ItemDateAttachmentPreviewBinding
-import io.getstream.chat.android.ui.message.composer.attachment.AttachmentPreviewViewHolder
-import io.getstream.chat.android.ui.message.composer.attachment.factory.AttachmentPreviewFactory
+import io.getstream.chat.android.models.Attachment
+import io.getstream.chat.android.ui.feature.messages.composer.MessageComposerViewStyle
+import io.getstream.chat.android.ui.feature.messages.composer.attachment.preview.AttachmentPreviewViewHolder
+import io.getstream.chat.android.ui.feature.messages.composer.attachment.preview.factory.AttachmentPreviewFactory
 
 class DateAttachmentPreviewFactory : AttachmentPreviewFactory {
 
@@ -39,7 +40,8 @@ class DateAttachmentPreviewFactory : AttachmentPreviewFactory {
 
     override fun onCreateViewHolder(
         parentView: ViewGroup,
-        attachmentRemovalListener: (Attachment) -> Unit
+        attachmentRemovalListener: (Attachment) -> Unit,
+        style: MessageComposerViewStyle?
     ): AttachmentPreviewViewHolder {
         return ItemDateAttachmentPreviewBinding
             .inflate(LayoutInflater.from(parentView.context), parentView, false)
