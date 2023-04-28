@@ -30,7 +30,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import io.getstream.chat.android.state.utils.EventObserver
 import io.getstream.chat.virtualevent.databinding.ActivitySelectParticipantBinding
 import io.getstream.chat.virtualevent.feature.dm.DirectChatActivity
 import io.getstream.chat.virtualevent.util.setupToolbar

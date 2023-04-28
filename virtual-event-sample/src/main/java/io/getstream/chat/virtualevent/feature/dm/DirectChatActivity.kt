@@ -35,7 +35,6 @@ import androidx.core.view.descendants
 import androidx.core.view.setPadding
 import io.getstream.chat.android.ui.common.state.messages.Edit
 import io.getstream.chat.android.ui.common.state.messages.MessageMode
-import io.getstream.chat.android.ui.common.state.messages.list.EditMessage
 import io.getstream.chat.android.ui.feature.messages.composer.MessageComposerView
 import io.getstream.chat.android.ui.feature.messages.header.MessageListHeaderView
 import io.getstream.chat.android.ui.feature.messages.list.MessageListView

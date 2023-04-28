@@ -62,7 +62,6 @@ class ChannelListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.bindView(binding.channelList, viewLifecycleOwner)
 
-
         binding.channelList.setChannelItemClickListener { channel ->
             println("JcLog: cid -> ${channel.cid}")
             findNavController().navigate(HomeFragmentDirections.navHomeToChannel(channel.cid))

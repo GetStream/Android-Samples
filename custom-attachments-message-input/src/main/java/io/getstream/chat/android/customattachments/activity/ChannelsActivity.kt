@@ -24,9 +24,9 @@
 
 package io.getstream.chat.android.customattachments.activity
 
-import io.getstream.chat.android.client.models.Channel
-import io.getstream.chat.android.ui.channel.ChannelListActivity
-import io.getstream.chat.android.ui.channel.ChannelListFragment
+import io.getstream.chat.android.models.Channel
+import io.getstream.chat.android.ui.feature.channels.ChannelListActivity
+import io.getstream.chat.android.ui.feature.channels.ChannelListFragment
 
 class ChannelsActivity : ChannelListActivity(), ChannelListFragment.ChannelListItemClickListener {
 

@@ -31,7 +31,6 @@ import androidx.lifecycle.viewModelScope
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.api.models.QueryUsersRequest
 import io.getstream.chat.android.client.errors.ChatError
-import io.getstream.chat.android.client.utils.flatMap
 import io.getstream.chat.android.models.Filters
 import io.getstream.chat.android.models.User
 import io.getstream.chat.virtualevent.util.currentUserId
