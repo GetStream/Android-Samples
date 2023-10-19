@@ -29,7 +29,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import io.getstream.chat.android.livedata.utils.EventObserver
+import androidx.lifecycle.Observer
 import io.getstream.chat.virtualevent.databinding.ActivitySelectParticipantBinding
 import io.getstream.chat.virtualevent.feature.dm.DirectChatActivity
 import io.getstream.chat.virtualevent.util.setupToolbar
@@ -56,7 +56,7 @@ class SelectParticipantActivity : AppCompatActivity() {
         binding.participantsRecyclerView.adapter = adapter
         with(viewModel) {
             state.observe(this@SelectParticipantActivity, ::renderParticipantsState)
-            events.observe(this@SelectParticipantActivity, EventObserver(::handleEvent))
+            events.observe(this@SelectParticipantActivity, Observer(::handleEvent))
         }
     }
 

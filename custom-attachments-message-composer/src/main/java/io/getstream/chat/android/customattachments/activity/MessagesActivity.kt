@@ -34,30 +34,27 @@ import androidx.activity.addCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import com.getstream.sdk.chat.viewmodel.messages.MessageListViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
-import io.getstream.chat.android.client.models.Attachment
-import io.getstream.chat.android.client.models.ChannelCapabilities
-import io.getstream.chat.android.common.composer.MessageComposerState
-import io.getstream.chat.android.common.state.Edit
-import io.getstream.chat.android.common.state.MessageMode
-import io.getstream.chat.android.common.state.Reply
 import io.getstream.chat.android.core.ExperimentalStreamChatApi
 import io.getstream.chat.android.customattachments.databinding.ActivityMessagesBinding
 import io.getstream.chat.android.customattachments.databinding.CustomMessageComposerLeadingContentBinding
-import io.getstream.chat.android.ui.message.composer.MessageComposerContext
-import io.getstream.chat.android.ui.message.composer.MessageComposerViewStyle
-import io.getstream.chat.android.ui.message.composer.content.MessageComposerContent
-import io.getstream.chat.android.ui.message.composer.viewmodel.MessageComposerViewModel
-import io.getstream.chat.android.ui.message.composer.viewmodel.bindView
-import io.getstream.chat.android.ui.message.list.header.viewmodel.MessageListHeaderViewModel
-import io.getstream.chat.android.ui.message.list.header.viewmodel.bindView
-import io.getstream.chat.android.ui.message.list.viewmodel.bindView
-import io.getstream.chat.android.ui.message.list.viewmodel.factory.MessageListViewModelFactory
+import io.getstream.chat.android.models.Attachment
+import io.getstream.chat.android.models.ChannelCapabilities
+import io.getstream.chat.android.ui.common.state.messages.Edit
+import io.getstream.chat.android.ui.common.state.messages.MessageMode
+import io.getstream.chat.android.ui.common.state.messages.Reply
+import io.getstream.chat.android.ui.common.state.messages.composer.MessageComposerState
+import io.getstream.chat.android.ui.feature.messages.composer.MessageComposerContext
+import io.getstream.chat.android.ui.feature.messages.composer.MessageComposerViewStyle
+import io.getstream.chat.android.ui.feature.messages.composer.content.MessageComposerContent
+import io.getstream.chat.android.ui.viewmodel.messages.MessageComposerViewModel
+import io.getstream.chat.android.ui.viewmodel.messages.MessageListHeaderViewModel
+import io.getstream.chat.android.ui.viewmodel.messages.MessageListViewModel
+import io.getstream.chat.android.ui.viewmodel.messages.MessageListViewModelFactory
+import io.getstream.chat.android.ui.viewmodel.messages.bindView
 import java.text.DateFormat
 import java.util.Date
 
-@OptIn(ExperimentalStreamChatApi::class)
 class MessagesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMessagesBinding
 
@@ -80,11 +77,11 @@ class MessagesActivity : AppCompatActivity() {
 
         messageListViewModel.mode.observe(this) {
             when (it) {
-                is MessageListViewModel.Mode.Thread -> {
+                is MessageMode.MessageThread -> {
                     messageListHeaderViewModel.setActiveThread(it.parentMessage)
                     messageComposerViewModel.setMessageMode(MessageMode.MessageThread(it.parentMessage))
                 }
-                is MessageListViewModel.Mode.Normal -> {
+                is MessageMode.Normal -> {
                     messageListHeaderViewModel.resetThread()
                     messageComposerViewModel.leaveThread()
                 }

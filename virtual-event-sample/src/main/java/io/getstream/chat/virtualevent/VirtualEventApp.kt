@@ -27,20 +27,22 @@ package io.getstream.chat.virtualevent
 import android.app.Application
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.logger.ChatLogLevel
-import io.getstream.chat.android.client.models.User
-import io.getstream.chat.android.offline.plugin.configuration.Config
+import io.getstream.chat.android.models.User
 import io.getstream.chat.android.offline.plugin.factory.StreamOfflinePluginFactory
+import io.getstream.chat.android.state.plugin.config.StatePluginConfig
+import io.getstream.chat.android.state.plugin.factory.StreamStatePluginFactory
 
 class VirtualEventApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        val offlinePluginFactory = StreamOfflinePluginFactory(
-            config = Config(),
-            appContext = this
+        val offlinePluginFactory = StreamOfflinePluginFactory(appContext = this)
+        val statePluginFactory = StreamStatePluginFactory(
+            config = StatePluginConfig(),
+            appContext = this,
         )
         ChatClient.Builder("7de6n9dsyzjx", applicationContext)
-            .withPlugin(offlinePluginFactory)
+            .withPlugins(offlinePluginFactory, statePluginFactory)
             .logLevel(ChatLogLevel.ALL)
             .build()
 

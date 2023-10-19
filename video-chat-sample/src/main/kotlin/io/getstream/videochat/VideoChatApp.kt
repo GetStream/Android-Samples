@@ -27,7 +27,7 @@ package io.getstream.videochat
 import android.app.Application
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.logger.ChatLogLevel
-import io.getstream.chat.android.client.models.User
+import io.getstream.chat.android.models.User
 
 class VideoChatApp : Application() {
 

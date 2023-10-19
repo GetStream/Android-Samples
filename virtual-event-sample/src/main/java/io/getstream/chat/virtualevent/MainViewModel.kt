@@ -28,12 +28,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import io.getstream.chat.android.client.ChatClient
-import io.getstream.chat.android.client.models.User
-import io.getstream.chat.android.client.setup.state.ClientState
+import io.getstream.chat.android.models.User
+import io.getstream.chat.android.state.extensions.globalState
+import io.getstream.chat.android.state.plugin.state.global.GlobalState
 
 class MainViewModel(
-    clientState: ClientState = ChatClient.instance().clientState,
+    globalState: GlobalState = ChatClient.instance().globalState,
 ) : ViewModel() {
 
-    val currentUser: LiveData<User?> = clientState.user.asLiveData()
+    val currentUser: LiveData<User?> = globalState.user.asLiveData()
 }

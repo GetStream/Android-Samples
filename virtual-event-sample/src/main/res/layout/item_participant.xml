@@ -29,9 +29,10 @@
     android:layout_height="48dp"
     android:background="?attr/selectableItemBackground"
     android:paddingHorizontal="@dimen/margin_small"
-    android:paddingVertical="@dimen/margin_tiny">
+    android:paddingVertical="@dimen/margin_tiny"
+    >
 
-    <io.getstream.chat.android.ui.avatar.AvatarView
+    <io.getstream.chat.android.ui.widgets.avatar.UserAvatarView
         android:id="@+id/userAvatarView"
         android:layout_width="32dp"
         android:layout_height="32dp"
@@ -39,7 +40,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:streamUiAvatarBorderWidth="0dp"
-        tools:src="@tools:sample/avatars" />
+        />
 
     <TextView
         android:id="@+id/nameTextView"
@@ -53,7 +54,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/userAvatarView"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Jerome Abbadi" />
+        tools:text="Jerome Abbadi"
+        />
 
     <TextView
         android:id="@+id/companyTextView"
@@ -67,6 +69,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/userAvatarView"
-        tools:text="Harvey Inc" />
-
+        tools:text="Harvey Inc"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

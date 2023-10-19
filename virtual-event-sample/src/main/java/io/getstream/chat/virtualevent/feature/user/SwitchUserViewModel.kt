@@ -29,8 +29,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.getstream.chat.android.client.ChatClient
-import io.getstream.chat.android.client.models.User
-import io.getstream.chat.android.livedata.utils.Event
+import io.getstream.chat.android.models.User
 import io.getstream.chat.virtualevent.AppConfig
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -38,9 +37,9 @@ import kotlinx.coroutines.launch
 class SwitchUserViewModel : ViewModel() {
 
     private val _state: MutableLiveData<State> = MutableLiveData()
-    private val _events: MutableLiveData<Event<UiEvent>> = MutableLiveData()
+    private val _events: MutableLiveData<UiEvent> = MutableLiveData()
     val state: LiveData<State> = _state
-    val events: LiveData<Event<UiEvent>> = _events
+    val events: LiveData<UiEvent> = _events
 
     init {
         val users = AppConfig.availableUsers
@@ -72,7 +71,7 @@ class SwitchUserViewModel : ViewModel() {
             .connectUser(user, token)
             .enqueue { result ->
                 if (result.isSuccess) {
-                    _events.postValue(Event(UiEvent.NavigateToHomeScreen))
+                    _events.postValue(UiEvent.NavigateToHomeScreen)
                 }
             }
     }

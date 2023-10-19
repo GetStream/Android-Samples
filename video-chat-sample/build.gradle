@@ -41,7 +41,7 @@ android {
 
 dependencies {
     // Stream SDK dependency
-    implementation 'io.getstream:stream-chat-android-client:5.17.0'
+    implementation "io.getstream:stream-chat-android-client:6.0.0-beta2"
 
     implementation libs.materialComponents
     implementation libs.kotlinStdLib

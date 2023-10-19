@@ -27,19 +27,19 @@ package io.getstream.chat.android.customattachments
 import android.app.Application
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.logger.ChatLogLevel
-import io.getstream.chat.android.client.models.User
 import io.getstream.chat.android.customattachments.factory.DateAttachmentFactory
 import io.getstream.chat.android.customattachments.factory.DateAttachmentPreviewFactory
 import io.getstream.chat.android.customattachments.factory.QuotedDateAttachmentFactory
-import io.getstream.chat.android.offline.plugin.configuration.Config
+import io.getstream.chat.android.models.User
 import io.getstream.chat.android.offline.plugin.factory.StreamOfflinePluginFactory
+import io.getstream.chat.android.state.plugin.config.StatePluginConfig
+import io.getstream.chat.android.state.plugin.factory.StreamStatePluginFactory
 import io.getstream.chat.android.ui.ChatUI
-import io.getstream.chat.android.ui.message.composer.attachment.AttachmentPreviewFactoryManager
-import io.getstream.chat.android.ui.message.composer.attachment.factory.FileAttachmentPreviewFactory
-import io.getstream.chat.android.ui.message.composer.attachment.factory.ImageAttachmentPreviewFactory
-import io.getstream.chat.android.ui.message.list.adapter.viewholder.attachment.AttachmentFactoryManager
-import io.getstream.chat.android.ui.message.list.adapter.viewholder.attachment.DefaultQuotedAttachmentMessageFactory
-import io.getstream.chat.android.ui.message.list.adapter.viewholder.attachment.QuotedAttachmentFactoryManager
+import io.getstream.chat.android.ui.feature.messages.composer.attachment.preview.AttachmentPreviewFactoryManager
+import io.getstream.chat.android.ui.feature.messages.composer.attachment.preview.factory.FileAttachmentPreviewFactory
+import io.getstream.chat.android.ui.feature.messages.list.adapter.viewholder.attachment.AttachmentFactoryManager
+import io.getstream.chat.android.ui.feature.messages.list.adapter.viewholder.attachment.DefaultQuotedAttachmentMessageFactory
+import io.getstream.chat.android.ui.feature.messages.list.adapter.viewholder.attachment.QuotedAttachmentFactoryManager
 
 class App : Application() {
     override fun onCreate() {
@@ -49,28 +49,33 @@ class App : Application() {
     }
 
     private fun setupStreamSdk() {
-        val offlinePluginFactory = StreamOfflinePluginFactory(
-            config = Config(),
-            appContext = applicationContext
+        val offlinePluginFactory = StreamOfflinePluginFactory(appContext = applicationContext)
+        val statePluginFactory = StreamStatePluginFactory(
+            config = StatePluginConfig(),
+            appContext = applicationContext,
         )
         ChatClient.Builder("qx5us2v6xvmh", applicationContext)
             .logLevel(ChatLogLevel.ALL)
-            .withPlugin(offlinePluginFactory)
+            .withPlugins(offlinePluginFactory, statePluginFactory)
             .build()
 
-        ChatUI.attachmentFactoryManager = AttachmentFactoryManager(listOf(DateAttachmentFactory()))
+        ChatUI.attachmentFactoryManager = AttachmentFactoryManager(
+            attachmentFactories = listOf(
+                DateAttachmentFactory()
+            )
+        )
 
         ChatUI.attachmentPreviewFactoryManager = AttachmentPreviewFactoryManager(
             listOf(
                 DateAttachmentPreviewFactory(),
-                ImageAttachmentPreviewFactory(),
                 FileAttachmentPreviewFactory()
             )
         )
 
         ChatUI.quotedAttachmentFactoryManager = QuotedAttachmentFactoryManager(
-            listOf(
+            quotedAttachmentFactories = listOf(
                 QuotedDateAttachmentFactory(),
+                // The default factory
                 DefaultQuotedAttachmentMessageFactory()
             )
         )

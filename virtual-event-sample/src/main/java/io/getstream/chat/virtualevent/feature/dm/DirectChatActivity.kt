@@ -33,16 +33,16 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.descendants
 import androidx.core.view.setPadding
-import com.getstream.sdk.chat.viewmodel.MessageInputViewModel
-import com.getstream.sdk.chat.viewmodel.messages.MessageListViewModel
-import io.getstream.chat.android.ui.message.input.MessageInputView
-import io.getstream.chat.android.ui.message.input.viewmodel.bindView
-import io.getstream.chat.android.ui.message.list.MessageListView
-import io.getstream.chat.android.ui.message.list.header.MessageListHeaderView
-import io.getstream.chat.android.ui.message.list.header.viewmodel.MessageListHeaderViewModel
-import io.getstream.chat.android.ui.message.list.header.viewmodel.bindView
-import io.getstream.chat.android.ui.message.list.viewmodel.bindView
-import io.getstream.chat.android.ui.message.list.viewmodel.factory.MessageListViewModelFactory
+import io.getstream.chat.android.ui.common.state.messages.Edit
+import io.getstream.chat.android.ui.common.state.messages.MessageMode
+import io.getstream.chat.android.ui.feature.messages.composer.MessageComposerView
+import io.getstream.chat.android.ui.feature.messages.header.MessageListHeaderView
+import io.getstream.chat.android.ui.feature.messages.list.MessageListView
+import io.getstream.chat.android.ui.viewmodel.messages.MessageComposerViewModel
+import io.getstream.chat.android.ui.viewmodel.messages.MessageListHeaderViewModel
+import io.getstream.chat.android.ui.viewmodel.messages.MessageListViewModel
+import io.getstream.chat.android.ui.viewmodel.messages.MessageListViewModelFactory
+import io.getstream.chat.android.ui.viewmodel.messages.bindView
 import io.getstream.chat.virtualevent.databinding.ActivityDirectChatBinding
 
 class DirectChatActivity : AppCompatActivity() {
@@ -54,7 +54,7 @@ class DirectChatActivity : AppCompatActivity() {
     private val factory: MessageListViewModelFactory by lazy { MessageListViewModelFactory(cid) }
     private val messageListViewModel: MessageListViewModel by viewModels { factory }
     private val messageListHeaderViewModel: MessageListHeaderViewModel by viewModels { factory }
-    private val messageInputViewModel: MessageInputViewModel by viewModels { factory }
+    private val messageInputViewModel: MessageComposerViewModel by viewModels { factory }
 
     private lateinit var binding: ActivityDirectChatBinding
 
@@ -107,23 +107,24 @@ class DirectChatActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupMessageInput(messageInputView: MessageInputView) {
+    private fun setupMessageInput(messageInputView: MessageComposerView) {
         messageInputViewModel.apply {
             messageInputViewModel.bindView(messageInputView, this@DirectChatActivity)
 
             messageListViewModel.mode.observe(this@DirectChatActivity) {
                 when (it) {
-                    is MessageListViewModel.Mode.Thread -> {
+                    is MessageMode.MessageThread -> {
                         messageListHeaderViewModel.setActiveThread(it.parentMessage)
-                        messageInputViewModel.setActiveThread(it.parentMessage)
                     }
-                    is MessageListViewModel.Mode.Normal -> {
+                    is MessageMode.Normal -> {
                         messageListHeaderViewModel.resetThread()
-                        messageInputViewModel.resetThread()
                     }
                 }
+                messageInputViewModel.setMessageMode(it)
             }
-            binding.messageListView.setMessageEditHandler(::postMessageToEdit)
+            binding.messageListView.setMessageEditHandler {
+                performMessageAction(Edit(it))
+            }
         }
     }
 

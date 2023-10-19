@@ -31,9 +31,9 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import io.getstream.chat.android.ui.channel.list.viewmodel.ChannelListViewModel
-import io.getstream.chat.android.ui.channel.list.viewmodel.bindView
-import io.getstream.chat.android.ui.channel.list.viewmodel.factory.ChannelListViewModelFactory
+import io.getstream.chat.android.ui.viewmodel.channels.ChannelListViewModel
+import io.getstream.chat.android.ui.viewmodel.channels.ChannelListViewModelFactory
+import io.getstream.chat.android.ui.viewmodel.channels.bindView
 import io.getstream.chat.virtualevent.databinding.FragmentDirectChatsBinding
 import io.getstream.chat.virtualevent.databinding.ViewDmEmptyBinding
 import io.getstream.chat.virtualevent.feature.dm.DirectChatActivity

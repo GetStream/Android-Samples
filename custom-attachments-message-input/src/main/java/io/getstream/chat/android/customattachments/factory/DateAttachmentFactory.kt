@@ -26,11 +26,11 @@ package io.getstream.chat.android.customattachments.factory
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import io.getstream.chat.android.client.models.Message
 import io.getstream.chat.android.customattachments.databinding.ItemDateAttachmentBinding
-import io.getstream.chat.android.ui.message.list.adapter.MessageListListenerContainer
-import io.getstream.chat.android.ui.message.list.adapter.viewholder.attachment.AttachmentFactory
-import io.getstream.chat.android.ui.message.list.adapter.viewholder.attachment.InnerAttachmentViewHolder
+import io.getstream.chat.android.models.Message
+import io.getstream.chat.android.ui.feature.messages.list.adapter.MessageListListenerContainer
+import io.getstream.chat.android.ui.feature.messages.list.adapter.viewholder.attachment.AttachmentFactory
+import io.getstream.chat.android.ui.feature.messages.list.adapter.viewholder.attachment.InnerAttachmentViewHolder
 
 class DateAttachmentFactory : AttachmentFactory {
 

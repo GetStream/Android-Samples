@@ -33,8 +33,8 @@ import io.getstream.chat.android.client.api.models.QueryChannelRequest
 import io.getstream.chat.android.client.channel.ChannelClient
 import io.getstream.chat.android.client.channel.subscribeFor
 import io.getstream.chat.android.client.events.NewMessageEvent
-import io.getstream.chat.android.client.models.Message
 import io.getstream.chat.android.client.utils.observable.Disposable
+import io.getstream.chat.android.models.Message
 import io.getstream.videochat.YoutubeVideo
 
 class VideoDetailViewModel(
@@ -55,9 +55,7 @@ class VideoDetailViewModel(
             .withMessages(30)
             .withWatch()
         channelClient.query(query).enqueue {
-            if (it.isSuccess) {
-                _messages.value = it.data().messages
-            }
+            it.onSuccess { _messages.value = it.messages }
         }
 
         channelClient.subscribeFor<NewMessageEvent> { event ->

@@ -26,11 +26,11 @@ package io.getstream.chat.virtualevent.feature.event.detail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.getstream.sdk.chat.adapter.MessageListItem
-import io.getstream.chat.android.ui.message.list.adapter.BaseMessageItemViewHolder
-import io.getstream.chat.android.ui.message.list.adapter.MessageListItemPayloadDiff
-import io.getstream.chat.android.ui.message.list.adapter.MessageListItemViewHolderFactory
-import io.getstream.chat.android.ui.message.list.adapter.MessageListItemViewType.PLAIN_TEXT
+import io.getstream.chat.android.ui.feature.messages.list.adapter.BaseMessageItemViewHolder
+import io.getstream.chat.android.ui.feature.messages.list.adapter.MessageListItem
+import io.getstream.chat.android.ui.feature.messages.list.adapter.MessageListItemPayloadDiff
+import io.getstream.chat.android.ui.feature.messages.list.adapter.MessageListItemViewHolderFactory
+import io.getstream.chat.android.ui.feature.messages.list.adapter.MessageListItemViewType.PLAIN_TEXT
 import io.getstream.chat.virtualevent.databinding.ItemMessagePlainTextBinding
 
 class LivestreamMessageItemVhFactory : MessageListItemViewHolderFactory() {
@@ -58,7 +58,7 @@ class PlainTextViewHolder(
     override fun bindData(data: MessageListItem.MessageItem, diff: MessageListItemPayloadDiff?) {
         binding.messageTextView.text = data.message.text
         binding.usernameTextView.text = data.message.user.name
-        binding.avatarView.setUserData(data.message.user)
+        binding.avatarView.setUser(data.message.user)
         // TODO: check if we can push back on this
         binding.messageTimeTextView.text = "2 mins"
     }
