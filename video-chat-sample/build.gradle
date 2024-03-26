@@ -2,56 +2,56 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdk 34
+  compileSdk 34
 
-    defaultConfig {
-        applicationId "io.getstream.videochat"
-        namespace "io.getstream.videochat"
-        minSdk 23
-        targetSdk 34
-        versionCode 1
-        versionName "1.0"
-    }
+  defaultConfig {
+    applicationId "io.getstream.videochat"
+    namespace "io.getstream.videochat"
+    minSdk 23
+    targetSdk 34
+    versionCode 1
+    versionName "1.0"
+  }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
+  }
 
-    buildFeatures {
-        viewBinding true
-    }
+  buildFeatures {
+    viewBinding true
+  }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+  compileOptions {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+  }
 
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
+  kotlinOptions {
+    jvmTarget = "17"
+  }
 
-    sourceSets {
-        all {
-            it.java.srcDir "src/$it.name/kotlin"
-        }
+  sourceSets {
+    all {
+      it.java.srcDir "src/$it.name/kotlin"
     }
+  }
 }
 
 dependencies {
-    // Stream SDK dependency
-    implementation "io.getstream:stream-chat-android-client:6.1.1"
+  // Stream SDK dependency
+  implementation "io.getstream:stream-chat-android-client:6.1.1"
 
-    implementation libs.materialComponents
-    implementation libs.kotlinStdLib
-    implementation libs.androidxAppCompat
-    implementation libs.androidxCoreKtx
-    implementation libs.androidxActivityKtx
-    implementation libs.androidxLifecycleExtensions
-    implementation libs.coil
-    implementation libs.androidxRecyclerview
-    implementation libs.androidxConstraintLayout
-    implementation libs.youtubePlayer
+  implementation libs.materialComponents
+  implementation libs.kotlinStdLib
+  implementation libs.androidxAppCompat
+  implementation libs.androidxCoreKtx
+  implementation libs.androidxActivityKtx
+  implementation libs.androidxLifecycleExtensions
+  implementation libs.coil
+  implementation libs.androidxRecyclerview
+  implementation libs.androidxConstraintLayout
+  implementation libs.youtubePlayer
 }

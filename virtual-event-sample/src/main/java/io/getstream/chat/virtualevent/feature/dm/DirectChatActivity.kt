@@ -51,7 +51,7 @@ class DirectChatActivity : AppCompatActivity() {
         intent.getStringExtra(KEY_EXTRA_CID)!!
     }
 
-    private val factory: MessageListViewModelFactory by lazy { MessageListViewModelFactory(cid) }
+    private val factory: MessageListViewModelFactory by lazy { MessageListViewModelFactory(this, cid) }
     private val messageListViewModel: MessageListViewModel by viewModels { factory }
     private val messageListHeaderViewModel: MessageListHeaderViewModel by viewModels { factory }
     private val messageInputViewModel: MessageComposerViewModel by viewModels { factory }

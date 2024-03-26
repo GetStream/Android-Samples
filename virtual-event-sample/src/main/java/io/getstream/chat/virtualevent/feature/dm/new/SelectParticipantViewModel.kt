@@ -30,7 +30,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.api.models.QueryUsersRequest
-import io.getstream.chat.android.client.errors.ChatError
 import io.getstream.chat.android.models.Filters
 import io.getstream.chat.android.models.User
 import io.getstream.chat.virtualevent.util.currentUserId
@@ -85,7 +84,7 @@ class SelectParticipantViewModel(
     sealed class State {
         object Loading : State()
         data class Content(val participants: List<User>) : State()
-        data class Error(val error: ChatError) : State()
+        data class Error(val error: io.getstream.result.Error) : State()
     }
 
     sealed class UiEvent {
