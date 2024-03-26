@@ -16,13 +16,13 @@
 
 This repository contains sample projects, guides, tutorials, and links to helpful resources to help you get started with [Android Stream SDK](https://github.com/GetStream/stream-chat-android).
 
-<a href="https://getstream.io/chat/sdk/compose?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Aug2022_WhatsAppComposeClone&utm_term=DevRelOss">
+<a href="https://getstream.io/chat/sdk/compose?utm_source=Github&utm_medium=Jaewoong_OSS&utm_content=Developer&utm_campaign=Github_Mar2024_Jaewoong_Android_Samples&utm_term=DevRelOss">
 <img src="https://user-images.githubusercontent.com/24237865/138428440-b92e5fb7-89f8-41aa-96b1-71a5486c5849.png" align="right" width="12%"/>
 </a>
 
 ## 🔗 Quick Links
 
-- [Register For a Free Account](https://getstream.io/try-for-free/)
+- [Register For a Free Account](https://getstream.io/try-for-free/?utm_source=Github&utm_medium=Jaewoong_OSS&utm_content=Developer&utm_campaign=Github_Mar2024_Jaewoong_Android_Samples&utm_term=DevRelOss)
 - [Android Chat SDK Repository](https://github.com/GetStream/stream-chat-android)
 
 **Tutorials:**
@@ -32,10 +32,19 @@ This repository contains sample projects, guides, tutorials, and links to helpfu
 
 **Documentation:**
 
-- [Client Documentation](https://getstream.io/chat/docs/android/?language=kotlin)
-- [UI Components Documentation](https://getstream.io/chat/docs/sdk/android/ui/overview/)
-- [Compose UI Components Documentation](https://getstream.io/chat/docs/sdk/android/compose/overview/)
-- [API docs](https://getstream.github.io/stream-chat-android/)
+- [Client Documentation](https://getstream.io/chat/docs/android/?language=kotlin/?utm_source=Github&utm_medium=Jaewoong_OSS&utm_content=Developer&utm_campaign=Github_Mar2024_Jaewoong_Android_Samples&utm_term=DevRelOss)
+- [UI Components Documentation](https://getstream.io/chat/docs/sdk/android/ui/overview/?utm_source=Github&utm_medium=Jaewoong_OSS&utm_content=Developer&utm_campaign=Github_Mar2024_Jaewoong_Android_Samples&utm_term=DevRelOss)
+- [Compose UI Components Documentation](https://getstream.io/chat/docs/sdk/android/compose/overview/?utm_source=Github&utm_medium=Jaewoong_OSS&utm_content=Developer&utm_campaign=Github_Mar2024_Jaewoong_Android_Samples&utm_term=DevRelOss)
+- [API docs](https://getstream.github.io/stream-chat-android/?utm_source=Github&utm_medium=Jaewoong_OSS&utm_content=Developer&utm_campaign=Github_Mar2024_Jaewoong_Android_Samples&utm_term=DevRelOss)
+
+## 📹 Stream Video SDK
+
+Stream also offers seamless Video SDK solutions that allow you to implement video calling, audio/video room, and live streaming using Jetpack Compose. If you're interested in learning the Stream Video SDKs, check out the tutorials below:
+
+- [Stream Video SDK for Android on GitHub](https://github.com/getstream/stream-video-android)
+- [Video Call Tutorial](https://getstream.io/video/docs/android/tutorials/video-calling?utm_source=Github&utm_medium=Jaewoong_OSS&utm_content=Developer&utm_campaign=Github_Mar2024_Jaewoong_Android_Samples/&utm_term=DevRelOss)
+- [Audio Room Tutorial](https://getstream.io/video/docs/android/tutorials/audio-room/?utm_source=Github&utm_medium=Jaewoong_OSS&utm_content=Developer&utm_campaign=Github_Mar2024_Jaewoong_Android_Samples&utm_term=DevRelOss)
+- [Livestream Tutorial](https://getstream.io/video/docs/android/tutorials/livestream/?utm_source=Github&utm_medium=Jaewoong_OSS&utm_content=Developer&utm_campaign=Github_Mar2024_Jaewoong_Android_Samples&utm_term=DevRelOss)
 
 ## 🤝 Contribution
 
