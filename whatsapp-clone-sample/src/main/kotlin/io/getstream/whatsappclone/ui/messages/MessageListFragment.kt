@@ -37,7 +37,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import io.getstream.chat.android.client.ChatClient
-import io.getstream.chat.android.state.extensions.globalState
 import io.getstream.chat.android.ui.ChatUI
 import io.getstream.chat.android.ui.viewmodel.messages.MessageComposerViewModel
 import io.getstream.chat.android.ui.viewmodel.messages.MessageListHeaderViewModel
@@ -51,7 +50,7 @@ class MessageListFragment : Fragment() {
 
     private val args: MessageListFragmentArgs by navArgs()
 
-    private val factory: MessageListViewModelFactory by lazy { MessageListViewModelFactory(args.cid) }
+    private val factory: MessageListViewModelFactory by lazy { MessageListViewModelFactory(requireContext(), args.cid) }
     private val messageListHeaderViewModel: MessageListHeaderViewModel by viewModels { factory }
     private val messageListViewModel: MessageListViewModel by viewModels { factory }
     private val messageInputViewModel: MessageComposerViewModel by viewModels { factory }
@@ -103,7 +102,7 @@ class MessageListFragment : Fragment() {
         }
 
         messageListHeaderViewModel.channel.observe(viewLifecycleOwner) { channel ->
-            val user = ChatClient.instance().globalState.user.value
+            val user = ChatClient.instance().clientState.user.value
             binding.channelNameTextView.text =
                 ChatUI.channelNameFormatter.formatChannelName(channel, user)
             binding.avatarView.setChannel(channel)

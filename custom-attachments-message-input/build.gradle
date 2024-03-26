@@ -4,12 +4,13 @@ plugins {
 }
 
 android {
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "io.getstream.chat.android.customattachments"
+        namespace "io.getstream.chat.android.customattachments"
         minSdk 21
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
     }
@@ -17,13 +18,18 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+  compileOptions {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+  }
 }
 
 dependencies {
     // Stream SDK dependency
-    implementation "io.getstream:stream-chat-android-ui-components:6.0.0-beta2"
-    implementation "io.getstream:stream-chat-android-state:6.0.0-beta2"
-    implementation "io.getstream:stream-chat-android-offline:6.0.0-beta2"
+    implementation "io.getstream:stream-chat-android-ui-components:6.1.1"
+    implementation "io.getstream:stream-chat-android-state:6.1.1"
+    implementation "io.getstream:stream-chat-android-offline:6.1.1"
 
     implementation libs.androidxCoreKtx
     implementation libs.androidxActivityKtx

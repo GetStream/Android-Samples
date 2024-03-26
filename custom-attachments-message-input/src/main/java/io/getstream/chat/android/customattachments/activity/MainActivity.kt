@@ -22,18 +22,28 @@
  *  THE SOFTWARE.
  */
 
-package io.getstream.chat.virtualevent
+package io.getstream.chat.android.customattachments.activity
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
+import android.content.Intent
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.lifecycle.lifecycleScope
 import io.getstream.chat.android.client.ChatClient
-import io.getstream.chat.android.client.setup.state.ClientState
-import io.getstream.chat.android.models.User
+import io.getstream.chat.android.models.InitializationState
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
-class MainViewModel(
-    state: ClientState = ChatClient.instance().clientState,
-) : ViewModel() {
+class MainActivity : ComponentActivity() {
 
-    val currentUser: LiveData<User?> = state.user.asLiveData()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        lifecycleScope.launch {
+            ChatClient.instance().clientState.initializationState.collectLatest {
+                if (it == InitializationState.COMPLETE) {
+                    startActivity(Intent(this@MainActivity, ChannelsActivity::class.java))
+                }
+            }
+        }
+    }
 }

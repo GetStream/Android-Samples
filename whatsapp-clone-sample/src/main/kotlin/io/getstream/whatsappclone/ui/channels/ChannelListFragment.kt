@@ -30,12 +30,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import io.getstream.chat.android.client.ChatClient
+import io.getstream.chat.android.models.InitializationState
 import io.getstream.chat.android.ui.viewmodel.channels.ChannelListViewModel
 import io.getstream.chat.android.ui.viewmodel.channels.ChannelListViewModelFactory
 import io.getstream.chat.android.ui.viewmodel.channels.bindView
 import io.getstream.whatsappclone.databinding.FragmentChannelListBinding
 import io.getstream.whatsappclone.ui.home.HomeFragmentDirections
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class ChannelListFragment : Fragment() {
 
@@ -60,11 +65,17 @@ class ChannelListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.bindView(binding.channelList, viewLifecycleOwner)
 
-        binding.channelList.setChannelItemClickListener { channel ->
-            println("JcLog: cid -> ${channel.cid}")
-            findNavController().navigate(HomeFragmentDirections.navHomeToChannel(channel.cid))
+        lifecycleScope.launch {
+            ChatClient.instance().clientState.initializationState.collectLatest {
+                if (it == InitializationState.COMPLETE) {
+                    viewModel.bindView(binding.channelList, viewLifecycleOwner)
+                    binding.channelList.setChannelItemClickListener { channel ->
+                        println("JcLog: cid -> ${channel.cid}")
+                        findNavController().navigate(HomeFragmentDirections.navHomeToChannel(channel.cid))
+                    }
+                }
+            }
         }
     }
 }

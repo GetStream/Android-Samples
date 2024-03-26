@@ -47,11 +47,11 @@ class WhatsApp : Application() {
             .withPlugins(offlinePluginFactory, statePluginFactory)
             .build()
 
-        val user = User().apply {
-            id = "jc"
-            name = "Jc Miñarro"
-            image = "https://ca.slack-edge.com/T02RM6X6B-U011KEXDPB2-891dbb8df64f-128"
-        }
+        val user = User(
+            id = "jc",
+            name = "Jc Miñarro",
+            image = "https://ca.slack-edge.com/T02RM6X6B-U011KEXDPB2-891dbb8df64f-128",
+        )
         ChatClient.instance()
             .connectUser(
                 user = user,

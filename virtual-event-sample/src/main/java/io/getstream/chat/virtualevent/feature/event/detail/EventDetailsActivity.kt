@@ -58,7 +58,7 @@ class EventDetailsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val cid = intent.getStringExtra(KEY_EXTRA_CID)!!
-        val factory = MessageListViewModelFactory(cid = cid)
+        val factory = MessageListViewModelFactory(this, cid = cid)
         messageListViewModel = factory.create(MessageListViewModel::class.java)
         messageInputViewModel = factory.create(MessageComposerViewModel::class.java)
 
