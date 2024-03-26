@@ -46,6 +46,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.android.material.datepicker.MaterialDatePicker
+import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.compose.customattachments.R
 import io.getstream.chat.android.compose.ui.messages.MessagesScreen
 import io.getstream.chat.android.compose.ui.messages.composer.MessageComposer
@@ -79,6 +80,7 @@ fun CustomMessagesScreen(
 
     val messageListViewModel = viewModel(MessageListViewModel::class.java, factory = factory)
     val composerViewModel = viewModel(MessageComposerViewModel::class.java, factory = factory)
+    val connectionState by ChatClient.instance().clientState.connectionState.collectAsState()
 
     val messageMode = messageListViewModel.messageMode
     val currentUser by messageListViewModel.user.collectAsState()
@@ -94,7 +96,8 @@ fun CustomMessagesScreen(
                     channel = messageListViewModel.channel,
                     currentUser = currentUser,
                     messageMode = messageMode,
-                    onBackPressed = onBackPressed
+                    onBackPressed = onBackPressed,
+                    connectionState = connectionState
                 )
             },
             bottomBar = {

@@ -1,49 +1,54 @@
 plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
+  id 'com.android.application'
+  id 'kotlin-android'
 }
 
 android {
-    compileSdk 33
+  compileSdk 34
 
-    defaultConfig {
-        applicationId "io.getstream.chat.android.compose.customattachments"
-        minSdk 21
-        targetSdk 33
-        versionCode 1
-        versionName "1.0"
-    }
+  defaultConfig {
+    applicationId "io.getstream.chat.android.compose.customattachments"
+    namespace "io.getstream.chat.android.compose.customattachments"
+    minSdk 21
+    targetSdk 34
+    versionCode 1
+    versionName "1.0"
+  }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
-    buildFeatures {
-        compose true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion libs.versions.composeCompiler.get()
-    }
+  }
+  buildFeatures {
+    compose true
+  }
+  composeOptions {
+    kotlinCompilerExtensionVersion libs.versions.composeCompiler.get()
+  }
+  compileOptions {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+  }
 }
 
 dependencies {
-    // Stream SDK
-    implementation "io.getstream:stream-chat-android-compose:6.0.0-beta2"
-    implementation "io.getstream:stream-chat-android-state:6.0.0-beta2"
-    implementation "io.getstream:stream-chat-android-offline:6.0.0-beta2"
+  // Stream SDK
+  implementation "io.getstream:stream-chat-android-compose:6.1.1"
+  implementation "io.getstream:stream-chat-android-state:6.1.1"
+  implementation "io.getstream:stream-chat-android-offline:6.1.1"
 
-    implementation libs.androidxCoreKtx
-    implementation libs.androidxAppCompat
-    implementation libs.materialComponents
+  implementation libs.androidxCoreKtx
+  implementation libs.androidxAppCompat
+  implementation libs.materialComponents
 
-    // Compose
-    implementation libs.composeCompiler
-    implementation libs.composeUi
-    implementation libs.composeUiTooling
-    implementation libs.composeFoundation
-    implementation libs.composeMaterial
-    implementation libs.composeActivity
-    implementation libs.composeViewModel
+  // Compose
+  implementation libs.composeCompiler
+  implementation libs.composeUi
+  implementation libs.composeUiTooling
+  implementation libs.composeFoundation
+  implementation libs.composeMaterial
+  implementation libs.composeActivity
+  implementation libs.composeViewModel
 }
