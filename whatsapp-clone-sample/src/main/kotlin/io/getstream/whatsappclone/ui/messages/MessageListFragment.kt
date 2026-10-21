@@ -38,10 +38,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.ui.ChatUI
+import io.getstream.chat.android.ui.viewmodel.messages.ChannelHeaderViewModel
+import io.getstream.chat.android.ui.viewmodel.messages.ChannelViewModelFactory
 import io.getstream.chat.android.ui.viewmodel.messages.MessageComposerViewModel
-import io.getstream.chat.android.ui.viewmodel.messages.MessageListHeaderViewModel
 import io.getstream.chat.android.ui.viewmodel.messages.MessageListViewModel
-import io.getstream.chat.android.ui.viewmodel.messages.MessageListViewModelFactory
 import io.getstream.chat.android.ui.viewmodel.messages.bindView
 import io.getstream.whatsappclone.R
 import io.getstream.whatsappclone.databinding.FragmentMessageListBinding
@@ -50,8 +50,8 @@ class MessageListFragment : Fragment() {
 
     private val args: MessageListFragmentArgs by navArgs()
 
-    private val factory: MessageListViewModelFactory by lazy { MessageListViewModelFactory(requireContext(), args.cid) }
-    private val messageListHeaderViewModel: MessageListHeaderViewModel by viewModels { factory }
+    private val factory: ChannelViewModelFactory by lazy { ChannelViewModelFactory(requireContext(), args.cid) }
+    private val channelHeaderViewModel: ChannelHeaderViewModel by viewModels { factory }
     private val messageListViewModel: MessageListViewModel by viewModels { factory }
     private val messageInputViewModel: MessageComposerViewModel by viewModels { factory }
 
@@ -101,7 +101,7 @@ class MessageListFragment : Fragment() {
             setDisplayShowTitleEnabled(false)
         }
 
-        messageListHeaderViewModel.channel.observe(viewLifecycleOwner) { channel ->
+        channelHeaderViewModel.channel.observe(viewLifecycleOwner) { channel ->
             val user = ChatClient.instance().clientState.user.value
             binding.channelNameTextView.text =
                 ChatUI.channelNameFormatter.formatChannelName(channel, user)

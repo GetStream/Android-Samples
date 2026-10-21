@@ -30,16 +30,16 @@
     android:layout_height="match_parent"
     >
 
-    <io.getstream.chat.android.ui.feature.messages.header.MessageListHeaderView
-        android:id="@+id/messageListHeaderView"
+    <io.getstream.chat.android.ui.feature.messages.header.ChannelHeaderView
+        android:id="@+id/channelHeaderView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:streamUiMessageListHeaderBackButtonIcon="@drawable/ic_back"
-        app:streamUiMessageListHeaderBackground="@color/app_canvas"
-        app:streamUiMessageListHeaderShowUserAvatar="false"
+        app:streamUiChannelHeaderBackButtonIcon="@drawable/ic_back"
+        app:streamUiChannelHeaderBackground="@color/app_canvas"
+        app:streamUiChannelHeaderShowUserAvatar="false"
         />
 
     <io.getstream.chat.android.ui.feature.messages.list.MessageListView
@@ -50,7 +50,7 @@
         app:layout_constraintBottom_toTopOf="@+id/messageInputView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/messageListHeaderView"
+        app:layout_constraintTop_toBottomOf="@+id/channelHeaderView"
         app:streamUiFlagMessageConfirmationEnabled="true"
         app:streamUiPinMessageEnabled="false"
         />

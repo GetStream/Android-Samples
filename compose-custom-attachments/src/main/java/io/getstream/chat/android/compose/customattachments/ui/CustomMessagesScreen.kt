@@ -32,30 +32,25 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.android.material.datepicker.MaterialDatePicker
 import io.getstream.chat.android.client.ChatClient
-import io.getstream.chat.android.compose.customattachments.R
-import io.getstream.chat.android.compose.ui.messages.MessagesScreen
+import io.getstream.chat.android.compose.ui.messages.ChannelScreen
 import io.getstream.chat.android.compose.ui.messages.composer.MessageComposer
-import io.getstream.chat.android.compose.ui.messages.header.MessageListHeader
+import io.getstream.chat.android.compose.ui.messages.header.ChannelHeader
 import io.getstream.chat.android.compose.ui.messages.list.MessageList
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
+import io.getstream.chat.android.compose.viewmodel.messages.ChannelViewModelFactory
 import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
-import io.getstream.chat.android.compose.viewmodel.messages.MessagesViewModelFactory
 import io.getstream.chat.android.models.Attachment
 import io.getstream.chat.android.ui.common.state.messages.MessageMode
 import io.getstream.chat.android.ui.common.state.messages.Reply
@@ -63,7 +58,7 @@ import java.text.DateFormat
 import java.util.Date
 
 /**
- * A custom [MessagesScreen] with the support for date attachments.
+ * A custom [ChannelScreen] with the support for date attachments.
  *
  * @param channelId The ID of the opened channel.
  * @param onBackPressed Handler for the back action.
@@ -73,7 +68,7 @@ fun CustomMessagesScreen(
     channelId: String,
     onBackPressed: () -> Unit = {}
 ) {
-    val factory = MessagesViewModelFactory(
+    val factory = ChannelViewModelFactory(
         context = LocalContext.current,
         channelId = channelId
     )
@@ -91,7 +86,7 @@ fun CustomMessagesScreen(
         Scaffold(
             modifier = Modifier.fillMaxSize(),
             topBar = {
-                MessageListHeader(
+                ChannelHeader(
                     modifier = Modifier.height(56.dp),
                     channel = messageListViewModel.channel,
                     currentUser = currentUser,
@@ -107,12 +102,15 @@ fun CustomMessagesScreen(
                         val date = DateFormat
                             .getDateInstance(DateFormat.LONG)
                             .format(Date(it))
+                        // fallback is the text shown for this attachment in message previews,
+                        // such as the channel list
                         val attachment = Attachment(
                             type = "date",
+                            fallback = date,
                             extraData = mutableMapOf("payload" to date)
                         )
 
-                        composerViewModel.addSelectedAttachments(listOf(attachment))
+                        composerViewModel.addAttachments(listOf(attachment))
                     }
                 )
             }
@@ -120,7 +118,7 @@ fun CustomMessagesScreen(
             MessageList(
                 modifier = Modifier
                     .padding(it)
-                    .background(ChatTheme.colors.appBackground)
+                    .background(ChatTheme.colors.backgroundCoreApp)
                     .fillMaxSize(),
                 viewModel = messageListViewModel,
                 onThreadClick = { message ->
@@ -136,7 +134,8 @@ fun CustomMessagesScreen(
 }
 
 /**
- * A custom [MessageComposer] with a button that shows [MaterialDatePicker].
+ * A custom [MessageComposer] that shows [MaterialDatePicker] when the leading button is clicked.
+ * The calendar icon for that button is provided by [CustomChatComponentFactory].
  *
  * @param viewModel The ViewModel that provides pieces of data to show in the composer, like the
  * currently selected integration data or the user input. It also handles sending messages.
@@ -154,30 +153,16 @@ private fun CustomMessageComposer(
             .fillMaxWidth()
             .wrapContentHeight(),
         viewModel = viewModel,
-        integrations = {
-            IconButton(
-                modifier = Modifier
-                    .size(48.dp)
-                    .padding(12.dp),
-                content = {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_calendar),
-                        contentDescription = null,
-                        tint = ChatTheme.colors.textLowEmphasis
-                    )
-                },
-                onClick = {
-                    MaterialDatePicker.Builder
-                        .datePicker()
-                        .build()
-                        .apply {
-                            show(activity.supportFragmentManager, null)
-                            addOnPositiveButtonClickListener {
-                                onDateSelected(it)
-                            }
-                        }
+        onAttachmentsClick = {
+            MaterialDatePicker.Builder
+                .datePicker()
+                .build()
+                .apply {
+                    show(activity.supportFragmentManager, null)
+                    addOnPositiveButtonClickListener {
+                        onDateSelected(it)
+                    }
                 }
-            )
         }
     )
 }

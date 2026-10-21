@@ -33,9 +33,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
+import io.getstream.chat.android.ui.viewmodel.messages.ChannelViewModelFactory
 import io.getstream.chat.android.ui.viewmodel.messages.MessageComposerViewModel
 import io.getstream.chat.android.ui.viewmodel.messages.MessageListViewModel
-import io.getstream.chat.android.ui.viewmodel.messages.MessageListViewModelFactory
 import io.getstream.chat.android.ui.viewmodel.messages.bindView
 import io.getstream.chat.virtualevent.databinding.ActivityEventDetailsBinding
 import io.getstream.chat.virtualevent.util.setupToolbar
@@ -58,7 +58,7 @@ class EventDetailsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val cid = intent.getStringExtra(KEY_EXTRA_CID)!!
-        val factory = MessageListViewModelFactory(this, cid = cid)
+        val factory = ChannelViewModelFactory(this, cid = cid)
         messageListViewModel = factory.create(MessageListViewModel::class.java)
         messageInputViewModel = factory.create(MessageComposerViewModel::class.java)
 

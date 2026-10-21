@@ -36,8 +36,8 @@ import io.getstream.chat.android.models.Attachment
 import io.getstream.chat.android.models.ChannelCapabilities
 import io.getstream.chat.android.ui.common.state.messages.Edit
 import io.getstream.chat.android.ui.common.state.messages.composer.MessageComposerState
-import io.getstream.chat.android.ui.feature.messages.MessageListActivity
-import io.getstream.chat.android.ui.feature.messages.MessageListFragment
+import io.getstream.chat.android.ui.feature.messages.ChannelActivity
+import io.getstream.chat.android.ui.feature.messages.ChannelFragment
 import io.getstream.chat.android.ui.feature.messages.composer.MessageComposerContext
 import io.getstream.chat.android.ui.feature.messages.composer.MessageComposerView
 import io.getstream.chat.android.ui.feature.messages.composer.MessageComposerViewStyle
@@ -45,17 +45,17 @@ import io.getstream.chat.android.ui.feature.messages.composer.content.MessageCom
 import java.text.SimpleDateFormat
 import java.util.Date
 
-class MessagesActivity : MessageListActivity() {
+class MessagesActivity : ChannelActivity() {
 
-    override fun createMessageListFragment(cid: String, messageId: String?): MessageListFragment {
-        return MessageListFragment.newInstance(cid) {
-            setFragment(CustomMessageListFragment())
+    override fun createChannelFragment(cid: String, messageId: String?): ChannelFragment {
+        return ChannelFragment.newInstance(cid) {
+            setFragment(CustomChannelFragment())
             showHeader(true)
             messageId(messageId)
         }
     }
 
-    class CustomMessageListFragment : MessageListFragment() {
+    class CustomChannelFragment : ChannelFragment() {
 
         override fun setupMessageComposer(messageComposerView: MessageComposerView) {
             super.setupMessageComposer(messageComposerView)
@@ -76,7 +76,7 @@ class MessagesActivity : MessageListActivity() {
                                 type = "date",
                                 extraData = mutableMapOf("payload" to payload)
                             )
-                            messageComposerViewModel.addSelectedAttachments(listOf(attachment))
+                            messageComposerViewModel.addAttachments(listOf(attachment))
                         }
 
                         // Show the date picker dialog at the click of the calendar button

@@ -47,10 +47,10 @@ import io.getstream.chat.android.ui.common.state.messages.composer.MessageCompos
 import io.getstream.chat.android.ui.feature.messages.composer.MessageComposerContext
 import io.getstream.chat.android.ui.feature.messages.composer.MessageComposerViewStyle
 import io.getstream.chat.android.ui.feature.messages.composer.content.MessageComposerContent
+import io.getstream.chat.android.ui.viewmodel.messages.ChannelHeaderViewModel
+import io.getstream.chat.android.ui.viewmodel.messages.ChannelViewModelFactory
 import io.getstream.chat.android.ui.viewmodel.messages.MessageComposerViewModel
-import io.getstream.chat.android.ui.viewmodel.messages.MessageListHeaderViewModel
 import io.getstream.chat.android.ui.viewmodel.messages.MessageListViewModel
-import io.getstream.chat.android.ui.viewmodel.messages.MessageListViewModelFactory
 import io.getstream.chat.android.ui.viewmodel.messages.bindView
 import java.text.DateFormat
 import java.util.Date
@@ -58,10 +58,10 @@ import java.util.Date
 class MessagesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMessagesBinding
 
-    private val factory: MessageListViewModelFactory by lazy {
-        MessageListViewModelFactory(this, requireNotNull(intent.getStringExtra(EXTRA_CID)))
+    private val factory: ChannelViewModelFactory by lazy {
+        ChannelViewModelFactory(this, requireNotNull(intent.getStringExtra(EXTRA_CID)))
     }
-    private val messageListHeaderViewModel: MessageListHeaderViewModel by viewModels { factory }
+    private val channelHeaderViewModel: ChannelHeaderViewModel by viewModels { factory }
     private val messageListViewModel: MessageListViewModel by viewModels { factory }
     private val messageComposerViewModel: MessageComposerViewModel by viewModels { factory }
 
@@ -71,18 +71,18 @@ class MessagesActivity : AppCompatActivity() {
         binding = ActivityMessagesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        messageListHeaderViewModel.bindView(binding.messageListHeaderView, this)
+        channelHeaderViewModel.bindView(binding.channelHeaderView, this)
         messageListViewModel.bindView(binding.messageListView, this)
         messageComposerViewModel.bindView(binding.messageComposerView, this)
 
         messageListViewModel.mode.observe(this) {
             when (it) {
                 is MessageMode.MessageThread -> {
-                    messageListHeaderViewModel.setActiveThread(it.parentMessage)
+                    channelHeaderViewModel.setActiveThread(it.parentMessage)
                     messageComposerViewModel.setMessageMode(MessageMode.MessageThread(it.parentMessage))
                 }
                 is MessageMode.Normal -> {
-                    messageListHeaderViewModel.resetThread()
+                    channelHeaderViewModel.resetThread()
                     messageComposerViewModel.leaveThread()
                 }
             }
@@ -103,7 +103,7 @@ class MessagesActivity : AppCompatActivity() {
         val backHandler = {
             messageListViewModel.onEvent(MessageListViewModel.Event.BackButtonPressed)
         }
-        binding.messageListHeaderView.setBackButtonClickListener(backHandler)
+        binding.channelHeaderView.setBackButtonClickListener(backHandler)
         onBackPressedDispatcher.addCallback(this) {
             backHandler()
         }
@@ -130,7 +130,7 @@ class MessagesActivity : AppCompatActivity() {
                             type = "date",
                             extraData = mutableMapOf("payload" to date)
                         )
-                        messageComposerViewModel.addSelectedAttachments(listOf(attachment))
+                        messageComposerViewModel.addAttachments(listOf(attachment))
                     }
 
                     // Show the date picker dialog when the attachment button is clicked

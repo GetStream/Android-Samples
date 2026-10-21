@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    compileSdk 34
+    compileSdk 36
 
     defaultConfig {
         applicationId "io.getstream.chat.android.customattachments"
@@ -27,9 +27,7 @@ android {
 
 dependencies {
     // Stream SDK dependency
-    implementation "io.getstream:stream-chat-android-ui-components:6.1.1"
-    implementation "io.getstream:stream-chat-android-state:6.1.1"
-    implementation "io.getstream:stream-chat-android-offline:6.1.1"
+    implementation "io.getstream:stream-chat-android-ui-components:7.13.0"
 
     implementation libs.androidxCoreKtx
     implementation libs.androidxActivityKtx
