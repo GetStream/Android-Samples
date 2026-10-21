@@ -29,10 +29,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import io.getstream.chat.android.compose.customattachments.ui.CustomChatComponentFactory
 import io.getstream.chat.android.compose.customattachments.ui.CustomMessagesScreen
-import io.getstream.chat.android.compose.customattachments.ui.dateAttachmentFactory
-import io.getstream.chat.android.compose.customattachments.ui.quotedDateAttachmentFactory
-import io.getstream.chat.android.compose.ui.attachments.StreamAttachmentFactories
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 
 class MessagesActivity : AppCompatActivity() {
@@ -41,17 +39,8 @@ class MessagesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val channelId = requireNotNull(intent.getStringExtra(KEY_CHANNEL_ID))
 
-        val customFactories = listOf(dateAttachmentFactory)
-        val defaultFactories = StreamAttachmentFactories.defaultFactories()
-
-        val customQuotedFactories = listOf(quotedDateAttachmentFactory)
-        val defaultQuotedFactories = StreamAttachmentFactories.defaultQuotedFactories()
-
         setContent {
-            ChatTheme(
-                attachmentFactories = customFactories + defaultFactories,
-                quotedAttachmentFactories = customQuotedFactories + defaultQuotedFactories
-            ) {
+            ChatTheme(componentFactory = CustomChatComponentFactory) {
                 CustomMessagesScreen(
                     channelId = channelId,
                     onBackPressed = { finish() }

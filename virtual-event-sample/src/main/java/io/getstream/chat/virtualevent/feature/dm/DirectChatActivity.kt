@@ -36,12 +36,12 @@ import androidx.core.view.setPadding
 import io.getstream.chat.android.ui.common.state.messages.Edit
 import io.getstream.chat.android.ui.common.state.messages.MessageMode
 import io.getstream.chat.android.ui.feature.messages.composer.MessageComposerView
-import io.getstream.chat.android.ui.feature.messages.header.MessageListHeaderView
+import io.getstream.chat.android.ui.feature.messages.header.ChannelHeaderView
 import io.getstream.chat.android.ui.feature.messages.list.MessageListView
+import io.getstream.chat.android.ui.viewmodel.messages.ChannelHeaderViewModel
+import io.getstream.chat.android.ui.viewmodel.messages.ChannelViewModelFactory
 import io.getstream.chat.android.ui.viewmodel.messages.MessageComposerViewModel
-import io.getstream.chat.android.ui.viewmodel.messages.MessageListHeaderViewModel
 import io.getstream.chat.android.ui.viewmodel.messages.MessageListViewModel
-import io.getstream.chat.android.ui.viewmodel.messages.MessageListViewModelFactory
 import io.getstream.chat.android.ui.viewmodel.messages.bindView
 import io.getstream.chat.virtualevent.databinding.ActivityDirectChatBinding
 
@@ -51,9 +51,9 @@ class DirectChatActivity : AppCompatActivity() {
         intent.getStringExtra(KEY_EXTRA_CID)!!
     }
 
-    private val factory: MessageListViewModelFactory by lazy { MessageListViewModelFactory(this, cid) }
+    private val factory: ChannelViewModelFactory by lazy { ChannelViewModelFactory(this, cid) }
     private val messageListViewModel: MessageListViewModel by viewModels { factory }
-    private val messageListHeaderViewModel: MessageListHeaderViewModel by viewModels { factory }
+    private val channelHeaderViewModel: ChannelHeaderViewModel by viewModels { factory }
     private val messageInputViewModel: MessageComposerViewModel by viewModels { factory }
 
     private lateinit var binding: ActivityDirectChatBinding
@@ -63,14 +63,14 @@ class DirectChatActivity : AppCompatActivity() {
         binding = ActivityDirectChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupMessageListHeader(binding.messageListHeaderView)
+        setupChannelHeader(binding.channelHeaderView)
         setupMessageList(binding.messageListView)
         setupMessageInput(binding.messageInputView)
     }
 
-    private fun setupMessageListHeader(messageListHeaderView: MessageListHeaderView) {
-        with(messageListHeaderView) {
-            messageListHeaderViewModel.bindView(this, this@DirectChatActivity)
+    private fun setupChannelHeader(channelHeaderView: ChannelHeaderView) {
+        with(channelHeaderView) {
+            channelHeaderViewModel.bindView(this, this@DirectChatActivity)
 
             val backHandler = {
                 messageListViewModel.onEvent(MessageListViewModel.Event.BackButtonPressed)
@@ -86,7 +86,7 @@ class DirectChatActivity : AppCompatActivity() {
             )
 
             // Workaround to remove back button padding
-            messageListHeaderView.descendants
+            channelHeaderView.descendants
                 .firstOrNull { it is ImageView }
                 ?.let {
                     it.setPadding(0)
@@ -114,10 +114,10 @@ class DirectChatActivity : AppCompatActivity() {
             messageListViewModel.mode.observe(this@DirectChatActivity) {
                 when (it) {
                     is MessageMode.MessageThread -> {
-                        messageListHeaderViewModel.setActiveThread(it.parentMessage)
+                        channelHeaderViewModel.setActiveThread(it.parentMessage)
                     }
                     is MessageMode.Normal -> {
-                        messageListHeaderViewModel.resetThread()
+                        channelHeaderViewModel.resetThread()
                     }
                 }
                 messageInputViewModel.setMessageMode(it)

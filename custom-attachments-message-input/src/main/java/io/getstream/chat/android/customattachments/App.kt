@@ -26,14 +26,12 @@ package io.getstream.chat.android.customattachments
 
 import android.app.Application
 import io.getstream.chat.android.client.ChatClient
+import io.getstream.chat.android.client.api.ChatClientConfig
 import io.getstream.chat.android.client.logger.ChatLogLevel
 import io.getstream.chat.android.customattachments.factory.DateAttachmentFactory
 import io.getstream.chat.android.customattachments.factory.DateAttachmentPreviewFactory
 import io.getstream.chat.android.customattachments.factory.QuotedDateAttachmentFactory
 import io.getstream.chat.android.models.User
-import io.getstream.chat.android.offline.plugin.factory.StreamOfflinePluginFactory
-import io.getstream.chat.android.state.plugin.config.StatePluginConfig
-import io.getstream.chat.android.state.plugin.factory.StreamStatePluginFactory
 import io.getstream.chat.android.ui.ChatUI
 import io.getstream.chat.android.ui.feature.messages.composer.attachment.preview.AttachmentPreviewFactoryManager
 import io.getstream.chat.android.ui.feature.messages.composer.attachment.preview.factory.FileAttachmentPreviewFactory
@@ -50,14 +48,9 @@ class App : Application() {
     }
 
     private fun setupStreamSdk() {
-        val offlinePluginFactory = StreamOfflinePluginFactory(appContext = applicationContext)
-        val statePluginFactory = StreamStatePluginFactory(
-            config = StatePluginConfig(),
-            appContext = applicationContext,
-        )
         ChatClient.Builder("qx5us2v6xvmh", applicationContext)
             .logLevel(ChatLogLevel.ALL)
-            .withPlugins(offlinePluginFactory, statePluginFactory)
+            .config(ChatClientConfig(offlineEnabled = true, userPresence = true))
             .build()
 
         ChatUI.attachmentFactoryManager = AttachmentFactoryManager(

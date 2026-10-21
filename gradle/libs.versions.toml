@@ -1,6 +1,6 @@
 [versions]
-kotlin = "1.9.23"
-androidGradlePlugin = "8.2.2"
+kotlin = "2.2.21"
+androidGradlePlugin = "8.13.2"
 androidxActivityKtx = "1.5.1"
 androidxAppCompat = "1.4.2"
 androidxCardView = "1.0.0"
@@ -13,7 +13,6 @@ androidxRecyclerView = "1.2.1"
 androidxViewPager2 = "1.0.0"
 coil = "2.6.0"
 compose = "1.6.4"
-composeCompiler = "1.5.11"
 composeAccompanist = "0.25.0"
 composeAcitvity = "1.5.1"
 composeViewModel = "2.4.1"
@@ -21,7 +20,7 @@ exoplayer = "2.18.1"
 fragmentKtx = "1.4.0"
 lottie = "4.1.0"
 materialComponents = "1.6.1"
-navigation = "2.5.1"
+navigation = "2.8.4"
 timber = "5.0.1"
 youtubePlayer = "11.1.0"
 spotlessPlugin = "6.7.2"
@@ -42,7 +41,6 @@ androidxRecyclerview = { module = "androidx.recyclerview:recyclerview", version.
 androidxViewPager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "androidxViewPager2" }
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 composeCoil = { module = "io.coil-kt:coil-compose", version.ref = "compose" }
-composeCompiler = { module = "androidx.compose.compiler:compiler", version.ref = "composeCompiler" }
 composeUi = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 composeUiTooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 composeFoundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
@@ -57,6 +55,7 @@ exoplayerCore = { module = "com.google.android.exoplayer:exoplayer-core", versio
 exoplayerUi = { module = "com.google.android.exoplayer:exoplayer-ui", version.ref = "exoplayer" }
 fragmentKtx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
 kotlinGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+composeCompilerGradlePlugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
 materialComponents = { module = "com.google.android.material:material", version.ref = "materialComponents" }
 navigationSafeArgsGradlePlugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigation" }

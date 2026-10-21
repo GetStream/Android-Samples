@@ -55,7 +55,7 @@ class PlainTextViewHolder(
     ),
 ) : BaseMessageItemViewHolder<MessageListItem.MessageItem>(binding.root) {
 
-    override fun bindData(data: MessageListItem.MessageItem, diff: MessageListItemPayloadDiff?) {
+    override fun bindData(data: MessageListItem.MessageItem, diff: MessageListItemPayloadDiff) {
         binding.messageTextView.text = data.message.text
         binding.usernameTextView.text = data.message.user.name
         binding.avatarView.setUser(data.message.user)

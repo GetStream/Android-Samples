@@ -1,10 +1,11 @@
 plugins {
   id 'com.android.application'
   id 'kotlin-android'
+  id 'org.jetbrains.kotlin.plugin.compose'
 }
 
 android {
-  compileSdk 34
+  compileSdk 36
 
   defaultConfig {
     applicationId "io.getstream.chat.android.compose.customattachments"
@@ -24,9 +25,6 @@ android {
   buildFeatures {
     compose true
   }
-  composeOptions {
-    kotlinCompilerExtensionVersion libs.versions.composeCompiler.get()
-  }
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
@@ -35,16 +33,13 @@ android {
 
 dependencies {
   // Stream SDK
-  implementation "io.getstream:stream-chat-android-compose:6.1.1"
-  implementation "io.getstream:stream-chat-android-state:6.1.1"
-  implementation "io.getstream:stream-chat-android-offline:6.1.1"
+  implementation "io.getstream:stream-chat-android-compose:7.13.0"
 
   implementation libs.androidxCoreKtx
   implementation libs.androidxAppCompat
   implementation libs.materialComponents
 
   // Compose
-  implementation libs.composeCompiler
   implementation libs.composeUi
   implementation libs.composeUiTooling
   implementation libs.composeFoundation
