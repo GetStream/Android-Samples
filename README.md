@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://github.com/GetStream/stream-video-android/actions/workflows/android.yml"><img alt="Build Status" src="https://github.com/GetStream/Android-Samples/actions/workflows/pr-checks.yml/badge.svg"/></a>
-  <a href="https://android-arsenal.com/api?level=21"><img alt="API" src="https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat"/></a>
+  <img alt="API" src="https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat"/>
   <a href="https://getstream.io"><img src="https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/HayesGordon/e7f3c4587859c17f3e593fd3ff5b13f4/raw/11d9d9385c9f34374ede25f6471dc743b977a914/badge.json" alt="Stream Feeds"></a>
 </p>
 
@@ -130,13 +130,6 @@ With Stream's chat components, developers quickly add chat to their app for a va
 - Team style chat like Slack
 - Messaging style chat like Whatsapp or Facebook's messenger
 - Commerce chat like Drift or Intercom
-
-## 💼 We are hiring
-
-We've recently closed a [\$38 million Series B funding round](https://techcrunch.com/2021/03/04/stream-raises-38m-as-its-chat-and-activity-feed-apis-power-communications-for-1b-users/) and we keep actively growing.
-Our APIs are used by more than a billion end-users, and you'll have a chance to make a huge impact on the product within a team of the strongest engineers all over the world.
-
-Check out our current openings and apply via [Stream's website](https://getstream.io/team/#jobs).    
 
 ## License
 
